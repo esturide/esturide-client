@@ -1,4 +1,5 @@
 # Esturide (client)
+
 ![ReactNative](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 [![Build with EAS](https://img.shields.io/badge/Build-3275E7.svg?style=for-the-badge&logo=EXPO&labelColor=000&logoColor=FFF)](https://docs.expo.dev/build/introduction/)
@@ -35,6 +36,7 @@ In the output, you'll find options to open the app in a
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
 ## Get started for testing
+
 [StoryBook](https://storybook.js.org/) is used for development testing, you can run tests with the following command:
 
 ```bash

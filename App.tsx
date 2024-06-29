@@ -3,7 +3,9 @@ import Constants from "expo-constants";
 import { InputButton } from "@/components/Buttons/InputButton";
 
 function App() {
-  const onPress = () => Alert.alert("Alert message");
+  const onPress = () => {
+    Alert.alert("Alert", "Hello world from Message");
+  };
 
   return (
     <View style={styles.container}>
