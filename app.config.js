@@ -1,8 +1,8 @@
 export default ({ config }) => ({
   ...config,
-  name: "HelloWorld",
-  slug: "expo-template-blank-typescript",
-  version: "1.0.0",
+  name: "Esturide (Client)",
+  slug: "esturide",
+  version: "0.0.1",
   orientation: "portrait",
   icon: "./assets/icon.png",
   extra: {
