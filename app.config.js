@@ -29,4 +29,5 @@ export default ({ config }) => ({
   web: {
     favicon: "./assets/favicon.png",
   },
+  plugins: ["expo-router"],
 });

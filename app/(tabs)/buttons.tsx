@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { InputButton } from "@/components/Buttons/InputButton";
 
-export default function ExampleButtons() {
+export default function Buttons() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buttons components</Text>

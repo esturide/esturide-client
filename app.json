@@ -1,4 +1,5 @@
 {
   "name": "Esturide (Client)",
-  "slug": "esturide"
+  "slug": "esturide",
+  "scheme": "esturide-scheme"
 }
