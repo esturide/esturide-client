@@ -7,10 +7,10 @@ export default function ExampleButtons() {
     <View style={styles.container}>
       <Text style={styles.title}>Buttons components</Text>
 
-      <InputButton typeButton={"submit"} label="Subir" />
-      <InputButton typeButton={"withdraw"} label="Retirar" />
-      <InputButton typeButton={"depositBlue"} label="Depositar" />
-      <InputButton typeButton={"depositGreen"} label="Depositar" />
+      <InputButton typeButton={"submit"} label={"Subir"} />
+      <InputButton typeButton={"withdraw"} label={"Retirar"} />
+      <InputButton typeButton={"depositBlue"} label={"Depositar"} />
+      <InputButton typeButton={"depositGreen"} label={"Depositar"} />
     </View>
   );
 }
