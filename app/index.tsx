@@ -1,12 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
-import { Link, Redirect } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
 import Constants from "expo-constants";
 
 function StartPage() {
   return (
     <View style={styles.container}>
-      <Text>Start page</Text>
-      <Link href={"buttons"}>Buttons</Link>
+      <Text style={styles.title}>Welcome to start page</Text>
+
+      <Link replace href={"buttons"} asChild>
+        <Pressable>
+          <Text>Buttons</Text>
+        </Pressable>
+      </Link>
     </View>
   );
 }

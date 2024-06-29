@@ -1,16 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { InputButton } from "@/components/Buttons/InputButton";
+import { Link } from "expo-router";
 
 export default function Buttons() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Buttons components</Text>
-
       <InputButton typeButton={"submit"} label={"Subir"} />
       <InputButton typeButton={"withdraw"} label={"Retirar"} />
       <InputButton typeButton={"depositBlue"} label={"Depositar"} />
       <InputButton typeButton={"depositGreen"} label={"Depositar"} />
+
+      <Link replace href="/index">
+        Home
+      </Link>
     </View>
   );
 }
