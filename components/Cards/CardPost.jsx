@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-export default function CardPost() {
+export default function CardPost({ userName, date, body, likeCount, commentCount }) {
   return (
     <View style={styles.cardContainer}>
       <Image
@@ -10,14 +10,16 @@ export default function CardPost() {
       />
       <View>
         <View>
-          <Text style={styles.userName}>Pedro Ramirez</Text>
-          <Text style={styles.postDate}>18 de marzo a las 12:00AM</Text>
+          <Text style={styles.userName}>{userName}</Text>
+          {/*18 de marzo a las 12:00AM*/}
+          <Text style={styles.postDate}>{date}</Text>
         </View>
         <View>
-          <Text style={styles.postBody}>
+          {/*
             Hola comunidad, empezaron las competencias de robótica en las
             explanadas de aulas amplias.
-          </Text>
+          */}
+          <Text style={styles.postBody}>{body}</Text>
         </View>
         <View style={styles.postInfo}>
           <Text style={styles.postInfoText}>
@@ -26,7 +28,7 @@ export default function CardPost() {
               size={12}
               color="#484C52"
             />{" "}
-            54 Likes
+            {likeCount} Likes
           </Text>
           <Text style={styles.postInfoText}>
             <MaterialCommunityIcons
@@ -34,7 +36,7 @@ export default function CardPost() {
               size={10}
               color="#484C52"
             />{" "}
-            17 Comments
+            {commentCount} Comments
           </Text>
         </View>
       </View>
