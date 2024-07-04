@@ -7,7 +7,7 @@ export default function CardPost({ userName, date, body, likeCount, commentCount
     <View style={styles.cardContainer}>
       <Image
         style={styles.userImage}
-        source={require("../../assets/imagen-post.jpg")}
+        source={require("../../assets/icon.png")}
       />
       <View>
         <View>
