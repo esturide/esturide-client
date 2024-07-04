@@ -8,18 +8,20 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: 335,
-    height: 135,
-    paddingTop: 10,
+    minHeight: 135,
+    paddingVertical: 10,
     paddingLeft: 10,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "#295C53",
     flexDirection: "row",
     gap: 12,
+    backgroundColor: "white",
   },
   postInfo: {
     flexDirection: "row",
     gap: 25,
+    marginTop: 10,
   },
   userName: {
     fontSize: 16,
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
   },
   postInfoText: {
     fontSize: 10,
-    marginTop: 10,
   },
 });
 
