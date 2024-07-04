@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
-import CardVehicleInfo from "@/components/Cards/CardVehicleInfo.jsx";
+import CardVehicleInfo from "@/components/Cards/CardVehicleInfo";
 
 const meta = {
   title: "CardVehicleInfo",
@@ -23,6 +23,6 @@ export const Example: Story = {
   args: {
     model: "Modelo",
     plates: "Placas",
-    carCoolor: "Color",
+    carColorString: "Color",
   },
 };
