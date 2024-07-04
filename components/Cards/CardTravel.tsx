@@ -1,11 +1,16 @@
 import { View, Text } from "react-native";
 import styles from "@/styles/CardTravel";
 
+interface SeatsArr {
+  id: string;
+  value: string;
+}
+
 interface CardTravelProps {
   departTime: string;
   arrivalTime: string;
   price: number;
-  seatsArr: string[];
+  seatsArr: SeatsArr[];
 }
 
 export default function CardTravel({
@@ -31,17 +36,21 @@ export default function CardTravel({
       <View style={styles.rowContainer}>
         <View>
           <Text style={styles.infoLabel}>Precio:</Text>
-          <Text style={styles.infoText}>${price}</Text>
+          <Text style={styles.infoText}>
+            ${price}
+            {price % 1 === 0 ? ".00" : ""}
+          </Text>
         </View>
 
         <View>
           <Text style={styles.infoLabel}>Asientos:</Text>
           <View style={styles.seatsContainer}>
-          {seatsArr && seatsArr.map((seat) => (
-            <View style={styles.seatView}>
-              <Text style={styles.seatText}>{seat}</Text>
-            </View>
-          ))}
+            {seatsArr &&
+              seatsArr.map((seat) => (
+                <View key={seat.id} style={styles.seatView}>
+                  <Text style={styles.seatText}>{seat.value}</Text>
+                </View>
+              ))}
           </View>
         </View>
       </View>

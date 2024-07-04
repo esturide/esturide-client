@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderColor: "#40498D",
     borderRadius: 20,
     paddingHorizontal: 25,
+    backgroundColor: "#FFFFFF",
   },
   infoLabel: {
     fontSize: 19,
@@ -25,7 +26,8 @@ const styles = StyleSheet.create({
   },
   seatsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    gap: 10,
+    //justifyContent: "space-between",
   },
   seatView: {
     width: 20,
