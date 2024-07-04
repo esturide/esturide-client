@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     width: 327,
     height: 71,
     borderRadius: 18,
+    backgroundColor: "#FFFFFF",
   },
   modelText: {
     fontWeight: "700",
