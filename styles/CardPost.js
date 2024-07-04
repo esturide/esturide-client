@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
   postInfo: {
     flexDirection: "row",
     gap: 25,
-    marginTop: 10,
   },
   userName: {
     fontSize: 16,
     fontWeight: "700",
     color: "#223F3A",
+    maxWidth: 220,
   },
   postDate: {
     fontSize: 12,
@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
     maxWidth: 250,
+    marginTop: 3,
+    marginBottom: 7
   },
   postInfoText: {
     fontSize: 10,

@@ -12,15 +12,10 @@ export default function CardPost({ userName, date, body, likeCount, commentCount
       <View>
         <View>
           <Text style={styles.userName}>{userName}</Text>
-          {/*18 de marzo a las 12:00AM*/}
           <Text style={styles.postDate}>{date}</Text>
         </View>
-        <View>
-          {/*
-            Hola comunidad, empezaron las competencias de robótica en las
-            explanadas de aulas amplias.
-          */}
-          <Text style={styles.postBody}>{body}</Text>
+        <View style={styles.postBody}>
+          <Text>{body}</Text>
         </View>
         <View style={styles.postInfo}>
           <Text style={styles.postInfoText}>
@@ -28,16 +23,14 @@ export default function CardPost({ userName, date, body, likeCount, commentCount
               name="cards-heart-outline"
               size={12}
               color="#484C52"
-            />{" "}
-            {likeCount} Likes
+            />{" " + likeCount + " Likes"}
           </Text>
           <Text style={styles.postInfoText}>
             <MaterialCommunityIcons
               name="message-reply-outline"
               size={10}
               color="#484C52"
-            />{" "}
-            {commentCount} Comments
+            />{" " + commentCount + " Comments"}
           </Text>
         </View>
       </View>
