@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import styles from "@/styles/CardTravel";
+import styles, {DRIVER_COLOR, PASSENGER_COLOR} from "@/styles/CardTravel";
 
 interface SeatsArr {
   id: string;
@@ -7,6 +7,7 @@ interface SeatsArr {
 }
 
 interface CardTravelProps {
+  typeCard: "driver" | "passenger";
   departTime: string;
   arrivalTime: string;
   price: number;
@@ -14,28 +15,45 @@ interface CardTravelProps {
 }
 
 export default function CardTravel({
+  typeCard,
   departTime,
   arrivalTime,
   price,
   seatsArr,
 }: CardTravelProps) {
+  const containerStyles = {
+    driver: { ...styles.cardContainer, borderColor: DRIVER_COLOR},
+    passenger: {...styles.cardContainer, borderColor: PASSENGER_COLOR},
+  }
+
+  const labelStyles = {
+    driver: { ...styles.infoLabel, color: DRIVER_COLOR},
+    passenger: {...styles.infoLabel, color: PASSENGER_COLOR},
+  }
+
+  const seatViewStyles = {
+    driver: { ...styles.seatView, backgroundColor: DRIVER_COLOR},
+    passenger: {...styles.seatView, backgroundColor: PASSENGER_COLOR},
+  }
+
+
   return (
-    <View style={styles.cardContainer}>
+    <View style={containerStyles[typeCard]}>
       <View style={styles.rowContainer}>
         <View>
-          <Text style={styles.infoLabel}>Salida:</Text>
+          <Text style={labelStyles[typeCard]}>Salida:</Text>
           <Text style={styles.infoText}>{departTime}</Text>
         </View>
 
         <View>
-          <Text style={styles.infoLabel}>Llegada:</Text>
+          <Text style={labelStyles[typeCard]}>Llegada:</Text>
           <Text style={styles.infoText}>{arrivalTime}</Text>
         </View>
       </View>
 
       <View style={styles.rowContainer}>
         <View>
-          <Text style={styles.infoLabel}>Precio:</Text>
+          <Text style={labelStyles[typeCard]}>Precio:</Text>
           <Text style={styles.infoText}>
             ${price}
             {price % 1 === 0 ? ".00" : ""}
@@ -43,11 +61,11 @@ export default function CardTravel({
         </View>
 
         <View>
-          <Text style={styles.infoLabel}>Asientos:</Text>
+          <Text style={labelStyles[typeCard]}>Asientos:</Text>
           <View style={styles.seatsContainer}>
             {seatsArr &&
               seatsArr.map((seat) => (
-                <View key={seat.id} style={styles.seatView}>
+                <View key={seat.id} style={seatViewStyles[typeCard]}>
                   <Text style={styles.seatText}>{seat.value}</Text>
                 </View>
               ))}

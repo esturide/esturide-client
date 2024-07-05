@@ -6,6 +6,9 @@ import CardTravel from "@/components/Cards/CardTravel";
 const meta = {
   title: "CardTravel",
   component: CardTravel,
+  args: {
+    typeCard: "driver",
+  },
   decorators: [
     (Story) => (
       <View style={{ padding: 16 }}>

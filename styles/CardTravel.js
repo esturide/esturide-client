@@ -1,11 +1,22 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  /*
+  driverColors: {
+    borderColor: "#3E8E7E",
+    color: "#3E8E7E",
+    backgroundColor: "#3E8E7E",
+  },
+  passengerColors: {
+    borderColor: "#40498D",
+    color: "#40498D",
+    backgroundColor: "#40498D",
+  },
+  */
   cardContainer: {
     width: 335,
     height: 153,
     borderWidth: 2,
-    borderColor: "#40498D",
     borderRadius: 20,
     paddingHorizontal: 25,
     backgroundColor: "#FFFFFF",
@@ -13,7 +24,6 @@ const styles = StyleSheet.create({
   infoLabel: {
     fontSize: 19,
     fontWeight: "700",
-    color: "#40498D",
   },
   infoText: {
     fontSize: 16,
@@ -27,12 +37,10 @@ const styles = StyleSheet.create({
   seatsContainer: {
     flexDirection: "row",
     gap: 10,
-    //justifyContent: "space-between",
   },
   seatView: {
     width: 20,
     height: 20,
-    backgroundColor: "#40498D",
     alignItems: "center",
     borderRadius: 6,
   },
@@ -43,3 +51,6 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+export const DRIVER_COLOR = "#3E8E7E";
+export const PASSENGER_COLOR = "#40498D";
