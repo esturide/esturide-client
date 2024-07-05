@@ -16,17 +16,18 @@ export default function CommunityPostItem({
   postBody,
 }: CommunityPostItemProps) {
   const readStatusColor = readStatus ? "#007AFF" : "#ffffff";
-  const readStateIndicatorStyle = Object.assign({...styles.readStateIndicator}, { backgroundColor: readStatusColor})
+  const readStateIndicatorStyle = Object.assign(
+    { ...styles.readStateIndicator },
+    { backgroundColor: readStatusColor },
+  );
 
   return (
     <View style={styles.itemContainer}>
-      <View
-        style={readStateIndicatorStyle}
-      />
+      <View style={readStateIndicatorStyle} />
 
       <View>
         <View style={styles.itemHeader}>
-          <Text style={styles.communityName}>{communityName}</Text>
+          <Text style={styles.communityName} numberOfLines={1} ellipsizeMode="tail">{communityName}</Text>
           <View style={styles.headerRightContainer}>
             <Text style={styles.postTime}>{postTime}</Text>
             <MaterialCommunityIcons
@@ -38,7 +39,9 @@ export default function CommunityPostItem({
         </View>
 
         <View style={styles.postBodyContainer}>
-          <Text style={styles.postBody}>{postBody}</Text>
+          <Text style={styles.postBody} numberOfLines={2} ellipsizeMode="tail">
+            {postBody}
+          </Text>
         </View>
       </View>
     </View>

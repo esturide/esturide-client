@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     paddingLeft: 17,
     marginVertical: 8,
     gap: 20,
+    backgroundColor: "#FFFFFF",
   },
   readStateIndicator: {
     width: 10,
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
   communityName: {
     fontSize: 16,
     fontWeight: "700",
+    maxWidth: 130, 
   },
   headerRightContainer: {
     flexDirection: "row",
