@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     height: 17.5,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: "#4B61B9",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 20,
@@ -38,3 +37,6 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+export const PASSENGER_COLOR = "#4B61B9";
+export const DRIVER_COLOR = "#2F7265";

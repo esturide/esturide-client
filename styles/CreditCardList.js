@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   textHeader: {
-    color: "#373F71",
     fontSize: 16,
     fontWeight: "700",
     marginBottom: 20,
@@ -24,7 +23,6 @@ const styles = StyleSheet.create({
   addCardButton: {
     width: 24,
     height: 24,
-    backgroundColor: "#ACC0E4",
     borderRadius: 6.13,
     justifyContent: "center",
     alignItems: "center",
@@ -38,3 +36,15 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+export const PASSENGER_COLORS = {
+  header: "#373F71",
+  addCardButton: "#ACC0E4",
+  iconColor: "#4B61B9",
+}
+
+export const DRIVER_COLORS = {
+  header: "#254A44",
+  addCardButton: "#87C9B8",
+  iconColor: "#2F7265",
+}

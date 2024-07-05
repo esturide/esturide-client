@@ -33,6 +33,9 @@ const DATA = [
 const meta = {
   title: "CustomRadioButtonGroup",
   component: CustomRadioButtonGroup,
+  args: {
+    typeRadio: "driver",
+  },
   decorators: [
     (Story) => (
       <View style={{ padding: 16 }}>
@@ -48,6 +51,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    data: DATA
+    data: DATA,
   },
 };

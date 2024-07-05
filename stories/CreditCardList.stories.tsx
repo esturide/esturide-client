@@ -33,6 +33,9 @@ const DATA = [
 const meta = {
   title: "CreditCardList",
   component: CreditCardList,
+  args:{
+    typeCard: "driver",
+  },
   decorators: [
     (Story) => (
       <View style={{ padding: 16 }}>
