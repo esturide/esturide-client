@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import styles from "../../styles/CardTravelInfoPassenger";
+import styles from "@/styles/CardTravelInfoPassenger";
 
 interface SeatsArr {
   id: string;
