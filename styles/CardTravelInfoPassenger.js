@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderColor: "#40498D",
     borderRadius: 20,
     paddingHorizontal: 25,
+    backgroundColor: "#FFFFFF"
   },
   driverInfoContainer: {
     marginTop: 18,
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
   seatsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    gap: 10,
   },
   seatView: {
     width: 20,
