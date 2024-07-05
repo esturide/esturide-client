@@ -27,12 +27,3 @@ export const Example: Story = {
     postBody: "Hola comunidad, este espacio es para que nos dejen sus mensajes"
   },
 };
-
-export const Example2: Story = {
-  args: {
-    readStatus: false,
-    communityName: "Futbol",
-    postTime: "11:00 AM",
-    postBody: "Hoy se arman las retas a las 3:00"
-  },
-};

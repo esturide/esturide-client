@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import styles from "@/styles/CommunityPostItem";
 
@@ -22,28 +22,40 @@ export default function CommunityPostItem({
   );
 
   return (
-    <View style={styles.itemContainer}>
-      <View style={readStateIndicatorStyle} />
+    <TouchableOpacity>
+      <View style={styles.itemContainer}>
+        <View style={readStateIndicatorStyle} />
 
-      <View>
-        <View style={styles.itemHeader}>
-          <Text style={styles.communityName} numberOfLines={1} ellipsizeMode="tail">{communityName}</Text>
-          <View style={styles.headerRightContainer}>
-            <Text style={styles.postTime}>{postTime}</Text>
-            <MaterialCommunityIcons
-              name="chevron-right"
-              size={20}
-              color="#3C3C434D"
-            />
+        <View>
+          <View style={styles.itemHeader}>
+            <Text
+              style={styles.communityName}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {communityName}
+            </Text>
+            <View style={styles.headerRightContainer}>
+              <Text style={styles.postTime}>{postTime}</Text>
+              <MaterialCommunityIcons
+                name="chevron-right"
+                size={20}
+                color="#3C3C434D"
+              />
+            </View>
+          </View>
+
+          <View style={styles.postBodyContainer}>
+            <Text
+              style={styles.postBody}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {postBody}
+            </Text>
           </View>
         </View>
-
-        <View style={styles.postBodyContainer}>
-          <Text style={styles.postBody} numberOfLines={2} ellipsizeMode="tail">
-            {postBody}
-          </Text>
-        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
