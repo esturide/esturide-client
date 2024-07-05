@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import CustomRadioButton from "./CustomRadioButton";
+import CustomRadioButtonGroup from "./CustomRadioButtonGroup";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const data = [
@@ -21,7 +21,7 @@ export default function CreditCardList() {
       <Text style={styles.textHeader}>Tarjetas</Text>
       <View style={styles.cardsContainer}>
         <View>
-          <CustomRadioButton data={data} />
+          <CustomRadioButtonGroup data={data} />
         </View>
 
         <TouchableOpacity>
