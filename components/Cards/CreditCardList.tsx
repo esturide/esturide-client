@@ -39,7 +39,7 @@ export default function CreditCardList({
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={headerStyles[typeCard]}>Tarjetas</Text>
       <View style={styles.cardsContainer}>
         <View>

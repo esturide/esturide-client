@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    width: 'fit-content',
+    paddingRight: 5,
+    paddingBottom: 5,
+    backgroundColor: "#FFFFFF",
+  },
   textHeader: {
     fontSize: 16,
     fontWeight: "700",

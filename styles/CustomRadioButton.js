@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     borderColor: "#F5F5F5",
     borderRadius: 8,
     marginBottom: 8,
+    backgroundColor: "#FFFFFF"
   },
   radio: {
     width: 17.5,
