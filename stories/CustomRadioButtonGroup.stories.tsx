@@ -34,7 +34,7 @@ const meta = {
   title: "CustomRadioButtonGroup",
   component: CustomRadioButtonGroup,
   args: {
-    typeRadio: "driver",
+    typeButton: "driver",
   },
   decorators: [
     (Story) => (

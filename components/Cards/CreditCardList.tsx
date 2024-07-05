@@ -43,7 +43,7 @@ export default function CreditCardList({
       <Text style={headerStyles[typeCard]}>Tarjetas</Text>
       <View style={styles.cardsContainer}>
         <View>
-          <CustomRadioButtonGroup data={data} typeRadio={typeCard} />
+          <CustomRadioButtonGroup data={data} typeButton ={typeCard} />
         </View>
 
         <TouchableOpacity>

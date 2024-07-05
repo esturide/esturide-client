@@ -11,11 +11,11 @@ interface CreditCardInfo {
 }
 
 interface RadioButtonGroupProps {
-  typeRadio: "driver" | "passenger";
+  typeButton: "driver" | "passenger";
   data: CreditCardInfo[];
 }
 
-export default function CustomRadioButton({ data, typeRadio }: RadioButtonGroupProps) {
+export default function CustomRadioButton({ data, typeButton }: RadioButtonGroupProps) {
   const [userOption, setUserOption] = useState("");
 
   const radioStyles = {
@@ -43,9 +43,9 @@ export default function CustomRadioButton({ data, typeRadio }: RadioButtonGroupP
               <MaterialCommunityIcons name="credit-card-outline" size={20} />
               <Text style={styles.cardInfoText}>{item.cardBank}</Text>
               <Text style={styles.cardInfoText}>{item.cardNumber}</Text>
-              <View style={radioStyles[typeRadio]}>
+              <View style={radioStyles[typeButton]}>
                 {userOption === item.id && (
-                  <View style={selectedRadioStyles[typeRadio]}></View>
+                  <View style={selectedRadioStyles[typeButton]}></View>
                 )}
               </View>
             </View>
