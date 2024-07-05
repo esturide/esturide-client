@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     width: 327,
-    height: 148,
+    minHeight: 148,
     backgroundColor: "#FFFFFF",
     borderRadius: 18,
     padding: 16,
