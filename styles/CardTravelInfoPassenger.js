@@ -3,15 +3,15 @@
 const styles = StyleSheet.create({
   cardContainer: {
     width: 335,
-    height: 273,
+    minHeight: 273,
     borderWidth: 2,
     borderColor: "#40498D",
     borderRadius: 20,
     paddingHorizontal: 25,
-    backgroundColor: "#FFFFFF"
+    paddingVertical: 18,
+    backgroundColor: "#FFFFFF",
   },
   driverInfoContainer: {
-    marginTop: 18,
     gap: 18,
   },
   infoLabel: {
