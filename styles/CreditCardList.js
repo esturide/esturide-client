@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    width: 'fit-content',
+    width: "fit-content",
     paddingRight: 5,
     paddingBottom: 5,
     backgroundColor: "#FFFFFF",
@@ -47,10 +47,10 @@ export const PASSENGER_COLORS = {
   header: "#373F71",
   addCardButton: "#ACC0E4",
   iconColor: "#4B61B9",
-}
+};
 
 export const DRIVER_COLORS = {
   header: "#254A44",
   addCardButton: "#87C9B8",
   iconColor: "#2F7265",
-}
+};

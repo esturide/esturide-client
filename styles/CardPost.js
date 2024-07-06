@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     maxWidth: 250,
     marginTop: 3,
-    marginBottom: 7
+    marginBottom: 7,
   },
   postInfoText: {
     fontSize: 10,

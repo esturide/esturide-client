@@ -2,28 +2,29 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
 import CustomRadioButtonGroup from "@/components/Cards/CustomRadioButtonGroup";
+import * as Crypto from "expo-crypto";
 
 const DATA = [
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "MasterCard",
     cardBank: "Banco NU",
     cardNumber: "**** **** **** 8395",
   },
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "VISA",
     cardBank: "RappiCard",
     cardNumber: "**** **** **** 6246",
   },
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "VISA",
     cardBank: "RappiCard",
     cardNumber: "**** **** **** 6246",
   },
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "VISA",
     cardBank: "RappiCard",
     cardNumber: "**** **** **** 6246",

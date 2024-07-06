@@ -2,28 +2,29 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
 import CreditCardList from "@/components/Cards/CreditCardList";
+import * as Crypto from "expo-crypto";
 
 const DATA = [
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "MasterCard",
     cardBank: "Banco NU",
     cardNumber: "**** **** **** 8395",
   },
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "VISA",
     cardBank: "RappiCard",
     cardNumber: "**** **** **** 6246",
   },
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "VISA",
     cardBank: "RappiCard",
     cardNumber: "**** **** **** 6246",
   },
   {
-    id: crypto.randomUUID(),
+    id: Crypto.randomUUID(),
     cardLogo: "VISA",
     cardBank: "RappiCard",
     cardNumber: "**** **** **** 6246",
@@ -33,7 +34,7 @@ const DATA = [
 const meta = {
   title: "CreditCardList",
   component: CreditCardList,
-  args:{
+  args: {
     typeCard: "driver",
   },
   decorators: [
@@ -51,6 +52,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    data: DATA
+    data: DATA,
   },
-}
+};

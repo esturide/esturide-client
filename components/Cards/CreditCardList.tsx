@@ -27,7 +27,10 @@ export default function CreditCardList({
     passenger: { ...styles.textHeader, color: PASSENGER_COLORS.header },
   };
   const addCardButtonStyles = {
-    driver: { ...styles.addCardButton, backgroundColor: DRIVER_COLORS.addCardButton },
+    driver: {
+      ...styles.addCardButton,
+      backgroundColor: DRIVER_COLORS.addCardButton,
+    },
     passenger: {
       ...styles.addCardButton,
       backgroundColor: PASSENGER_COLORS.addCardButton,
@@ -43,7 +46,7 @@ export default function CreditCardList({
       <Text style={headerStyles[typeCard]}>Tarjetas</Text>
       <View style={styles.cardsContainer}>
         <View>
-          <CustomRadioButtonGroup data={data} typeButton ={typeCard} />
+          <CustomRadioButtonGroup data={data} typeButton={typeCard} />
         </View>
 
         <TouchableOpacity>

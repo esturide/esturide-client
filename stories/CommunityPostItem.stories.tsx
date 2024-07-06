@@ -24,6 +24,6 @@ export const Example: Story = {
     readStatus: true,
     communityName: "Cut",
     postTime: "9:40 AM",
-    postBody: "Hola comunidad, este espacio es para que nos dejen sus mensajes"
+    postBody: "Hola comunidad, este espacio es para que nos dejen sus mensajes",
   },
 };

@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import styles, {DRIVER_COLOR, PASSENGER_COLOR} from "@/styles/CardTravel";
+import styles, { DRIVER_COLOR, PASSENGER_COLOR } from "@/styles/CardTravel";
 
 interface SeatsArr {
   id: string;
@@ -22,20 +22,19 @@ export default function CardTravel({
   seatsArr,
 }: CardTravelProps) {
   const containerStyles = {
-    driver: { ...styles.cardContainer, borderColor: DRIVER_COLOR},
-    passenger: {...styles.cardContainer, borderColor: PASSENGER_COLOR},
-  }
+    driver: { ...styles.cardContainer, borderColor: DRIVER_COLOR },
+    passenger: { ...styles.cardContainer, borderColor: PASSENGER_COLOR },
+  };
 
   const labelStyles = {
-    driver: { ...styles.infoLabel, color: DRIVER_COLOR},
-    passenger: {...styles.infoLabel, color: PASSENGER_COLOR},
-  }
+    driver: { ...styles.infoLabel, color: DRIVER_COLOR },
+    passenger: { ...styles.infoLabel, color: PASSENGER_COLOR },
+  };
 
   const seatViewStyles = {
-    driver: { ...styles.seatView, backgroundColor: DRIVER_COLOR},
-    passenger: {...styles.seatView, backgroundColor: PASSENGER_COLOR},
-  }
-
+    driver: { ...styles.seatView, backgroundColor: DRIVER_COLOR },
+    passenger: { ...styles.seatView, backgroundColor: PASSENGER_COLOR },
+  };
 
   return (
     <View style={containerStyles[typeCard]}>

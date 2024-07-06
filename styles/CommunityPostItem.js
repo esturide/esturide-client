@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   communityName: {
     fontSize: 16,
     fontWeight: "700",
-    maxWidth: 130, 
+    maxWidth: 130,
   },
   headerRightContainer: {
     flexDirection: "row",

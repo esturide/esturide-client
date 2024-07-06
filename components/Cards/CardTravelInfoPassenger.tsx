@@ -35,7 +35,9 @@ export default function CardTravelInfoPassenger({
 
         <View>
           <Text style={styles.infoLabel}>Vehiculo:</Text>
-          <Text style={styles.infoText}>{vehicleModel} {vehiclePlates}</Text>
+          <Text style={styles.infoText}>
+            {vehicleModel} {vehiclePlates}
+          </Text>
         </View>
       </View>
 

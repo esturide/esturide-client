@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
 import CardTravel from "@/components/Cards/CardTravel";
+import * as Crypto from "expo-crypto";
 
 const meta = {
   title: "CardTravel",
@@ -28,9 +29,9 @@ export const Example: Story = {
     arrivalTime: "8:06 am",
     price: 10.0,
     seatsArr: [
-      { id: crypto.randomUUID(), value: "A" },
-      { id: crypto.randomUUID(), value: "B" },
-      { id: crypto.randomUUID(), value: "C" },
+      { id: Crypto.randomUUID(), value: "A" },
+      { id: Crypto.randomUUID(), value: "B" },
+      { id: Crypto.randomUUID(), value: "C" },
     ],
   },
 };
@@ -41,8 +42,8 @@ export const Example2: Story = {
     arrivalTime: "8:06 am",
     price: 10.0,
     seatsArr: [
-      { id: crypto.randomUUID(), value: "B" },
-      { id: crypto.randomUUID(), value: "C" },
+      { id: Crypto.randomUUID(), value: "B" },
+      { id: Crypto.randomUUID(), value: "C" },
     ],
   },
 };
@@ -52,6 +53,6 @@ export const Example3: Story = {
     departTime: "7:20 am",
     arrivalTime: "8:06 am",
     price: 10.0,
-    seatsArr: [{ id: crypto.randomUUID(), value: "C" }],
+    seatsArr: [{ id: Crypto.randomUUID(), value: "C" }],
   },
 };
