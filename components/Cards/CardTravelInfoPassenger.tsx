@@ -25,6 +25,10 @@ export default function CardTravelInfoPassenger({
   price,
   seatsArr,
 }: CardTravelInfoPassengerProps) {
+  if(seatsArr.length > 3) {
+    throw RangeError("Invalid number of seats, maximum only 3");
+  }
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.driverInfoContainer}>

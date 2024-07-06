@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   modelText: {
     fontWeight: "700",
     fontSize: 19,
+    textAlign: "center",
     marginBottom: 8,
   },
   carInfoText: {

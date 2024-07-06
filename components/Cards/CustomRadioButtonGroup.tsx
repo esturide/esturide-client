@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import styles, {
   DRIVER_COLOR,
   PASSENGER_COLOR,
-} from "../../styles/CustomRadioButton";
+} from "@/styles/CustomRadioButton";
 
 interface CreditCardInfo {
   id: string;

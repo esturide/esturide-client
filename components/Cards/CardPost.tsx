@@ -21,7 +21,7 @@ export default function CardPost({
     <View style={styles.cardContainer}>
       <Image
         style={styles.userImage}
-        source={require("../../assets/icon.png")}
+        source={require("@/assets/icon.png")}
       />
       <View>
         <View>

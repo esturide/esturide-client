@@ -36,6 +36,10 @@ export default function CardTravel({
     passenger: { ...styles.seatView, backgroundColor: PASSENGER_COLOR },
   };
 
+  if(seatsArr.length > 3) {
+    throw RangeError("Invalid number of seats, maximum only 3");
+  }
+
   return (
     <View style={containerStyles[typeCard]}>
       <View style={styles.rowContainer}>
