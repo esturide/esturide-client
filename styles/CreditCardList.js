@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
 
 export default styles;
 
-export const PASSENGER_COLORS = {
+export const DefautPassengerColor = {
   header: "#373F71",
   addCardButton: "#ACC0E4",
   iconColor: "#4B61B9",
 };
 
-export const DRIVER_COLORS = {
+export const DefaultDriverColors = {
   header: "#254A44",
   addCardButton: "#87C9B8",
   iconColor: "#2F7265",

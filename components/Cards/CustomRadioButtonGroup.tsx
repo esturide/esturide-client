@@ -2,8 +2,8 @@ import { Pressable, Text, View } from "react-native";
 import { useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import styles, {
-  DRIVER_COLOR,
-  PASSENGER_COLOR,
+  DefaultDriverColor,
+  DefaultPassengerColor,
 } from "@/styles/CustomRadioButton";
 
 interface CreditCardInfo {
@@ -25,20 +25,20 @@ export default function CustomRadioButton({
   const [userOption, setUserOption] = useState("");
 
   const radioStyles = {
-    driver: { ...styles.radio, borderColor: DRIVER_COLOR },
-    passenger: { ...styles.radio, borderColor: PASSENGER_COLOR },
+    driver: { ...styles.radio, borderColor: DefaultDriverColor },
+    passenger: { ...styles.radio, borderColor: DefaultPassengerColor },
   };
 
   const selectedRadioStyles = {
     driver: {
       ...styles.selectedRadio,
-      borderColor: DRIVER_COLOR,
-      backgroundColor: DRIVER_COLOR,
+      borderColor: DefaultDriverColor,
+      backgroundColor: DefaultDriverColor,
     },
     passenger: {
       ...styles.selectedRadio,
-      borderColor: PASSENGER_COLOR,
-      backgroundColor: PASSENGER_COLOR,
+      borderColor: DefaultPassengerColor,
+      backgroundColor: DefaultPassengerColor,
     },
   };
 

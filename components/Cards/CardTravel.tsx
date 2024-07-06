@@ -1,5 +1,8 @@
 import { View, Text } from "react-native";
-import styles, { DRIVER_COLOR, PASSENGER_COLOR } from "@/styles/CardTravel";
+import styles, {
+  DefaultDriverColor,
+  DefaultPassengerColor,
+} from "@/styles/CardTravel";
 
 interface SeatsArr {
   id: string;
@@ -22,21 +25,21 @@ export default function CardTravel({
   seatsArr,
 }: CardTravelProps) {
   const containerStyles = {
-    driver: { ...styles.cardContainer, borderColor: DRIVER_COLOR },
-    passenger: { ...styles.cardContainer, borderColor: PASSENGER_COLOR },
+    driver: { ...styles.cardContainer, borderColor: DefaultDriverColor },
+    passenger: { ...styles.cardContainer, borderColor: DefaultPassengerColor },
   };
 
   const labelStyles = {
-    driver: { ...styles.infoLabel, color: DRIVER_COLOR },
-    passenger: { ...styles.infoLabel, color: PASSENGER_COLOR },
+    driver: { ...styles.infoLabel, color: DefaultDriverColor },
+    passenger: { ...styles.infoLabel, color: DefaultPassengerColor },
   };
 
   const seatViewStyles = {
-    driver: { ...styles.seatView, backgroundColor: DRIVER_COLOR },
-    passenger: { ...styles.seatView, backgroundColor: PASSENGER_COLOR },
+    driver: { ...styles.seatView, backgroundColor: DefaultDriverColor },
+    passenger: { ...styles.seatView, backgroundColor: DefaultPassengerColor },
   };
 
-  if(seatsArr.length > 3) {
+  if (seatsArr.length > 3) {
     throw RangeError("Invalid number of seats, maximum only 3");
   }
 

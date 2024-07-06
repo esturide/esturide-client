@@ -52,5 +52,5 @@ const styles = StyleSheet.create({
 
 export default styles;
 
-export const DRIVER_COLOR = "#3E8E7E";
-export const PASSENGER_COLOR = "#40498D";
+export const DefaultDriverColor = "#3E8E7E";
+export const DefaultPassengerColor = "#40498D";

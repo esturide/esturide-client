@@ -2,8 +2,8 @@ import { Text, TouchableOpacity, View } from "react-native";
 import CustomRadioButtonGroup from "./CustomRadioButtonGroup";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import styles, {
-  DRIVER_COLORS,
-  PASSENGER_COLORS,
+  DefaultDriverColors,
+  DefautPassengerColor,
 } from "@/styles/CreditCardList";
 
 interface CreditCardInfo {
@@ -23,22 +23,22 @@ export default function CreditCardList({
   typeCard,
 }: CreditCardListProps) {
   const headerStyles = {
-    driver: { ...styles.textHeader, color: DRIVER_COLORS.header },
-    passenger: { ...styles.textHeader, color: PASSENGER_COLORS.header },
+    driver: { ...styles.textHeader, color: DefaultDriverColors.header },
+    passenger: { ...styles.textHeader, color: DefautPassengerColor.header },
   };
   const addCardButtonStyles = {
     driver: {
       ...styles.addCardButton,
-      backgroundColor: DRIVER_COLORS.addCardButton,
+      backgroundColor: DefaultDriverColors.addCardButton,
     },
     passenger: {
       ...styles.addCardButton,
-      backgroundColor: PASSENGER_COLORS.addCardButton,
+      backgroundColor: DefautPassengerColor.addCardButton,
     },
   };
   const addCardIconStyles = {
-    driver: DRIVER_COLORS.iconColor,
-    passenger: PASSENGER_COLORS.iconColor,
+    driver: DefaultDriverColors.iconColor,
+    passenger: DefautPassengerColor.iconColor,
   };
 
   return (
