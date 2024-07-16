@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, DimensionValue } from "react-native";
+import { View, DimensionValue } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
 
@@ -19,7 +19,7 @@ export default function Map({
     : { latitude: 20.56651, longitude: -103.22825 };
 
   return (
-    <View style={styles.container}>
+    <View>
       <StatusBar style="dark" />
       <MapView
         initialRegion={{
@@ -52,26 +52,3 @@ export default function Map({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 0,
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: "center",
-  },
-  durationContainer: {
-    backgroundColor: "blue",
-    padding: 5,
-    borderRadius: 5,
-  },
-  durationText: {
-    color: "white",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-});

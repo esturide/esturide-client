@@ -7,7 +7,7 @@ const meta = {
   title: "Map",
   component: Map,
   args: {
-    mapSize: { height: 1300, width: 370 },
+    mapSize: { height: "100%", width: "100%" },
   },
   decorators: [
     (Story) => (
@@ -22,5 +22,17 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Example: Story = {
+export const Example: Story = {};
+
+export const Example2: Story = {
+  args: {
+    origin: { latitude: 20.611603035337392, longitude: -103.2101955611849 },
+  },
+};
+
+export const Example3: Story = {
+  args: {
+    origin: { latitude: 20.611603035337392, longitude: -103.2101955611849 },
+    destination: { latitude: 20.56651, longitude: -103.22825 },
+  },
 };
