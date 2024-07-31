@@ -1,12 +1,20 @@
 import React from "react";
 import style from "@/styles/InputButtons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleProp, Text, TouchableOpacity, View } from "react-native";
+import ButtonPassenger from "@/components/Buttons/ButtonPassenger";
+import ButtonDriver from "@/components/Buttons/ButtonDriver"; 
 
 interface InputButtonProps {
   /**
    * What type button?
    */
-  typeButton: "depositBlue" | "depositGreen" | "submit" | "withdraw";
+  typeButton:
+    | "depositBlue"
+    | "depositGreen"
+    | "submit"
+    | "btnPassenger"
+    | "btnDriver";
   /**
    * InputButton contents
    */
@@ -30,6 +38,14 @@ export const InputButton = ({
     depositGreen: [style.btnDepositGreen, style.btnDepositGreenText],
     submit: [style.btnSubmit, style.btnSubmitText],
     withdraw: [style.btnWithdraw, style.btnWithdrawText],
+    addBlue: [style.btnAddBlue, style.btnAddIcon],
+    addGreen: [style.btnAddGreen, style.btnAddIcon],
+    filterGreen: [style.btnFilterGreen, style.filterIcon],
+    filterBlue: [style.btnFilterBlue, style.filterIcon],
+    locationGreen: [style.btnLocationGreen, style.gpsIcon],
+    locationBlue: [style.btnLocationBlue, style.gpsIcon],
+    btnPassenger: [style.btnPassenger],
+    btnDriver: [style.btnDriver],
   };
 
   const buttonStyle: StyleProp<any> = buttonStyles[typeButton][0];
@@ -37,7 +53,19 @@ export const InputButton = ({
 
   return (
     <TouchableOpacity style={buttonStyle} {...props}>
-      <Text style={textStyle}>{label}</Text>
+      {typeButton === "btnPassenger" ? (
+        <ButtonPassenger />
+      ) : typeButton === "btnDriver" ? (
+        <ButtonDriver />
+      ) : typeButton.startsWith("location") ? (
+        <Icon name="gps-fixed" style={textStyle} />
+      ) : typeButton.startsWith("filter") ? (
+        <Icon name="filter-list" style={textStyle} />
+      ) : typeButton.startsWith("add") ? (
+        <Icon name="add" style={textStyle} />
+      ) : (
+        <Text style={textStyle}>{label}</Text>
+      )}
     </TouchableOpacity>
   );
 };
