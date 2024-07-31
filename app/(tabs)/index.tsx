@@ -3,13 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 import { InputButton } from "@/components/Buttons/InputButton";
 import { Link } from "expo-router";
 
-export default function Buttons() {
+export default function Home() {
   return (
     <View style={styles.container}>
-      <InputButton typeButton={"submit"} label={"Subir"} />
-      <InputButton typeButton={"withdraw"} label={"Retirar"} />
-      <InputButton typeButton={"depositBlue"} label={"Depositar"} />
-      <InputButton typeButton={"depositGreen"} label={"Depositar"} />
+      <Text style={styles.title}>Home page</Text>
+      <Link href={"/"}>Return to main page</Link>
     </View>
   );
 }

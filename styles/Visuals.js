@@ -3,10 +3,10 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   indicatorIcon: {
     fontSize: 12,
-    color: "#3e8e7e", 
+    color: "#3e8e7e",
     marginHorizontal: 8,
   },
-  
+
   defaultLine: {
     borderStyle: "solid",
     borderColor: "#b9b9c3",
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
 
   progressBar2: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

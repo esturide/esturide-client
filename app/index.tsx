@@ -7,9 +7,9 @@ function StartPage() {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to start page</Text>
 
-      <Link replace href={"buttons"} asChild>
+      <Link replace href={"/buttons"} asChild>
         <Pressable>
-          <Text>Buttons</Text>
+          <Text>Go to tabs</Text>
         </Pressable>
       </Link>
     </View>
