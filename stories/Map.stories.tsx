@@ -22,15 +22,21 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Example: Story = {};
-
-export const Example2: Story = {
+export const FirstExample: Story = {
   args: {
-    origin: { latitude: 20.611603035337392, longitude: -103.2101955611849 },
+    origin: null,
+    destination: null,
   },
 };
 
-export const Example3: Story = {
+export const SecondExample: Story = {
+  args: {
+    origin: { latitude: 20.611603035337392, longitude: -103.2101955611849 },
+    destination: null,
+  },
+};
+
+export const ThirdExample: Story = {
   args: {
     origin: { latitude: 20.611603035337392, longitude: -103.2101955611849 },
     destination: { latitude: 20.56651, longitude: -103.22825 },
