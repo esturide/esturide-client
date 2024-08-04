@@ -11,7 +11,7 @@ export default function Buttons() {
       <InputButton typeButton={"depositBlue"} label={"Depositar"} />
       <InputButton typeButton={"depositGreen"} label={"Depositar"} />
 
-      <Link replace href="/index">
+      <Link replace href="/GreenScreen">
         Home
       </Link>
     </View>

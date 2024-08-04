@@ -1,12 +1,19 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import React from "react";
+import { Text, View, Pressable } from "react-native";
 import styles from "@/styles/InputButtons";
 
-const ButtonSubmit = ({ title }) => {
+const ButtonSubmit = ({ title, onPress, style }) => {
   return (
-    <View style={styles.btnSubmit}>
-      <Text style={styles.btnSubmitTexto}>{title}</Text>
-    </View>
+    <Pressable 
+      onPress={onPress} 
+      style={({ pressed }) => [
+        styles.btnSubmit,
+        style,
+        pressed ? styles.btnSubmitPressed : null,
+      ]}
+    >
+      <Text style={styles.btnSubmitText}>{title}</Text>
+    </Pressable>
   );
 };
 
