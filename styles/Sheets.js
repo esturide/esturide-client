@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  /*
   bottomSheet: {
     position: "absolute",
     bottom: 0,
@@ -27,6 +28,37 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     backgroundColor: "#f0f0f0",
+  },
+  */
+  bottomSheetHandle: {
+    backgroundColor: "#FFFFFF",
+  },
+  bottomSheetBackground: {
+    paddingHorizontal: 20,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
+    elevation: 10,
+    shadowOffset: {
+      height: 10,
+      width: 10,
+    },
+    shadowColor: "#000000",
+    shadowOpacity: 1,
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  modalCloseIcon: {
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  modalHeaderBalancer: {
+    height: 30,
+    width: 30
   },
 });
 
