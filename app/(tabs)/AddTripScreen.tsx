@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import ButtonAddGreen from "@/components/Buttons/ButtonAddGreen";
 import ButtonFilterGreen from "@/components/Buttons/ButtonFilterGreen";
 import BottomSheetBase from "@/components/Sheets/BottomSheetBase";
 import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
 import { useRef } from "react";
+
+const bgImage = require('assets/addTripBgImage.png');
 
 export default function AddTripScreen() {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -14,8 +16,7 @@ export default function AddTripScreen() {
   return (
     <View style={styles.screenContainer}>
       <View style={styles.adBanner}></View>
-      <View style={styles.bgImage}>
-      </View>
+      <Image source={bgImage} style={styles.bgImage}/>
       <View>
         <Text style={styles.textBold}>Aun no tienes viajes en tu lista.</Text>
         <Text style={styles.text}>
