@@ -5,7 +5,9 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useMemo } from "react";
 
-const BottomSheetBase = React.forwardRef(function BottomSheetBase({ title, handleModalClose }, ref) {
+// React.forwardRef is neccessary to be able to open and close the modal from different
+// components in the component tree.
+const BottomSheetBase = React.forwardRef(function BottomSheetBase({ title, handleModalClose, children=null }, ref) {
   const snapPoints = useMemo(() => ["98%"], []);
 
   return (
@@ -27,6 +29,8 @@ const BottomSheetBase = React.forwardRef(function BottomSheetBase({ title, handl
         <Text style={styles.modalTitle}>{title}</Text>
         <View style={styles.modalHeaderBalancer}></View>
       </View>
+
+      { children ? children : "" }
     </BottomSheet>
   );
 });

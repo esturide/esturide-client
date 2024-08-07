@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   btnContainer: {
-    gap: 30,
+    gap: 25,
     position: "absolute",
-    bottom: 30,
+    bottom: 40,
     right: 30,
   },
 });

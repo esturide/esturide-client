@@ -14,6 +14,7 @@ export default function AddTripScreen() {
   const handleModalClose = () => bottomSheetRef.current?.close();
   const handleModalOpen = () => bottomSheetRef.current?.expand();
 
+
   return (
     <View style={styles.screenContainer}>
       <View style={styles.adBanner}></View>
@@ -41,4 +42,3 @@ export default function AddTripScreen() {
     </View>
   );
 }
-
