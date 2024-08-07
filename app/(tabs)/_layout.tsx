@@ -35,6 +35,13 @@ export default () => {
               tabBarIcon: () => <FontAwesome name="gear" />,
             }}
           />
+          <Tabs.Screen
+            name="AddTripScreen"
+            options={{
+              tabBarLabel: "Add Trip",
+              tabBarIcon: () => <FontAwesome name="gear" />,
+            }}
+          />
         </Tabs>
       </SafeAreaProvider>
     </GestureHandlerRootView>
