@@ -1,8 +1,15 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import ButtonAddGreen from "@/components/Buttons/ButtonAddGreen";
 import ButtonFilterGreen from "@/components/Buttons/ButtonFilterGreen";
+import BottomSheetBase from "@/components/Sheets/BottomSheetBase";
+import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
+import { useRef } from "react";
 
 export default function AddTripScreen() {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const handleModalClose = () => bottomSheetRef.current?.close();
+  const handleModalOpen = () => bottomSheetRef.current?.expand();
 
   return (
     <View style={styles.screenContainer}>
@@ -16,13 +23,19 @@ export default function AddTripScreen() {
         </Text>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleModalOpen}>
           <ButtonAddGreen />
         </TouchableOpacity>
         <TouchableOpacity>
           <ButtonFilterGreen />
         </TouchableOpacity>
       </View>
+      <BottomSheetBase
+        title="Agregar Viaje"
+        ref={bottomSheetRef}
+        handleModalClose={handleModalClose}
+      >
+      </BottomSheetBase>
     </View>
   );
 }
