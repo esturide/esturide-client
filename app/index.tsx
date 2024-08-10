@@ -3,7 +3,19 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { useRouter } from "expo-router";
 import Constants from "expo-constants";
 
-function StartPage() {
+const FlexContainer = ({ children, style }) => {
+  return <View style={[styles.flexContainer, style]}>{children}</View>;
+};
+
+const Logo = () => {
+  return <Image source={require("@/assets/logo.png")} style={styles.logo} />;
+};
+
+const Title = ({ children }) => {
+  return <Text style={styles.title}>{children}</Text>;
+};
+
+const StartPage = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -12,15 +24,15 @@ function StartPage() {
     }, 5000);
 
     return () => clearTimeout(timer); 
-  }, []);
+  }, [router]);
 
   return (
-    <View style={styles.container}>
-      <Image source={require("@/assets/logo.png")} style={styles.logo} />
-      <Text style={styles.title}>ESTU RIDE</Text>
-    </View>
+    <FlexContainer>
+      <Logo />
+      <Title>ESTU RIDE</Title>
+    </FlexContainer>
   );
-}
+};
 
 let AppEntryPoint = StartPage;
 
@@ -29,7 +41,7 @@ if (Constants.expoConfig?.extra?.storybookEnabled === "true") {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  flexContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

@@ -1,17 +1,55 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import { useRouter } from "expo-router";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import InputLabel from "@/components/Inputs/InputLabel";
 import InputPassword from "@/components/Inputs/InputPassword";
 
-export default function LoginPage () {
+const FlexContainer = ({ children, style }) => {
+  return <View style={[styles.flexContainer, style]}>{children}</View>;
+};
+
+const Logo = ({ style }) => {
+  return (
+    <Image source={require("@/assets/logo.png")} style={[styles.logo, style]} />
+  );
+};
+
+const Title = ({ children }) => {
+  return <Text style={styles.title}>{children}</Text>;
+};
+
+const LoginForm = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  onSubmit,
+}) => {
+  return (
+    <>
+      <InputLabel
+        label="Usuario"
+        value={username}
+        onChangeText={setUsername}
+        style={styles.userInputMargin}
+      />
+      <InputPassword
+        label="Contraseña"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <ButtonSubmit
+        title="Iniciar Sesión"
+        onPress={onSubmit}
+        style={styles.loginButton}
+      />
+    </>
+  );
+};
+
+export default function LoginPage() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
@@ -21,53 +59,45 @@ export default function LoginPage () {
   };
 
   return (
-    <View style={styles.backgroundContainer}>
-      <View style={styles.logoContainer}>
-        <Image source={require("@/assets/logo.png")} style={styles.logo} />
-      </View>
+    <FlexContainer style={styles.backgroundContainer}>
+      <Logo style={styles.logoContainer} />
       <View style={styles.container}>
-        <Text style={styles.title}>Iniciar Sesión</Text>
-        <InputLabel
-          label="Usuario"
-          value={username}
-          onChangeText={setUsername}
-          style={styles.userInputMargin}
-        />
-        <InputPassword
-          label="Contraseña"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <ButtonSubmit
-          title="Iniciar Sesión"
-          onPress={handleSubmit}
-          style={styles.loginButton}
+        <Title>Iniciar Sesión</Title>
+        <LoginForm
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          onSubmit={handleSubmit}
         />
         <Pressable onPress={() => router.push("/register")}>
           <Text style={styles.registerText}>¿No tienes cuenta? Regístrate</Text>
         </Pressable>
       </View>
-    </View>
+    </FlexContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  backgroundContainer: {
+  flexContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0f2422",
     padding: 16,
+  },
+  backgroundContainer: {
+    backgroundColor: "#0f2422",
   },
   logoContainer: {
     position: "absolute",
     top: 79,
     alignItems: "center",
-  },
-  logo: {
     width: 123,
     height: 124,
+  },
+  logo: {
+    width: "100%",
+    height: "100%",
   },
   container: {
     position: "absolute",

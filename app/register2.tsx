@@ -1,12 +1,27 @@
 import React from "react";
-import { StyleSheet, Text, View, Pressable, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from "react-native-vector-icons/MaterialIcons";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBar3 from "@/components/Visuals/ProgressBar3";
 import InputPassword from "@/components/Inputs/InputPassword";
 
+const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
+  return <View style={[styles.flexContainer, style]}>{children}</View>;
+};
+
+const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
+  return (
+    <TouchableOpacity style={styles.backButton} onPress={onPress}>
+      <Icon name="arrow-back" size={24} color="#fff" />
+    </TouchableOpacity>
+  );
+};
+
+const Title: React.FC = ({ children }) => {
+  return <Text style={styles.title}>{children}</Text>;
+};
 
 export default function Register2() {
   const [address, setAddress] = React.useState("");
@@ -25,13 +40,13 @@ export default function Register2() {
   };
 
   return (
-    <View style={styles.backgroundContainer}>
-      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-        <Icon name="arrow-back" size={24} color="#fff" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Registrar</Text>
-      <ProgressBar3 />
-      <View style={styles.container}>
+    <FlexContainer style={styles.backgroundContainer}>
+      <BackButton onPress={handleBack} />
+      <View style={styles.headerContainer}>
+        <Title>Registrar</Title>
+        <ProgressBar3 style={styles.progressBar} />
+      </View>
+      <FlexContainer style={styles.formContainer}>
         <InputLabel
           label="Dirección"
           value={address}
@@ -69,45 +84,57 @@ export default function Register2() {
           onPress={handleSubmit}
           style={styles.submitButton}
         />
-      </View>
-    </View>
+      </FlexContainer>
+    </FlexContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  backgroundContainer: {
+  flexContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    width: "100%",
+    padding: 0,
+  },
+  backgroundContainer: {
+    flex: 1,
     backgroundColor: "#0f2422",
-    padding: 16,
+  },
+  headerContainer: {
+    width: "100%",
+    alignItems: "center",
+    paddingTop: 60,
+    paddingBottom: 20,
+  },
+  progressBar: {
+    marginTop: 15,
+    width: "60%",
   },
   backButton: {
     position: "absolute",
     top: 43,
     left: 20,
   },
-  container: {
-    position: "absolute",
-    top: 142,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  formContainer: {
+    flex: 1,
     backgroundColor: "#fff",
     borderTopLeftRadius: 40,
-    padding: 20,
+    paddingTop: 30,
     alignItems: "center",
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 43.2,
     fontWeight: "bold",
     color: "#fff",
-    marginTop: 23,
+    textAlign: "center",
   },
-  userFirstInputMargin: {},
-  userInputMargin: {},
+  userInputMargin: {
+    marginTop: 10,
+  },
   submitButton: {
     marginTop: 24,
   },
-  dateInputMargin: {},
 });

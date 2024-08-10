@@ -1,18 +1,32 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBar2 from "@/components/Visuals/ProgressBar2";
 
-export default function driverRegister() {
+const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
+  return <View style={[styles.flexContainer, style]}>{children}</View>;
+};
+
+const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
+  return (
+    <TouchableOpacity style={styles.backButton} onPress={onPress}>
+      <Icon name="arrow-back" size={24} color="#fff" />
+    </TouchableOpacity>
+  );
+};
+
+const Title: React.FC = ({ children }) => {
+  return <Text style={styles.title}>{children}</Text>;
+};
+
+const InputRow: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return <View style={styles.inputRow}>{children}</View>;
+};
+
+export default function DriverRegister() {
   const [brand, setBrand] = React.useState("");
   const [model, setModel] = React.useState("");
   const [year, setYear] = React.useState("");
@@ -30,12 +44,12 @@ export default function driverRegister() {
 
   return (
     <View style={styles.backgroundContainer}>
-      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-        <Icon name="arrow-back" size={24} color="#fff" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Vehículo</Text>
-      <ProgressBar2 />
-      <View style={styles.container}>
+      <BackButton onPress={handleBack} />
+      <View style={styles.headerContainer}>
+        <Title>Vehículo</Title>
+        <ProgressBar2 style={styles.progressBar} />
+      </View>
+      <View style={styles.formContainer}>
         <InputLabel
           label="Marca"
           value={brand}
@@ -48,31 +62,27 @@ export default function driverRegister() {
           onChangeText={setModel}
           style={styles.input}
         />
-        <View style={styles.row}>
+        <InputRow>
           <InputLabel
             label="Año"
             value={year}
             onChangeText={setYear}
-            style={[styles.input, styles.halfInput]}
+            style={styles.halfInput}
           />
           <InputLabel
             label="Placas"
             value={plates}
             onChangeText={setPlates}
-            style={[styles.input, styles.halfInput]}
+            style={styles.halfInput}
           />
-        </View>
+        </InputRow>
         <InputLabel
           label="Color"
           value={color}
           onChangeText={setColor}
           style={styles.input}
         />
-        <ButtonSubmit
-          title="Siguiente"
-          onPress={handleSubmit}
-          style={styles.submitButton}
-        />
+        <ButtonSubmit title="Siguiente" onPress={handleSubmit} />
       </View>
     </View>
   );
@@ -81,35 +91,39 @@ export default function driverRegister() {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#0f2422",
-    padding: 16,
   },
   backButton: {
     position: "absolute",
-    top: 43,
+    top: 40,
     left: 20,
   },
-  container: {
-    position: "absolute",
-    top: 142,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 40,
-    padding: 20,
+  headerContainer: {
+    justifyContent: "center",
     alignItems: "center",
+    width: "100%",
+    marginTop: 60,
   },
   title: {
     fontSize: 43.2,
     fontWeight: "bold",
     color: "#fff",
-    marginTop: 23,
+    textAlign: "center",
   },
-  input: {},
-  row: {
+  progressBar: {
+    width: "70%",
+    marginTop: 10,
+  },
+  formContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 40,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  inputRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -117,7 +131,8 @@ const styles = StyleSheet.create({
   halfInput: {
     width: "48%",
   },
-  submitButton: {
-    marginTop: 24,
+  input: {
+    width: "100%",
+    marginBottom: 16,
   },
 });

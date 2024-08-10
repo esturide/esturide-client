@@ -5,6 +5,54 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBar3 from "@/components/Visuals/ProgressBar3";
 
+const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
+  return <View style={[styles.flexContainer, style]}>{children}</View>;
+};
+
+const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
+  return (
+    <TouchableOpacity style={styles.backButton} onPress={onPress}>
+      <Icon name="arrow-back" size={24} color="#fff" />
+    </TouchableOpacity>
+  );
+};
+
+const Title: React.FC = ({ children }) => {
+  return <Text style={styles.title}>{children}</Text>;
+};
+
+const AccountOption = ({ icon, title, description, selected, onPress, containerStyle, iconStyle }) => (
+  <TouchableOpacity style={[styles.option, selected && containerStyle]} onPress={onPress}>
+    <View style={[styles.iconContainer, iconStyle]}>
+      <Icon name={icon} size={50} color="#fff" />
+    </View>
+    <View style={styles.optionText}>
+      <Text style={styles.optionTitle}>{title}</Text>
+      {description.map((line, index) => (
+        <Text key={index}>{line}</Text>
+      ))}
+    </View>
+  </TouchableOpacity>
+);
+
+const TermsSwitch = ({ isSelected, onValueChange, onLinkPress }) => (
+  <View style={styles.switchContainer}>
+    <Switch
+      value={isSelected}
+      onValueChange={onValueChange}
+      trackColor={{ false: "#767577", true: "#87c9b8" }}
+      thumbColor={isSelected ? "#2f7265" : "#f4f3f4"}
+      style={styles.switch}
+    />
+    <Text style={styles.labelContainer}>
+      <Text style={styles.label}>He leído y acepto los </Text>
+      <TouchableOpacity onPress={onLinkPress}>
+        <Text style={styles.link}>términos y condiciones</Text>
+      </TouchableOpacity>.
+    </Text>
+  </View>
+);
+
 export default function Register3() {
   const [isSelected, setSelection] = React.useState(false);
   const [selectedOption, setSelectedOption] = React.useState(null);
@@ -12,14 +60,6 @@ export default function Register3() {
 
   const handleBack = () => {
     router.back();
-  };
-
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
-
-  const handleTermsAndConditions = () => {
-    router.push("/termsAndConditions");
   };
 
   const handleSubmit = () => {
@@ -38,76 +78,57 @@ export default function Register3() {
   };
 
   return (
-    <View style={styles.backgroundContainer}>
-      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-        <Icon name="arrow-back" size={24} color="#fff" />
-      </TouchableOpacity>
-      <Text style={styles.title}>Registrar</Text>
-      <ProgressBar3 />
-      <View style={styles.container}>
+    <FlexContainer style={styles.backgroundContainer}>
+      <BackButton onPress={handleBack} />
+      <View style={styles.headerContainer}>
+        <Title>Registrar</Title>
+        <ProgressBar3 style={styles.progressBar} />
+      </View>
+      <FlexContainer style={styles.formContainer}>
         <Text style={styles.subTitle}>Tipo de Cuenta</Text>
-        <TouchableOpacity
-          style={[
-            styles.option,
-            selectedOption === "Conductor" && styles.driverSelectedOption,
-          ]}
-          onPress={() => handleOptionSelect("Conductor")}
-        >
-          <View style={styles.driverContainer}>
-            <Icon name="directions-car" size={50} color="#fff" />
-          </View>
-          <View style={styles.optionText}>
-            <Text style={styles.optionTitle}>Conductor</Text>
-            <Text>° Solicitar y ofrecer viajes.</Text>
-            <Text>° Registrar vehículos.</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.option,
-            selectedOption === "Pasajero" && styles.passengerSelectedOption,
-          ]}
-          onPress={() => handleOptionSelect("Pasajero")}
-        >
-          <View style={styles.passengerContainer}>
-            <Icon name="person" size={50} color="#fff" />
-          </View>
-          <View style={styles.optionText}>
-            <Text style={styles.optionTitle}>Pasajero</Text>
-            <Text>° Acceder a viajes.</Text>
-            <Text>° Registrar vehículos más tarde.</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.switchContainer}>
-          <Switch
-            value={isSelected}
-            onValueChange={setSelection}
-            trackColor={{ false: "#767577", true: "#87c9b8" }}
-            thumbColor={isSelected ? "#2f7265" : "#f4f3f4"}
-            style={styles.switch}
-          />
-          <Text style={styles.labelContainer}>
-            <Text style={styles.label}>He leído y acepto los </Text>
-            <TouchableOpacity onPress={handleTermsAndConditions}>
-              <Text style={styles.link}>términos y condiciones</Text>
-            </TouchableOpacity>.
-          </Text>
-        </View>
+        <AccountOption
+          icon="directions-car"
+          title="Conductor"
+          description={["° Solicitar y ofrecer viajes.", "° Registrar vehículos."]}
+          selected={selectedOption === "Conductor"}
+          onPress={() => setSelectedOption("Conductor")}
+          containerStyle={styles.driverSelectedOption}
+          iconStyle={styles.driverContainer}
+        />
+        <AccountOption
+          icon="person"
+          title="Pasajero"
+          description={["° Acceder a viajes.", "° Registrar vehículos más tarde."]}
+          selected={selectedOption === "Pasajero"}
+          onPress={() => setSelectedOption("Pasajero")}
+          containerStyle={styles.passengerSelectedOption}
+          iconStyle={styles.passengerContainer}
+        />
+        <TermsSwitch
+          isSelected={isSelected}
+          onValueChange={setSelection}
+          onLinkPress={() => router.push("/termsAndConditions")}
+        />
         <ButtonSubmit
           title="Siguiente"
           onPress={handleSubmit}
           style={styles.submitButton}
         />
-      </View>
-    </View>
+      </FlexContainer>
+    </FlexContainer>
   );
 }
 
 const styles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
+  },
   backgroundContainer: {
     flex: 1,
     backgroundColor: "#0f2422",
-    padding: 16,
   },
   backButton: {
     position: "absolute",
@@ -115,22 +136,30 @@ const styles = StyleSheet.create({
     left: 20,
     zIndex: 1,
   },
+  headerContainer: {
+    alignItems: "center",
+    marginTop: 60,
+    marginBottom: 20,
+    width: "100%",
+  },
   title: {
     fontSize: 43.2,
     fontWeight: "bold",
     color: "#fff",
-    marginTop: 12,
     textAlign: "center",
   },
-  container: {
-    position: "absolute",
-    top: 142,
-    left: 0,
-    right: 0,
-    bottom: 0,
+  progressBar: {
+    marginTop: 10,
+    width: "70%",
+    alignSelf: "center",
+  },
+  formContainer: {
+    flex: 1,
+    width: "100%",
     backgroundColor: "#fff",
     borderTopLeftRadius: 40,
-    padding: 20,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
     alignItems: "center",
   },
   subTitle: {
@@ -138,7 +167,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 50,
     color: "#254a44",
-    marginTop: 51,
   },
   option: {
     flexDirection: "row",
@@ -151,12 +179,6 @@ const styles = StyleSheet.create({
     height: 107,
     borderColor: "#cfcfcf",
     borderWidth: 1,
-  },
-  driverSelectedOption: {
-    backgroundColor: "#d8efe8",
-  },
-  passengerSelectedOption: {
-    backgroundColor: "#e3e9f6",
   },
   driverContainer: {
     width: 78,
@@ -174,8 +196,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  driverSelectedOption: {
+    backgroundColor: "#d8efe8",
+  },
+  passengerSelectedOption: {
+    backgroundColor: "#e3e9f6",
+  },
+  iconContainer: {
+    width: 78,
+    height: 78,
+    borderRadius: 32,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   optionText: {
     marginLeft: 10,
+    flex: 1,
   },
   optionTitle: {
     fontSize: 19.2,
