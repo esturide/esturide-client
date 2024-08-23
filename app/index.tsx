@@ -26,7 +26,7 @@ const StartPage = () => {
     return () => clearTimeout(timer); 
   }, [router]);
 
-  return (
+  return 
     <FlexContainer>
       <Logo />
       <Title>ESTU RIDE</Title>

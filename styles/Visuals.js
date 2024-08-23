@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     color: "#b9b9c3", 
     marginHorizontal: 8,
   },
-  
+
   defaultLine: {
     borderStyle: "solid",
     borderColor: "#b9b9c3",
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
 
   progressBar2: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
