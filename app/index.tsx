@@ -1,20 +1,38 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Link } from "expo-router";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { useRouter } from "expo-router";
 import Constants from "expo-constants";
 
-function StartPage() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to start page</Text>
+const FlexContainer = ({ children, style }) => {
+  return <View style={[styles.flexContainer, style]}>{children}</View>;
+};
 
-      <Link replace href={"/buttons"} asChild>
-        <Pressable>
-          <Text>Go to tabs</Text>
-        </Pressable>
-      </Link>
-    </View>
+const Logo = () => {
+  return <Image source={require("@/assets/logo.png")} style={styles.logo} />;
+};
+
+const Title = ({ children }) => {
+  return <Text style={styles.title}>{children}</Text>;
+};
+
+const StartPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace("/logIn"); 
+    }, 5000);
+
+    return () => clearTimeout(timer); 
+  }, [router]);
+
+  return 
+    <FlexContainer>
+      <Logo />
+      <Title>ESTU RIDE</Title>
+    </FlexContainer>
   );
-}
+};
 
 let AppEntryPoint = StartPage;
 
@@ -23,15 +41,23 @@ if (Constants.expoConfig?.extra?.storybookEnabled === "true") {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  flexContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#0f2422",
+    padding: 16,
+  },
+  logo: {
+    width: 248,
+    height: 248,
+    marginBottom: 16,
   },
   title: {
-    fontSize: 20,
+    fontSize: 48,
     fontWeight: "bold",
+    color: "#FFFFFF",
+    marginBottom: 32,
   },
 });
 
