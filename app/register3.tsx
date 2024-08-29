@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
 import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import ProgressBar3 from "@/components/Visuals/ProgressBar3";
+import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 
 const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
@@ -82,7 +82,7 @@ export default function Register3() {
       <BackButton onPress={handleBack} />
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBar3 style={styles.progressBar} />
+        <ProgressBarContainer style={styles.progressBar} />
       </View>
       <FlexContainer style={styles.formContainer}>
         <Text style={styles.subTitle}>Tipo de Cuenta</Text>

@@ -4,9 +4,9 @@ import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import ProgressBar2 from "@/components/Visuals/ProgressBar2";
+import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 
-const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
+const FlexContainer: React.FC<{ children: React.ReactNode, style?: any }> = ({ children, style }) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
 };
 
@@ -18,7 +18,7 @@ const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
   );
 };
 
-const Title: React.FC = ({ children }) => {
+const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <Text style={styles.title}>{children}</Text>;
 };
 
@@ -47,7 +47,7 @@ export default function DriverRegister() {
       <BackButton onPress={handleBack} />
       <View style={styles.headerContainer}>
         <Title>Vehículo</Title>
-        <ProgressBar2 style={styles.progressBar} />
+        <ProgressBarContainer type="ProgressBar3" />
       </View>
       <View style={styles.formContainer}>
         <InputLabel
