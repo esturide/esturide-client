@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import ProgressBar3 from "@/components/Visuals/ProgressBar3";
+import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import InputPassword from "@/components/Inputs/InputPassword";
 
 const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
@@ -44,7 +44,7 @@ export default function Register2() {
       <BackButton onPress={handleBack} />
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBar3 style={styles.progressBar} />
+        <ProgressBarContainer type={"ProgressBar2"} style={styles.progressBar} />
       </View>
       <FlexContainer style={styles.formContainer}>
         <InputLabel

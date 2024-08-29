@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import ProgressBar3 from "@/components/Visuals/ProgressBar3";
+import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import InputDate from "@/components/Inputs/InputDate";
 
 type RegistrationFormProps = {
@@ -102,7 +102,7 @@ const Register: React.FC = () => {
     <View style={styles.backgroundContainer}>
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBar3 style={styles.progressBar} />
+        <ProgressBarContainer type={"ProgressBar2"} style={styles.progressBar} />
       </View>
       <View style={styles.formContainerWrapper}>
         <ScrollView contentContainerStyle={styles.container}>
