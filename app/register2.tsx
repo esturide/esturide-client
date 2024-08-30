@@ -44,7 +44,10 @@ export default function Register2() {
       <BackButton onPress={handleBack} />
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBarContainer type={"ProgressBar2"} style={styles.progressBar} />
+        <ProgressBarContainer
+          type={"ProgressBar2"}
+          style={styles.progressBar}
+        />
       </View>
       <FlexContainer style={styles.formContainer}>
         <InputLabel

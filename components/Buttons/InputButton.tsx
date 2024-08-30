@@ -3,7 +3,7 @@ import style from "@/styles/InputButtons";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleProp, Text, TouchableOpacity, View } from "react-native";
 import ButtonPassenger from "@/components/Buttons/ButtonPassenger";
-import ButtonDriver from "@/components/Buttons/ButtonDriver"; 
+import ButtonDriver from "@/components/Buttons/ButtonDriver";
 
 interface InputButtonProps {
   /**

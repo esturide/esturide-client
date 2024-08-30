@@ -21,8 +21,19 @@ const Title: React.FC = ({ children }) => {
   return <Text style={styles.title}>{children}</Text>;
 };
 
-const AccountOption = ({ icon, title, description, selected, onPress, containerStyle, iconStyle }) => (
-  <TouchableOpacity style={[styles.option, selected && containerStyle]} onPress={onPress}>
+const AccountOption = ({
+  icon,
+  title,
+  description,
+  selected,
+  onPress,
+  containerStyle,
+  iconStyle,
+}) => (
+  <TouchableOpacity
+    style={[styles.option, selected && containerStyle]}
+    onPress={onPress}
+  >
     <View style={[styles.iconContainer, iconStyle]}>
       <Icon name={icon} size={50} color="#fff" />
     </View>
@@ -48,7 +59,8 @@ const TermsSwitch = ({ isSelected, onValueChange, onLinkPress }) => (
       <Text style={styles.label}>He leído y acepto los </Text>
       <TouchableOpacity onPress={onLinkPress}>
         <Text style={styles.link}>términos y condiciones</Text>
-      </TouchableOpacity>.
+      </TouchableOpacity>
+      .
     </Text>
   </View>
 );
@@ -89,7 +101,10 @@ export default function Register3() {
         <AccountOption
           icon="directions-car"
           title="Conductor"
-          description={["° Solicitar y ofrecer viajes.", "° Registrar vehículos."]}
+          description={[
+            "° Solicitar y ofrecer viajes.",
+            "° Registrar vehículos.",
+          ]}
           selected={selectedOption === "Conductor"}
           onPress={() => setSelectedOption("Conductor")}
           containerStyle={styles.driverSelectedOption}
@@ -98,7 +113,10 @@ export default function Register3() {
         <AccountOption
           icon="person"
           title="Pasajero"
-          description={["° Acceder a viajes.", "° Registrar vehículos más tarde."]}
+          description={[
+            "° Acceder a viajes.",
+            "° Registrar vehículos más tarde.",
+          ]}
           selected={selectedOption === "Pasajero"}
           onPress={() => setSelectedOption("Pasajero")}
           containerStyle={styles.passengerSelectedOption}

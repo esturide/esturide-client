@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   indicatorIcon: {
     fontSize: 12,
-    color: "#b9b9c3", 
+    color: "#b9b9c3",
     marginHorizontal: 8,
   },
 

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { View, TouchableOpacity } from 'react-native';
-import Option from '@/components/Buttons/Option'; 
+import * as React from "react";
+import { Meta, Story } from "@storybook/react";
+import { View, TouchableOpacity } from "react-native";
+import Option from "@/components/Buttons/Option";
 
 const meta: Meta<typeof Option> = {
-  title: 'Components/Option',
+  title: "Components/Option",
   component: Option,
   decorators: [
     (Story) => (
@@ -18,10 +18,10 @@ const meta: Meta<typeof Option> = {
 export default meta;
 
 const Template: Story<typeof Option> = (args) => (
-    <TouchableOpacity>
-      <Option {...args} />
-    </TouchableOpacity>
-  );
+  <TouchableOpacity>
+    <Option {...args} />
+  </TouchableOpacity>
+);
 
 export const Default = Template.bind({});
 Default.args = {};

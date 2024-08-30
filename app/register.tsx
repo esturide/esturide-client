@@ -102,7 +102,10 @@ const Register: React.FC = () => {
     <View style={styles.backgroundContainer}>
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBarContainer type={"ProgressBar2"} style={styles.progressBar} />
+        <ProgressBarContainer
+          type={"ProgressBar2"}
+          style={styles.progressBar}
+        />
       </View>
       <View style={styles.formContainerWrapper}>
         <ScrollView contentContainerStyle={styles.container}>
