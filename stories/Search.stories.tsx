@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { View } from 'react-native';
-import Search from '@/components/Buttons/Search'; 
+import * as React from "react";
+import { Meta, Story } from "@storybook/react";
+import { View } from "react-native";
+import Search from "@/components/Buttons/Search";
 
 const meta: Meta<typeof Search> = {
-  title: 'Components/Search',
+  title: "Components/Search",
   component: Search,
   decorators: [
     (Story) => (

@@ -6,7 +6,10 @@ import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 
-const FlexContainer: React.FC<{ children: React.ReactNode, style?: any }> = ({ children, style }) => {
+const FlexContainer: React.FC<{ children: React.ReactNode; style?: any }> = ({
+  children,
+  style,
+}) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
 };
 

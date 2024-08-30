@@ -20,10 +20,10 @@ const StartPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace("/logIn"); 
+      router.replace("/logIn");
     }, 5000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [router]);
 
   return (
