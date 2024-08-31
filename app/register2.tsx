@@ -32,6 +32,7 @@ export default function Register2() {
   const router = useRouter();
 
   const handleBack = () => {
+    console.log("Back!");
     router.back();
   };
 
