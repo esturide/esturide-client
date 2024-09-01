@@ -4,16 +4,13 @@ import { useRouter } from "expo-router";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import InputLabel from "@/components/Inputs/InputLabel";
 import InputPassword from "@/components/Inputs/InputPassword";
-import BackgroundContainer from "@/components/container/Background";
+import RegisterLayout from "@/components/layouts/RegisterLayout";
+import Title from "@/components/layouts/Title";
 
 const Logo = ({ style }) => {
   return (
     <Image source={require("@/assets/logo.png")} style={[styles.logo, style]} />
   );
-};
-
-const Title = ({ children }) => {
-  return <Text style={styles.title}>{children}</Text>;
 };
 
 const LoginForm = ({
@@ -58,7 +55,7 @@ export default function LoginPage() {
   return (
     <>
       <Logo style={styles.logoContainer} />
-      <BackgroundContainer>
+      <RegisterLayout>
         <Title>Iniciar Sesión</Title>
         <LoginForm
           username={username}
@@ -70,7 +67,7 @@ export default function LoginPage() {
         <Pressable onPress={() => router.push("/register")}>
           <Text style={styles.registerText}>¿No tienes cuenta? Regístrate</Text>
         </Pressable>
-      </BackgroundContainer>
+      </RegisterLayout>
     </>
   );
 }

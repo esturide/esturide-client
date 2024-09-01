@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import Constants from "expo-constants";
+import Title from "@/components/layouts/Title";
 
 const FlexContainer = ({ children, style }) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
@@ -9,10 +10,6 @@ const FlexContainer = ({ children, style }) => {
 
 const Logo = () => {
   return <Image source={require("@/assets/logo.png")} style={styles.logo} />;
-};
-
-const Title = ({ children }) => {
-  return <Text style={styles.title}>{children}</Text>;
 };
 
 export const StartPage = () => {
