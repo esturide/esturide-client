@@ -1,7 +1,7 @@
 import React from "react";
 import style from "@/styles/InputButtons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { StyleProp, Text, TouchableOpacity, View } from "react-native";
+import { StyleProp, Text, TouchableOpacity } from "react-native";
 import ButtonPassenger from "@/components/Buttons/ButtonPassenger";
 import ButtonDriver from "@/components/Buttons/ButtonDriver";
 

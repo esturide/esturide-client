@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import Constants from "expo-constants";
 
@@ -15,7 +15,7 @@ const Title = ({ children }) => {
   return <Text style={styles.title}>{children}</Text>;
 };
 
-const StartPage = () => {
+export const StartPage = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -27,10 +27,10 @@ const StartPage = () => {
   }, [router]);
 
   return (
-    <FlexContainer style={styles.flexContainer}>
+    <>
       <Logo />
       <Title>ESTU RIDE</Title>
-    </FlexContainer>
+    </>
   );
 };
 

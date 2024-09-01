@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, TextInput } from "react-native";
+import { TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "@/styles/InputButtons";
 
