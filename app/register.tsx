@@ -5,7 +5,8 @@ import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import InputDate from "@/components/Inputs/InputDate";
-import BackgroundContainer from "@/components/container/Background";
+import RegisterLayout from "@/components/layouts/RegisterLayout";
+import Title from "@/components/layouts/Title";
 
 type RegistrationFormProps = {
   name: string;
@@ -23,10 +24,6 @@ type RegistrationFormProps = {
 
 const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
-};
-
-const Title: React.FC = ({ children }) => {
-  return <Text style={styles.title}>{children}</Text>;
 };
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
@@ -105,7 +102,7 @@ const Register: React.FC = () => {
         <Title>Registrar</Title>
         <ProgressBarContainer type={"ProgressBar2"} />
       </View>
-      <BackgroundContainer>
+      <RegisterLayout>
         <ScrollView contentContainerStyle={styles.container}>
           <RegistrationForm
             name={name}
@@ -125,7 +122,7 @@ const Register: React.FC = () => {
             </Text>
           </Pressable>
         </ScrollView>
-      </BackgroundContainer>
+      </RegisterLayout>
     </>
   );
 };

@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
+import Title from "@/components/layouts/Title";
 
 const FlexContainer: React.FC<{ children: React.ReactNode; style?: any }> = ({
   children,
@@ -19,10 +20,6 @@ const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
       <Icon name="arrow-back" size={24} color="#fff" />
     </TouchableOpacity>
   );
-};
-
-const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <Text style={styles.title}>{children}</Text>;
 };
 
 const InputRow: React.FC<{ children: React.ReactNode }> = ({ children }) => {

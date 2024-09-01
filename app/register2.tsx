@@ -12,11 +12,8 @@ import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import InputPassword from "@/components/Inputs/InputPassword";
-import BackgroundContainer from "@/components/container/Background";
-
-const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
-  return <View style={[styles.flexContainer, style]}>{children}</View>;
-};
+import RegisterLayout from "@/components/layouts/RegisterLayout";
+import Title from "@/components/layouts/Title";
 
 const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
   return (
@@ -24,10 +21,6 @@ const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
       <Icon name="arrow-back" size={24} color="#fff" />
     </TouchableOpacity>
   );
-};
-
-const Title: React.FC = ({ children }) => {
-  return <Text style={styles.title}>{children}</Text>;
 };
 
 export default function Register2() {
@@ -54,7 +47,7 @@ export default function Register2() {
         <Title>Registrar</Title>
         <ProgressBarContainer type={"ProgressBar2"} />
       </View>
-      <BackgroundContainer>
+      <RegisterLayout>
         <ScrollView>
           <InputLabel
             label="Dirección"
@@ -94,7 +87,7 @@ export default function Register2() {
             style={styles.submitButton}
           />
         </ScrollView>
-      </BackgroundContainer>
+      </RegisterLayout>
     </>
   );
 }

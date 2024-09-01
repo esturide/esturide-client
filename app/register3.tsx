@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
+import Title from "@/components/layouts/Title";
 
 const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
@@ -15,10 +16,6 @@ const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
       <Icon name="arrow-back" size={24} color="#fff" />
     </TouchableOpacity>
   );
-};
-
-const Title: React.FC = ({ children }) => {
-  return <Text style={styles.title}>{children}</Text>;
 };
 
 const AccountOption = ({
