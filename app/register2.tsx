@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import InputPassword from "@/components/Inputs/InputPassword";
+import BackgroundContainer from "@/components/container/Background";
 
 const FlexContainer: React.FC<{ style?: object }> = ({ children, style }) => {
   return <View style={[styles.flexContainer, style]}>{children}</View>;
@@ -41,55 +48,54 @@ export default function Register2() {
   };
 
   return (
-    <FlexContainer style={styles.backgroundContainer}>
+    <>
       <BackButton onPress={handleBack} />
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBarContainer
-          type={"ProgressBar2"}
-          style={styles.progressBar}
-        />
+        <ProgressBarContainer type={"ProgressBar2"} />
       </View>
-      <FlexContainer style={styles.formContainer}>
-        <InputLabel
-          label="Dirección"
-          value={address}
-          onChangeText={setAddress}
-          style={styles.userInputMargin}
-        />
-        <InputLabel
-          label="Número de Teléfono"
-          value={phoneNumber}
-          onChangeText={setPhoneNumber}
-          style={styles.userInputMargin}
-        />
-        <InputLabel
-          label="Correo Electrónico"
-          value={email}
-          onChangeText={setEmail}
-          style={styles.userInputMargin}
-        />
-        <InputPassword
-          label="Contraseña"
-          value={password}
-          onChangeText={setPassword}
-          style={styles.userInputMargin}
-          secureTextEntry
-        />
-        <InputPassword
-          label="Confirmar Contraseña"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          style={styles.userInputMargin}
-          secureTextEntry
-        />
-        <ButtonSubmit
-          title="Siguiente"
-          onPress={handleSubmit}
-          style={styles.submitButton}
-        />
-      </FlexContainer>
-    </FlexContainer>
+      <BackgroundContainer>
+        <ScrollView>
+          <InputLabel
+            label="Dirección"
+            value={address}
+            onChangeText={setAddress}
+            style={styles.userInputMargin}
+          />
+          <InputLabel
+            label="Número de Teléfono"
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            style={styles.userInputMargin}
+          />
+          <InputLabel
+            label="Correo Electrónico"
+            value={email}
+            onChangeText={setEmail}
+            style={styles.userInputMargin}
+          />
+          <InputPassword
+            label="Contraseña"
+            value={password}
+            onChangeText={setPassword}
+            style={styles.userInputMargin}
+            secureTextEntry
+          />
+          <InputPassword
+            label="Confirmar Contraseña"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={styles.userInputMargin}
+            secureTextEntry
+          />
+          <ButtonSubmit
+            title="Siguiente"
+            onPress={handleSubmit}
+            style={styles.submitButton}
+          />
+        </ScrollView>
+      </BackgroundContainer>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 import styles from "@/styles/InputButtons";
 
 const ButtonSubmit = ({ title, onPress, style }) => {

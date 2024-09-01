@@ -2,13 +2,13 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import { Slot } from "expo-router";
 
-const FlexContainer: React.FC = () => {
+export default function Layout() {
   return (
-    <View style={[styles.flexContainer]}>
+    <View style={styles.flexContainer}>
       <Slot />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   flexContainer: {

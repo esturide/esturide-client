@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import styles from "@/styles/Inputs";
 
 const InputLabel = ({ label, value, onChangeText, style }) => {

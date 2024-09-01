@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import InputLabel from "@/components/Inputs/InputLabel";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import InputDate from "@/components/Inputs/InputDate";
+import BackgroundContainer from "@/components/container/Background";
 
 type RegistrationFormProps = {
   name: string;
@@ -99,15 +100,12 @@ const Register: React.FC = () => {
   };
 
   return (
-    <View style={styles.backgroundContainer}>
+    <>
       <View style={styles.headerContainer}>
         <Title>Registrar</Title>
-        <ProgressBarContainer
-          type={"ProgressBar2"}
-          style={styles.progressBar}
-        />
+        <ProgressBarContainer type={"ProgressBar2"} />
       </View>
-      <View style={styles.formContainerWrapper}>
+      <BackgroundContainer>
         <ScrollView contentContainerStyle={styles.container}>
           <RegistrationForm
             name={name}
@@ -127,8 +125,8 @@ const Register: React.FC = () => {
             </Text>
           </Pressable>
         </ScrollView>
-      </View>
-    </View>
+      </BackgroundContainer>
+    </>
   );
 };
 

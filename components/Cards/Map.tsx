@@ -1,5 +1,5 @@
 import React from "react";
-import { View, DimensionValue } from "react-native";
+import { DimensionValue, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
 

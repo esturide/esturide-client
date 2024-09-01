@@ -2,17 +2,17 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   /*
-  driverColors: {
-    borderColor: "#3E8E7E",
-    color: "#3E8E7E",
-    backgroundColor: "#3E8E7E",
-  },
-  passengerColors: {
-    borderColor: "#40498D",
-    color: "#40498D",
-    backgroundColor: "#40498D",
-  },
-  */
+    driverColors: {
+      borderColor: "#3E8E7E",
+      color: "#3E8E7E",
+      backgroundColor: "#3E8E7E",
+    },
+    passengerColors: {
+      borderColor: "#40498D",
+      color: "#40498D",
+      backgroundColor: "#40498D",
+    },
+    */
   cardContainer: {
     width: 335,
     height: 153,
