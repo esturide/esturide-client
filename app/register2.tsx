@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import InputLabel from "@/components/Inputs/InputLabel";
-import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
-import InputPassword from "@/components/Inputs/InputPassword";
-import RegisterLayout from "@/components/layouts/RegisterLayout";
+import LayoutRegister from "@/components/layouts/register/LayoutRegister";
 import Title from "@/components/layouts/Title";
+import AddressRegistrationForm from "@/components/forms/AddressRegistrationForm";
+
+import ScrollLayout from "@/components/layouts/ScrollLayout";
 
 const BackButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
   return (
@@ -47,47 +47,11 @@ export default function Register2() {
         <Title>Registrar</Title>
         <ProgressBarContainer type={"ProgressBar2"} />
       </View>
-      <RegisterLayout>
-        <ScrollView>
-          <InputLabel
-            label="Dirección"
-            value={address}
-            onChangeText={setAddress}
-            style={styles.userInputMargin}
-          />
-          <InputLabel
-            label="Número de Teléfono"
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
-            style={styles.userInputMargin}
-          />
-          <InputLabel
-            label="Correo Electrónico"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.userInputMargin}
-          />
-          <InputPassword
-            label="Contraseña"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.userInputMargin}
-            secureTextEntry
-          />
-          <InputPassword
-            label="Confirmar Contraseña"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            style={styles.userInputMargin}
-            secureTextEntry
-          />
-          <ButtonSubmit
-            title="Siguiente"
-            onPress={handleSubmit}
-            style={styles.submitButton}
-          />
-        </ScrollView>
-      </RegisterLayout>
+      <LayoutRegister>
+        <ScrollLayout>
+          <AddressRegistrationForm />
+        </ScrollLayout>
+      </LayoutRegister>
     </>
   );
 }

@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { Platform, Pressable, Text, View } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import styles from "@/styles/Inputs";
 
-const InputDate = ({ label, value, onChange, style }) => {
+type Props = {
+  label: string;
+  value: Date | null;
+  onChange: (date: Date) => void;
+  style: {};
+};
+
+const InputDate = ({ label, value, onChange, style }: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
-  const onChangeDate = (event, selectedDate) => {
+  const onChangeDate = (event: DateTimePickerEvent, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
+
     setShow(Platform.OS === "ios");
     setDate(currentDate);
+
     onChange(currentDate);
   };
 
