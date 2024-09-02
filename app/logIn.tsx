@@ -1,47 +1,11 @@
 import React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { useRouter } from "expo-router";
-import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import InputLabel from "@/components/Inputs/InputLabel";
-import InputPassword from "@/components/Inputs/InputPassword";
-import RegisterLayout from "@/components/layouts/RegisterLayout";
+import LayoutRegister from "@/components/layouts/register/LayoutRegister";
 import Title from "@/components/layouts/Title";
-
-const Logo = ({ style }) => {
-  return (
-    <Image source={require("@/assets/logo.png")} style={[styles.logo, style]} />
-  );
-};
-
-const LoginForm = ({
-  username,
-  setUsername,
-  password,
-  setPassword,
-  onSubmit,
-}) => {
-  return (
-    <>
-      <InputLabel
-        label="Usuario"
-        value={username}
-        onChangeText={setUsername}
-        style={styles.userInputMargin}
-      />
-      <InputPassword
-        label="Contraseña"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <ButtonSubmit
-        title="Iniciar Sesión"
-        onPress={onSubmit}
-        style={styles.loginButton}
-      />
-    </>
-  );
-};
+import LoginForm from "@/components/forms/LoginForm";
+import Logo from "@/components/resources/Logo";
+import HyperLink from "@/components/Buttons/HyperLink";
 
 export default function LoginPage() {
   const [username, setUsername] = React.useState("");
@@ -49,25 +13,28 @@ export default function LoginPage() {
   const router = useRouter();
 
   const handleSubmit = () => {
-    console.log("Button pressed");
+    console.log("Login user");
+  };
+
+  const onHyperLinkPressed = () => {
+    router.push("/register");
   };
 
   return (
     <>
       <Logo style={styles.logoContainer} />
-      <RegisterLayout>
-        <Title>Iniciar Sesión</Title>
+      <LayoutRegister>
+        <Title style={styles.title}>Iniciar Sesión</Title>
         <LoginForm
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
+          onChangeUsername={setUsername}
+          onChangePassword={setPassword}
           onSubmit={handleSubmit}
         />
-        <Pressable onPress={() => router.push("/register")}>
-          <Text style={styles.registerText}>¿No tienes cuenta? Regístrate</Text>
-        </Pressable>
-      </RegisterLayout>
+        <HyperLink
+          onPress={onHyperLinkPressed}
+          label={"¿No tienes cuenta? Regístrate"}
+        />
+      </LayoutRegister>
     </>
   );
 }
@@ -80,28 +47,18 @@ const styles = StyleSheet.create({
     width: 123,
     height: 124,
   },
-  logo: {
-    width: "100%",
-    height: "100%",
-  },
-  title: {
-    fontSize: 43.2,
-    fontWeight: "bold",
-    color: "#000",
-    marginTop: 49,
-  },
-  userInputMargin: {
-    marginTop: 46,
-    marginBottom: 24,
-  },
-  loginButton: {
-    marginTop: 35,
-  },
   registerText: {
     color: "#454545",
     textDecorationLine: "underline",
     fontSize: 13.3,
     fontWeight: "bold",
     marginTop: 24,
+  },
+  title: {
+    fontSize: 43.2,
+    fontWeight: "bold",
+    color: "#000",
+    textAlign: "center",
+    marginTop: 49,
   },
 });
