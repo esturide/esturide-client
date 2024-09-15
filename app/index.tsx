@@ -9,7 +9,7 @@ export const StartPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace("/logIn");
+      router.replace("/log-in");
     }, 5000);
 
     return () => clearTimeout(timer);
