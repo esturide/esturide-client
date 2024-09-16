@@ -1,13 +1,15 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import LayoutRegister from "@/components/layouts/register/LayoutRegister";
 import Title from "@/components/layouts/Title";
-import LoginForm from "@/components/forms/LoginForm";
+import LoginForm from "@/components/forms/register/LoginForm";
 import Logo from "@/components/resources/Logo";
 import HyperLink from "@/components/Buttons/HyperLink";
+import AuthUser from "@/components/forms/AuthUser";
+import ScrollLayout from "@/components/layouts/ScrollLayout";
 
-export default function LoginPage() {
+export default function () {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
@@ -16,8 +18,8 @@ export default function LoginPage() {
     console.log("Login user");
   };
 
-  const onHyperLinkPressed = () => {
-    router.push("/register");
+  const onHyperLinkPressed = async () => {
+    console.log("Redirect to User register");
   };
 
   return (
@@ -31,8 +33,9 @@ export default function LoginPage() {
           onSubmit={handleSubmit}
         />
         <HyperLink
-          onPress={onHyperLinkPressed}
+          onClick={onHyperLinkPressed}
           label={"¿No tienes cuenta? Regístrate"}
+          href={"/sign-up/register"}
         />
       </LayoutRegister>
     </>

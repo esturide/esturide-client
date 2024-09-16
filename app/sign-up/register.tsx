@@ -1,22 +1,17 @@
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { router, useRouter } from "expo-router";
+import { router } from "expo-router";
 import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
 import LayoutRegister from "@/components/layouts/register/LayoutRegister";
 import Title from "@/components/layouts/Title";
 import HyperLink from "@/components/Buttons/HyperLink";
-import UserRegistrationForm from "@/components/forms/UserRegistrationForm";
+import UserRegistrationForm from "@/components/forms/register/UserRegistrationForm";
 import HeaderRegister from "@/components/layouts/register/HeaderRegister";
 import ScrollLayout from "@/components/layouts/ScrollLayout";
 
-const Register: React.FC = () => {
-  const handleSubmit = () => {
-    router.push("/register2");
-  };
+export default function () {
+  const handleSubmitRegister = async () => {};
 
-  const handleLogInRedirect = () => {
-    router.push("/logIn");
-  };
+  const handleLogInRedirect = async () => {};
 
   return (
     <>
@@ -27,28 +22,17 @@ const Register: React.FC = () => {
 
       <LayoutRegister>
         <ScrollLayout>
-          <UserRegistrationForm onSubmit={handleSubmit} />
+          <UserRegistrationForm
+            onSubmit={handleSubmitRegister}
+            redirect={"/sign-up/register2"}
+          />
           <HyperLink
             label={"¿Ya tienes cuenta? Inicia Sesión"}
-            onPress={handleLogInRedirect}
+            onClick={handleLogInRedirect}
+            href={"/sign-up/log-in"}
           />
         </ScrollLayout>
       </LayoutRegister>
     </>
   );
-};
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    flex: 1,
-    alignItems: "center",
-    marginBottom: 20,
-    marginTop: 60,
-  },
-  progressBar: {
-    marginTop: 20,
-    width: "70%",
-  },
-});
-
-export default Register;
+}
