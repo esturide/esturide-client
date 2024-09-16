@@ -7,12 +7,13 @@ const meta: Meta<typeof ProgressBarContainer> = {
   title: 'Components/ProgressBarContainer',
   component: ProgressBarContainer,
   argTypes: {
-    type: {
+    status: {
       control: {
         type: 'radio',
-        options: ['ProgressBar2', 'ProgressBar3'],
+        options: ['starting', 'finished'],
       },
-      defaultValue: 'ProgressBar3',
+
+      defaultValue: 'finished',
       description: 'Select the type of progress bar',
     },
   },
@@ -33,5 +34,5 @@ const Template: Story<typeof ProgressBarContainer> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  type: 'ProgressBar3',
+  status: 'finished',
 };
