@@ -1,21 +1,19 @@
 import { StyleSheet, View } from "react-native";
-import React from "react";
 import { Slot } from "expo-router";
 
 export default function () {
   return (
-    <View style={styles.flexContainer}>
+    <View style={styles.container}>
       <Slot />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  flexContainer: {
+  container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0f2422",
-    padding: 16,
+    backgroundColor: "#fff",
   },
 });
