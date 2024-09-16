@@ -1,6 +1,6 @@
-import { Image, Text, View } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import styles from "@/styles/CardPost";
+import { Image, Text, View } from 'react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import styles from '@/styles/CardPost';
 
 interface CardPostProps {
   userName: string;
@@ -19,7 +19,7 @@ export default function CardPost({
 }: CardPostProps) {
   return (
     <View style={styles.cardContainer}>
-      <Image style={styles.userImage} source={require("@/assets/icon.png")} />
+      <Image style={styles.userImage} source={require('@/assets/icon.png')} />
       <View>
         <View>
           <Text style={styles.userName}>{userName}</Text>
@@ -35,7 +35,7 @@ export default function CardPost({
               size={12}
               color="#484C52"
             />
-            {" " + likeCount + " Likes"}
+            {' ' + likeCount + ' Likes'}
           </Text>
           <Text style={styles.postInfoText}>
             <MaterialCommunityIcons
@@ -43,7 +43,7 @@ export default function CardPost({
               size={10}
               color="#484C52"
             />
-            {" " + commentCount + " Comments"}
+            {' ' + commentCount + ' Comments'}
           </Text>
         </View>
       </View>

@@ -1,20 +1,20 @@
-import { View } from "react-native";
-import React, { useEffect } from "react";
-import Constants from "expo-constants";
-import { useRouter } from "expo-router";
-import { Platform } from "react-native";
+import { View } from 'react-native';
+import React, { useEffect } from 'react';
+import Constants from 'expo-constants';
+import { useRouter } from 'expo-router';
+import { Platform } from 'react-native';
 
-import Title from "@/components/layouts/Title";
-import Logo from "@/components/resources/Logo";
-import styles from "@/styles/layouts/SignUpLayout";
+import Title from '@/components/layouts/Title';
+import Logo from '@/components/resources/Logo';
+import styles from '@/styles/layouts/SignUpLayout';
 
 export const StartPage = () => {
   const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Platform.OS == "android" || Platform.OS == "ios") {
-        router.replace("/sign-up/log-in");
+      if (Platform.OS == 'android' || Platform.OS == 'ios') {
+        router.replace('/sign-up/log-in');
       } else {
       }
     }, 5000);
@@ -32,8 +32,8 @@ export const StartPage = () => {
 
 let AppEntryPoint = StartPage;
 
-if (Constants.expoConfig?.extra?.storybookEnabled === "true") {
-  AppEntryPoint = require("../.ondevice").default;
+if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+  AppEntryPoint = require('../.ondevice').default;
 }
 
 export default AppEntryPoint;

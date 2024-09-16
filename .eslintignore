@@ -1,2 +1,4 @@
 /.expo
-node_modules
+metro.config.js
+node_modules/
+dist/

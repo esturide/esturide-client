@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { router } from "expo-router";
+import React, { useState } from 'react';
+import { router } from 'expo-router';
 
-import InputLabel from "@/components/inputs/InputLabel";
-import InputDate from "@/components/inputs/InputDate";
-import styles from "@/styles/forms/RegistrationFormStyle";
-import { InputButton } from "@/components/buttons/InputButton";
-import { RegistrationFormProps } from "@/components/forms/register/RegisterForm";
+import InputLabel from '@/components/inputs/InputLabel';
+import InputDate from '@/components/inputs/InputDate';
+import styles from '@/styles/forms/RegistrationFormStyle';
+import { InputButton } from '@/components/buttons/InputButton';
+import { RegistrationFormProps } from '@/components/forms/register/RegisterFormProps';
 
 export default function UserRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationFormProps) {
-  const [name, setName] = useState<string>("");
-  const [firstLastName, setFirstLastName] = useState<string>("");
-  const [secondLastName, setSecondLastName] = useState<string>("");
-  const [code, setCode] = useState<string>("");
+  const [name, setName] = useState<string>('');
+  const [firstLastName, setFirstLastName] = useState<string>('');
+  const [secondLastName, setSecondLastName] = useState<string>('');
+  const [code, setCode] = useState<string>('');
   const [birthDate, setBirthDate] = useState<Date | null>(null);
 
   const onPressButton = async () => {
@@ -53,8 +53,8 @@ export default function UserRegistrationForm({
         style={[styles.userInputMargin, styles.dateInputMargin]}
       />
       <InputButton
-        label={"Siguente"}
-        typeButton={"submit"}
+        label={'Siguente'}
+        typeButton={'submit'}
         onPress={onPressButton}
       />
     </>

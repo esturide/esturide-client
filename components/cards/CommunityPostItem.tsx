@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import styles from "@/styles/CommunityPostItem";
+import { Text, TouchableOpacity, View } from 'react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import styles from '@/styles/CommunityPostItem';
 
 interface CommunityPostItemProps {
   readStatus: boolean;
@@ -15,7 +15,7 @@ export default function CommunityPostItem({
   postTime,
   postBody,
 }: CommunityPostItemProps) {
-  const readStatusColor = readStatus ? "#007AFF" : "#ffffff";
+  const readStatusColor = readStatus ? '#007AFF' : '#ffffff';
   const readStateIndicatorStyle = Object.assign(
     { ...styles.readStateIndicator },
     { backgroundColor: readStatusColor },

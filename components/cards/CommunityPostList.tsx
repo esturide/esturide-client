@@ -1,5 +1,5 @@
-import { FlatList, View } from "react-native";
-import CommunityPostItem from "./CommunityPostItem";
+import { FlatList, View } from 'react-native';
+import CommunityPostItem from './CommunityPostItem';
 
 interface CommunityPostItemProps {
   id: string;
@@ -21,8 +21,8 @@ export default function CommunityPostList({ dataArr }: CommunityPostListProps) {
           style={{
             height: 0.5,
             width: 312,
-            alignSelf: "flex-end",
-            backgroundColor: "#3C3C435C",
+            alignSelf: 'flex-end',
+            backgroundColor: '#3C3C435C',
           }}
         />
       )}

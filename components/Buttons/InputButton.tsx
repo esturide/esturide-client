@@ -1,20 +1,20 @@
-import { StyleProp, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import style from "@/styles/InputButtons";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import ButtonPassenger from "@/components/buttons/ButtonPassenger";
-import ButtonDriver from "@/components/buttons/ButtonDriver";
+import { StyleProp, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import style from '@/styles/InputButtons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import ButtonPassenger from '@/components/buttons/ButtonPassenger';
+import ButtonDriver from '@/components/buttons/ButtonDriver';
 
 interface InputButtonProps {
   /**
    * What type button?
    */
   typeButton:
-    | "depositBlue"
-    | "depositGreen"
-    | "submit"
-    | "btnPassenger"
-    | "btnDriver";
+    | 'depositBlue'
+    | 'depositGreen'
+    | 'submit'
+    | 'btnPassenger'
+    | 'btnDriver';
   /**
    * InputButton contents
    */
@@ -53,15 +53,15 @@ export const InputButton = ({
 
   return (
     <TouchableOpacity style={buttonStyle} {...props}>
-      {typeButton === "btnPassenger" ? (
+      {typeButton === 'btnPassenger' ? (
         <ButtonPassenger />
-      ) : typeButton === "btnDriver" ? (
+      ) : typeButton === 'btnDriver' ? (
         <ButtonDriver />
-      ) : typeButton.startsWith("location") ? (
+      ) : typeButton.startsWith('location') ? (
         <Icon name="gps-fixed" style={textStyle} />
-      ) : typeButton.startsWith("filter") ? (
+      ) : typeButton.startsWith('filter') ? (
         <Icon name="filter-list" style={textStyle} />
-      ) : typeButton.startsWith("add") ? (
+      ) : typeButton.startsWith('add') ? (
         <Icon name="add" style={textStyle} />
       ) : (
         <Text style={textStyle}>{label}</Text>

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   userImage: {
@@ -13,29 +13,29 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderRadius: 15,
     borderWidth: 2,
-    borderColor: "#295C53",
-    flexDirection: "row",
+    borderColor: '#295C53',
+    flexDirection: 'row',
     gap: 12,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   postInfo: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 25,
   },
   userName: {
     fontSize: 16,
-    fontWeight: "700",
-    color: "#223F3A",
+    fontWeight: '700',
+    color: '#223F3A',
     maxWidth: 220,
   },
   postDate: {
     fontSize: 12,
-    fontWeight: "300",
-    color: "#6D6D6D",
+    fontWeight: '300',
+    color: '#6D6D6D',
   },
   postBody: {
     fontSize: 14,
-    fontWeight: "400",
+    fontWeight: '400',
     maxWidth: 250,
     marginTop: 3,
     marginBottom: 7,

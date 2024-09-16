@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import styles from "@/styles/Inputs";
+import { useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from '@/styles/Inputs';
 
-const InputPassword = ({ label, onChangeText }) => {
+type Props = {
+  label: string;
+  onChangeText: (text: string) => void;
+};
+
+const InputPassword = ({ label, onChangeText }: Props) => {
   const [isSecure, setIsSecure] = useState(true);
 
   return (
@@ -20,7 +25,7 @@ const InputPassword = ({ label, onChangeText }) => {
           onPress={() => setIsSecure(!isSecure)}
         >
           <Icon
-            name={isSecure ? "visibility" : "visibility-off"}
+            name={isSecure ? 'visibility' : 'visibility-off'}
             size={24}
             color="#000"
           />

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-import styles from "@/styles/InputButtons";
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import styles from '@/styles/InputButtons';
 
 /**
  * @deprecated This component is deprecated and will be removed in future versions.

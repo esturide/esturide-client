@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   headerContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 20,
     marginTop: 60,
   },

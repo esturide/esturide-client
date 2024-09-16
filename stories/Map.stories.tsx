@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { View } from "react-native";
-import Map from "@/components/cards/Map";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { View } from 'react-native';
+import Map from '@/components/cards/Map';
 
 const meta = {
-  title: "Map",
+  title: 'Map',
   component: Map,
   args: {
-    mapSize: { height: "100%", width: "100%" },
+    mapSize: { height: '100%', width: '100%' },
   },
   decorators: [
     (Story) => (

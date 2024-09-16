@@ -1,19 +1,19 @@
-import * as React from "react";
-import { Meta, Story } from "@storybook/react";
-import { View } from "react-native";
-import ProgressBarContainer from "@/components/visuals/ProgressBarContainer";
+import * as React from 'react';
+import { Meta, Story } from '@storybook/react';
+import { View } from 'react-native';
+import ProgressBarContainer from '@/components/visuals/ProgressBarContainer';
 
 const meta: Meta<typeof ProgressBarContainer> = {
-  title: "Components/ProgressBarContainer",
+  title: 'Components/ProgressBarContainer',
   component: ProgressBarContainer,
   argTypes: {
     type: {
       control: {
-        type: "radio",
-        options: ["ProgressBar2", "ProgressBar3"],
+        type: 'radio',
+        options: ['ProgressBar2', 'ProgressBar3'],
       },
-      defaultValue: "ProgressBar3",
-      description: "Select the type of progress bar",
+      defaultValue: 'ProgressBar3',
+      description: 'Select the type of progress bar',
     },
   },
   decorators: [
@@ -33,5 +33,5 @@ const Template: Story<typeof ProgressBarContainer> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  type: "ProgressBar3",
+  type: 'ProgressBar3',
 };

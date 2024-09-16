@@ -1,31 +1,32 @@
-import InputLabel from "@/components/inputs/InputLabel";
-import InputPassword from "@/components/inputs/InputPassword";
-import React from "react";
-import styles from "@/styles/forms/LoginForm";
-import { InputButton } from "@/components/buttons/InputButton";
+import React from 'react';
+import { InputButton } from '@/components/buttons/InputButton';
+import InputLabel from '@/components/inputs/InputLabel';
+import InputPassword from '@/components/inputs/InputPassword';
+import styles from '@/styles/forms/LoginForm';
 
 type Props = {
-  onChangeUsername: React.Dispatch<React.SetStateAction<string>>;
-  onChangePassword: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: () => Promise<void>;
+  onLogin: (username: string, password: string) => Promise<void>;
 };
 
-export default function LoginForm({
-  onChangeUsername,
-  onChangePassword,
-  onSubmit,
-}: Props) {
+export default function LoginForm({ onLogin }: Props) {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const onSubmit = async () => {
+    await onLogin(username, password);
+  };
+
   return (
     <>
       <InputLabel
         label="Usuario"
-        onChangeText={onChangeUsername}
+        onChangeText={setUsername}
         style={styles.userInputMargin}
       />
-      <InputPassword label="Contraseña" onChangeText={onChangePassword} />
+      <InputPassword label="Contraseña" onChangeText={setPassword} />
       <InputButton
-        typeButton={"submit"}
-        label={"Iniciar Sesion"}
+        typeButton={'submit'}
+        label={'Iniciar Sesion'}
         onPress={onSubmit}
       />
     </>

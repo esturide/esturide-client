@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function TermsConditions() {
   return (
@@ -12,6 +12,6 @@ export default function TermsConditions() {
 const styles = StyleSheet.create({
   text: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
