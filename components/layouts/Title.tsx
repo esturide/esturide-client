@@ -1,10 +1,10 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { Text } from 'react-native';
 
-import styles from '@/styles/layouts/TitleStyle';
+import styles from '@styles/layouts/TitleStyle';
 
 type Props = {
-  children: string | React.ReactNode;
+  children: string | ReactNode;
   style?: object;
 };
 

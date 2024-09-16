@@ -14,6 +14,7 @@ module.exports = {
   overrides: [
     {
       files: [
+        'libs/**/*.ts,*.js',
         'styles/**/*.js',
         'components/**/*.ts,*.js,*.tsx,*.jsx',
         'app/**/*.tsx',

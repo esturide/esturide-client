@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import styles from '@/styles/CarVehicleInfo';
+import styles from '@styles/CarVehicleInfo';
 
 interface CardVehicleInfoProps {
   model: string;

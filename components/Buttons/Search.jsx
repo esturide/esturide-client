@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { TextInput, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from '@/styles/InputButtons';
+import { VisualIcon } from '@components/visuals/VisualIcon';
+import styles from '@styles/InputButtons';
 
 const Search = (props) => {
   return (
@@ -12,7 +11,7 @@ const Search = (props) => {
         placeholderTextColor="#dcdcdc"
         underlineColorAndroid="transparent"
       />
-      <Icon name="search" style={styles.searchIcon} />
+      <VisualIcon type={'search'} style={styles.optionIcon} />
     </View>
   );
 };

@@ -1,13 +1,12 @@
-import * as React from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from '@/styles/InputButtons';
+import styles from '@styles/InputButtons';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 const ButtonPassenger = () => {
   return (
     <View style={styles.btnPassenger}>
       <View style={styles.btnPassengerView}>
-        <Icon name="person" style={styles.passengerIcon} />
+        <VisualIcon type={'person'} style={styles.passengerIcon} />
       </View>
       <View style={styles.btnPassengerTextContainer}>
         <Text style={styles.btnPassengerLabel}>Label</Text>

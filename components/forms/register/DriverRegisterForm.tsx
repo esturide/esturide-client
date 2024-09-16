@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 
-import InputLabel from '@/components/inputs/InputLabel';
-import { InputRow } from '@/components/layouts/RowLayout';
-import { InputButton } from '@/components/buttons/InputButton';
-import { RegistrationFormProps } from '@/components/forms/register/RegisterFormProps';
+import InputLabel from '@components/inputs/InputLabel';
+import { InputRow } from '@components/layouts/RowLayout';
+import { InputButton } from '@components/buttons/InputButton';
+import { RegistrationFormProps } from '@components/forms/register/RegisterFormProps';
 
 export default function DriverRegisterForm({
   onSubmit,

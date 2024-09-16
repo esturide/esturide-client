@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import styles, {
   DefaultDriverColor,
   DefaultPassengerColor,
-} from '@/styles/CardTravel';
+} from '@styles/CardTravel';
 
 interface SeatsArr {
   id: string;
