@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
-import CardPost from "@/components/Cards/CardPost";
+import CardPost from "@/components/cards/CardPost";
 
 const meta = {
   title: "CardPost",

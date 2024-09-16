@@ -1,25 +1,25 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Link } from "expo-router";
 
-export default function Home() {
+const termsConditions = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home page</Text>
-      <Link href={"/"}>Return to main page</Link>
+      <Text style={styles.text}>This is the terms and conditions page.</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f7f7f7",
+    backgroundColor: "#fff",
   },
-  title: {
+  text: {
     fontSize: 20,
     fontWeight: "bold",
   },
 });
+
+export default termsConditions;

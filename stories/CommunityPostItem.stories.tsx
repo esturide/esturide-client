@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
-import CommunityPostItem from "@/components/Cards/CommunityPostItem";
+import CommunityPostItem from "@/components/cards/CommunityPostItem";
 
 const meta = {
   title: "CommunityPostItem",

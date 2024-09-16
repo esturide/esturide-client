@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { View } from "react-native";
-import CardVehicleInfo from "@/components/Cards/CardVehicleInfo";
+import CardVehicleInfo from "@/components/cards/CardVehicleInfo";
 
 const meta = {
   title: "CardVehicleInfo",

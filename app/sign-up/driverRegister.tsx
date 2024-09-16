@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import InputLabel from "@/components/Inputs/InputLabel";
-import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
+import InputLabel from "@/components/inputs/InputLabel";
+import ButtonSubmit from "@/components/buttons/ButtonSubmit";
+import ProgressBarContainer from "@/components/visuals/ProgressBarContainer";
 import Title from "@/components/layouts/Title";
 
 const FlexContainer: React.FC<{ children: React.ReactNode; style?: any }> = ({

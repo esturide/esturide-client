@@ -1,13 +1,13 @@
-import InputLabel from "@/components/Inputs/InputLabel";
-import InputPassword from "@/components/Inputs/InputPassword";
-import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
+import InputLabel from "@/components/inputs/InputLabel";
+import InputPassword from "@/components/inputs/InputPassword";
 import React from "react";
 import styles from "@/styles/forms/LoginForm";
+import { InputButton } from "@/components/buttons/InputButton";
 
 type Props = {
   onChangeUsername: React.Dispatch<React.SetStateAction<string>>;
   onChangePassword: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: () => void;
+  onSubmit: () => Promise<void>;
 };
 
 export default function LoginForm({
@@ -23,10 +23,10 @@ export default function LoginForm({
         style={styles.userInputMargin}
       />
       <InputPassword label="Contraseña" onChangeText={onChangePassword} />
-      <ButtonSubmit
-        title="Iniciar Sesión"
+      <InputButton
+        typeButton={"submit"}
+        label={"Iniciar Sesion"}
         onPress={onSubmit}
-        style={styles.loginButton}
       />
     </>
   );
