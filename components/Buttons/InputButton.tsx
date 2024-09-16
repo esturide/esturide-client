@@ -1,10 +1,9 @@
+import { StyleProp, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import style from "@/styles/InputButtons";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { StyleProp, Text, TouchableOpacity } from "react-native";
-import ButtonPassenger from "@/components/Buttons/ButtonPassenger";
-import ButtonDriver from "@/components/Buttons/ButtonDriver";
-import { number } from "prop-types";
+import ButtonPassenger from "@/components/buttons/ButtonPassenger";
+import ButtonDriver from "@/components/buttons/ButtonDriver";
 
 interface InputButtonProps {
   /**

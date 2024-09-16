@@ -3,7 +3,7 @@ import { TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "@/styles/InputButtons";
 
-const Search = () => {
+const Search = (props) => {
   return (
     <View style={styles.searchContainer}>
       <TextInput
