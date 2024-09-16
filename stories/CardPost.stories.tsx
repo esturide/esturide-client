@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { View } from "react-native";
-import CardPost from "@/components/cards/CardPost";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { View } from 'react-native';
+import CardPost from '@/components/cards/CardPost';
 
 const meta = {
-  title: "CardPost",
+  title: 'CardPost',
   component: CardPost,
   args: {
-    userName: "User Name",
+    userName: 'User Name',
   },
   decorators: [
     (Story) => (
@@ -24,8 +24,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    date: "18 de marzo a las 12:00AM",
-    body: "Hola comunidad, empezaron las competencias de robótica en las explanadas de aulas amplias.",
+    date: '18 de marzo a las 12:00AM',
+    body: 'Hola comunidad, empezaron las competencias de robótica en las explanadas de aulas amplias.',
     likeCount: 15,
     commentCount: 7,
   },

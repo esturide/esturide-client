@@ -15,7 +15,7 @@
     "storybook:android": "cross-env STORYBOOK_ENABLED='true' expo start --android",
     "format": "prettier . --write",
     "lint": "eslint .",
-    "fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@expo/fingerprint": "^0.10.3",
@@ -82,6 +82,17 @@
     "overrides": {
       "react-docgen-typescript": "2.2.2"
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "private": true
 }

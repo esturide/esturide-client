@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { View } from "react-native";
-import CardTravelInfoPassenger from "@/components/cards/CardTravelInfoPassenger";
-import * as Crypto from "expo-crypto";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { View } from 'react-native';
+import CardTravelInfoPassenger from '@/components/cards/CardTravelInfoPassenger';
+import * as Crypto from 'expo-crypto';
 
 const meta = {
-  title: "CardTravelInfoPassenger",
+  title: 'CardTravelInfoPassenger',
   component: CardTravelInfoPassenger,
   args: {
-    driverName: "Raul Jimenez Rodriguez",
-    vehicleModel: "Audi 2014",
-    vehiclePlates: "JLV687",
-    departureTime: "7:20 am",
-    arrivalTime: "8:06 am",
+    driverName: 'Raul Jimenez Rodriguez',
+    vehicleModel: 'Audi 2014',
+    vehiclePlates: 'JLV687',
+    departureTime: '7:20 am',
+    arrivalTime: '8:06 am',
     price: 10,
   },
   decorators: [
@@ -31,9 +31,9 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     seatsArr: [
-      { id: Crypto.randomUUID(), value: "A" },
-      { id: Crypto.randomUUID(), value: "B" },
-      { id: Crypto.randomUUID(), value: "C" },
+      { id: Crypto.randomUUID(), value: 'A' },
+      { id: Crypto.randomUUID(), value: 'B' },
+      { id: Crypto.randomUUID(), value: 'C' },
     ],
   },
 };
@@ -41,14 +41,14 @@ export const Example: Story = {
 export const Example2: Story = {
   args: {
     seatsArr: [
-      { id: Crypto.randomUUID(), value: "B" },
-      { id: Crypto.randomUUID(), value: "C" },
+      { id: Crypto.randomUUID(), value: 'B' },
+      { id: Crypto.randomUUID(), value: 'C' },
     ],
   },
 };
 
 export const Example3: Story = {
   args: {
-    seatsArr: [{ id: Crypto.randomUUID(), value: "C" }],
+    seatsArr: [{ id: Crypto.randomUUID(), value: 'C' }],
   },
 };

@@ -1,10 +1,10 @@
 /* eslint-env node */
-const path = require("path");
-const { getDefaultConfig } = require("expo/metro-config");
-const { generate } = require("@storybook/react-native/scripts/generate");
+const path = require('path');
+const { getDefaultConfig } = require('expo/metro-config');
+const { generate } = require('@storybook/react-native/scripts/generate');
 
 generate({
-  configPath: path.resolve(__dirname, "./.ondevice"),
+  configPath: path.resolve(__dirname, './.ondevice'),
 });
 
 /** @type {import('expo/metro-config').MetroConfig} */
@@ -20,11 +20,11 @@ defaultConfig.resolver.resolveRequest = (context, moduleName, platform) => {
   );
 
   if (
-    process.env.STORYBOOK_ENABLED !== "true" &&
-    defaultResolveResult?.filePath?.includes?.(".ondevice/")
+    process.env.STORYBOOK_ENABLED !== 'true' &&
+    defaultResolveResult?.filePath?.includes?.('.ondevice/')
   ) {
     return {
-      type: "empty",
+      type: 'empty',
     };
   }
 

@@ -1,7 +1,7 @@
-import React from "react";
-import { DimensionValue, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { router } from "expo-router";
+import React from 'react';
+import { DimensionValue, TouchableOpacity } from 'react-native';
+import { VisualIcon } from '@/components/visuals/VisualIcon';
+import { router } from 'expo-router';
 
 type Props = {
   onPress?: () => void;
@@ -18,19 +18,22 @@ export const AbsoluteBackButton = ({
     if (onPress) {
       onPress();
     }
-    router.back();
+
+    if (router.canGoBack()) {
+      router.back();
+    }
   };
 
   return (
     <TouchableOpacity
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: horizontal,
         left: vertically,
       }}
       onPress={onPressEvent}
     >
-      <Icon name="arrow-back" size={24} color="#fff" />
+      <VisualIcon type={'arrow-back'} size={24} color="#fff" />
     </TouchableOpacity>
   );
 };

@@ -1,8 +1,8 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 import styles, {
   DefaultDriverColor,
   DefaultPassengerColor,
-} from "@/styles/CardTravel";
+} from '@/styles/CardTravel';
 
 interface SeatsArr {
   id: string;
@@ -10,7 +10,7 @@ interface SeatsArr {
 }
 
 interface CardTravelProps {
-  typeCard: "driver" | "passenger";
+  typeCard: 'driver' | 'passenger';
   departTime: string;
   arrivalTime: string;
   price: number;
@@ -40,7 +40,7 @@ export default function CardTravel({
   };
 
   if (seatsArr.length > 3) {
-    throw RangeError("Invalid number of seats, maximum only 3");
+    throw RangeError('Invalid number of seats, maximum only 3');
   }
 
   return (
@@ -62,7 +62,7 @@ export default function CardTravel({
           <Text style={labelStyles[typeCard]}>Precio:</Text>
           <Text style={styles.infoText}>
             ${price}
-            {price % 1 === 0 ? ".00" : ""}
+            {price % 1 === 0 ? '.00' : ''}
           </Text>
         </View>
 

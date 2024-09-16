@@ -1,7 +1,7 @@
-import React from "react";
-import { ScrollView } from "react-native";
+import React from 'react';
+import { ScrollView } from 'react-native';
 
-import styles from "@/styles/layouts/ScrollLayoutStyle";
+import styles from '@/styles/layouts/ScrollLayoutStyle';
 
 type Props = {
   children: React.ReactNode;

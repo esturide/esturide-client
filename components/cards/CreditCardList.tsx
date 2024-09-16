@@ -1,10 +1,10 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import CustomRadioButtonGroup from "./CustomRadioButtonGroup";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Text, TouchableOpacity, View } from 'react-native';
+import CustomRadioButtonGroup from './CustomRadioButtonGroup';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles, {
   DefaultDriverColors,
   DefautPassengerColor,
-} from "@/styles/CreditCardList";
+} from '@/styles/CreditCardList';
 
 interface CreditCardInfo {
   id: string;
@@ -14,7 +14,7 @@ interface CreditCardInfo {
 }
 
 interface CreditCardListProps {
-  typeCard: "driver" | "passenger";
+  typeCard: 'driver' | 'passenger';
   data: CreditCardInfo[];
 }
 

@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { View } from "react-native";
-import CardVehicleInfo from "@/components/cards/CardVehicleInfo";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { View } from 'react-native';
+import CardVehicleInfo from '@/components/cards/CardVehicleInfo';
 
 const meta = {
-  title: "CardVehicleInfo",
+  title: 'CardVehicleInfo',
   component: CardVehicleInfo,
   decorators: [
     (Story) => (
@@ -21,8 +21,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    model: "Modelo",
-    plates: "Placas",
-    carColorString: "Color",
+    model: 'Modelo',
+    plates: 'Placas',
+    carColorString: 'Color',
   },
 };

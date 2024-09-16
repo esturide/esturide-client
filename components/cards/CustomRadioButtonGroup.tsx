@@ -1,10 +1,10 @@
-import { Pressable, Text, View } from "react-native";
-import { useState } from "react";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Pressable, Text, View } from 'react-native';
+import { useState } from 'react';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles, {
   DefaultDriverColor,
   DefaultPassengerColor,
-} from "@/styles/CustomRadioButton";
+} from '@/styles/CustomRadioButton';
 
 interface CreditCardInfo {
   id: string;
@@ -14,7 +14,7 @@ interface CreditCardInfo {
 }
 
 interface RadioButtonGroupProps {
-  typeButton: "driver" | "passenger";
+  typeButton: 'driver' | 'passenger';
   data: CreditCardInfo[];
 }
 
@@ -22,7 +22,7 @@ export default function CustomRadioButton({
   data,
   typeButton,
 }: RadioButtonGroupProps) {
-  const [userOption, setUserOption] = useState("");
+  const [userOption, setUserOption] = useState('');
 
   const radioStyles = {
     driver: { ...styles.radio, borderColor: DefaultDriverColor },

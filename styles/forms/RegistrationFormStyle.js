@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   userInputMargin: {
     marginTop: 10,
-    width: "100%",
+    width: '100%',
   },
   dateInputMargin: {
     marginTop: 10,

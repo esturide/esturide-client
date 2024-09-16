@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View } from "react-native";
-import styles from "@/styles/Sheets";
+import * as React from 'react';
+import { View } from 'react-native';
+import styles from '@/styles/Sheets';
 
 const BottomSheet = (props) => {
   return (

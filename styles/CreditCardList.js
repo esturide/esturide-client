@@ -1,25 +1,25 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    width: "fit-content",
+    width: 'fit-content',
     paddingRight: 5,
     paddingBottom: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
   },
   textHeader: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 20,
   },
   cardsContainer: {
     width: 327,
     minHeight: 148,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     borderRadius: 18,
     padding: 16,
     borderWidth: 1,
-    borderColor: "#F5F5F5",
+    borderColor: '#F5F5F5',
     elevation: 5,
     shadowOffset: {
       height: 5,
@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 6.13,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   addCardContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 6,
   },
 });
@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
 export default styles;
 
 export const DefautPassengerColor = {
-  header: "#373F71",
-  addCardButton: "#ACC0E4",
-  iconColor: "#4B61B9",
+  header: '#373F71',
+  addCardButton: '#ACC0E4',
+  iconColor: '#4B61B9',
 };
 
 export const DefaultDriverColors = {
-  header: "#254A44",
-  addCardButton: "#87C9B8",
-  iconColor: "#2F7265",
+  header: '#254A44',
+  addCardButton: '#87C9B8',
+  iconColor: '#2F7265',
 };

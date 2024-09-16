@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import styles from "@/styles/CardTravelInfoPassenger";
+import { Text, View } from 'react-native';
+import styles from '@/styles/CardTravelInfoPassenger';
 
 interface SeatsArr {
   id: string;
@@ -26,7 +26,7 @@ export default function CardTravelInfoPassenger({
   seatsArr,
 }: CardTravelInfoPassengerProps) {
   if (seatsArr.length > 3) {
-    throw RangeError("Invalid number of seats, maximum only 3");
+    throw RangeError('Invalid number of seats, maximum only 3');
   }
 
   return (
@@ -62,7 +62,7 @@ export default function CardTravelInfoPassenger({
           <Text style={styles.infoLabel}>Precio:</Text>
           <Text style={styles.infoText}>
             ${price}
-            {price % 1 === 0 ? ".00" : ""}
+            {price % 1 === 0 ? '.00' : ''}
           </Text>
         </View>
 

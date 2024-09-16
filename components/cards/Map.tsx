@@ -1,7 +1,7 @@
-import React from "react";
-import { DimensionValue, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
-import { StatusBar } from "expo-status-bar";
+import React from 'react';
+import { DimensionValue, View } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { StatusBar } from 'expo-status-bar';
 
 interface MapProps {
   mapSize: { height: DimensionValue; width: DimensionValue };
@@ -10,7 +10,7 @@ interface MapProps {
 }
 
 export default function Map({
-  mapSize = { height: "100%", width: "100%" },
+  mapSize = { height: '100%', width: '100%' },
   origin = null,
   destination = null,
 }: MapProps) {

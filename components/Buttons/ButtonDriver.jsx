@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import styles from "@/styles/InputButtons";
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from '@/styles/InputButtons';
 
 const ButtonDriver = () => {
   return (

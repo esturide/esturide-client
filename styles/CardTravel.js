@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   /*
@@ -19,38 +19,38 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 20,
     paddingHorizontal: 25,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
   },
   infoLabel: {
     fontSize: 19,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   infoText: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   rowContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 100,
     marginTop: 18,
   },
   seatsContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
   },
   seatView: {
     width: 20,
     height: 20,
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 6,
   },
   seatText: {
-    color: "white",
-    fontWeight: "700",
+    color: 'white',
+    fontWeight: '700',
   },
 });
 
 export default styles;
 
-export const DefaultDriverColor = "#3E8E7E";
-export const DefaultPassengerColor = "#40498D";
+export const DefaultDriverColor = '#3E8E7E';
+export const DefaultPassengerColor = '#40498D';

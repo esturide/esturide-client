@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { router } from "expo-router";
-import { StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { router } from 'expo-router';
+import { StyleSheet } from 'react-native';
 
-import InputLabel from "@/components/inputs/InputLabel";
-import InputPassword from "@/components/inputs/InputPassword";
-import { RegistrationFormProps } from "@/components/forms/register/RegisterForm";
-import { InputButton } from "@/components/buttons/InputButton";
+import InputLabel from '@/components/inputs/InputLabel';
+import InputPassword from '@/components/inputs/InputPassword';
+import { InputButton } from '@/components/buttons/InputButton';
+import { RegistrationFormProps } from '@/components/forms/register/RegisterFormProps';
 
 export default function AddressRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationFormProps) {
-  const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const onPressButton = async () => {
     if (onSubmit) {
@@ -48,8 +48,8 @@ export default function AddressRegistrationForm({
         onChangeText={setConfirmPassword}
       />
       <InputButton
-        label={"Siguente"}
-        typeButton={"submit"}
+        label={'Siguente'}
+        typeButton={'submit'}
         onPress={onPressButton}
       />
     </>

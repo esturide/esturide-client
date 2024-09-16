@@ -1,16 +1,16 @@
-import * as React from "react";
-import { View } from "react-native";
-import styles from "@/styles/Visuals";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import * as React from 'react';
+import { View } from 'react-native';
+import styles from '@/styles/Visuals';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface ProgressBarContainerProps {
-  type: "ProgressBar2" | "ProgressBar3";
+  type: 'ProgressBar2' | 'ProgressBar3';
 }
 
 const ProgressBarContainer: React.FC<ProgressBarContainerProps> = ({
   type,
 }) => {
-  return <>{type === "ProgressBar2" ? <ProgressBar2 /> : <ProgressBar3 />}</>;
+  return <>{type === 'ProgressBar2' ? <ProgressBar2 /> : <ProgressBar3 />}</>;
 };
 
 const ProgressBar2 = () => {

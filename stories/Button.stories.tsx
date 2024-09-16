@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { View } from "react-native";
-import { InputButton } from "@/components/buttons/InputButton";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { View } from 'react-native';
+import { InputButton } from '@/components/buttons/InputButton';
 
 const meta = {
-  title: "InputButton",
+  title: 'InputButton',
   component: InputButton,
   args: {
-    label: "Button",
+    label: 'Button',
   },
   decorators: [
     (Story) => (
@@ -24,6 +24,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    typeButton: "depositBlue",
+    typeButton: 'depositBlue',
   },
 };
