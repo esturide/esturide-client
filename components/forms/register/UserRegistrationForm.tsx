@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { router } from "expo-router";
+
 import InputLabel from "@/components/Inputs/InputLabel";
 import InputDate from "@/components/Inputs/InputDate";
-import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-
 import styles from "@/styles/forms/RegistrationFormStyle";
-
-type RegistrationFormProps = {
-  onSubmit: () => void;
-};
+import { InputButton } from "@/components/Buttons/InputButton";
+import { RegistrationFormProps } from "@/components/forms/register/RegisterForm";
 
 export default function UserRegistrationForm({
   onSubmit,
+  redirect,
 }: RegistrationFormProps) {
-  const [name, setName] = React.useState<string>("");
-  const [firstLastName, setFirstLastName] = React.useState<string>("");
-  const [secondLastName, setSecondLastName] = React.useState<string>("");
-  const [code, setCode] = React.useState<string>("");
-  const [birthDate, setBirthDate] = React.useState<Date | null>(null);
+  const [name, setName] = useState<string>("");
+  const [firstLastName, setFirstLastName] = useState<string>("");
+  const [secondLastName, setSecondLastName] = useState<string>("");
+  const [code, setCode] = useState<string>("");
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
+
+  const onPressButton = async () => {
+    if (onSubmit) {
+      await onSubmit();
+    }
+    router.push(redirect);
+  };
 
   return (
     <>
@@ -46,10 +52,10 @@ export default function UserRegistrationForm({
         value={birthDate}
         style={[styles.userInputMargin, styles.dateInputMargin]}
       />
-      <ButtonSubmit
-        title="Siguiente"
-        onPress={onSubmit}
-        style={styles.submitButton}
+      <InputButton
+        label={"Siguente"}
+        typeButton={"submit"}
+        onPress={onPressButton}
       />
     </>
   );

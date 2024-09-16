@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleProp, Text, TouchableOpacity } from "react-native";
 import ButtonPassenger from "@/components/Buttons/ButtonPassenger";
 import ButtonDriver from "@/components/Buttons/ButtonDriver";
+import { number } from "prop-types";
 
 interface InputButtonProps {
   /**
@@ -22,7 +23,7 @@ interface InputButtonProps {
   /**
    * Optional click handler
    */
-  onPress?: () => void;
+  onPress?: () => Promise<void>;
 }
 
 /**

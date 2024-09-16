@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginBottom: 32,
   },
 });
 

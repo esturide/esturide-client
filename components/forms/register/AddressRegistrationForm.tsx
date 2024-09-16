@@ -1,15 +1,29 @@
+import React, { useState } from "react";
+import { router } from "expo-router";
+import { StyleSheet } from "react-native";
+
 import InputLabel from "@/components/Inputs/InputLabel";
 import InputPassword from "@/components/Inputs/InputPassword";
 import ButtonSubmit from "@/components/Buttons/ButtonSubmit";
-import React from "react";
-import { StyleSheet } from "react-native";
+import { RegistrationFormProps } from "@/components/forms/register/RegisterForm";
 
-export default function AddressRegistrationForm() {
-  const [address, setAddress] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
+export default function AddressRegistrationForm({
+  onSubmit,
+  redirect,
+}: RegistrationFormProps) {
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const onPressButton = async () => {
+    if (onSubmit) {
+      await onSubmit();
+    }
+
+    router.push(redirect);
+  };
 
   return (
     <>
@@ -28,21 +42,14 @@ export default function AddressRegistrationForm() {
         onChangeText={setEmail}
         style={styles.userInputMargin}
       />
-      <InputPassword
-        label="Contraseña"
-        onChangeText={setPassword}
-        style={styles.userInputMargin}
-        secureTextEntry
-      />
+      <InputPassword label="Contraseña" onChangeText={setPassword} />
       <InputPassword
         label="Confirmar Contraseña"
         onChangeText={setConfirmPassword}
-        style={styles.userInputMargin}
-        secureTextEntry
       />
       <ButtonSubmit
         title="Siguiente"
-        onPress={handleSubmit}
+        onPress={onPressButton}
         style={styles.submitButton}
       />
     </>

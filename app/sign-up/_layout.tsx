@@ -1,6 +1,7 @@
 import { Slot, Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React from "react";
+import styles from "styles/layouts/SignUpLayout";
 
 function LayoutOther() {
   return (
@@ -19,20 +20,10 @@ function LayoutOther() {
   );
 }
 
-export default function Layout() {
+export default function () {
   return (
     <View style={styles.flexContainer}>
       <Slot />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  flexContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#0f2422",
-    padding: 16,
-  },
-});
