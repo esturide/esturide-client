@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
   },
+  expandedBoxAnimation: {},
 });
 
 export default styles;
