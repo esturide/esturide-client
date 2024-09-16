@@ -5,8 +5,9 @@ type Props = {
   type: string;
   size?: number;
   color?: number | ColorValue;
+  style?: {};
 };
 
-export const VisualIcon = ({ type, size, color }: Props) => {
-  return <Icon name={type} size={size} color={color} />;
+export const VisualIcon = ({ type, size, color, style }: Props) => {
+  return <Icon name={type} size={size} color={color} style={style} />;
 };

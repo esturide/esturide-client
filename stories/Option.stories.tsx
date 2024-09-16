@@ -19,7 +19,7 @@ export default meta;
 
 const Template: Story<typeof Option> = (args) => (
   <TouchableOpacity>
-    <Option {...args} />
+    <Option />
   </TouchableOpacity>
 );
 
