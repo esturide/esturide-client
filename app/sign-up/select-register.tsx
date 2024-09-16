@@ -38,7 +38,7 @@ export default function ThirdRegister() {
 
       <LayoutRegister>
         <TypeAccountForm
-          terms={"/sign-up/terms-conditions"}
+          terms={"/legal/terms-conditions"}
           handleSubmit={handleSubmit}
         />
       </LayoutRegister>
