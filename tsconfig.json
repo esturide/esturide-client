@@ -4,7 +4,10 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
+      "$/*": ["./libs/*"],
+      "@styles/*": ["./styles/*"],
+      "@components/*": ["./components/*"],
+      "@assets/*": ["./assets/*"],
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
