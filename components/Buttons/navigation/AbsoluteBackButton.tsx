@@ -1,7 +1,6 @@
-import React from 'react';
 import { DimensionValue, TouchableOpacity } from 'react-native';
-import { VisualIcon } from '@/components/visuals/VisualIcon';
 import { router } from 'expo-router';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 type Props = {
   onPress?: () => void;

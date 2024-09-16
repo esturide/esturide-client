@@ -1,12 +1,10 @@
-import React from 'react';
-import ProgressBarContainer from '@/components/visuals/ProgressBarContainer';
-import LayoutRegister from '@/components/layouts/register/LayoutRegister';
-import Title from '@/components/layouts/Title';
-import AddressRegistrationForm from '@/components/forms/register/AddressRegistrationForm';
-
-import ScrollLayout from '@/components/layouts/ScrollLayout';
-import HeaderRegister from '@/components/layouts/register/HeaderRegister';
-import { AbsoluteBackButton } from '@/components/buttons/navigation/AbsoluteBackButton';
+import ProgressBarContainer from '@components/visuals/ProgressBarContainer';
+import LayoutRegister from '@components/layouts/register/LayoutRegister';
+import Title from '@components/layouts/Title';
+import AddressRegistrationForm from '@components/forms/register/AddressRegistrationForm';
+import ScrollLayout from '@components/layouts/ScrollLayout';
+import HeaderRegister from '@components/layouts/register/HeaderRegister';
+import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
 
 export default function SecondRegister() {
   const eventRedirect = async () => {

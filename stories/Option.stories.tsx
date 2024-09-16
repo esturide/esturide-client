@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { TouchableOpacity, View } from 'react-native';
-import Option from '@/components/buttons/Option';
+import Option from '@components/buttons/Option';
 
 const meta: Meta<typeof Option> = {
   title: 'Components/Option',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { View } from 'react-native';
-import Search from '@/components/buttons/Search';
+import Search from '@components/buttons/Search';
 
 const meta: Meta<typeof Search> = {
   title: 'Components/Search',

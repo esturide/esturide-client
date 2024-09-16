@@ -1,13 +1,12 @@
-import * as React from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from '@/styles/InputButtons';
+import styles from '@styles/InputButtons';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 const ButtonDriver = () => {
   return (
     <View style={styles.btnDriver}>
       <View style={styles.btnDriverView}>
-        <Icon name="drive-eta" style={styles.driverIcon} />
+        <VisualIcon type={'drive-eta'} style={styles.driverIcon} />
       </View>
       <View style={styles.btnDriverTextContainer}>
         <Text style={styles.btnDriverLabel}>Label</Text>

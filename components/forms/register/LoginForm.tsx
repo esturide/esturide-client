@@ -1,16 +1,16 @@
-import React from 'react';
-import { InputButton } from '@/components/buttons/InputButton';
-import InputLabel from '@/components/inputs/InputLabel';
-import InputPassword from '@/components/inputs/InputPassword';
-import styles from '@/styles/forms/LoginForm';
+import { useState } from 'react';
+import { InputButton } from '@components/buttons/InputButton';
+import InputLabel from '@components/inputs/InputLabel';
+import InputPassword from '@components/inputs/InputPassword';
+import styles from '@styles/forms/LoginForm';
 
 type Props = {
   onLogin: (username: string, password: string) => Promise<void>;
 };
 
 export default function LoginForm({ onLogin }: Props) {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const onSubmit = async () => {
     await onLogin(username, password);

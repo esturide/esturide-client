@@ -1,14 +1,15 @@
 import React from 'react';
 import { router } from 'expo-router';
-import { AbsoluteBackButton } from '@/components/buttons/navigation/AbsoluteBackButton';
-import ProgressBarContainer from '@/components/visuals/ProgressBarContainer';
-import Title from '@/components/layouts/Title';
-import LayoutRegister from '@/components/layouts/register/LayoutRegister';
-import HeaderRegister from '@/components/layouts/register/HeaderRegister';
+
+import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
+import ProgressBarContainer from '@components/visuals/ProgressBarContainer';
+import Title from '@components/layouts/Title';
+import LayoutRegister from '@components/layouts/register/LayoutRegister';
+import HeaderRegister from '@components/layouts/register/HeaderRegister';
 
 import TypeAccountForm, {
   TypeAccount,
-} from '@/components/forms/register/TypeAccountForm';
+} from '@components/forms/register/TypeAccountForm';
 
 export default function ThirdRegister() {
   const handleSubmit = async (acceptTerms: boolean, account: TypeAccount) => {

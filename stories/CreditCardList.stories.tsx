@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { View } from 'react-native';
-import CreditCardList from '@/components/cards/CreditCardList';
+import CreditCardList from '@components/cards/CreditCardList';
 import * as Crypto from 'expo-crypto';
 
 const DATA = [

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { View } from 'react-native';
-import CardTravel from '@/components/cards/CardTravel';
+import CardTravel from '@components/cards/CardTravel';
 import * as Crypto from 'expo-crypto';
 
 const meta = {

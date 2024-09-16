@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Platform, Pressable, Text, View } from 'react-native';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-import styles from '@/styles/Inputs';
+import styles from '@styles/Inputs';
 
 type Props = {
   label: string;
