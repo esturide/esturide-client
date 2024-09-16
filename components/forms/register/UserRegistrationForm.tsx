@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { router } from "expo-router";
 
-import InputLabel from "@/components/Inputs/InputLabel";
-import InputDate from "@/components/Inputs/InputDate";
+import InputLabel from "@/components/inputs/InputLabel";
+import InputDate from "@/components/inputs/InputDate";
 import styles from "@/styles/forms/RegistrationFormStyle";
-import { InputButton } from "@/components/Buttons/InputButton";
+import { InputButton } from "@/components/buttons/InputButton";
 import { RegistrationFormProps } from "@/components/forms/register/RegisterForm";
 
 export default function UserRegistrationForm({

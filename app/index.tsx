@@ -1,8 +1,9 @@
 import { View } from "react-native";
 import React, { useEffect } from "react";
-import { useRouter } from "expo-router";
-
 import Constants from "expo-constants";
+import { useRouter } from "expo-router";
+import { Platform } from "react-native";
+
 import Title from "@/components/layouts/Title";
 import Logo from "@/components/resources/Logo";
 import styles from "@/styles/layouts/SignUpLayout";
@@ -12,7 +13,10 @@ export const StartPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace("/sign-up/log-in");
+      if (Platform.OS == "android" || Platform.OS == "ios") {
+        router.replace("/sign-up/log-in");
+      } else {
+      }
     }, 5000);
 
     return () => clearTimeout(timer);

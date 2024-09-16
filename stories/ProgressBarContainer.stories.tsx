@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { View } from "react-native";
-import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
+import ProgressBarContainer from "@/components/visuals/ProgressBarContainer";
 
 const meta: Meta<typeof ProgressBarContainer> = {
   title: "Components/ProgressBarContainer",

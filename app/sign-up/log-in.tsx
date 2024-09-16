@@ -5,16 +5,14 @@ import LayoutRegister from "@/components/layouts/register/LayoutRegister";
 import Title from "@/components/layouts/Title";
 import LoginForm from "@/components/forms/register/LoginForm";
 import Logo from "@/components/resources/Logo";
-import HyperLink from "@/components/Buttons/HyperLink";
-import AuthUser from "@/components/forms/AuthUser";
-import ScrollLayout from "@/components/layouts/ScrollLayout";
+import HyperLink from "@/components/buttons/HyperLink";
 
 export default function () {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("Login user");
   };
 
@@ -35,7 +33,7 @@ export default function () {
         <HyperLink
           onClick={onHyperLinkPressed}
           label={"¿No tienes cuenta? Regístrate"}
-          href={"/sign-up/register"}
+          href={"/sign-up/user-register"}
         />
       </LayoutRegister>
     </>

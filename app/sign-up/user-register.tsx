@@ -1,14 +1,13 @@
 import React from "react";
-import { router } from "expo-router";
-import ProgressBarContainer from "@/components/Visuals/ProgressBarContainer";
+import ProgressBarContainer from "@/components/visuals/ProgressBarContainer";
 import LayoutRegister from "@/components/layouts/register/LayoutRegister";
 import Title from "@/components/layouts/Title";
-import HyperLink from "@/components/Buttons/HyperLink";
+import HyperLink from "@/components/buttons/HyperLink";
 import UserRegistrationForm from "@/components/forms/register/UserRegistrationForm";
 import HeaderRegister from "@/components/layouts/register/HeaderRegister";
 import ScrollLayout from "@/components/layouts/ScrollLayout";
 
-export default function () {
+export default function FirstRegister() {
   const handleSubmitRegister = async () => {};
 
   const handleLogInRedirect = async () => {};
@@ -24,7 +23,7 @@ export default function () {
         <ScrollLayout>
           <UserRegistrationForm
             onSubmit={handleSubmitRegister}
-            redirect={"/sign-up/register2"}
+            redirect={"/sign-up/address-register"}
           />
           <HyperLink
             label={"¿Ya tienes cuenta? Inicia Sesión"}
