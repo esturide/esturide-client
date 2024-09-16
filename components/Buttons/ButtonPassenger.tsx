@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
-import styles from '@styles/InputButtons';
 import { VisualIcon } from '@components/visuals/VisualIcon';
+import styles from '@styles/InputButtons';
 
 const ButtonPassenger = () => {
   return (

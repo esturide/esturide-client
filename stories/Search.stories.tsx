@@ -17,7 +17,7 @@ const meta: Meta<typeof Search> = {
 
 export default meta;
 
-const Template: Story<typeof Search> = (args) => <Search {...args} />;
+const Template: Story<typeof Search> = (args) => <Search />;
 
 export const Default = Template.bind({});
 Default.args = {};

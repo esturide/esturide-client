@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 import { VisualIcon } from '@components/visuals/VisualIcon';
 import styles from '@styles/InputButtons';
 
-const Option = (props) => {
+const Option = () => {
   return (
     <View style={styles.optionContainer}>
       <View style={styles.optionChild}>
