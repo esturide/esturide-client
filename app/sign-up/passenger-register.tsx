@@ -14,7 +14,7 @@ export default function PassengerRegister() {
 
       <HeaderRegister>
         <Title>Registrar</Title>
-        <ProgressBarContainer type={'ProgressBar3'} />
+        <ProgressBarContainer status={'finished'} />
       </HeaderRegister>
 
       <LayoutRegister>

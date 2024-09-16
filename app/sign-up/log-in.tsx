@@ -22,8 +22,8 @@ export default function LogIn() {
     <>
       <Logo style={styles.logoContainer} />
       <LayoutRegister>
-        <Title style={styles.title}>Iniciar Sesión</Title>
         <ScrollLayout>
+          <Title style={styles.title}>Iniciar Sesión</Title>
           <LoginForm onLogin={onLogin} />
           <HyperLink
             onClick={onHyperLinkPressed}

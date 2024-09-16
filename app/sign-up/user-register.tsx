@@ -15,7 +15,7 @@ export default function FirstRegister() {
     <>
       <HeaderRegister>
         <Title>Registrar</Title>
-        <ProgressBarContainer type={'ProgressBar2'} />
+        <ProgressBarContainer />
       </HeaderRegister>
 
       <LayoutRegister>

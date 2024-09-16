@@ -17,7 +17,7 @@ export default function SecondRegister() {
 
       <HeaderRegister>
         <Title>Registrar</Title>
-        <ProgressBarContainer type={'ProgressBar3'} />
+        <ProgressBarContainer status={'middle'} />
       </HeaderRegister>
 
       <LayoutRegister>

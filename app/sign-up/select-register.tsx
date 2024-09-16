@@ -35,7 +35,7 @@ export default function ThirdRegister() {
 
       <HeaderRegister>
         <Title>Registrar</Title>
-        <ProgressBarContainer type={'ProgressBar3'} />
+        <ProgressBarContainer status={'finished'} />
       </HeaderRegister>
 
       <LayoutRegister>

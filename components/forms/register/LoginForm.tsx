@@ -22,6 +22,7 @@ export default function LoginForm({ onLogin }: Props) {
         label="Usuario"
         onChangeText={setUsername}
         style={styles.userInputMargin}
+        placeholder={'Correo o numero de usuario'}
       />
       <InputPassword label="Contraseña" onChangeText={setPassword} />
       <InputButton

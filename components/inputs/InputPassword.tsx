@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import styles from '@styles/Inputs';
 import { VisualIcon } from '@components/visuals/VisualIcon';
+import styles from '@styles/Inputs';
 
 type Props = {
   label: string;
@@ -19,6 +19,7 @@ const InputPassword = ({ label, onChangeText }: Props) => {
           style={styles.input}
           onChangeText={onChangeText}
           secureTextEntry={isSecure}
+          placeholder={label}
         />
         <TouchableOpacity
           style={styles.toggleButton}
@@ -27,7 +28,7 @@ const InputPassword = ({ label, onChangeText }: Props) => {
           <VisualIcon
             type={isSecure ? 'visibility' : 'visibility-off'}
             size={24}
-            color={isSecure ? '#000' : '#fff'}
+            color="#000"
           />
         </TouchableOpacity>
       </View>

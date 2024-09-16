@@ -1,41 +1,73 @@
-import * as React from 'react';
 import { View } from 'react-native';
-import styles from '@styles/Visuals';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { VisualIcon } from '@components/visuals/VisualIcon';
+import styles from '@styles/ProgressBarContainer';
 
-interface ProgressBarContainerProps {
-  type: 'ProgressBar2' | 'ProgressBar3';
+type StatusProgress = 'starting' | 'middle' | 'finished';
+
+type ProgressBarContainerProps = {
+  status?: StatusProgress;
+};
+
+export default function ProgressBarContainer({
+  status,
+}: ProgressBarContainerProps) {
+  if (status == 'middle') {
+    return <ProgressMiddle />;
+  } else if (status == 'finished') {
+    return <ProgressFinished />;
+  }
+
+  return <ProgressStarting />;
 }
 
-const ProgressBarContainer: React.FC<ProgressBarContainerProps> = ({
-  type,
-}) => {
-  return <>{type === 'ProgressBar2' ? <ProgressBar2 /> : <ProgressBar3 />}</>;
+const DefaultLine = () => {
+  return <View style={styles.defaultLine} />;
 };
 
-const ProgressBar2 = () => {
+const RadioChecked = () => {
   return (
-    <View style={styles.progressBar2}>
-      <View style={styles.progressBar3}>
-        <Icon name="radio-button-checked" style={styles.indicatorIcon} />
-        <View style={styles.defaultLine} />
-        <Icon name="radio-button-unchecked" style={styles.indicatorIcon} />
-      </View>
+    <VisualIcon type="radio-button-checked" style={styles.indicatorIcon} />
+  );
+};
+
+const RadioUnChecked = () => {
+  return (
+    <VisualIcon type="radio-button-unchecked" style={styles.indicatorIcon} />
+  );
+};
+
+const ProgressStarting = () => {
+  return (
+    <View style={styles.container}>
+      <RadioChecked />
+      <DefaultLine />
+      <RadioUnChecked />
+      <DefaultLine />
+      <RadioUnChecked />
     </View>
   );
 };
 
-const ProgressBar3 = () => {
+const ProgressMiddle = () => {
   return (
-    <View style={styles.progressBar3}>
-      <Icon name="radio-button-checked" style={styles.indicatorIcon} />
-      <View style={styles.defaultLine} />
-      <Icon name="radio-button-unchecked" style={styles.indicatorIcon} />
-      <View style={styles.defaultLine} />
-      <Icon name="radio-button-unchecked" style={styles.indicatorIcon} />
+    <View style={styles.container}>
+      <RadioUnChecked />
+      <DefaultLine />
+      <RadioChecked />
+      <DefaultLine />
+      <RadioUnChecked />
     </View>
   );
 };
 
-export default ProgressBarContainer;
+const ProgressFinished = () => {
+  return (
+    <View style={styles.container}>
+      <RadioUnChecked />
+      <DefaultLine />
+      <RadioUnChecked />
+      <DefaultLine />
+      <RadioChecked />
+    </View>
+  );
+};
