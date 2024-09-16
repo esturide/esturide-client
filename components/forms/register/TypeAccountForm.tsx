@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   StyleSheet,
   Switch,
@@ -6,10 +7,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { useState } from 'react';
 import { router } from 'expo-router';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { InputButton } from '@/components/buttons/InputButton';
+import { InputButton } from '@components/buttons/InputButton';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 export type TypeAccount = 'driver' | 'passenger' | 'unknown';
 
@@ -63,7 +63,7 @@ export default function TypeAccountForm({
           onPress={onPress}
         >
           <View style={[styles.iconContainer, iconStyle]}>
-            <Icon name={selectIcon} size={50} color="#fff" />
+            <VisualIcon type={selectIcon} size={50} color="#fff" />
           </View>
           <View style={styles.optionText}>
             <Text style={styles.optionTitle}>{title}</Text>

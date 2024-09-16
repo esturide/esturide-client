@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import styles from '@/styles/CommunityPostItem';
+import styles from '@styles/CommunityPostItem';
 
 interface CommunityPostItemProps {
   readStatus: boolean;

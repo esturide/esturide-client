@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from '@/styles/Inputs';
+import styles from '@styles/Inputs';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 type Props = {
   label: string;
@@ -24,10 +24,10 @@ const InputPassword = ({ label, onChangeText }: Props) => {
           style={styles.toggleButton}
           onPress={() => setIsSecure(!isSecure)}
         >
-          <Icon
-            name={isSecure ? 'visibility' : 'visibility-off'}
+          <VisualIcon
+            type={isSecure ? 'visibility' : 'visibility-off'}
             size={24}
-            color="#000"
+            color={isSecure ? '#000' : '#fff'}
           />
         </TouchableOpacity>
       </View>

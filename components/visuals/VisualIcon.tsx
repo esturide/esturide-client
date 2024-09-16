@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
   type: string;
-  size: number;
+  size?: number;
   color?: number | ColorValue;
 };
 

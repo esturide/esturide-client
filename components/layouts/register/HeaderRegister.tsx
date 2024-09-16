@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import { View } from 'react-native';
 
-import styles from '@/styles/layouts/register/HeaderRegisterStyle';
+import styles from '@styles/layouts/register/HeaderRegisterStyle';
 
 type Props = {
   children: ReactNode;
 };
 
-export default function ({ children }: Props) {
+export default function HeaderRegister({ children }: Props) {
   return <View style={styles.headerContainer}>{children}</View>;
 }

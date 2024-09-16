@@ -1,9 +1,8 @@
 import { StyleProp, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
-import style from '@/styles/InputButtons';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import ButtonPassenger from '@/components/buttons/ButtonPassenger';
-import ButtonDriver from '@/components/buttons/ButtonDriver';
+import style from '@styles/InputButtons';
+import ButtonPassenger from '@components/buttons/ButtonPassenger';
+import ButtonDriver from '@components/buttons/ButtonDriver';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 interface InputButtonProps {
   /**
@@ -58,11 +57,11 @@ export const InputButton = ({
       ) : typeButton === 'btnDriver' ? (
         <ButtonDriver />
       ) : typeButton.startsWith('location') ? (
-        <Icon name="gps-fixed" style={textStyle} />
+        <VisualIcon type={'gps-fixed'} size={textStyle} />
       ) : typeButton.startsWith('filter') ? (
-        <Icon name="filter-list" style={textStyle} />
+        <VisualIcon type={'filter-list'} size={textStyle} />
       ) : typeButton.startsWith('add') ? (
-        <Icon name="add" style={textStyle} />
+        <VisualIcon type={'add'} size={textStyle} />
       ) : (
         <Text style={textStyle}>{label}</Text>
       )}

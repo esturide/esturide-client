@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { useState } from 'react';
+import { Alert, Text, View } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { InputButton } from '@/components/buttons/InputButton';
+import { InputButton } from '@components/buttons/InputButton';
 
 export default function AuthUser() {
   const [authenticated, setAuthenticated] = useState(false);

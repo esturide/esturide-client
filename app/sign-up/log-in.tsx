@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import LayoutRegister from '@/components/layouts/register/LayoutRegister';
-import Title from '@/components/layouts/Title';
-import LoginForm from '@/components/forms/register/LoginForm';
-import Logo from '@/components/resources/Logo';
-import HyperLink from '@/components/buttons/HyperLink';
-import ScrollLayout from '@/components/layouts/ScrollLayout';
+import LayoutRegister from '@components/layouts/register/LayoutRegister';
+import Title from '@components/layouts/Title';
+import LoginForm from '@components/forms/register/LoginForm';
+import Logo from '@components/resources/Logo';
+import HyperLink from '@components/buttons/HyperLink';
+import ScrollLayout from '@components/layouts/ScrollLayout';
 
 export default function LogIn() {
   const onLogin = async (username: string, password: string) => {

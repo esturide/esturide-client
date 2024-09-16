@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { Slot } from 'expo-router';
 
-export default function () {
+export default function UserLayout() {
   return (
     <View style={styles.flexContainer}>
       <Slot />

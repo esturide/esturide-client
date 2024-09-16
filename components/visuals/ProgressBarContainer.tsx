@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import styles from '@/styles/Visuals';
+import styles from '@styles/Visuals';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { VisualIcon } from '@components/visuals/VisualIcon';
 
 interface ProgressBarContainerProps {
   type: 'ProgressBar2' | 'ProgressBar3';

@@ -1,5 +1,5 @@
 import { FlatList, View } from 'react-native';
-import CommunityPostItem from './CommunityPostItem';
+import CommunityPostItem from '@components/cards/CommunityPostItem';
 
 interface CommunityPostItemProps {
   id: string;

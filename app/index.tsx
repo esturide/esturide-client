@@ -1,12 +1,11 @@
-import { View } from 'react-native';
-import React, { useEffect } from 'react';
-import Constants from 'expo-constants';
+import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
+import Constants from 'expo-constants';
 
-import Title from '@/components/layouts/Title';
-import Logo from '@/components/resources/Logo';
-import styles from '@/styles/layouts/SignUpLayout';
+import Title from '@components/layouts/Title';
+import Logo from '@components/resources/Logo';
+import styles from '@styles/layouts/SignUpLayout';
 
 export const StartPage = () => {
   const router = useRouter();

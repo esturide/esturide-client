@@ -1,7 +1,7 @@
 import React from 'react';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text } from 'react-native';
-import styles from '@/styles/buttons/HyperLinkStyle';
+import { Pressable, Text } from 'react-native';
+import styles from '@styles/buttons/HyperLinkStyle';
 
 type Props = {
   label: string;

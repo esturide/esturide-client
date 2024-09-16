@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { View } from 'react-native';
-import CommunityPostList from '@/components/cards/CommunityPostList';
+import CommunityPostList from '@components/cards/CommunityPostList';
 import * as Crypto from 'expo-crypto';
 
 const DATA = [
