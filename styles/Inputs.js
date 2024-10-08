@@ -54,6 +54,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   expandedBoxAnimation: {},
+
+   // Añadimos el estilo para el texto del error
+   errorText: {
+    color: 'red',  // Color rojo para los errores
+    fontSize: 14,  // Tamaño de letra más pequeño que el texto normal
+    marginTop: 5,  // Un pequeño margen superior
+    marginLeft: 22, // Alineado con el label
+  },
 });
 
 export default styles;

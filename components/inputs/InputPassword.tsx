@@ -6,9 +6,10 @@ import styles from '@styles/Inputs';
 type Props = {
   label: string;
   onChangeText: (text: string) => void;
+  errorMessage?: string; // Nueva prop para manejar el mensaje de error
 };
 
-const InputPassword = ({ label, onChangeText }: Props) => {
+const InputPassword = ({ label, onChangeText, errorMessage }: Props) => {
   const [isSecure, setIsSecure] = useState(true);
 
   return (
@@ -30,8 +31,10 @@ const InputPassword = ({ label, onChangeText }: Props) => {
             size={24}
             color="#000"
           />
+          <Text>{isSecure ? 'Show' : 'Hide'}</Text>
         </TouchableOpacity>
       </View>
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };

@@ -16,6 +16,7 @@ type Props = {
   style: ViewStyle;
   placeholder?: string;
   floatLabel?: boolean;
+  errorMessage?: string; // Nueva prop para manejar el mensaje de error
 };
 
 if (Platform.OS === 'android') {
@@ -29,15 +30,16 @@ const InputLabel = ({
   onChangeText,
   style,
   floatLabel = false,
+  errorMessage, // Recibimos el mensaje de error
 }: Props) => {
-  if (placeholder === undefined) {
-    placeholder = label;
-  }
-
-  const [textPlaceholder, setTextPlaceholder] = useState(placeholder);
   const [input, setInput] = useState('');
   const [showLabel, setShowLabel] = useState(false);
   const [expanded, setExpanded] = useState(false);
+
+  // Si el placeholder es undefined, usamos el valor de `label`
+  if (!placeholder) {
+    placeholder = label;
+  }
 
   const toggleExpandAnimation = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -61,39 +63,25 @@ const InputLabel = ({
     setInput(input);
   };
 
-  if (floatLabel) {
-    return (
-      <View
-        style={[
-          styles.container,
-          style,
-          expanded && styles.expandedBoxAnimation,
-        ]}
-      >
-        {showLabel && <Text style={styles.label}>{label}</Text>}
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder={textPlaceholder}
-            onChangeText={onInputEvent}
-            onFocus={toggleShowLabel(true)}
-            onBlur={toggleShowLabel(false)}
-          />
-        </View>
-      </View>
-    );
-  }
-
   return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.label}>{label}</Text>
+    <View
+      style={[
+        styles.container,
+        style,
+        floatLabel && expanded && styles.expandedBoxAnimation,
+      ]}
+    >
+      {floatLabel && showLabel && <Text style={styles.label}>{label}</Text>}
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
-          placeholder={textPlaceholder}
+          placeholder={placeholder}
+          onChangeText={onInputEvent}
+          onFocus={toggleShowLabel(true)}
+          onBlur={toggleShowLabel(false)}
         />
       </View>
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };

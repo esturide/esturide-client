@@ -8,6 +8,7 @@
       "@styles/*": ["./styles/*"],
       "@components/*": ["./components/*"],
       "@assets/*": ["./assets/*"],
+      "@libs/*": ["libs/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
