@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useAtom } from 'jotai';
+import { usernameAtom, passwordAtom } from '../../state/loginAtoms'; 
 import { InputButton } from '@components/buttons/InputButton';
 import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
@@ -9,8 +10,8 @@ type Props = {
 };
 
 export default function LoginForm({ onLogin }: Props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useAtom(usernameAtom);
+  const [password, setPassword] = useAtom(passwordAtom);
 
   const onSubmit = async () => {
     await onLogin(username, password);
@@ -22,12 +23,12 @@ export default function LoginForm({ onLogin }: Props) {
         label="Usuario"
         onChangeText={setUsername}
         style={styles.userInputMargin}
-        placeholder={'Correo o numero de usuario'}
+        placeholder={'Correo o número de usuario'}
       />
       <InputPassword label="Contraseña" onChangeText={setPassword} />
       <InputButton
         typeButton={'submit'}
-        label={'Iniciar Sesion'}
+        label={'Iniciar Sesión'}
         onPress={onSubmit}
       />
     </>

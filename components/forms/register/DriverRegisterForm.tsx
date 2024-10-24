@@ -1,4 +1,11 @@
-import { useState } from 'react';
+import { useAtom } from 'jotai';
+import {
+  brandAtom,
+  modelAtom,
+  yearAtom,
+  platesAtom,
+  colorAtom,
+} from '../../state/registrationAtoms'; 
 import { StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 
@@ -11,11 +18,11 @@ export default function DriverRegisterForm({
   onSubmit,
   redirect,
 }: RegistrationFormProps) {
-  const [brand, setBrand] = useState('');
-  const [model, setModel] = useState('');
-  const [year, setYear] = useState('');
-  const [plates, setPlates] = useState('');
-  const [color, setColor] = useState('');
+  const [brand, setBrand] = useAtom(brandAtom); 
+  const [model, setModel] = useAtom(modelAtom); 
+  const [year, setYear] = useAtom(yearAtom); 
+  const [plates, setPlates] = useAtom(platesAtom); 
+  const [color, setColor] = useAtom(colorAtom); 
 
   const handleSubmit = async () => {
     if (onSubmit) {
@@ -45,7 +52,7 @@ export default function DriverRegisterForm({
 
       <InputButton
         typeButton={'submit'}
-        label={'Siguente'}
+        label={'Siguiente'}
         onPress={handleSubmit}
       />
     </>

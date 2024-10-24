@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useAtom } from 'jotai';
+import { selectedOptionAtom, isSelectedAtom } from '../../state/registrationAtoms'; 
 import {
   StyleSheet,
   Switch,
@@ -32,8 +33,8 @@ export default function TypeAccountForm({
   handleSubmit,
   terms,
 }: TypeAccountProps) {
-  const [isSelected, setSelection] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<TypeAccount>('unknown');
+  const [isSelected, setSelection] = useAtom(isSelectedAtom);
+  const [selectedOption, setSelectedOption] = useAtom(selectedOptionAtom); 
 
   const onSubmit = async () => {
     await handleSubmit(isSelected, selectedOption);
@@ -57,22 +58,20 @@ export default function TypeAccountForm({
     }
 
     return (
-      <>
-        <TouchableOpacity
-          style={[styles.option, selected && containerStyle]}
-          onPress={onPress}
-        >
-          <View style={[styles.iconContainer, iconStyle]}>
-            <VisualIcon type={selectIcon} size={50} color="#fff" />
-          </View>
-          <View style={styles.optionText}>
-            <Text style={styles.optionTitle}>{title}</Text>
-            {description.map((line, index) => (
-              <Text key={index}>{line}</Text>
-            ))}
-          </View>
-        </TouchableOpacity>
-      </>
+      <TouchableOpacity
+        style={[styles.option, selected && containerStyle]}
+        onPress={onPress}
+      >
+        <View style={[styles.iconContainer, iconStyle]}>
+          <VisualIcon type={selectIcon} size={50} color="#fff" />
+        </View>
+        <View style={styles.optionText}>
+          <Text style={styles.optionTitle}>{title}</Text>
+          {description.map((line, index) => (
+            <Text key={index}>{line}</Text>
+          ))}
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -108,10 +107,7 @@ export default function TypeAccountForm({
       <AccountOption
         icon="driver"
         title="Conductor"
-        description={[
-          '° Solicitar y ofrecer viajes.',
-          '° Registrar vehículos.',
-        ]}
+        description={['° Solicitar y ofrecer viajes.', '° Registrar vehículos.']}
         selected={selectedOption === 'driver'}
         onPress={() => setSelectedOption('driver')}
         containerStyle={styles.driverSelectedOption}
@@ -121,10 +117,7 @@ export default function TypeAccountForm({
       <AccountOption
         icon="passenger"
         title="Pasajero"
-        description={[
-          '° Acceder a viajes.',
-          '° Registrar vehículos más tarde.',
-        ]}
+        description={['° Acceder a viajes.', '° Registrar vehículos más tarde.']}
         selected={selectedOption === 'passenger'}
         onPress={() => setSelectedOption('passenger')}
         containerStyle={styles.passengerSelectedOption}
@@ -134,7 +127,7 @@ export default function TypeAccountForm({
       <TermsSwitch />
 
       <InputButton
-        label={'Siguente'}
+        label={'Siguiente'}
         typeButton={'submit'}
         onPress={onSubmit}
       />

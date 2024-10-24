@@ -1,4 +1,11 @@
-import React, { useState } from 'react';
+import { useAtom } from 'jotai';
+import {
+  nameAtom,
+  firstLastNameAtom,
+  secondLastNameAtom,
+  codeAtom,
+  birthDateAtom,
+} from '../../state/registrationAtoms';
 import { router } from 'expo-router';
 
 import InputLabel from '@components/inputs/InputLabel';
@@ -11,12 +18,11 @@ export default function UserRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationFormProps) {
-  const [name, setName] = useState<string>('');
-  const [firstLastName, setFirstLastName] = useState<string>('');
-  const [secondLastName, setSecondLastName] = useState<string>('');
-  const [code, setCode] = useState<string>('');
-  const [birthDate, setBirthDate] = useState<Date | null>(null);
-
+  const [name, setName] = useAtom(nameAtom); 
+  const [firstLastName, setFirstLastName] = useAtom(firstLastNameAtom); 
+  const [secondLastName, setSecondLastName] = useAtom(secondLastNameAtom); 
+  const [code, setCode] = useAtom(codeAtom); 
+  const [birthDate, setBirthDate] = useAtom(birthDateAtom);
   const onPressButton = async () => {
     if (onSubmit) {
       await onSubmit();
@@ -53,7 +59,7 @@ export default function UserRegistrationForm({
         style={[styles.userInputMargin, styles.dateInputMargin]}
       />
       <InputButton
-        label={'Siguente'}
+        label={'Siguiente'}
         typeButton={'submit'}
         onPress={onPressButton}
       />

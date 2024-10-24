@@ -1,4 +1,11 @@
-import { useState } from 'react';
+import { useAtom } from 'jotai';
+import {
+  addressAtom,
+  phoneNumberAtom,
+  emailAtom,
+  passwordAtom,
+  confirmPasswordAtom,
+} from '../../state/registrationAtoms';
 import { router } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
@@ -11,11 +18,11 @@ export default function AddressRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationFormProps) {
-  const [address, setAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [address, setAddress] = useAtom(addressAtom);
+  const [phoneNumber, setPhoneNumber] = useAtom(phoneNumberAtom);
+  const [email, setEmail] = useAtom(emailAtom);
+  const [password, setPassword] = useAtom(passwordAtom);
+  const [confirmPassword, setConfirmPassword] = useAtom(confirmPasswordAtom);
 
   const onPressButton = async () => {
     if (onSubmit) {
