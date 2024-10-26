@@ -10,9 +10,10 @@ type Props = {
   value: Date | null;
   onChange: (date: Date) => void;
   style: {};
+  errorMessage?: string; // Nueva prop para manejar el mensaje de error
 };
 
-const InputDate = ({ label, value, onChange, style }: Props) => {
+const InputDate = ({ label, value, onChange, style, errorMessage }: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
@@ -46,6 +47,7 @@ const InputDate = ({ label, value, onChange, style }: Props) => {
           onChange={onChangeDate}
         />
       )}
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };

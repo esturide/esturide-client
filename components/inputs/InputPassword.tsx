@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { VisualIcon } from '@components/visuals/VisualIcon';
 import styles from '@styles/Inputs';
 
@@ -7,13 +13,14 @@ type Props = {
   label: string;
   onChangeText: (text: string) => void;
   errorMessage?: string; // Nueva prop para manejar el mensaje de error
+  style?: ViewStyle; // Aceptar estilo externo como prop
 };
 
-const InputPassword = ({ label, onChangeText, errorMessage }: Props) => {
+const InputPassword = ({ label, onChangeText, errorMessage, style }: Props) => {
   const [isSecure, setIsSecure] = useState(true);
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.inputContainer}>
         <TextInput

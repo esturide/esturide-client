@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationFormProps } from '@components/forms/register/RegisterFormProps';
+import { addressValidationSchema } from '@libs/validationSchemas';
 
 export default function AddressRegistrationForm({
   onSubmit,
@@ -16,13 +17,41 @@ export default function AddressRegistrationForm({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errors, setErrors] = useState<any>({});
+
+  const validateForm = () => {
+    const formData = {
+      address,
+      phoneNumber,
+      email,
+      password,
+      confirmPassword,
+    };
+
+    // Validamos el formulario usando Joi
+    const { error } = addressValidationSchema.validate(formData, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      const formattedErrors: any = {};
+      error.details.forEach((detail) => {
+        formattedErrors[detail.path[0]] = detail.message;
+      });
+      setErrors(formattedErrors);
+      return false;
+    }
+    setErrors({});
+    return true;
+  };
 
   const onPressButton = async () => {
-    if (onSubmit) {
-      await onSubmit();
+    if (validateForm() && onSubmit) {
+      if (onSubmit) {
+        await onSubmit();
+      }
+      router.push(redirect);
     }
-
-    router.push(redirect);
   };
 
   return (
@@ -31,24 +60,39 @@ export default function AddressRegistrationForm({
         label="Dirección"
         onChangeText={setAddress}
         style={styles.userInputMargin}
+        errorMessage={errors.address}
       />
       <InputLabel
         label="Número de Teléfono"
         onChangeText={setPhoneNumber}
         style={styles.userInputMargin}
+        errorMessage={errors.phoneNumber}
       />
       <InputLabel
         label="Correo Electrónico"
         onChangeText={setEmail}
         style={styles.userInputMargin}
+        errorMessage={errors.email}
       />
-      <InputPassword label="Contraseña" onChangeText={setPassword} />
+      {/* Añadimos un texto debajo del campo para los requisitos de contraseña */}
+      <InputPassword
+        label="Contraseña"
+        onChangeText={setPassword}
+        errorMessage={errors.password}
+        style={{ marginBottom: 3 }} // Reducimos el espacio solo para este campo
+      />
+      <View style={{ alignItems: 'flex-start' }}>
+        <Text style={styles.passwordInfo}>
+          La contraseña debe tener al menos 6 caracteres y una mayúscula.
+        </Text>
+      </View>
       <InputPassword
         label="Confirmar Contraseña"
         onChangeText={setConfirmPassword}
+        errorMessage={errors.confirmPassword}
       />
       <InputButton
-        label={'Siguente'}
+        label={'Siguiente'}
         typeButton={'submit'}
         onPress={onPressButton}
       />
@@ -59,5 +103,12 @@ export default function AddressRegistrationForm({
 const styles = StyleSheet.create({
   userInputMargin: {
     marginTop: 10,
+  },
+  passwordInfo: {
+    fontSize: 12,
+    color: 'gray',
+    marginTop: 0,
+    marginBottom: 10,
+    marginLeft: 0,
   },
 });

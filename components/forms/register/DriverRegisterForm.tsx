@@ -45,7 +45,7 @@ export default function DriverRegisterForm({
 
       <InputButton
         typeButton={'submit'}
-        label={'Siguente'}
+        label={'Siguiente'}
         onPress={handleSubmit}
       />
     </>

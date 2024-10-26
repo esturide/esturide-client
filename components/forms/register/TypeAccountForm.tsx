@@ -32,10 +32,21 @@ export default function TypeAccountForm({
   handleSubmit,
   terms,
 }: TypeAccountProps) {
-  const [isSelected, setSelection] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<TypeAccount>('unknown');
+  const [isSelected, setSelection] = useState(false); // Términos y condiciones
+  const [selectedOption, setSelectedOption] = useState<TypeAccount>('unknown'); // Opción de cuenta
+  const [errors, setErrors] = useState({ terms: false, account: false }); // Manejo de errores
 
   const onSubmit = async () => {
+    // Validamos si aceptaron los términos y seleccionaron una cuenta
+    if (selectedOption === 'unknown' || !isSelected) {
+      setErrors({
+        terms: !isSelected,
+        account: selectedOption === 'unknown',
+      });
+      return;
+    }
+
+    // Si está todo bien, llamamos a handleSubmit
     await handleSubmit(isSelected, selectedOption);
   };
 
@@ -68,7 +79,9 @@ export default function TypeAccountForm({
           <View style={styles.optionText}>
             <Text style={styles.optionTitle}>{title}</Text>
             {description.map((line, index) => (
-              <Text key={index}>{line}</Text>
+              <Text key={index} style={styles.optionDescription}>
+                {line}
+              </Text>
             ))}
           </View>
         </TouchableOpacity>
@@ -82,21 +95,28 @@ export default function TypeAccountForm({
     };
 
     return (
-      <View style={styles.switchContainer}>
-        <Switch
-          value={isSelected}
-          onValueChange={setSelection}
-          trackColor={{ false: '#767577', true: '#87c9b8' }}
-          thumbColor={isSelected ? '#2f7265' : '#f4f3f4'}
-          style={styles.switch}
-        />
-
-        <Text style={styles.labelContainer}>
-          <Text style={styles.label}>He leído y acepto los </Text>
-          <TouchableOpacity style={styles.linkTouchable} onPress={onLinkPress}>
+      <View style={styles.termsContainer}>
+        <View style={styles.switchContainer}>
+          <Switch
+            value={isSelected}
+            onValueChange={setSelection}
+            trackColor={{ false: '#767577', true: '#87c9b8' }}
+            thumbColor={isSelected ? '#2f7265' : '#f4f3f4'}
+            style={styles.switch}
+          />
+          <Text style={styles.labelContainer}>
+            <Text style={styles.label}>He leído y acepto los </Text>
+            <TouchableOpacity
+              style={styles.linkTouchable}
+              onPress={onLinkPress}
+            >
             <Text style={styles.link}>términos y condiciones</Text>
-          </TouchableOpacity>
-        </Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
+        {errors.terms && (
+          <Text style={styles.errorText}>Debes aceptar los términos.</Text>
+        )}
       </View>
     );
   };
@@ -108,10 +128,7 @@ export default function TypeAccountForm({
       <AccountOption
         icon="driver"
         title="Conductor"
-        description={[
-          '° Solicitar y ofrecer viajes.',
-          '° Registrar vehículos.',
-        ]}
+        description={['° Solicita y ofrece viajes', '° Registra tu vehículo']}
         selected={selectedOption === 'driver'}
         onPress={() => setSelectedOption('driver')}
         containerStyle={styles.driverSelectedOption}
@@ -122,8 +139,8 @@ export default function TypeAccountForm({
         icon="passenger"
         title="Pasajero"
         description={[
-          '° Acceder a viajes.',
-          '° Registrar vehículos más tarde.',
+          '° Accede a viajes',
+          '° Podrás registrar vehículos más adelante',
         ]}
         selected={selectedOption === 'passenger'}
         onPress={() => setSelectedOption('passenger')}
@@ -131,10 +148,16 @@ export default function TypeAccountForm({
         iconStyle={styles.passengerContainer}
       />
 
+      {errors.account && (
+        <Text style={[styles.errorText, styles.accountErrorText]}>
+          Debes seleccionar un tipo de cuenta.
+        </Text>
+      )}
+
       <TermsSwitch />
 
       <InputButton
-        label={'Siguente'}
+        label={'Siguiente'}
         typeButton={'submit'}
         onPress={onSubmit}
       />
@@ -224,25 +247,46 @@ const styles = StyleSheet.create({
     fontSize: 19.2,
     fontWeight: 'bold',
   },
+  optionDescription: {
+    fontSize: 16, // Ajustamos para que las descripciones se alineen
+  },
   switchContainer: {
     flexDirection: 'row',
     marginBottom: 20,
     alignItems: 'center',
+    justifyContent: 'center', // Alineamos el switch y el texto en el centro
+  },
+  termsContainer: {
+    flexDirection: 'column', // Cambiamos esto para que el error esté debajo de los términos
+    //marginTop: 10, // Añadimos un pequeño margen superior
+    marginBottom: 20,
+    alignItems: 'center', // Centramos todo lo que está dentro del contenedor
   },
   switch: {
     alignSelf: 'center',
+    marginRight: 10, // Añadimos margen derecho al switch
+  },
+  termsTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
   },
   link: {
     color: '#2f7265',
     textDecorationLine: 'underline',
     bottom: 0,
+    marginLeft: 2, // Agregamos un pequeño margen para separar el texto del link
+    // textAlignVertical: 'center', // Aseguramos que el texto del link esté alineado verticalmente
+    fontSize: 14, // Asegúrate de que el tamaño de la fuente sea el mismo que el del texto
+    lineHeight: 18, // Igualamos la altura de línea al texto "He leído y acepto los"
   },
   linkTouchable: {},
-  label: {},
+  label: {
+    fontSize: 14, // Ajusta según el tamaño que prefieras
+    lineHeight: 18, // Esto asegura que el texto esté alineado verticalmente con el switch y el link
+  },
   labelContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   submitButton: {
@@ -250,5 +294,15 @@ const styles = StyleSheet.create({
     fontSize: 13.3,
     fontWeight: 'bold',
     marginTop: 34,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    marginTop: 5,
+  },
+
+  accountErrorText: {
+    marginTop: -15, // Reducimos el margen superior para acercar al cuadro de opciones
+    marginBottom: 10,
   },
 });

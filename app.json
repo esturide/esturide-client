@@ -1,5 +1,10 @@
 {
   "name": "EstuRide",
   "slug": "esturide",
-  "scheme": "esturide-scheme"
+  "scheme": "esturide-scheme",
+  "expo": {
+    "slug": "EstuRide",
+    "name": "EstuRide",
+    "sdkVersion": "51.0.0"
+  }
 }
