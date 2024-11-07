@@ -6,6 +6,7 @@ import InputLabel from '@components/inputs/InputLabel';
 import { InputRow } from '@components/layouts/RowLayout';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationFormProps } from '@components/forms/register/RegisterFormProps';
+import React from 'react';
 
 export default function DriverRegisterForm({
   onSubmit,
