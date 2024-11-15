@@ -8,47 +8,90 @@ interface BottomNavigationBarProps {
   currentPage: 'home' | 'add' | 'messages' | 'profile';
 }
 
-const BottomNavigationBar: React.FC<BottomNavigationBarProps> = ({ userType = 'driver', currentPage }) => {
+const BottomNavigationBar: React.FC<BottomNavigationBarProps> = ({
+  userType = 'driver',
+  currentPage,
+}) => {
   const router = useRouter();
   const activeColor = userType === 'driver' ? '#00796B' : '#3B82F6';
   const inactiveColor = 'gray';
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/home')} style={styles.iconContainer}>
+      <TouchableOpacity
+        onPress={() => router.push('/home')}
+        style={styles.iconContainer}
+      >
         <Ionicons
           name="home-outline"
           size={24}
           color={currentPage === 'home' ? activeColor : inactiveColor}
         />
-        <Text style={[styles.label, { color: currentPage === 'home' ? activeColor : inactiveColor }]}>Home</Text>
+        <Text
+          style={[
+            styles.label,
+            { color: currentPage === 'home' ? activeColor : inactiveColor },
+          ]}
+        >
+          Home
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.push('/add')} style={styles.iconContainer}>
+      <TouchableOpacity
+        onPress={() => router.push('/add')}
+        style={styles.iconContainer}
+      >
         <Ionicons
           name="add-circle-outline"
           size={24}
           color={currentPage === 'add' ? activeColor : inactiveColor}
         />
-        <Text style={[styles.label, { color: currentPage === 'add' ? activeColor : inactiveColor }]}>Add</Text>
+        <Text
+          style={[
+            styles.label,
+            { color: currentPage === 'add' ? activeColor : inactiveColor },
+          ]}
+        >
+          Add
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.push('/messages')} style={styles.iconContainer}>
+      <TouchableOpacity
+        onPress={() => router.push('/messages')}
+        style={styles.iconContainer}
+      >
         <Ionicons
           name="mail-outline"
           size={24}
           color={currentPage === 'messages' ? activeColor : inactiveColor}
         />
-        <Text style={[styles.label, { color: currentPage === 'messages' ? activeColor : inactiveColor }]}>Messages</Text>
+        <Text
+          style={[
+            styles.label,
+            { color: currentPage === 'messages' ? activeColor : inactiveColor },
+          ]}
+        >
+          Messages
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.push('/profile')} style={styles.iconContainer}>
+      <TouchableOpacity
+        onPress={() => router.push('/profile')}
+        style={styles.iconContainer}
+      >
         <Ionicons
           name="person-outline"
           size={24}
           color={currentPage === 'profile' ? activeColor : inactiveColor}
         />
-        <Text style={[styles.label, { color: currentPage === 'profile' ? activeColor : inactiveColor }]}>Profile</Text>
+        <Text
+          style={[
+            styles.label,
+            { color: currentPage === 'profile' ? activeColor : inactiveColor },
+          ]}
+        >
+          Profile
+        </Text>
       </TouchableOpacity>
     </View>
   );

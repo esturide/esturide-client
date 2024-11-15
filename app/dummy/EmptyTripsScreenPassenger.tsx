@@ -1,15 +1,11 @@
 // app/screens/EmptyTripsScreenPassenger.tsx
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AdBanner from '@components/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import FilterModalPassenger from '@components/modals/FilterModalPassenger';
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 const EmptyTripsScreenPassenger: React.FC = () => {
   const [isFilterModalVisible, setFilterModalVisible] = useState(false);
@@ -41,8 +37,9 @@ const EmptyTripsScreenPassenger: React.FC = () => {
         <TouchableOpacity style={styles.addButton}>
           <MaterialIcons name="add" size={30} color="#fff" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterButton}
-        onPress={() => setFilterModalVisible(true)}
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => setFilterModalVisible(true)}
         >
           <MaterialCommunityIcons name="tune-variant" size={24} color="#fff" />
         </TouchableOpacity>
@@ -51,8 +48,8 @@ const EmptyTripsScreenPassenger: React.FC = () => {
       {/* Bottom Navigation */}
       <BottomNavigationBar userType="passenger" currentPage="add" />
 
-       {/* Modal de Filtros */}
-       <FilterModalPassenger
+      {/* Modal de Filtros */}
+      <FilterModalPassenger
         visible={isFilterModalVisible}
         onClose={() => setFilterModalVisible(false)}
       />

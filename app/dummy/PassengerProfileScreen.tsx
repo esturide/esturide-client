@@ -1,7 +1,7 @@
 // app/screens/PassengerProfileScreen.tsx
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AdBanner from '@components/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import DepositModalPassenger from '@components/modals/DepositModalPassenger';

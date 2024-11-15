@@ -30,5 +30,4 @@ export default ({ config }) => ({
     favicon: './assets/favicon.png',
   },
   plugins: ['expo-router', 'expo-font'],
-
 });

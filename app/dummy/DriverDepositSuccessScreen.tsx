@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import AdBanner from '@components/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
-import ButtonAddGreen from '@components/buttons/ButtonAddGreen';
-import { InputButton } from '@components/buttons/InputButton';
 
 const DepositSuccessScreen: React.FC = () => {
   const router = useRouter();
@@ -57,7 +55,7 @@ const DepositSuccessScreen: React.FC = () => {
       </View>
 
       {/* Bottom Navigation */}
-      <BottomNavigationBar userType='driver' currentPage='profile' />
+      <BottomNavigationBar userType="driver" currentPage="profile" />
     </View>
   );
 };
