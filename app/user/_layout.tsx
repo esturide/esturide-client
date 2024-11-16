@@ -1,7 +1,9 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import { Slot } from 'expo-router';
 import NavigationBar from '@components/tabs/NavigationBar';
+
+import styles from '@styles/layouts/UserLayout';
 
 export default function UserLayout() {
   const navigationItem = [
@@ -35,12 +37,3 @@ export default function UserLayout() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  flexContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-});

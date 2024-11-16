@@ -1,12 +1,13 @@
 import React from 'react';
 import {
   View,
-  StyleSheet,
   Image,
   TouchableOpacity,
   ImageSourcePropType,
 } from 'react-native';
 import { router } from 'expo-router';
+
+import styles from '@styles/NavigationItemStyle';
 
 interface NavigationItemProps {
   icon: ImageSourcePropType;
@@ -47,28 +48,5 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 52,
-    height: 52,
-  },
-  activeIconContainer: {
-    borderRadius: 100,
-    borderWidth: 4,
-    borderColor: '#FFF',
-  },
-  icon: {
-    width: 24,
-    height: 24,
-  },
-});
 
 export default NavigationItem;
