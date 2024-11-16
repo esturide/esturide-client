@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType, View } from 'react-native';
 import NavigationItem from '@components/tabs/NavigationItem';
 
 import styles from '@styles/NavigationBarStyle';

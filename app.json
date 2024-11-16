@@ -1,5 +1,6 @@
 {
   "name": "EstuRide",
   "slug": "esturide",
-  "scheme": "esturide-scheme"
+  "scheme": "esturide-scheme",
+  "assetBundlePatterns": [ "assets/*" ]
 }
