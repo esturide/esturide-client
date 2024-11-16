@@ -14,9 +14,7 @@ export default function LogIn() {
       `Username: ${username} is logging in, with the password: ${password}`,
     );
 
-    const href = 'dummy/driver/community/DriveFeedCommunity';
-
-    router.replace(href);
+    router.replace('/user');
   };
 
   const onHyperLinkPressed = async () => {
