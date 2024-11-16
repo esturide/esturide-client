@@ -56,7 +56,7 @@ const DriverProfileScreen: React.FC = () => {
             >
               <Text style={styles.menuText}>{option}</Text>
               <Image
-                source={require('../../assets/arrow-forward.png')} // Reemplaza con la imagen de la flecha
+                source={require('@assets/arrow-forward.png')} // Reemplaza con la imagen de la flecha
                 style={styles.arrowIcon}
               />
             </TouchableOpacity>

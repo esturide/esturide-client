@@ -6,12 +6,17 @@ import LoginForm from '@components/forms/register/LoginForm';
 import Logo from '@components/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import { router } from 'expo-router';
 
 export default function LogIn() {
   const onLogin = async (username: string, password: string) => {
     console.log(
       `Username: ${username} is logging in, with the password: ${password}`,
     );
+
+    const href = 'dummy/driver/community/DriveFeedCommunity';
+
+    router.replace(href);
   };
 
   const onHyperLinkPressed = async () => {
