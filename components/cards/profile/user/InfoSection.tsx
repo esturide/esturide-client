@@ -1,9 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-interface InfoSectionProps {}
-
-export const InfoSection: React.FC<InfoSectionProps> = () => {
+export const InfoSection: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Información</Text>
