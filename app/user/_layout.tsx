@@ -9,23 +9,23 @@ export default function UserLayout() {
   const navigationItem = [
     {
       icon: require('@assets/icons/tabs/home.png'),
-      href: '',
+      href: '/user',
       onPress: async () => console.log('Home page'),
     },
     {
       icon: require('@assets/icons/tabs/add.png'),
-      href: '',
-      onPress: async () => console.log('Home page'),
+      href: '/user',
+      onPress: async () => console.log('Travels and rides page'),
     },
     {
       icon: require('@assets/icons/tabs/notify.png'),
-      href: '',
-      onPress: async () => console.log('Home page'),
+      href: '/user',
+      onPress: async () => console.log('Notifications page'),
     },
     {
       icon: require('@assets/icons/tabs/user.png'),
-      href: '',
-      onPress: async () => console.log('Home page'),
+      href: '/user',
+      onPress: async () => console.log('Profile page'),
     },
   ];
 
