@@ -1,6 +1,6 @@
 export default ({ config }) => ({
   ...config,
-  name: 'Esturide (Client)',
+  name: 'EstuRide',
   slug: 'esturide',
   version: '0.0.1',
   orientation: 'portrait',
