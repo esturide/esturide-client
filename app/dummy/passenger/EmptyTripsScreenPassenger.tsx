@@ -20,7 +20,7 @@ const EmptyTripsScreenPassenger: React.FC = () => {
         {/* Icono de ubicación */}
         <View style={styles.iconContainer}>
           <Image
-            source={require('../../assets/location-blue-icon.png')}
+            source={require('@assets/location-blue-icon.png')}
             style={{ width: 250, height: 200 }}
           />
         </View>

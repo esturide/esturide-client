@@ -1,10 +1,12 @@
+// app/screens/DepositSuccessPassengerScreen.tsx
+
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import AdBanner from '@components/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 
-const DepositSuccessScreen: React.FC = () => {
+const DepositSuccessPassengerScreen: React.FC = () => {
   const router = useRouter();
 
   return (
@@ -18,7 +20,7 @@ const DepositSuccessScreen: React.FC = () => {
 
         {/* Icono de confirmación */}
         <Image
-          source={require('../../assets/check-green-icon.png')} // Asegúrate de agregar el ícono en la carpeta assets
+          source={require('@assets/check-blue-icon.png')} // Asegúrate de agregar el ícono en azul en la carpeta assets
           style={styles.checkIcon}
         />
 
@@ -45,17 +47,17 @@ const DepositSuccessScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* Botón de Confirmación */}
+        {/* Botón de Regresar */}
         <TouchableOpacity
-          style={styles.confirmButton}
+          style={styles.backButton}
           onPress={() => router.push('/home')}
         >
-          <Text style={styles.confirmButtonText}>Confirmar</Text>
+          <Text style={styles.backButtonText}>Regresar</Text>
         </TouchableOpacity>
       </View>
 
       {/* Bottom Navigation */}
-      <BottomNavigationBar userType="driver" currentPage="profile" />
+      <BottomNavigationBar userType="passenger" currentPage="profile" />
     </View>
   );
 };
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    padding: 8,
   },
   content: {
     flex: 1,
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
   amount: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#00796B',
+    color: '#4958AC', // Azul para el pasajero
     marginBottom: 20,
   },
   infoContainer: {
@@ -109,8 +112,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
-  confirmButton: {
-    backgroundColor: '#00796B',
+  backButton: {
+    backgroundColor: '#4958AC', // Azul para el pasajero
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -118,11 +121,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 100,
   },
-  confirmButtonText: {
+  backButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
-export default DepositSuccessScreen;
+export default DepositSuccessPassengerScreen;
