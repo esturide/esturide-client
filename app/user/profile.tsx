@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import { ProfileHeader } from './ProfileHeader';
-import { InfoSection } from './InfoSection';
-import { ActionItem } from './ActionItem';
+import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
+import { InfoSection } from '@components/cards/profile/user/InfoSection';
+import { ActionItem } from '@components/cards/profile/user/ActionItem';
 import AdBanner from '@components/banners/AdBanner';
 
 export default function UserProfile() {
