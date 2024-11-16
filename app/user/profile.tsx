@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { ProfileHeader } from './ProfileHeader';
 import { InfoSection } from './InfoSection';
 import { ActionItem } from './ActionItem';
