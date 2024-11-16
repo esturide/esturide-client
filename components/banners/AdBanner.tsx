@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Image, StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { Dimensions, Image, View } from 'react-native';
+import styles from '@styles/banners/AdBannerStyle';
 
 const AdBanner: React.FC = () => {
   return (
@@ -13,23 +12,5 @@ const AdBanner: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: width * 0.9,
-    height: 50,
-    backgroundColor: '#f0f0f0',
-    alignSelf: 'center',
-    borderRadius: 8,
-    overflow: 'hidden',
-    marginVertical: 10,
-    position: 'relative',
-  },
-  bannerImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-});
 
 export default AdBanner;

@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, ImageSourcePropType } from 'react-native';
+import { View, ImageSourcePropType } from 'react-native';
 import NavigationItem from '@components/tabs/NavigationItem';
+
+import styles from '@styles/NavigationBarStyle';
 
 interface ItemNavProps {
   icon: ImageSourcePropType;
@@ -31,33 +33,5 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ navigationItems }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    alignItems: 'center',
-  },
-  navigationBar: {
-    flexDirection: 'row',
-    width: '100%',
-    paddingHorizontal: 3,
-    paddingTop: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  indicatorContainer: {
-    width: '100%',
-    paddingHorizontal: 75,
-    paddingTop: 17,
-    paddingBottom: 8,
-    alignItems: 'center',
-  },
-  indicator: {
-    width: 135,
-    height: 5,
-    borderRadius: 100,
-    backgroundColor: '#000',
-  },
-});
 
 export default NavigationBar;
