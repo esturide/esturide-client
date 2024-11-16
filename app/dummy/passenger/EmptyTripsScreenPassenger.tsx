@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import AdBanner from '@components/AdBanner';
+import AdBanner from '@components/banners/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import FilterModalPassenger from '@components/modals/FilterModalPassenger';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
