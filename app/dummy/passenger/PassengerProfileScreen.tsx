@@ -62,7 +62,7 @@ const PassengerProfileScreen: React.FC = () => {
               >
                 <Text style={styles.menuText}>{option}</Text>
                 <Image
-                  source={require('../../assets/arrow-forward.png')} // Reemplazar con el icono de flecha
+                  source={require('@assets/arrow-forward.png')} // Reemplazar con el icono de flecha
                   style={styles.arrowIcon}
                 />
               </TouchableOpacity>

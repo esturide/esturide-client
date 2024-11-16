@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import { ActivityIndicator, Platform, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Constants from 'expo-constants';
-import * as Font from 'expo-font';
-import { Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
 
 import Title from '@components/layouts/Title';
 import Logo from '@components/resources/Logo';
 import styles from '@styles/layouts/SignUpLayout';
-
-import DriverProfileScreen from './dummy/DriverProfileScreen';
-import DriverInfoScreen from './dummy/DriverInfoScreen';
-import DriverDepositFundsScreen from './dummy/DriverDepositFundsScreen';
-import DriverDepositSuccessScreen from './dummy/DriverDepositSuccessScreen';
-import PassengerProfileScreen from './dummy/PassengerProfileScreen';
-import PassengerDepositSuccessScreen from './dummy/PassengerDepositSuccessScreen';
-import EmptyTripsScreenPassenger from './dummy/EmptyTripsScreenPassenger';
 
 export const StartPage = () => {
   const router = useRouter();

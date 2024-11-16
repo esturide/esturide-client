@@ -26,7 +26,7 @@ const DepositCapitalScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require('../../assets/arrow-back.png')} // Ruta a tu imagen personalizada en assets
+            source={require('@assets/arrow-back.png')} // Ruta a tu imagen personalizada en assets
             style={styles.backIcon}
           />
         </TouchableOpacity>
