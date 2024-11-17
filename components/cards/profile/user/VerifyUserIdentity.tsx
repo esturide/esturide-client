@@ -15,7 +15,7 @@ export const VerifyUserIdentity = ({ code, onTouch }: Props) => {
       await onTouch(code);
     }
 
-    console.log('Redirect to User register');
+    console.log('Touch event');
   };
 
   return (
