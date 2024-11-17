@@ -6,15 +6,20 @@ import LoginForm from '@components/forms/register/LoginForm';
 import Logo from '@components/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
-import { router } from 'expo-router';
+import axios from 'axios';
 
 export default function LogIn() {
   const onLogin = async (username: string, password: string) => {
-    console.log(
-      `Username: ${username} is logging in, with the password: ${password}`,
-    );
+    console.log({
+      username: username,
+      password: password,
+    });
 
-    router.replace('/user');
+    if (username === '' && password === '') {
+      return false;
+    }
+
+    return true;
   };
 
   const onHyperLinkPressed = async () => {
@@ -27,7 +32,7 @@ export default function LogIn() {
       <LayoutRegister>
         <ScrollLayout>
           <Title style={styles.title}>Iniciar Sesión</Title>
-          <LoginForm onLogin={onLogin} />
+          <LoginForm onLogin={onLogin} redirect={'/user'} />
           <HyperLink
             onClick={onHyperLinkPressed}
             label={'¿No tienes cuenta? Regístrate'}
