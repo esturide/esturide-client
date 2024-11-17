@@ -1,3 +1,4 @@
+import React from 'react';
 import ProgressBarContainer from '@components/visuals/ProgressBarContainer';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';

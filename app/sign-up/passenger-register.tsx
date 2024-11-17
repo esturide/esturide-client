@@ -1,3 +1,4 @@
+import React from 'react';
 import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
 import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import Title from '@components/layouts/Title';
