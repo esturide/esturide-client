@@ -4,6 +4,7 @@ import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
 import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
 import AdBanner from '@components/banners/AdBanner';
+import QRCode from 'react-native-qrcode-svg';
 
 export default function UserProfile() {
   const actionItems = [
@@ -21,14 +22,7 @@ export default function UserProfile() {
     },
   ];
 
-  return (
-    <View style={styles.container}>
-      <AdBanner />
-      <ProfileHeader
-        name="Raul Jiménez Rodríguez"
-        role="Conductor"
-        avatarUri="https://cdn.builder.io/api/v1/image/assets/d15ccaa318ae47d3ace2dfebd63f7426/74d5a3d37a9568a351100cdcf54159355bfad163068f23b17ffdf97346ba711e?apiKey=d15ccaa318ae47d3ace2dfebd63f7426&"
-      />
+  /*
       <Image
         resizeMode="contain"
         source={{
@@ -37,6 +31,18 @@ export default function UserProfile() {
         style={styles.divider}
         accessibilityLabel="Decorative divider"
       />
+  */
+
+  return (
+    <View style={styles.container}>
+      <AdBanner />
+      <ProfileHeader
+        name="Raul Jiménez Rodríguez"
+        role="Conductor"
+        avatarUri="https://cdn.builder.io/api/v1/image/assets/d15ccaa318ae47d3ace2dfebd63f7426/74d5a3d37a9568a351100cdcf54159355bfad163068f23b17ffdf97346ba711e?apiKey=d15ccaa318ae47d3ace2dfebd63f7426&"
+      />
+      <QRCode value="Hello world" />
+
       <InfoSection />
       {actionItems.map((item, index) => (
         <ActionItem key={index} title={item.title} iconUri={item.icon} />
