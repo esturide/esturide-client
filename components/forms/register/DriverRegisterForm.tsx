@@ -20,7 +20,7 @@ export default function DriverRegisterForm({
 
   const handleSubmit = async () => {
     if (onSubmit) {
-      await onSubmit();
+      await onSubmit(name, firstLastName, secondLastName, code, birthDate);
     }
 
     router.push(redirect);

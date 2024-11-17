@@ -1,4 +1,10 @@
 export type RegistrationFormProps = {
-  onSubmit?: () => Promise<void>;
+  onSubmit?: (
+    name: string,
+    firstLastName: string,
+    secondLastName: string,
+    code: string,
+    birthDate: Date,
+  ) => Promise<boolean>;
   redirect: string;
 };
