@@ -3,12 +3,27 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface ActionItemProps {
   title: string;
-  iconUri: string;
+  iconUri?: string;
+  onTouchTap?: () => Promise<void>;
 }
 
-export const ActionItem: React.FC<ActionItemProps> = ({ title, iconUri }) => {
+export const ActionItem: React.FC<ActionItemProps> = ({
+  title,
+  iconUri,
+  onTouchTap,
+}) => {
+  const onPress = async () => {
+    if (onTouchTap) {
+      await onTouchTap();
+    }
+  };
+
   return (
-    <TouchableOpacity style={styles.container} accessibilityRole="button">
+    <TouchableOpacity
+      style={styles.container}
+      accessibilityRole="button"
+      onPress={onPress}
+    >
       <View style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>
       </View>

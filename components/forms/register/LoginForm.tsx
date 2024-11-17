@@ -19,7 +19,10 @@ export default function LoginForm({ onLogin, redirect }: Props) {
     const status = await onLogin(username, password);
 
     if (status) {
-      router.replace(redirect);
+      setTimeout(() => {
+        showMessage('Iniciando sesion');
+        router.replace(redirect);
+      }, 1000);
     } else {
       showMessage('Contraseña o usuario incorrectos');
     }

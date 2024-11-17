@@ -12,7 +12,11 @@ export const StartPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Platform.OS === 'android' || Platform.OS === 'ios') {
+      if (
+        Platform.OS === 'android' ||
+        Platform.OS === 'ios' ||
+        Platform.OS === 'web'
+      ) {
         router.replace('/sign-up/log-in');
       }
     }, 5000);
