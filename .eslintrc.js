@@ -10,7 +10,6 @@ module.exports = {
   plugins: ['prettier', '@typescript-eslint'],
   rules: {
     'prettier/prettier': 'error',
-    '@typescript-eslint/no-var-requires': 'off',
   },
   overrides: [
     {
@@ -20,9 +19,7 @@ module.exports = {
         'components/**/*.ts,*.js,*.tsx,*.jsx',
         'app/**/*.tsx',
       ],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
+      rules: {},
     },
   ],
 };
