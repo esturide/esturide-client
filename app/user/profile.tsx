@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
 import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
