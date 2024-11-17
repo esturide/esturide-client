@@ -6,7 +6,6 @@ import LoginForm from '@components/forms/register/LoginForm';
 import Logo from '@components/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
-import axios from 'axios';
 
 export default function LogIn() {
   const onLogin = async (username: string, password: string) => {
