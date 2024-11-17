@@ -19,7 +19,9 @@ module.exports = {
         'components/**/*.ts,*.js,*.tsx,*.jsx',
         'app/**/*.tsx',
       ],
-      rules: {},
+      rules: {
+        'react/prop-types': 'warn',
+      },
     },
   ],
 };
