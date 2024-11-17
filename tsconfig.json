@@ -5,6 +5,7 @@
       "@app/*": ["app/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@libs/*": ["libs/*"],
       "@styles/*": ["styles/*"]
     }
   },
