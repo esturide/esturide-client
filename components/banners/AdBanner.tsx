@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Image, View } from 'react-native';
+import { Image, View } from 'react-native';
 import styles from '@styles/banners/AdBannerStyle';
 
 const AdBanner: React.FC = () => {
