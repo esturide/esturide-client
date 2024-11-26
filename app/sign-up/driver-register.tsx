@@ -8,7 +8,15 @@ import ScrollLayout from '@components/layouts/ScrollLayout';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 
 export default function DriverRegister() {
-  const handleSubmit = async () => {};
+  const handleSubmit = async (
+    brand: string,
+    model: string,
+    year: string,
+    plates: string,
+    color: string,
+  ) => {
+    return true;
+  };
 
   return (
     <>
@@ -21,10 +29,7 @@ export default function DriverRegister() {
 
       <LayoutRegister>
         <ScrollLayout>
-          <DriverRegisterForm
-            redirect={'/sign-up/passenger-register'}
-            onSubmit={handleSubmit}
-          />
+          <DriverRegisterForm redirect={'/'} onSubmit={handleSubmit} />
         </ScrollLayout>
       </LayoutRegister>
     </>

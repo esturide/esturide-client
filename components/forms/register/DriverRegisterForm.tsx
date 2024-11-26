@@ -5,13 +5,13 @@ import { router } from 'expo-router';
 import InputLabel from '@components/inputs/InputLabel';
 import { InputRow } from '@components/layouts/RowLayout';
 import { InputButton } from '@components/buttons/InputButton';
-import { RegistrationFormProps } from '@components/forms/register/RegisterFormProps';
+import { RegistrationDriverFormProps } from '@components/forms/register/RegisterFormProps';
 import React from 'react';
 
 export default function DriverRegisterForm({
   onSubmit,
   redirect,
-}: RegistrationFormProps) {
+}: RegistrationDriverFormProps) {
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
@@ -20,7 +20,7 @@ export default function DriverRegisterForm({
 
   const handleSubmit = async () => {
     if (onSubmit) {
-      await onSubmit(name, firstLastName, secondLastName, code, birthDate);
+      await onSubmit(brand, model, year, plates, color);
     }
 
     router.push(redirect);

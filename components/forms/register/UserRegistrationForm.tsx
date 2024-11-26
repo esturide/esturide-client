@@ -5,13 +5,13 @@ import InputLabel from '@components/inputs/InputLabel';
 import InputDate from '@components/inputs/InputDate';
 import styles from '@styles/forms/RegistrationFormStyle';
 import { InputButton } from '@components/buttons/InputButton';
-import { RegistrationFormProps } from '@components/forms/register/RegisterFormProps';
+import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
 import { showMessage } from '@libs/alerts/toast';
 
 export default function UserRegistrationForm({
   onSubmit,
   redirect,
-}: RegistrationFormProps) {
+}: RegistrationUserFormProps) {
   const [name, setName] = useState<string>('');
   const [firstLastName, setFirstLastName] = useState<string>('');
   const [secondLastName, setSecondLastName] = useState<string>('');
