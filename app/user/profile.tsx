@@ -30,7 +30,7 @@ export default function UserProfile() {
     <View style={styles.container}>
       <AdBanner />
       <ProfileHeader
-        name="Raul Jiménez Rodríguez"
+        name="Mary Jiménez Rodríguez"
         role="Conductor"
         avatarUri="https://thispersondoesnotexist.com/"
       />

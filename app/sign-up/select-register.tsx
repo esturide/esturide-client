@@ -10,6 +10,7 @@ import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import TypeAccountForm, {
   TypeAccount,
 } from '@components/forms/register/TypeAccountForm';
+import { showMessage } from '@libs/alerts/toast';
 
 export default function ThirdRegister() {
   const handleSubmit = async (acceptTerms: boolean, account: TypeAccount) => {
@@ -21,7 +22,8 @@ export default function ThirdRegister() {
     if (account === 'driver') {
       router.push('/sign-up/driver-register');
     } else if (account === 'passenger') {
-      router.push('/sign-up/passenger-register');
+      showMessage('Usuario registrado correctamente');
+      router.push('/');
     } else {
       console.log(
         `Debe seleccionar una opción, '${account}' no es una opción valida`,
