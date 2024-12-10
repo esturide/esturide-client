@@ -1,7 +1,7 @@
 // app/screens/DepositSuccessPassengerScreen.tsx
 
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import AdBanner from '@components/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';

@@ -1,7 +1,7 @@
 // app/dummy/DriverProfileScreen.tsx
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AdBanner from '@components/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import WithdrawalNoticeModal from '@components/modals/WithdrawalNoticeModal';
@@ -49,11 +49,11 @@ const DriverProfileScreen: React.FC = () => {
             'Retirar Capital',
             'Cambiar a Pasajero',
           ].map((option, index) => (
-            <TouchableOpacity 
-            key={index} 
-            style={styles.menuItem} 
-            onPress={() => handleOptionPress(option)}>
-
+            <TouchableOpacity
+              key={index}
+              style={styles.menuItem}
+              onPress={() => handleOptionPress(option)}
+            >
               <Text style={styles.menuText}>{option}</Text>
               <Image
                 source={require('../../assets/arrow-forward.png')} // Reemplaza con la imagen de la flecha
@@ -64,7 +64,7 @@ const DriverProfileScreen: React.FC = () => {
         </View>
       </View>
 
-      <BottomNavigationBar userType='driver' currentPage='profile' />
+      <BottomNavigationBar userType="driver" currentPage="profile" />
       {/* Modal para Retiro de Capital */}
       <WithdrawalNoticeModal
         visible={isWithdrawalModalVisible}
@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
     color: '#76797D',
     fontWeight: 'bold', // Ajusta el peso si es necesario
     fontFamily: 'Inter',
-    
   },
   arrowIcon: {
     width: 16, // Ajusta el tamaño según tu icono
