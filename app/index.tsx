@@ -16,7 +16,7 @@ export const StartPage = () => {
         router.replace('/sign-up/log-in');
       }
 
-      const example = '';
+      const example="";
     }, 5000);
 
     return () => clearTimeout(timer);
