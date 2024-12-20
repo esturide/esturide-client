@@ -24,4 +24,5 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           prettier_options: --write .
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.WORKFLOW_TOKEN }}
+
