@@ -25,9 +25,3 @@ jobs:
         with:
           prettier_options: --write .
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'style: format code with Prettier'
-          branch: ${{ github.ref }}
