@@ -79,7 +79,8 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "storybook": "^7.6.18",
-    "typescript": "~5.3.3"
+    "typescript": "~5.3.3",
+    "pnpm": "^9.15.1"
   },
   "resolutions": {
     "react-docgen-typescript": "2.2.2"
