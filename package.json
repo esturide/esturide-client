@@ -14,6 +14,8 @@
     "storybook:ios": "cross-env STORYBOOK_ENABLED='true' expo start --ios",
     "storybook:android": "cross-env STORYBOOK_ENABLED='true' expo start --android",
     "format": "prettier . --write",
+    "prettier:format": "prettier . --write",
+    "prettier:check": "prettier . --check",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
