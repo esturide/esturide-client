@@ -15,6 +15,8 @@ export const StartPage = () => {
       if (Platform.OS === 'android' || Platform.OS === 'ios') {
         router.replace('/sign-up/log-in');
       }
+
+      const example = '';
     }, 5000);
 
     return () => clearTimeout(timer);
