@@ -13,7 +13,8 @@ export const StartPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (Platform.OS === 'android' || Platform.OS === 'ios') {
-        router.replace('/sign-up/log-in');
+        // router.replace('/sign-up/log-in');
+        router.replace('/payments');
       }
     }, 5000);
 
