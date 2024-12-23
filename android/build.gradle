@@ -39,3 +39,6 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+android.useAndroidX=true
+android.enableJetifier=true
