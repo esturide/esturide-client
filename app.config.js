@@ -2,6 +2,7 @@ export default ({ config }) => ({
   ...config,
   name: 'EstuRide',
   slug: 'esturide',
+  scheme: 'esturide',
   version: '0.0.1',
   orientation: 'portrait',
   icon: './assets/icon.png',
@@ -19,12 +20,14 @@ export default ({ config }) => ({
   assetBundlePatterns: ['**/*'],
   ios: {
     supportsTablet: true,
+    bundleIdentifier: 'com.anonymous.esturide',
   },
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',
       backgroundColor: '#FFFFFF',
     },
+    package: 'com.anonymous.esturide',
   },
   web: {
     favicon: './assets/favicon.png',
