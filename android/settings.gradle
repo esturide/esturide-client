@@ -23,6 +23,9 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 
 rootProject.name = 'EstuRide'
 
+include ':react-native-webview'
+project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
+
 dependencyResolutionManagement {
   versionCatalogs {
     reactAndroidLibs {
