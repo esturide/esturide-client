@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import styles, {
   DefaultDriverColors,
@@ -13,11 +13,17 @@ import {
 export default function CreditCardList({
   data,
   typeCard,
+  onAppend,
+  onCancel,
 }: CreditCardListProps) {
   const headerStyles = {
     driver: { ...styles.textHeader, color: DefaultDriverColors.header },
     passenger: { ...styles.textHeader, color: DefautPassengerColor.header },
   };
+
+  useEffect(() => {
+    console.log('Update card');
+  }, [data]);
 
   return (
     <View style={styles.container}>

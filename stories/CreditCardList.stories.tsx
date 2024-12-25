@@ -3,8 +3,9 @@ import React from 'react';
 import { View } from 'react-native';
 import CreditCardList from '@components/cards/CreditCardList';
 import * as Crypto from 'expo-crypto';
+import { CardData } from '@components/cards/credit/CreditCard';
 
-const DATA = [
+let DATA = [
   {
     id: Crypto.randomUUID(),
     cardLogo: 'MasterCard',
@@ -36,6 +37,18 @@ const meta = {
   component: CreditCardList,
   args: {
     typeCard: 'driver',
+    onAppend: async (data: CardData) => {
+      console.log('Append card');
+
+      DATA.push({
+        id: Crypto.randomUUID(),
+        cardLogo: 'VISA',
+        cardBank: 'RappiCard',
+        cardNumber: '**** **** **** 6246',
+      });
+
+      return true;
+    },
   },
   decorators: [
     (Story) => (

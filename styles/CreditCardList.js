@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     width: 'fit-content',
     paddingRight: 5,
     paddingBottom: 5,
-    backgroundColor: '#FFFFFF',
   },
   textHeader: {
     fontSize: 16,
@@ -13,12 +12,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   cardsContainer: {
-    width: 327,
     minHeight: 148,
     backgroundColor: '#FFFFFF',
     borderRadius: 18,
     padding: 16,
-    borderWidth: 1,
     borderColor: '#F5F5F5',
     elevation: 5,
     shadowOffset: {
