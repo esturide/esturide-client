@@ -9,10 +9,10 @@ interface SecureButtonProps {
 
 const styleButton = {
   cancel: {
-    backgroundColor: '#c30808',
+    backgroundColor: '#858585',
   },
   append: {
-    backgroundColor: '#2887e6',
+    backgroundColor: '#000000',
   },
   generic: {
     backgroundColor: '#000000',
