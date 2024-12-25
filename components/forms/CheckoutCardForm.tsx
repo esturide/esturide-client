@@ -12,9 +12,10 @@ type Props = {
     exp: string,
     cvc: string,
   ) => Promise<void>;
+  onClose?: () => Promise<void>;
 };
 
-export const CheckoutCardForm = ({ onSubmit }: Props) => {
+export const CheckoutCardForm = ({ onSubmit, onClose }: Props) => {
   const [cardNumber, setCardNumber] = useState<string>('');
   const [cardProperty, setCardProperty] = useState<string>('');
   const [cardExpiration, setCardExpiration] = useState<string>('');
@@ -55,7 +56,7 @@ export const CheckoutCardForm = ({ onSubmit }: Props) => {
       </ScrollView>
       <View style={styles.buttons}>
         <SecureButton label={'Agregar'} type={'append'} onPress={submitCard} />
-        <SecureButton label={'Cancelar'} type={'cancel'} />
+        <SecureButton label={'Cancelar'} type={'cancel'} onPress={onClose} />
       </View>
     </View>
   );

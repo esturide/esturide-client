@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 type Props = PropsWithChildren<{
   isVisible: boolean;
-  onClose: () => void;
+  onClose: () => Promise<void>;
 }>;
 
 export function GenericModal({ isVisible, children, onClose }: Props) {

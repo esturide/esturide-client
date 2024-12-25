@@ -15,9 +15,18 @@ export interface CreditCardInfo {
   cardNumber: string;
 }
 
+export interface CardData {
+  number: string;
+  property: string;
+  exp: string;
+  cvc: string;
+}
+
 export interface CreditCardListProps {
   typeCard: 'driver' | 'passenger';
   data: CreditCardInfo[];
+  onAppend?: (data: CardData) => Promise<boolean>;
+  onCancel?: () => Promise<boolean>;
 }
 
 const addCardIconStyles = {
@@ -36,15 +45,26 @@ const addCardButtonStyles = {
   },
 };
 
-export const CreditCard = ({ data, typeCard }: CreditCardListProps) => {
+export const CreditCard = ({
+  data,
+  typeCard,
+  onAppend,
+  onCancel,
+}: CreditCardListProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const defaultIconSize = 18.38;
 
-  const changeVisibility = () => {
+  const changeVisibility = async () => {
     setShowModal(!showModal);
   };
 
-  const onCloseModal = () => {};
+  const onCloseModal = async () => {
+    setShowModal(false);
+
+    if (onCancel !== undefined) {
+      await onCancel();
+    }
+  };
 
   const ModalCard = () => {
     return (
@@ -57,7 +77,15 @@ export const CreditCard = ({ data, typeCard }: CreditCardListProps) => {
     property: string,
     exp: string,
     cvc: string,
-  ) => {};
+  ) => {
+    let status = false;
+
+    if (onAppend !== undefined) {
+      status = await onAppend({ number, property, exp, cvc });
+    }
+
+    setShowModal(!status);
+  };
 
   return (
     <TouchableOpacity onPress={changeVisibility}>
@@ -73,7 +101,7 @@ export const CreditCard = ({ data, typeCard }: CreditCardListProps) => {
       </View>
 
       <GenericModal isVisible={showModal} onClose={changeVisibility}>
-        <CheckoutCardForm onSubmit={onSubmitCard} />
+        <CheckoutCardForm onSubmit={onSubmitCard} onClose={onCloseModal} />
       </GenericModal>
 
       <ModalCard />
