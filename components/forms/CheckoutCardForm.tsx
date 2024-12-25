@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import ScrollLayout from '@components/layouts/ScrollLayout';
+import { Image, StyleSheet, ScrollView, View } from 'react-native';
 import { SecureButton } from '@components/buttons/SecureButton';
 import InputLabel from '@components/inputs/InputLabel';
 import { default as InputSecure } from '@components/inputs/InputPassword';
+import logo from '@assets/third-party/conekta.png';
 
 export const CheckoutCardForm = () => {
   return (
     <View style={styles.container}>
-      <ScrollLayout>
+      <View style={styles.logoContainer}>
+        <Image source={logo} style={styles.logoStyle} />
+      </View>
+      <ScrollView>
         <InputSecure
           label={'Numero de tarjeta'}
           onChangeText={function (text: string): void {}}
@@ -27,12 +30,12 @@ export const CheckoutCardForm = () => {
             style={styles.row}
           />
           <InputSecure
-            label={'Codigo'}
+            label={'CVC'}
             onChangeText={function (text: string): void {}}
             style={styles.row}
           />
         </View>
-      </ScrollLayout>
+      </ScrollView>
       <View style={styles.buttons}>
         <SecureButton label={'Agregar'} type={'append'} />
         <SecureButton label={'Cancelar'} type={'cancel'} />
@@ -42,6 +45,15 @@ export const CheckoutCardForm = () => {
 };
 
 const styles = StyleSheet.create({
+  logoContainer: {
+    flex: 1,
+  },
+  logoStyle: {
+    aspectRatio: 2,
+    width: undefined,
+    height: undefined,
+    resizeMode: 'contain',
+  },
   container: {
     paddingHorizontal: 20,
     paddingVertical: 15,
