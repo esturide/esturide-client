@@ -1,43 +1,60 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, ScrollView, View } from 'react-native';
+import { Image, StyleSheet, ScrollView, View, ViewStyle } from 'react-native';
 import { SecureButton } from '@components/buttons/SecureButton';
 import InputLabel from '@components/inputs/InputLabel';
 import { default as InputSecure } from '@components/inputs/InputPassword';
 import logo from '@assets/third-party/conekta.png';
 
-export const CheckoutCardForm = () => {
+type Props = {
+  onSubmit?: (
+    number: string,
+    property: string,
+    exp: string,
+    cvc: string,
+  ) => Promise<void>;
+};
+
+export const CheckoutCardForm = ({ onSubmit }: Props) => {
+  const [cardNumber, setCardNumber] = useState<string>('');
+  const [cardProperty, setCardProperty] = useState<string>('');
+  const [cardExpiration, setCardExpiration] = useState<string>('');
+  const [cardCVC, setCardCVC] = useState<string>('');
+
+  const submitCard = async () => {
+    if (onSubmit !== undefined) {
+      await onSubmit(cardNumber, cardProperty, cardExpiration, cardCVC);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logoStyle} />
       </View>
       <ScrollView>
-        <InputSecure
-          label={'Numero de tarjeta'}
-          onChangeText={function (text: string): void {}}
-        />
+        <InputSecure label={'Numero de tarjeta'} onChangeText={setCardNumber} />
         <InputLabel
           label={'Propietario'}
           placeholder={'Ex. Octavio Paz'}
-          onChangeText={function (text: string): void {}}
+          onChangeText={setCardProperty}
           style={undefined}
         />
         <View style={styles.subContainer}>
           <InputLabel
             label={'Expiracion'}
             placeholder={'02/20'}
-            onChangeText={function (text: string): void {}}
+            onChangeText={setCardExpiration}
             style={styles.row}
           />
           <InputSecure
             label={'CVC'}
-            onChangeText={function (text: string): void {}}
+            onChangeText={setCardCVC}
             style={styles.row}
           />
         </View>
       </ScrollView>
       <View style={styles.buttons}>
-        <SecureButton label={'Agregar'} type={'append'} />
+        <SecureButton label={'Agregar'} type={'append'} onPress={submitCard} />
         <SecureButton label={'Cancelar'} type={'cancel'} />
       </View>
     </View>
