@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: 'center',
     marginTop: 6,
+    paddingHorizontal: 12,
   },
 });
 
