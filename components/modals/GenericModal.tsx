@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     padding: 25,
     backgroundColor: '#000000',
-    paddingHorizontal: 25,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
