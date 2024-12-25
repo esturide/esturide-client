@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import InputLabel from '@components/inputs/InputLabel';
-import { SecureButton } from '@components/buttons/SecureButton';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import { SecureButton } from '@components/buttons/SecureButton';
+import InputLabel from '@components/inputs/InputLabel';
 import { default as InputSecure } from '@components/inputs/InputPassword';
 
 export const CheckoutCardForm = () => {
