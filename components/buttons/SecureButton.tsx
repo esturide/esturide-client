@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 interface SecureButtonProps {
   label: string;
   type?: 'generic' | 'cancel' | 'append';
+  onPress?: () => Promise<void>;
 }
 
 const styleButton = {
@@ -21,9 +22,13 @@ const styleButton = {
 export const SecureButton = ({
   label,
   type = 'generic',
+  onPress,
 }: SecureButtonProps) => {
   return (
-    <TouchableOpacity style={[styles.button, styleButton[type]]}>
+    <TouchableOpacity
+      style={[styles.button, styleButton[type]]}
+      onPress={onPress}
+    >
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>
   );

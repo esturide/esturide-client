@@ -52,6 +52,13 @@ export const CreditCard = ({ data, typeCard }: CreditCardListProps) => {
     );
   };
 
+  const onSubmitCard = async (
+    number: string,
+    property: string,
+    exp: string,
+    cvc: string,
+  ) => {};
+
   return (
     <TouchableOpacity onPress={changeVisibility}>
       <View style={styles.addCardContainer}>
@@ -66,7 +73,7 @@ export const CreditCard = ({ data, typeCard }: CreditCardListProps) => {
       </View>
 
       <GenericModal isVisible={showModal} onClose={changeVisibility}>
-        <CheckoutCardForm />
+        <CheckoutCardForm onSubmit={onSubmitCard} />
       </GenericModal>
 
       <ModalCard />
