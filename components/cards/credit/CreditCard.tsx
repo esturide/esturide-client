@@ -6,7 +6,7 @@ import styles, {
   DefautPassengerColor,
 } from '@styles/CreditCardList';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { CardInput } from '@components/forms/CardInput';
+import { CheckoutCardForm } from '@components/forms/CheckoutCardForm';
 
 export interface CreditCardInfo {
   id: string;
@@ -66,7 +66,7 @@ export const CreditCard = ({ data, typeCard }: CreditCardListProps) => {
       </View>
 
       <GenericModal isVisible={showModal} onClose={changeVisibility}>
-        <CardInput />
+        <CheckoutCardForm />
       </GenericModal>
 
       <ModalCard />

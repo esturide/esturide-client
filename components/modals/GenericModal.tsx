@@ -12,9 +12,9 @@ export function GenericModal({ isVisible, children, onClose }: Props) {
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Choose a sticker</Text>
+          <Text style={styles.title}>Registrar tarjeta</Text>
           <Pressable onPress={onClose}>
-            <MaterialIcons name="close" color="black" size={22} />
+            <MaterialIcons name={'close'} color={'white'} size={22} />
           </Pressable>
         </View>
         {children}
@@ -30,20 +30,18 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
     position: 'absolute',
-    bottom: 0,
   },
   titleContainer: {
-    height: '16%',
-    backgroundColor: '#dddddd',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-    paddingHorizontal: 20,
+    padding: 25,
+    backgroundColor: '#000000',
+    paddingHorizontal: 25,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   title: {
     color: '#fff',
-    fontSize: 16,
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
