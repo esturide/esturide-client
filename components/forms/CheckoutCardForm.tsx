@@ -3,16 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import InputLabel from '@components/inputs/InputLabel';
 import { SecureButton } from '@components/buttons/SecureButton';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import { default as InputSecure } from '@components/inputs/InputPassword';
 
 export const CheckoutCardForm = () => {
   return (
     <View style={styles.container}>
       <ScrollLayout>
-        <InputLabel
+        <InputSecure
           label={'Numero de tarjeta'}
-          placeholder={'1234 5678 9012 3456'}
           onChangeText={function (text: string): void {}}
-          style={undefined}
         />
         <InputLabel
           label={'Propietario'}
@@ -27,17 +26,16 @@ export const CheckoutCardForm = () => {
             onChangeText={function (text: string): void {}}
             style={styles.row}
           />
-          <InputLabel
+          <InputSecure
             label={'Codigo'}
-            placeholder={'****'}
             onChangeText={function (text: string): void {}}
             style={styles.row}
           />
         </View>
       </ScrollLayout>
       <View style={styles.buttons}>
-        <SecureButton label={'Agregar'} />
-        <SecureButton label={'Cancelar'} />
+        <SecureButton label={'Agregar'} type={'append'} />
+        <SecureButton label={'Cancelar'} type={'cancel'} />
       </View>
     </View>
   );

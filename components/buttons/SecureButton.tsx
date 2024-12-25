@@ -3,11 +3,27 @@ import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 
 interface SecureButtonProps {
   label: string;
+  type?: 'generic' | 'cancel' | 'append';
 }
 
-export const SecureButton = ({ label }: SecureButtonProps) => {
+const styleButton = {
+  cancel: {
+    backgroundColor: '#c30808',
+  },
+  append: {
+    backgroundColor: '#2887e6',
+  },
+  generic: {
+    backgroundColor: '#000000',
+  },
+};
+
+export const SecureButton = ({
+  label,
+  type = 'generic',
+}: SecureButtonProps) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={[styles.button, styleButton[type]]}>
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>
   );
@@ -15,12 +31,10 @@ export const SecureButton = ({ label }: SecureButtonProps) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#000000',
-    borderRadius: 15,
-    padding: 20,
+    borderRadius: 25,
+    padding: 15,
+    margin: 10,
     color: 'white',
-    flexDirection: 'row',
-    margin: 5,
   },
   label: {
     color: '#fff',

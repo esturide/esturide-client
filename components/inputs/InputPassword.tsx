@@ -1,18 +1,25 @@
 import { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { VisualIcon } from '@components/visuals/VisualIcon';
 import styles from '@styles/Inputs';
 
 type Props = {
   label: string;
   onChangeText: (text: string) => void;
+  style?: ViewStyle;
 };
 
-const InputPassword = ({ label, onChangeText }: Props) => {
+const InputPassword = ({ label, onChangeText, style }: Props) => {
   const [isSecure, setIsSecure] = useState(true);
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.inputContainer}>
         <TextInput
