@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles, {
   DefaultDriverColor,

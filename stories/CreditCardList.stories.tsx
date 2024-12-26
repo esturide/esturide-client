@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import CreditCardList from '@components/cards/CreditCardList';
 import * as Crypto from 'expo-crypto';
+import { CardData } from '@components/cards/credit/CreditCard';
 
 const DATA = [
   {
@@ -53,5 +54,17 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     data: DATA,
+    onAppend: async (data: CardData) => {
+      console.log('Append card');
+
+      DATA.push({
+        id: Crypto.randomUUID(),
+        cardLogo: 'VISA',
+        cardBank: 'RappiCard',
+        cardNumber: data.number,
+      });
+
+      return true;
+    },
   },
 };
