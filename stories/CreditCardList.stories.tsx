@@ -5,7 +5,7 @@ import CreditCardList from '@components/cards/CreditCardList';
 import * as Crypto from 'expo-crypto';
 import { CardData } from '@components/cards/credit/CreditCard';
 
-let DATA = [
+const DATA = [
   {
     id: Crypto.randomUUID(),
     cardLogo: 'MasterCard',
@@ -37,18 +37,6 @@ const meta = {
   component: CreditCardList,
   args: {
     typeCard: 'driver',
-    onAppend: async (data: CardData) => {
-      console.log('Append card');
-
-      DATA.push({
-        id: Crypto.randomUUID(),
-        cardLogo: 'VISA',
-        cardBank: 'RappiCard',
-        cardNumber: '**** **** **** 6246',
-      });
-
-      return true;
-    },
   },
   decorators: [
     (Story) => (
@@ -66,5 +54,17 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     data: DATA,
+    onAppend: async (data: CardData) => {
+      console.log('Append card');
+
+      DATA.push({
+        id: Crypto.randomUUID(),
+        cardLogo: 'VISA',
+        cardBank: 'RappiCard',
+        cardNumber: data.number,
+      });
+
+      return true;
+    },
   },
 };
