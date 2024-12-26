@@ -7,6 +7,8 @@ import styles, {
 } from '@styles/CreditCardList';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { CheckoutCardForm } from '@components/forms/CheckoutCardForm';
+import { isNumeric } from '@libs/numeric';
+import { validateCard } from '@libs/checkStatusCard';
 
 export interface CreditCardInfo {
   id: string;
@@ -80,8 +82,10 @@ export const CreditCard = ({
   ) => {
     let status = false;
 
-    if (onAppend !== undefined) {
-      status = await onAppend({ number, property, exp, cvc });
+    if (validateCard(number, property, exp, cvc)) {
+      if (onAppend !== undefined) {
+        status = await onAppend({ number, property, exp, cvc });
+      }
     }
 
     setShowModal(!status);

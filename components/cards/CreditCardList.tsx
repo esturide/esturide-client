@@ -16,23 +16,22 @@ export default function CreditCardList({
   onAppend,
   onCancel,
 }: CreditCardListProps) {
+  const [dataCard, setDataCard] = useState(data);
   const headerStyles = {
     driver: { ...styles.textHeader, color: DefaultDriverColors.header },
     passenger: { ...styles.textHeader, color: DefautPassengerColor.header },
   };
 
-  useEffect(() => {
-    console.log('Update card');
-  }, [data]);
+  const appendCard = () => {};
 
   return (
     <View style={styles.container}>
       <Text style={headerStyles[typeCard]}>Tarjetas</Text>
       <View style={styles.cardsContainer}>
         <View>
-          <CustomRadioButtonGroup data={data} typeButton={typeCard} />
+          <CustomRadioButtonGroup data={dataCard} typeButton={typeCard} />
         </View>
-        <CreditCard data={data} typeCard={typeCard} />
+        <CreditCard data={dataCard} typeCard={typeCard} onAppend={onAppend} />
       </View>
     </View>
   );
