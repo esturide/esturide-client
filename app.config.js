@@ -26,6 +26,8 @@ export default ({ config }) => ({
     supportsTablet: true,
   },
   android: {
+    package: 'com.esturide.mx',
+    packageCode: 1,
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',
       backgroundColor: '#FFFFFF',
