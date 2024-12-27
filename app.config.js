@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 export default ({ config }) => ({
   ...config,
   name: 'EstuRide',
@@ -7,6 +9,9 @@ export default ({ config }) => ({
   icon: './assets/icon.png',
   extra: {
     storybookEnabled: process.env.STORYBOOK_ENABLED,
+    eas: {
+      projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+    },
   },
   splash: {
     image: './assets/splash.png',
