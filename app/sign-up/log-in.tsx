@@ -7,6 +7,9 @@ import Logo from '@components/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
 
+import 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
+
 export default function LogIn() {
   const onLogin = async (username: string, password: string) => {
     console.log({
@@ -17,6 +20,12 @@ export default function LogIn() {
     if (username === '' && password === '') {
       return false;
     }
+
+    Toast.show({
+      type: 'success',
+      text1: 'Hello',
+      text2: 'This is some something 👋',
+    });
 
     return true;
   };

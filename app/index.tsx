@@ -3,14 +3,8 @@ import { useRouter } from 'expo-router';
 import { Platform, View } from 'react-native';
 import Constants from 'expo-constants';
 
-import Title from '@components/layouts/Title';
-import Logo from '@components/resources/Logo';
 import styles from '@styles/layouts/SignUpLayout';
-
-import { Provider } from 'jotai';
-
-import 'react-native-reanimated';
-import Toast from 'react-native-toast-message';
+import Welcome from '@components/resources/Welcome';
 
 export const StartPage = () => {
   const router = useRouter();
@@ -26,19 +20,16 @@ export const StartPage = () => {
   }, [router]);
 
   return (
-    <Provider>
-      <View style={styles.flexContainer}>
-        <Logo />
-        <Title>ESTU RIDE</Title>
-      </View>
-      <Toast />
-    </Provider>
+    <View style={styles.flexContainer}>
+      <Welcome />
+    </View>
   );
 };
 
 let AppEntryPoint = StartPage;
 
 if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   AppEntryPoint = require('../.ondevice').default;
 }
 
