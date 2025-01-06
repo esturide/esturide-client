@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
@@ -9,25 +9,37 @@ import ScrollLayout from '@components/layouts/ScrollLayout';
 
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
+import { loginUser } from '@libs/request/loginUser';
 
 export default function LogIn() {
-  const onLogin = async (username: string, password: string) => {
-    console.log({
-      username: username,
-      password: password,
-    });
+  const [authToken, setAuthToken] = useState('');
 
+  const onLogin = async (username: string, password: string) => {
     if (username === '' && password === '') {
       return false;
     }
 
-    Toast.show({
-      type: 'success',
-      text1: 'Hello',
-      text2: 'This is some something 👋',
-    });
+    const status = await loginUser(
+      { code: username, password: password },
+      setAuthToken,
+    );
 
-    return true;
+    console.log(status);
+
+    if (status) {
+      Toast.show({
+        type: 'success',
+        text1: 'Bievenido',
+        text2: 'Realiza tus viajes y agenda 👋',
+      });
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: 'Nombre de usuario o contraseña incorrectos',
+      });
+    }
+
+    return status;
   };
 
   const onHyperLinkPressed = async () => {
