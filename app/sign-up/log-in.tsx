@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
+import { useAtom } from 'jotai';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
 import LoginForm from '@components/forms/register/LoginForm';
 import Logo from '@components/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import { loginUser } from '@libs/request/loginUser';
+import { authTokenAtom } from '@stores/token';
 
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
-import { loginUser } from '@libs/request/loginUser';
 
 export default function LogIn() {
-  const [authToken, setAuthToken] = useState('');
+  const [authToken, setAuthToken] = useAtom(authTokenAtom);
 
   const onLogin = async (username: string, password: string) => {
     if (username === '' && password === '') {
@@ -23,8 +25,6 @@ export default function LogIn() {
       { code: username, password: password },
       setAuthToken,
     );
-
-    console.log(status);
 
     if (status) {
       Toast.show({

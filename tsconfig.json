@@ -7,7 +7,8 @@
       "@components/*": ["components/*"],
       "@libs/*": ["libs/*"],
       "@styles/*": ["styles/*"],
-      "@const/*": ["const/*"]
+      "@const/*": ["const/*"],
+      "@stores/*": ["stores/*"]
     }
   },
   "extends": "expo/tsconfig.base"
