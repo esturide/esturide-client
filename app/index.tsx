@@ -7,6 +7,11 @@ import Title from '@components/layouts/Title';
 import Logo from '@components/resources/Logo';
 import styles from '@styles/layouts/SignUpLayout';
 
+import { Provider } from 'jotai';
+
+import 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
+
 export const StartPage = () => {
   const router = useRouter();
 
@@ -21,10 +26,13 @@ export const StartPage = () => {
   }, [router]);
 
   return (
-    <View style={styles.flexContainer}>
-      <Logo />
-      <Title>ESTU RIDE</Title>
-    </View>
+    <Provider>
+      <View style={styles.flexContainer}>
+        <Logo />
+        <Title>ESTU RIDE</Title>
+      </View>
+      <Toast />
+    </Provider>
   );
 };
 
