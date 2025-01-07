@@ -9,12 +9,12 @@ import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
 import Loading from '@components/visuals/resources/Loading';
 import { loginUser } from '@libs/request/loginUser';
+import loaderEffect from '@libs/loaderEffect';
+import { timing } from '@libs/timing';
 import { authTokenAtom } from '@stores/token';
 
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
-import loaderEffect from '@libs/loaderEffect';
-import { timing } from '@libs/timing';
 
 export default function LogIn() {
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
