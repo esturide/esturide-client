@@ -20,11 +20,8 @@ export default function LoginForm({ onLogin, redirect }: Props) {
 
     if (status) {
       setTimeout(() => {
-        showMessage('Iniciando sesion');
         router.replace(redirect);
       }, 1000);
-    } else {
-      showMessage('Contraseña o usuario incorrectos');
     }
   };
 

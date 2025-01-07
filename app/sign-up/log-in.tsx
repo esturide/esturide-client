@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useAtom } from 'jotai';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
@@ -12,31 +12,41 @@ import { authTokenAtom } from '@stores/token';
 
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
+import loaderEffect from '@libs/loaderEffect';
+import { Loading } from '@components/modals/Loading';
+import { timing } from '@libs/timing';
 
 export default function LogIn() {
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [loading, setLoading] = useState(false);
+
+  const showSuccessMessage = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Bienvenido',
+      text2: 'Realiza tus viajes y agenda 👋',
+    });
+  };
+
+  const showFailureMessage = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Nombre de usuario o contraseña incorrectos',
+    });
+  };
 
   const onLogin = async (username: string, password: string) => {
-    if (username === '' && password === '') {
-      return false;
-    }
+    const data = { code: username, password: password };
+    let status = false;
 
-    const status = await loginUser(
-      { code: username, password: password },
-      setAuthToken,
-    );
+    await loaderEffect(async () => {
+      status = await loginUser(data, setAuthToken);
+    }, setLoading);
 
     if (status) {
-      Toast.show({
-        type: 'success',
-        text1: 'Bienvenido',
-        text2: 'Realiza tus viajes y agenda 👋',
-      });
+      showSuccessMessage();
     } else {
-      Toast.show({
-        type: 'error',
-        text1: 'Nombre de usuario o contraseña incorrectos',
-      });
+      showFailureMessage();
     }
 
     return status;
@@ -58,6 +68,7 @@ export default function LogIn() {
             label={'¿No tienes cuenta? Regístrate'}
             href={'/sign-up/user-register'}
           />
+          <Loading visible={loading} />
         </ScrollLayout>
       </LayoutRegister>
     </>

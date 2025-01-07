@@ -23,11 +23,12 @@ export const loginUser = async (
     const accessToken = response.data.access_token;
 
     setAuthToken(accessToken);
+    config.headers.Authorization = `Bearer ${accessToken}`;
 
     return response.status === 200;
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      throw e;
+      return false;
     }
   }
 
