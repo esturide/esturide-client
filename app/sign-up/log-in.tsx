@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useAtom } from 'jotai';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
 import LoginForm from '@components/forms/register/LoginForm';
-import Logo from '@components/resources/Logo';
+import Logo from '@components/visuals/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import Loading from '@components/visuals/resources/Loading';
 import { loginUser } from '@libs/request/loginUser';
 import { authTokenAtom } from '@stores/token';
 
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
 import loaderEffect from '@libs/loaderEffect';
-import { Loading } from '@components/modals/Loading';
 import { timing } from '@libs/timing';
 
 export default function LogIn() {
@@ -40,6 +40,7 @@ export default function LogIn() {
     let status = false;
 
     await loaderEffect(async () => {
+      await timing(100);
       status = await loginUser(data, setAuthToken);
     }, setLoading);
 

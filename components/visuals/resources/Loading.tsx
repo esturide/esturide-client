@@ -6,7 +6,7 @@ type Props = {
   visible: boolean;
 };
 
-export function Loading({ visible }: Props) {
+export default function Loading({ visible }: Props) {
   return (
     <>
       <Modal animationType="slide" visible={visible}>

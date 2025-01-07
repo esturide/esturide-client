@@ -4,7 +4,7 @@ import { Platform, View } from 'react-native';
 import Constants from 'expo-constants';
 
 import styles from '@styles/layouts/SignUpLayout';
-import Welcome from '@components/resources/Welcome';
+import Welcome from '@components/visuals/resources/Welcome';
 
 export const StartPage = () => {
   const router = useRouter();
