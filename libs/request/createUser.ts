@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { client, config } from '@const/apiRequest';
+import { clientUserManagementSystem, config } from '@const/apiRequest';
 
 export interface UserDataRequest {
   code: number;
@@ -24,7 +24,11 @@ export const createUser = async (user: UserDataRequest) => {
     password: user.paternalSurname,
   };
 
-  const response: AxiosResponse = await client.post(`/user`, data, config);
+  const response: AxiosResponse = await clientUserManagementSystem.post(
+    `/user`,
+    data,
+    config,
+  );
 
   return response.status === 201 ? response.data : response.data;
 };

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { client, config } from '@const/apiRequest';
+import { clientRoot, config } from '@const/apiRequest';
 
 export interface UserDataLogin {
   code: string;
@@ -15,7 +15,11 @@ export const loginUser = async (
     params.append('username', `${user.code}`);
     params.append('password', `${user.password}`);
 
-    const response: AxiosResponse = await client.post(`/auth/`, params, config);
+    const response: AxiosResponse = await clientRoot.post(
+      `/auth/`,
+      params,
+      config,
+    );
     const accessToken = response.data.access_token;
 
     setAuthToken(accessToken);
