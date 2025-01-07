@@ -24,7 +24,7 @@ export const loginUser = async (
 
     setAuthToken(accessToken);
 
-    return response.status === 201;
+    return response.status === 200;
   } catch (e) {
     if (axios.isAxiosError(e)) {
       throw e;

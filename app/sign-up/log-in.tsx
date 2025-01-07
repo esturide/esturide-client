@@ -29,7 +29,7 @@ export default function LogIn() {
     if (status) {
       Toast.show({
         type: 'success',
-        text1: 'Bievenido',
+        text1: 'Bienvenido',
         text2: 'Realiza tus viajes y agenda 👋',
       });
     } else {
