@@ -6,8 +6,17 @@ import { ActionItem } from '@components/cards/profile/user/ActionItem';
 import AdBanner from '@components/banners/AdBanner';
 import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIdentity';
 import { router } from 'expo-router';
+import { useAtom } from 'jotai/index';
+import { authTokenAtom } from '@stores/token';
 
 export default function UserProfile() {
+  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+
+  const closeSession = async () => {
+    setAuthToken('');
+    router.replace('/');
+  };
+
   const actionItems = [
     {
       title: 'Depositar Capital',
@@ -20,9 +29,7 @@ export default function UserProfile() {
     },
     {
       title: 'Cerrar sesion',
-      onTouchTap: async () => {
-        router.replace('/');
-      },
+      onTouchTap: closeSession,
     },
   ];
 
