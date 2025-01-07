@@ -1,17 +1,18 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
+import React from 'react';
+import { Modal, View, ActivityIndicator } from 'react-native';
+import styles from '@styles/LoadingStyle';
 
 type Props = {
   visible: boolean;
 };
 
 export function Loading({ visible }: Props) {
-  // const [showModal, setShowModal] = useState(visible);
-
   return (
     <>
       <Modal animationType="slide" visible={visible}>
-        <Text>Loading...</Text>
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>
       </Modal>
     </>
   );
