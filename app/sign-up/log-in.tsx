@@ -14,26 +14,11 @@ import { timing } from '@libs/timing';
 import { authTokenAtom } from '@stores/token';
 
 import 'react-native-reanimated';
-import Toast from 'react-native-toast-message';
+import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 
 export default function LogIn() {
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [loading, setLoading] = useState(false);
-
-  const showSuccessMessage = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Bienvenido',
-      text2: 'Realiza tus viajes y agenda 👋',
-    });
-  };
-
-  const showFailureMessage = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'Nombre de usuario o contraseña incorrectos',
-    });
-  };
 
   const onLogin = async (username: string, password: string) => {
     const data = { code: username, password: password };
@@ -45,9 +30,9 @@ export default function LogIn() {
     }, setLoading);
 
     if (status) {
-      showSuccessMessage();
+      showSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
     } else {
-      showFailureMessage();
+      showFailureMessage('Nombre de usuario o contraseña incorrectos ⚠️.');
     }
 
     return status;
