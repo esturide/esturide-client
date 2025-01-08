@@ -8,8 +8,15 @@ import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
 
 export default function SecondRegister() {
-  const eventRedirect = async () => {
+  const eventRedirect = async (
+    address: string,
+    phoneNumber: string,
+    email: string,
+    password: string,
+  ) => {
     console.log('Redirect to Register 3...');
+
+    return true;
   };
 
   return (

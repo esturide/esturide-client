@@ -5,12 +5,12 @@ import { StyleSheet } from 'react-native';
 import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
-import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
+import { RegistrationAddressFormProps } from '@components/forms/register/RegisterFormProps';
 
 export default function AddressRegistrationForm({
   onSubmit,
   redirect,
-}: RegistrationUserFormProps) {
+}: RegistrationAddressFormProps) {
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -19,7 +19,9 @@ export default function AddressRegistrationForm({
 
   const onPressButton = async () => {
     if (onSubmit) {
-      await onSubmit();
+      if (password === confirmPassword) {
+        await onSubmit(address, phoneNumber, email, password);
+      }
     }
 
     router.push(redirect);

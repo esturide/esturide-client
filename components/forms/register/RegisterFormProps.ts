@@ -9,6 +9,16 @@ export type RegistrationUserFormProps = {
   redirect: string;
 };
 
+export type RegistrationAddressFormProps = {
+  onSubmit?: (
+    address: string,
+    phoneNumber: string,
+    email: string,
+    password: string,
+  ) => Promise<boolean>;
+  redirect: string;
+};
+
 export type RegistrationDriverFormProps = {
   onSubmit?: (
     brand: string,
