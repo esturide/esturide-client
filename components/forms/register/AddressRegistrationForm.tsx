@@ -6,6 +6,7 @@ import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationAddressFormProps } from '@components/forms/register/RegisterFormProps';
+import { showMessage } from '@libs/alerts/toast';
 
 export default function AddressRegistrationForm({
   onSubmit,
@@ -19,8 +20,14 @@ export default function AddressRegistrationForm({
 
   const onPressButton = async () => {
     if (onSubmit) {
-      if (password === confirmPassword) {
+      if (password === confirmPassword && password.length > 8) {
         await onSubmit(address, phoneNumber, email, password);
+      } else {
+        if (password !== confirmPassword) {
+          showMessage('La contraseña no es la misma.');
+        } else if (!(password.length > 8)) {
+          showMessage('La contraseña tiene que ser de 8 caracteres.');
+        }
       }
     }
 

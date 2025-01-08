@@ -25,7 +25,6 @@ export default function LogIn() {
     let status = false;
 
     await loaderEffect(async () => {
-      await timing(100);
       status = await loginUser(data, setAuthToken);
     }, setLoading);
 

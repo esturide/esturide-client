@@ -3,10 +3,10 @@ import { router } from 'expo-router';
 
 import InputLabel from '@components/inputs/InputLabel';
 import InputDate from '@components/inputs/InputDate';
-import styles from '@styles/forms/RegistrationFormStyle';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
-import { showMessage } from '@libs/alerts/toast';
+import styles from '@styles/forms/RegistrationFormStyle';
+import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 
 export default function UserRegistrationForm({
   onSubmit,
@@ -30,13 +30,19 @@ export default function UserRegistrationForm({
         );
 
         if (status) {
-          showMessage('Usuario registrado correctamente');
+          showSuccessMessage(
+            'Datos enviados',
+            'Usuario registrado correctamente.',
+          );
+
           router.push(redirect);
         } else {
-          showMessage('Datos invalidos, vuelve a ingresarlos correctamente');
+          showFailureMessage(
+            'Datos invalidos, vuelve a ingresarlos correctamente.',
+          );
         }
       } else {
-        showMessage('Ingrese una fecha valida');
+        showFailureMessage('Ingrese una fecha valida.');
       }
     }
   };
