@@ -3,7 +3,7 @@ import { clientUserManagementSystem, config } from '@const/apiRequest';
 import RequestProfile from '@const/RequestProfile';
 
 export const requestProfile = async (
-  code: string | number,
+  code: number,
   setProfile: (date: RequestProfile) => void,
 ) => {
   try {
@@ -15,6 +15,7 @@ export const requestProfile = async (
     const data = response.data;
 
     setProfile({
+      userCode: code,
       firstName: data.firstname,
       maternalSurname: data.maternal_surname,
       paternalSurname: data.paternal_surname,

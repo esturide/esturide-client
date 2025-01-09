@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AdBanner from '@components/banners/AdBanner';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
@@ -8,37 +8,18 @@ import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIde
 import { router } from 'expo-router';
 import { useAtom } from 'jotai/index';
 import { authTokenAtom } from '@stores/token';
-import loaderEffect from '@libs/loaderEffect';
-import { requestProfile } from '@libs/request/requestProfile';
-import RequestProfile from '@const/RequestProfile';
 import { userCodeAtom } from '@stores/user';
-import Loading from '@components/visuals/resources/Loading';
+import { UserProfileContext } from '@components/context/UserProfileContext';
 
 export default function UserProfile() {
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [userCode, setUserCode] = useAtom(userCodeAtom);
-  const [userProfile, setUserProfile] = useState<RequestProfile | null>(null);
-  const [loading, setLoading] = useState(false);
+  const userProfile = useContext(UserProfileContext);
 
   const closeSession = async () => {
     setAuthToken('');
     router.replace('/');
   };
-
-  useEffect(() => {
-    const requestDateProfile = async () => {
-      await loaderEffect(async () => {
-        const status = await requestProfile(userCode, setUserProfile);
-
-        if (!status) {
-        }
-
-        console.log(userProfile);
-      }, setLoading);
-    };
-
-    requestDateProfile();
-  }, []);
 
   const actionItems = [
     {
@@ -56,39 +37,28 @@ export default function UserProfile() {
     },
   ];
 
-  if (userProfile !== null) {
-    const fullName = `${userProfile.firstName} ${userProfile.maternalSurname} ${userProfile.paternalSurname}`;
-    const role = userProfile.role;
+  const fullName = `${userProfile.firstName} ${userProfile.maternalSurname} ${userProfile.paternalSurname}`;
+  const userIdentify = `#${userCode}`;
+  const role = userProfile.role;
 
-    return (
-      <View style={styles.container}>
-        <AdBanner />
-        <ProfileHeader
-          name={fullName}
-          role={role}
-          avatarUri="https://thispersondoesnotexist.com/"
+  return (
+    <View style={styles.container}>
+      <AdBanner />
+      <ProfileHeader name={fullName} role={role} />
+
+      <VerifyUserIdentity code={userIdentify} />
+
+      <InfoSection />
+
+      {actionItems.map((item, index) => (
+        <ActionItem
+          key={index}
+          title={item.title}
+          onTouchTap={item.onTouchTap}
         />
-
-        <VerifyUserIdentity code={'Hello world'} />
-
-        <InfoSection />
-
-        {actionItems.map((item, index) => (
-          <ActionItem
-            key={index}
-            title={item.title}
-            onTouchTap={item.onTouchTap}
-          />
-        ))}
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Loading visible={true} />
-      </View>
-    );
-  }
+      ))}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

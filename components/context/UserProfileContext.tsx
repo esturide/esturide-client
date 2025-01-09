@@ -11,8 +11,9 @@ import { userCodeAtom } from '@stores/user';
 import Loading from '@components/visuals/resources/Loading';
 import loaderEffect from '@libs/loaderEffect';
 import { router } from 'expo-router';
+import { stringToInteger } from '@libs/cast';
 
-export const UserProfileContext = createContext(null);
+export const UserProfileContext = createContext<RequestProfile>(null);
 
 export default function UserContext({ children }: PropsWithChildren) {
   const [loading, setLoading] = useState(false);
@@ -22,11 +23,16 @@ export default function UserContext({ children }: PropsWithChildren) {
   useEffect(() => {
     const requestDateProfile = async () => {
       await loaderEffect(async () => {
-        const status = await requestProfile(userCode, setUserProfile);
+        const status = await requestProfile(
+          stringToInteger(userCode),
+          setUserProfile,
+        );
 
         if (!status) {
           router.replace('/');
         }
+
+        console.log(userProfile);
       }, setLoading);
     };
 
@@ -36,7 +42,7 @@ export default function UserContext({ children }: PropsWithChildren) {
   return (
     <UserProfileContext.Provider value={userProfile}>
       {children}
-      <Loading visible={loading} />
+      <Loading visible={loading} modal />
     </UserProfileContext.Provider>
   );
 }

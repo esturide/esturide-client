@@ -4,13 +4,13 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 interface ProfileHeaderProps {
   name: string;
   role: string;
-  avatarUri: string;
+  avatarUri?: string;
 }
 
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   name,
   role,
-  avatarUri,
+  avatarUri = null,
 }) => {
   return (
     <View style={styles.container}>
@@ -18,14 +18,16 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         <Text style={styles.roleText}>{role}</Text>
         <Text style={styles.nameText}>{name}</Text>
       </View>
-      <View style={styles.avatarContainer}>
-        <Image
-          resizeMode="contain"
-          source={{ uri: avatarUri }}
-          style={styles.avatar}
-          accessibilityLabel={`Profile picture of ${name}`}
-        />
-      </View>
+      {avatarUri && (
+        <View style={styles.avatarContainer}>
+          <Image
+            resizeMode="contain"
+            source={{ uri: avatarUri }}
+            style={styles.avatar}
+            accessibilityLabel={`Profile picture of ${name}`}
+          />
+        </View>
+      )}
     </View>
   );
 };

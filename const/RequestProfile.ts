@@ -1,4 +1,5 @@
 export default interface RequestProfile {
+  userCode: number;
   firstName: string;
   maternalSurname: string;
   paternalSurname: string;

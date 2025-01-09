@@ -9,6 +9,7 @@ import notifyIcon from '@assets/icons/tabs/notify.png';
 import profileIcon from '@assets/icons/tabs/user.png';
 
 import styles from '@styles/layouts/UserLayout';
+import UserContext from '@components/context/UserProfileContext';
 
 export default function UserLayout() {
   const navigationItem = [
@@ -36,8 +37,10 @@ export default function UserLayout() {
 
   return (
     <View style={styles.flexContainer}>
-      <Slot />
-      <NavigationBar navigationItems={navigationItem} />
+      <UserContext>
+        <Slot />
+        <NavigationBar navigationItems={navigationItem} />
+      </UserContext>
     </View>
   );
 }
