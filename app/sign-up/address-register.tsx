@@ -32,8 +32,8 @@ export default function SecondRegister() {
         userFormRequest.firstLastName,
         userFormRequest.secondLastName,
         userFormRequest.curp,
-        userFormRequest.email,
         userFormRequest.birthDate,
+        userFormRequest.email,
         password,
       );
     }, setLoading);

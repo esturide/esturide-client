@@ -24,8 +24,6 @@ export const createUser = async (
       password: password,
     };
 
-    console.log(data);
-
     const response: AxiosResponse = await clientUserManagementSystem.post(
       `/user/`,
       data,
@@ -38,6 +36,6 @@ export const createUser = async (
       return false;
     }
 
-    throw e;
+    return false;
   }
 };

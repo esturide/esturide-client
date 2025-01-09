@@ -25,25 +25,29 @@ export default function UserRegistrationForm({
   const onPressButton = async () => {
     if (onSubmit) {
       if (userFormRequest.birthDate !== null) {
-        const status = await onSubmit(
-          userFormRequest.name,
-          userFormRequest.firstLastName,
-          userFormRequest.secondLastName,
-          userFormRequest.code,
-          userFormRequest.birthDate,
-        );
-
-        if (status) {
-          showSuccessMessage(
-            'Datos enviados',
-            'Usuario registrado correctamente.',
+        if (userFormRequest.code > 1000000000) {
+          const status = await onSubmit(
+            userFormRequest.name,
+            userFormRequest.firstLastName,
+            userFormRequest.secondLastName,
+            userFormRequest.code,
+            userFormRequest.birthDate,
           );
 
-          router.push(redirect);
+          if (status) {
+            showSuccessMessage(
+              'Datos enviados',
+              'Usuario registrado correctamente.',
+            );
+
+            router.push(redirect);
+          } else {
+            showFailureMessage(
+              'Datos invalidos, vuelve a ingresarlos correctamente.',
+            );
+          }
         } else {
-          showFailureMessage(
-            'Datos invalidos, vuelve a ingresarlos correctamente.',
-          );
+          showFailureMessage('Codigo invalido.');
         }
       } else {
         showFailureMessage('Ingrese una fecha valida.');

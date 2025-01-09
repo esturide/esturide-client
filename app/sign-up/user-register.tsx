@@ -15,7 +15,6 @@ export default function FirstRegister() {
     code: number,
     birthDate: Date,
   ) => {
-    console.log(name, firstLastName, secondLastName, code, birthDate);
     return true;
   };
 
