@@ -20,7 +20,7 @@ export default function UserLayout() {
     },
     {
       icon: addIcon,
-      href: '/user',
+      href: '/user/maps',
       onPress: async () => console.log('Travels and rides page'),
     },
     {

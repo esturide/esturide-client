@@ -4,8 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 
 interface MapProps {
   mapSize: { height: DimensionValue; width: DimensionValue };
-  origin: { latitude: number; longitude: number } | null;
-  destination: { latitude: number; longitude: number } | null;
+  origin?: { latitude: number; longitude: number } | null;
+  destination?: { latitude: number; longitude: number } | null;
 }
 
 export default function Map({
