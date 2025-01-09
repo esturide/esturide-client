@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   LayoutAnimation,
   Platform,
@@ -16,6 +16,7 @@ type Props = {
   style: ViewStyle;
   placeholder?: string;
   floatLabel?: boolean;
+  value?: string;
 };
 
 if (Platform.OS === 'android') {
@@ -28,6 +29,7 @@ const InputLabel = ({
   placeholder,
   onChangeText,
   style,
+  value = null,
   floatLabel = false,
 }: Props) => {
   if (placeholder === undefined) {
@@ -78,6 +80,7 @@ const InputLabel = ({
             onChangeText={onInputEvent}
             onFocus={toggleShowLabel(true)}
             onBlur={toggleShowLabel(false)}
+            value={value}
           />
         </View>
       </View>
@@ -92,6 +95,7 @@ const InputLabel = ({
           style={styles.input}
           onChangeText={onChangeText}
           placeholder={textPlaceholder}
+          value={value}
         />
       </View>
     </View>

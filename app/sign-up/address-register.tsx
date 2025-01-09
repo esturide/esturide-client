@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ProgressBarContainer from '@components/visuals/ProgressBarContainer';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
@@ -6,14 +6,16 @@ import AddressRegistrationForm from '@components/forms/register/AddressRegistrat
 import ScrollLayout from '@components/layouts/ScrollLayout';
 import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
-import { useAtom } from 'jotai/index';
-import { userDataRequestAtom } from '@stores/forms/forms';
 import loaderEffect from '@libs/loaderEffect';
+import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
 import { createUser } from '@libs/request/createUser';
+import Loading from '@components/visuals/resources/Loading';
 
 export default function SecondRegister() {
-  const [userDataRequest, setUserDataRequest] = useAtom(userDataRequestAtom);
   const [loading, setLoading] = useState(false);
+  const { userFormRequest, setUserFormRequest } = useContext(
+    UserRegisterFormContext,
+  );
 
   const eventRedirect = async (
     address: string,
@@ -23,15 +25,18 @@ export default function SecondRegister() {
   ) => {
     let status = false;
 
-    const data = userDataRequest;
-    data.email = email;
-    data.password = password;
-
     await loaderEffect(async () => {
-      status = await createUser(data);
+      status = await createUser(
+        userFormRequest.code,
+        userFormRequest.name,
+        userFormRequest.firstLastName,
+        userFormRequest.secondLastName,
+        userFormRequest.curp,
+        userFormRequest.email,
+        userFormRequest.birthDate,
+        password,
+      );
     }, setLoading);
-
-    setUserDataRequest(data);
 
     return status;
   };
@@ -52,6 +57,7 @@ export default function SecondRegister() {
             onSubmit={eventRedirect}
           />
         </ScrollLayout>
+        <Loading visible={loading} />
       </LayoutRegister>
     </>
   );

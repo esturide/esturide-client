@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
@@ -7,21 +7,37 @@ import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationAddressFormProps } from '@components/forms/register/RegisterFormProps';
 import { showMessage } from '@libs/alerts/toast';
+import { showFailureMessage } from '@libs/toast/messages';
+import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
 
 export default function AddressRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationAddressFormProps) {
-  const [address, setAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const { userFormRequest, setUserFormRequest } = useContext(
+    UserRegisterFormContext,
+  );
+
+  const handleChange = (name: string, value) => {
+    setUserFormRequest({ ...userFormRequest, [name]: value });
+  };
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const onPressButton = async () => {
+    let status = false;
+
     if (onSubmit) {
       if (password === confirmPassword && password.length > 8) {
-        await onSubmit(address, phoneNumber, email, password);
+        handleChange('password', password);
+
+        status = await onSubmit(
+          userFormRequest.address,
+          userFormRequest.phoneNumber,
+          userFormRequest.email,
+          password,
+        );
       } else {
         if (password !== confirmPassword) {
           showMessage('La contraseña no es la misma.');
@@ -31,24 +47,30 @@ export default function AddressRegistrationForm({
       }
     }
 
-    router.push(redirect);
+    if (status) {
+      router.push(redirect);
+    } else {
+      showFailureMessage(
+        'Usuario no fue creado correctamente, intenta denuevo.',
+      );
+    }
   };
 
   return (
     <>
       <InputLabel
         label="Dirección"
-        onChangeText={setAddress}
+        onChangeText={(address) => handleChange('address', address)}
         style={styles.userInputMargin}
       />
       <InputLabel
         label="Número de Teléfono"
-        onChangeText={setPhoneNumber}
+        onChangeText={(phoneNumber) => handleChange('phoneNumber', phoneNumber)}
         style={styles.userInputMargin}
       />
       <InputLabel
         label="Correo Electrónico"
-        onChangeText={setEmail}
+        onChangeText={(email) => handleChange('email', email)}
         style={styles.userInputMargin}
       />
       <InputPassword label="Contraseña" onChangeText={setPassword} />

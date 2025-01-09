@@ -2,35 +2,37 @@ import axios, { AxiosResponse } from 'axios';
 import { clientUserManagementSystem, config } from '@const/apiRequest';
 import { formatDate } from '@libs/format/dates';
 
-export interface UserDataRequest {
-  code?: number;
-  firstname?: string;
-  maternalSurname?: string;
-  paternalSurname?: string;
-  curp?: string;
-  birthDate?: Date;
-  email?: string;
-  password?: string;
-}
-
-export const createUser = async (user: UserDataRequest) => {
+export const createUser = async (
+  code: number,
+  firstName: string,
+  maternalSurname: string,
+  paternalSurname: string,
+  curp: string,
+  birth: Date,
+  email: string,
+  password: string,
+) => {
   try {
+    const data = {
+      code: code,
+      firstname: firstName,
+      maternal_surname: maternalSurname,
+      paternal_surname: paternalSurname,
+      curp: curp,
+      birth_date: formatDate(birth),
+      email: email,
+      password: password,
+    };
+
+    console.log(data);
+
     const response: AxiosResponse = await clientUserManagementSystem.post(
       `/user/`,
-      {
-        code: user.code,
-        firstname: user.firstname,
-        maternal_surname: user.paternalSurname,
-        paternal_surname: user.paternalSurname,
-        curp: user.curp,
-        birth_date: formatDate(user.birthDate),
-        email: user.email,
-        password: user.password,
-      },
+      data,
       config,
     );
 
-    return response.status === 200;
+    return response.status === 200 || response.status === 201;
   } catch (e) {
     if (axios.isAxiosError(e)) {
       return false;

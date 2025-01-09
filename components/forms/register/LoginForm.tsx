@@ -19,9 +19,7 @@ export default function LoginForm({ onLogin, redirect }: Props) {
     const status = await onLogin(username, password);
 
     if (status) {
-      setTimeout(() => {
-        router.replace(redirect);
-      }, 1000);
+      router.replace(redirect);
     }
   };
 
