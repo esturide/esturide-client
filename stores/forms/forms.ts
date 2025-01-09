@@ -1,7 +1,7 @@
 import { atomWithStorage } from 'jotai/utils';
-import { UserDataRequest } from '@libs/request/createUser';
+import { CreateUserRequest } from '@libs/request/createUser';
 
-export const userDataRequestAtom = atomWithStorage<UserDataRequest>(
+export const userDataRequestAtom = atomWithStorage<CreateUserRequest>(
   'userDataRequest',
   {},
 );

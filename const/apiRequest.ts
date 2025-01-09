@@ -1,11 +1,13 @@
 import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
 
+const baseURL = 'https://api.esturide.com';
+
 export const clientRoot = axios.create({
-  baseURL: 'https://api.esturide.com',
+  baseURL: baseURL,
 });
 
 export const clientUserManagementSystem = axios.create({
-  baseURL: 'https://api.esturide.com/user_management_system',
+  baseURL: `${baseURL}/user_management_system`,
 });
 
 export const config: AxiosRequestConfig = {

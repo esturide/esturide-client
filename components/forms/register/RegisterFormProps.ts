@@ -3,7 +3,7 @@ export type RegistrationUserFormProps = {
     name: string,
     firstLastName: string,
     secondLastName: string,
-    code: string,
+    code: number,
     birthDate: Date,
   ) => Promise<boolean>;
   redirect: string;
