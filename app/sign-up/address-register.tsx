@@ -57,7 +57,7 @@ export default function SecondRegister() {
             onSubmit={eventRedirect}
           />
         </ScrollLayout>
-        <Loading visible={loading} />
+        <Loading visible={loading} modal />
       </LayoutRegister>
     </>
   );

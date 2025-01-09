@@ -15,17 +15,24 @@ import { authTokenAtom } from '@stores/token';
 
 import 'react-native-reanimated';
 import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
+import { userCodeAtom } from '@stores/user';
+import { stringToInteger } from '@libs/cast';
 
 export default function LogIn() {
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [userCode, setUserCode] = useAtom(userCodeAtom);
   const [loading, setLoading] = useState(false);
 
-  const onLogin = async (username: string, password: string) => {
-    const data = { code: username, password: password };
+  const onLogin = async (code: string, password: string) => {
+    const data = { code: code, password: password };
     let status = false;
 
     await loaderEffect(async () => {
       status = await loginUser(data, setAuthToken);
+
+      if (status) {
+        setUserCode(code);
+      }
     }, setLoading);
 
     if (status) {
@@ -53,7 +60,7 @@ export default function LogIn() {
             label={'¿No tienes cuenta? Regístrate'}
             href={'/sign-up/user-register'}
           />
-          <Loading visible={loading} />
+          <Loading visible={loading} modal />
         </ScrollLayout>
       </LayoutRegister>
     </>
