@@ -4,19 +4,24 @@ import {
   Platform,
   Text,
   TextInput,
+  TextInputProps,
   UIManager,
   View,
   ViewStyle,
 } from 'react-native';
 import styles from '@styles/Inputs';
 
+type TypeInput = 'text' | 'numeric';
+
 type Props = {
   label: string;
-  onChangeText: (text: string) => void;
-  style: ViewStyle;
+  onChangeText?: (text: string) => void;
+  style?: ViewStyle;
   placeholder?: string;
   floatLabel?: boolean;
   value?: string;
+  readOnly?: boolean;
+  typeInput?: TypeInput;
 };
 
 if (Platform.OS === 'android') {
@@ -31,6 +36,8 @@ const InputLabel = ({
   style,
   value = null,
   floatLabel = false,
+  readOnly = false,
+  typeInput,
 }: Props) => {
   if (placeholder === undefined) {
     placeholder = label;
@@ -81,6 +88,8 @@ const InputLabel = ({
             onFocus={toggleShowLabel(true)}
             onBlur={toggleShowLabel(false)}
             value={value}
+            readOnly={readOnly}
+            keyboardType={typeInput == 'text' ? 'default' : 'numeric'}
           />
         </View>
       </View>
@@ -96,6 +105,8 @@ const InputLabel = ({
           onChangeText={onChangeText}
           placeholder={textPlaceholder}
           value={value}
+          readOnly={readOnly}
+          keyboardType={typeInput == 'text' ? 'default' : 'numeric'}
         />
       </View>
     </View>

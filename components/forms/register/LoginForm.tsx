@@ -12,11 +12,11 @@ type Props = {
 };
 
 export default function LoginForm({ onLogin, redirect }: Props) {
-  const [username, setUsername] = useState('');
+  const [userCode, setUserCode] = useState('');
   const [password, setPassword] = useState('');
 
   const onSubmit = async () => {
-    const status = await onLogin(username, password);
+    const status = await onLogin(userCode, password);
 
     if (status) {
       router.replace(redirect);
@@ -27,14 +27,15 @@ export default function LoginForm({ onLogin, redirect }: Props) {
     <>
       <InputLabel
         label="Usuario"
-        onChangeText={setUsername}
+        onChangeText={setUserCode}
         style={styles.userInputMargin}
         placeholder={'Numero de usuario'}
+        typeInput={'numeric'}
       />
       <InputPassword label="Contraseña" onChangeText={setPassword} />
       <InputButton
         typeButton={'submit'}
-        label={'Iniciar Sesion'}
+        label={'Confirmar'}
         onPress={onSubmit}
       />
     </>

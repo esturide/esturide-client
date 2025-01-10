@@ -4,20 +4,33 @@ import LoadingDots from 'react-native-loading-dots';
 
 type Props = {
   visible: boolean;
+  modal?: boolean;
 };
 
-export default function Loading({ visible }: Props) {
-  return (
-    <>
-      <Modal animationType="slide" visible={visible}>
+export default function Loading({ visible, modal = false }: Props) {
+  if (modal) {
+    return (
+      <>
+        <Modal animationType="slide" visible={visible}>
+          <View style={styles.container}>
+            <View style={styles.wrapper}>
+              <LoadingDots />
+            </View>
+          </View>
+        </Modal>
+      </>
+    );
+  } else {
+    return (
+      <>
         <View style={styles.container}>
           <View style={styles.wrapper}>
             <LoadingDots />
           </View>
         </View>
-      </Modal>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

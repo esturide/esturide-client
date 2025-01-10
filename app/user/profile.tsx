@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import AdBanner from '@components/banners/AdBanner';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
 import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
-import AdBanner from '@components/banners/AdBanner';
 import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIdentity';
 import { router } from 'expo-router';
 import { useAtom } from 'jotai/index';
 import { authTokenAtom } from '@stores/token';
+import { userCodeAtom } from '@stores/user';
+import { UserProfileContext } from '@components/context/UserProfileContext';
 
 export default function UserProfile() {
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [userCode, setUserCode] = useAtom(userCodeAtom);
+  const userProfile = useContext(UserProfileContext);
 
   const closeSession = async () => {
     setAuthToken('');
@@ -33,16 +37,16 @@ export default function UserProfile() {
     },
   ];
 
+  const fullName = `${userProfile.firstName} ${userProfile.maternalSurname} ${userProfile.paternalSurname}`;
+  const userIdentify = `#${userCode}`;
+  const role = userProfile.role;
+
   return (
     <View style={styles.container}>
       <AdBanner />
-      <ProfileHeader
-        name="Mary Jiménez Rodríguez"
-        role="Conductor"
-        avatarUri="https://thispersondoesnotexist.com/"
-      />
+      <ProfileHeader name={fullName} role={role} />
 
-      <VerifyUserIdentity code={'Hello world'} />
+      <VerifyUserIdentity code={userIdentify} />
 
       <InfoSection />
 
