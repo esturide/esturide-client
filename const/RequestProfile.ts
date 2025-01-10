@@ -6,3 +6,7 @@ export default interface RequestProfile {
   email: string;
   role: string;
 }
+
+export const getFullName = (profile: RequestProfile) => {
+  return `${profile.firstName} ${profile.paternalSurname} ${profile.maternalSurname}`;
+};

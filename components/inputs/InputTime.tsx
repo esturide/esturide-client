@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { InputButton } from '@components/buttons/InputButton';
-import { formatTime } from '@libs/format/dates';
 import InputLabel from '@components/inputs/InputLabel';
+import { formatTime } from '@libs/format/dates';
+
+export interface Time {
+  readonly hour: number;
+  readonly minute: number;
+}
 
 type Props = {
   label: string;
   setTime?: (time: Date) => void;
+};
+
+export const setTimeData = (date: Date, hour: number, minute: number) => {
+  date.setHours(hour, minute, 0, 0);
+
+  return date;
 };
 
 export default function InputTime({ label, setTime }: Props) {

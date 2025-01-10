@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import InputTime from '@components/inputs/InputTime';
+import InputTime, { Time } from '@components/inputs/InputTime';
 import { InputButton } from '@components/buttons/InputButton';
 import InputLabel from '@components/inputs/InputLabel';
 import { router } from 'expo-router';
+import { stringToInteger } from '@libs/cast';
+import { showMessage } from '@libs/alerts/toast';
 
-export default function ScheduleRides() {
+export default function ScheduleTravel() {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [startTime, setStartTime] = useState(new Date());
   const [finishedTime, setFinishedTime] = useState(new Date());
+  const [travelPrice, setTravelPrice] = useState('');
 
   const showDatePicker = async () => {
     setDatePickerVisibility(true);
@@ -25,7 +28,23 @@ export default function ScheduleRides() {
   };
 
   const travelConfirm = async () => {
-    router.replace('/user/maps/driver/waiting-travel');
+    try {
+      const price = stringToInteger(travelPrice);
+
+      if (price > 0) {
+        router.replace('/user/maps/driver/waiting-passengers');
+      } else {
+        showMessage('Los viajes deben tener un precio.');
+      }
+    } catch (e) {
+      return;
+    }
+  };
+
+  const setPrice = (value) => {
+    try {
+      setTravelPrice(value);
+    } catch (e) {}
   };
 
   return (
@@ -35,15 +54,17 @@ export default function ScheduleRides() {
           <InputTime label={'Inicio'} />
           <InputTime label={'Terminar'} />
         </View>
+
         <InputLabel
           label={'Precio'}
-          onChangeText={(price) => console.log(price)}
+          onChangeText={setPrice}
+          value={`${travelPrice}`}
           typeInput={'numeric'}
-          floatLabel
         />
+
         <InputButton
           typeButton={'submit'}
-          label={'Iniciar viaje'}
+          label={'Confirmar'}
           onPress={travelConfirm}
         />
       </View>
@@ -54,7 +75,10 @@ export default function ScheduleRides() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 15,
+    margin: 25,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
   },
   inputs: {
     flex: 1,
