@@ -22,7 +22,7 @@ export default function SelectMap() {
           showFailureMessage('No se pudo acceder a la ubicacion.');
         }
 
-        let locationObject = await Location.getCurrentPositionAsync({});
+        const locationObject = await Location.getCurrentPositionAsync({});
 
         setLocation({
           latitude: locationObject.coords.latitude,

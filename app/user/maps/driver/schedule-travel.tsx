@@ -44,7 +44,9 @@ export default function ScheduleTravel() {
   const setPrice = (value) => {
     try {
       setTravelPrice(value);
-    } catch (e) {}
+    } catch (e) {
+      // TO DO
+    }
   };
 
   return (

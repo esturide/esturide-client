@@ -4,13 +4,19 @@ import * as Location from 'expo-location';
 import { Position } from '@components/cards/Map';
 import loaderEffect from '@libs/loaderEffect';
 import { showFailureMessage } from '@libs/toast/messages';
-import Passengers from '@components/cards/passangers/Passengers';
+import { InputButton } from '@components/buttons/InputButton';
+import Passengers, { Seat } from '@components/cards/passangers/Passengers';
 import RequestProfile from '@const/RequestProfile';
 import AdBanner from '@components/banners/AdBanner';
-import { InputButton } from '@components/buttons/InputButton';
+import { router } from 'expo-router';
+
+import * as Crypto from 'expo-crypto';
+
+interface PassengerProfile extends RequestProfile {
+  seat: Seat;
+}
 
 export default function WaitingPassengers() {
-  // 20.566719562492036, -103.22854245481798
   const [location, setLocation] = useState<Position | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +29,7 @@ export default function WaitingPassengers() {
           showFailureMessage('No se pudo acceder a la ubicacion.');
         }
 
-        let locationObject = await Location.getCurrentPositionAsync({});
+        const locationObject = await Location.getCurrentPositionAsync({});
 
         setLocation({
           latitude: locationObject.coords.latitude,
@@ -33,14 +39,30 @@ export default function WaitingPassengers() {
     })();
   }, []);
 
-  const profile: RequestProfile = {
-    firstName: 'Diego',
-    paternalSurname: 'Valderrama',
-    maternalSurname: 'Garcia',
-    userCode: 10222,
-    role: 'student',
-    email: 'a@mail.com',
+  const finishTravel = async () => {
+    router.push('/user/maps');
   };
+
+  const profiles: PassengerProfile[] = [
+    {
+      seat: 'A',
+      firstName: 'Diego',
+      paternalSurname: 'Valderrama',
+      maternalSurname: 'Garcia',
+      userCode: 10222,
+      role: 'student',
+      email: 'a@mail.com',
+    },
+    {
+      seat: 'B',
+      firstName: 'Guillermo',
+      paternalSurname: 'Obregon',
+      maternalSurname: 'Garcia',
+      userCode: 10223,
+      role: 'student',
+      email: 'b@mail.com',
+    },
+  ];
 
   return (
     <>
@@ -53,14 +75,25 @@ export default function WaitingPassengers() {
         <View style={styles.containerPassengers}>
           <Text style={styles.title}>Lista de pasajeros</Text>
           <View style={styles.passengerList}>
-            <Passengers seat={'A'} profile={profile} />
-            <Passengers seat={'B'} profile={profile} />
+            {profiles.map((profile) => (
+              <View key={Crypto.randomUUID()}>
+                <Passengers seat={profile.seat} profile={profile} />
+              </View>
+            ))}
           </View>
         </View>
 
         <View style={styles.containerButtons}>
-          <InputButton typeButton={'depositBlue'} label={'Terminar viaje'} />
-          <InputButton typeButton={'depositGreen'} label={'Cancelar'} />
+          <InputButton
+            typeButton={'depositBlue'}
+            label={'Terminar viaje'}
+            onPress={finishTravel}
+          />
+          <InputButton
+            typeButton={'depositGreen'}
+            label={'Cancelar'}
+            onPress={finishTravel}
+          />
         </View>
       </View>
     </>
