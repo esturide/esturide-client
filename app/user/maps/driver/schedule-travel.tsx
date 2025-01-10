@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
 import InputTime, { Time } from '@components/inputs/InputTime';
 import { InputButton } from '@components/buttons/InputButton';
@@ -7,6 +7,7 @@ import InputLabel from '@components/inputs/InputLabel';
 import { router } from 'expo-router';
 import { stringToInteger } from '@libs/cast';
 import { showMessage } from '@libs/alerts/toast';
+import CardSeat from '@components/cards/CardSeat';
 
 export default function ScheduleTravel() {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -57,6 +58,15 @@ export default function ScheduleTravel() {
           <InputTime label={'Terminar'} />
         </View>
 
+        <View style={styles.containerSeats}>
+          <Text>Asientos disponibles</Text>
+          <View style={styles.seats}>
+            <CardSeat seat={'A'} />
+            <CardSeat seat={'B'} />
+            <CardSeat seat={'C'} />
+          </View>
+        </View>
+
         <InputLabel
           label={'Precio'}
           onChangeText={setPrice}
@@ -82,10 +92,21 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
+
   inputs: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: 10,
+  },
+
+  containerSeats: {
+    flex: 1,
+  },
+
+  seats: {
+    flexDirection: 'row',
+    gap: 15,
+    margin: 5,
   },
 });
