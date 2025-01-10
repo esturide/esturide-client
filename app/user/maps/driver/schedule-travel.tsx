@@ -42,6 +42,10 @@ export default function ScheduleTravel() {
     }
   };
 
+  const travelDestinationSelect = async () => {
+    router.push('/user/maps/driver/select-destination');
+  };
+
   const setPrice = (value) => {
     try {
       setTravelPrice(value);
@@ -78,6 +82,12 @@ export default function ScheduleTravel() {
           typeButton={'submit'}
           label={'Confirmar'}
           onPress={travelConfirm}
+        />
+
+        <InputButton
+          typeButton={'submit'}
+          label={'Destino'}
+          onPress={travelDestinationSelect}
         />
       </View>
     </GenericModal>
