@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Slot } from 'expo-router';
 import NavigationBar from '@components/tabs/NavigationBar';
 
@@ -38,7 +38,9 @@ export default function UserLayout() {
   return (
     <View style={styles.flexContainer}>
       <UserContext>
-        <Slot />
+        <View style={styles.container}>
+          <Slot />
+        </View>
         <NavigationBar navigationItems={navigationItem} />
       </UserContext>
     </View>

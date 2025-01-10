@@ -30,11 +30,12 @@ export default function LoginForm({ onLogin, redirect }: Props) {
         onChangeText={setUserCode}
         style={styles.userInputMargin}
         placeholder={'Numero de usuario'}
+        typeInput={'numeric'}
       />
       <InputPassword label="Contraseña" onChangeText={setPassword} />
       <InputButton
         typeButton={'submit'}
-        label={'Iniciar Sesion'}
+        label={'Confirmar'}
         onPress={onSubmit}
       />
     </>

@@ -32,6 +32,7 @@ export default ({ config }) => ({
       foregroundImage: './assets/adaptive-icon.png',
       backgroundColor: '#FFFFFF',
     },
+    permissions: ['ACCESS_FINE_LOCATION'],
   },
   web: {
     favicon: './assets/favicon.png',
