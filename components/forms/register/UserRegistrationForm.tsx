@@ -5,12 +5,13 @@ import InputLabel from '@components/inputs/InputLabel';
 import InputDate from '@components/inputs/InputDate';
 import styles from '@styles/forms/RegistrationFormStyle';
 import { InputButton } from '@components/buttons/InputButton';
-import { RegistrationFormProps } from '@components/forms/register/RegisterFormProps';
+import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
+import { showMessage } from '@libs/alerts/toast';
 
 export default function UserRegistrationForm({
   onSubmit,
   redirect,
-}: RegistrationFormProps) {
+}: RegistrationUserFormProps) {
   const [name, setName] = useState<string>('');
   const [firstLastName, setFirstLastName] = useState<string>('');
   const [secondLastName, setSecondLastName] = useState<string>('');
@@ -19,9 +20,25 @@ export default function UserRegistrationForm({
 
   const onPressButton = async () => {
     if (onSubmit) {
-      await onSubmit();
+      if (birthDate !== null) {
+        const status = await onSubmit(
+          name,
+          firstLastName,
+          secondLastName,
+          code,
+          birthDate,
+        );
+
+        if (status) {
+          showMessage('Usuario registrado correctamente');
+          router.push(redirect);
+        } else {
+          showMessage('Datos invalidos, vuelve a ingresarlos correctamente');
+        }
+      } else {
+        showMessage('Ingrese una fecha valida');
+      }
     }
-    router.push(redirect);
   };
 
   return (

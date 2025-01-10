@@ -9,9 +9,16 @@ import ScrollLayout from '@components/layouts/ScrollLayout';
 
 export default function LogIn() {
   const onLogin = async (username: string, password: string) => {
-    console.log(
-      `Username: ${username} is logging in, with the password: ${password}`,
-    );
+    console.log({
+      username: username,
+      password: password,
+    });
+
+    if (username === '' && password === '') {
+      return false;
+    }
+
+    return true;
   };
 
   const onHyperLinkPressed = async () => {
@@ -24,7 +31,7 @@ export default function LogIn() {
       <LayoutRegister>
         <ScrollLayout>
           <Title style={styles.title}>Iniciar Sesión</Title>
-          <LoginForm onLogin={onLogin} />
+          <LoginForm onLogin={onLogin} redirect={'/user'} />
           <HyperLink
             onClick={onHyperLinkPressed}
             label={'¿No tienes cuenta? Regístrate'}

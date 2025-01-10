@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import AdBanner from '@components/AdBanner';
+import AdBanner from '@components/banners/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import AddVehicleModal from '@components/modals/AddVehicleModal';
 
@@ -23,7 +23,7 @@ const DriverInfoScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require('../../assets/arrow-back.png')} // Ruta a tu imagen personalizada en assets
+            source={require('@assets/arrow-back.png')} // Ruta a tu imagen personalizada en assets
             style={styles.backIcon}
           />
         </TouchableOpacity>
@@ -68,7 +68,7 @@ const DriverInfoScreen: React.FC = () => {
           {/* Botón en la esquina superior derecha del cuadro verde */}
           <TouchableOpacity onPress={openModal} style={styles.vehicleButton}>
             <Image
-              source={require('../../assets/add-car.png')} // Cambia a la ruta de tu icono personalizado
+              source={require('@assets/add-car.png')} // Cambia a la ruta de tu icono personalizado
               style={styles.editIcon}
             />
           </TouchableOpacity>

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import AdBanner from '@components/AdBanner';
+import AdBanner from '@components/banners/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import FilterModalPassenger from '@components/modals/FilterModalPassenger';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -20,7 +20,7 @@ const EmptyTripsScreenPassenger: React.FC = () => {
         {/* Icono de ubicación */}
         <View style={styles.iconContainer}>
           <Image
-            source={require('../../assets/location-blue-icon.png')}
+            source={require('@assets/location-blue-icon.png')}
             style={{ width: 250, height: 200 }}
           />
         </View>

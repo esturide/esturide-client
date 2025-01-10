@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import AdBanner from '@components/AdBanner';
+import AdBanner from '@components/banners/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -26,7 +26,7 @@ const DepositCapitalScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Image
-            source={require('../../assets/arrow-back.png')} // Ruta a tu imagen personalizada en assets
+            source={require('@assets/arrow-back.png')} // Ruta a tu imagen personalizada en assets
             style={styles.backIcon}
           />
         </TouchableOpacity>

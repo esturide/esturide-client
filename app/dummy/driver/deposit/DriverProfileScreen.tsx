@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import AdBanner from '@components/AdBanner';
+import AdBanner from '@components/banners/AdBanner';
 import BottomNavigationBar from '@components/buttons/navigation/BottomNavigationBar';
 import WithdrawalNoticeModal from '@components/modals/WithdrawalNoticeModal';
 
@@ -56,7 +56,7 @@ const DriverProfileScreen: React.FC = () => {
             >
               <Text style={styles.menuText}>{option}</Text>
               <Image
-                source={require('../../assets/arrow-forward.png')} // Reemplaza con la imagen de la flecha
+                source={require('@assets/arrow-forward.png')} // Reemplaza con la imagen de la flecha
                 style={styles.arrowIcon}
               />
             </TouchableOpacity>
