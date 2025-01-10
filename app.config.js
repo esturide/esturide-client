@@ -20,6 +20,10 @@ export default ({ config }) => ({
   },
   updates: {
     fallbackToCacheTimeout: 0,
+    url: process.env.EXPO_URL_PROJECT_ID,
+  },
+  runtimeVersion: {
+    policy: 'appVersion',
   },
   assetBundlePatterns: ['**/*'],
   ios: {
