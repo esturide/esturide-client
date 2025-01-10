@@ -46,17 +46,21 @@ export default function WaitingPassengers() {
     <>
       <AdBanner />
       <View style={styles.container}>
-        <View>
+        <View style={styles.cardContainer}>
           <Text style={styles.title}>Lista de pasajeros</Text>
         </View>
 
         <View style={styles.containerPassengers}>
-          <Passengers seat={'A'} profile={profile} />
-          <Passengers seat={'B'} profile={profile} />
+          <Text style={styles.title}>Lista de pasajeros</Text>
+          <View style={styles.passengerList}>
+            <Passengers seat={'A'} profile={profile} />
+            <Passengers seat={'B'} profile={profile} />
+          </View>
         </View>
 
-        <View>
-          <InputButton typeButton={'submit'} label={'Iniciar viaje'} />
+        <View style={styles.containerButtons}>
+          <InputButton typeButton={'depositBlue'} label={'Terminar viaje'} />
+          <InputButton typeButton={'depositGreen'} label={'Cancelar'} />
         </View>
       </View>
     </>
@@ -67,25 +71,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 5,
-    justifyContent: 'center',
-    alignSelf: 'center',
     margin: 15,
   },
   containerPassengers: {
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    elevation: 11,
-    margin: 25,
-    padding: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#e4e4e4',
+    padding: 15,
     gap: 15,
   },
   title: {
     fontWeight: 'bold',
   },
-  buttons: {},
+  cardContainer: {
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#e4e4e4',
+    padding: 5,
+  },
+  passengerList: {
+    gap: 15,
+  },
+  containerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    gap: 15,
+  },
 });
