@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
 import { Position } from '@components/cards/Map';
 import loaderEffect from '@libs/loaderEffect';
-import { showFailureMessage } from '@libs/toast/messages';
+import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 import { InputButton } from '@components/buttons/InputButton';
 import Passengers, { Seat } from '@components/cards/passangers/Passengers';
 import RequestProfile from '@const/RequestProfile';
@@ -17,30 +17,14 @@ interface PassengerProfile extends RequestProfile {
 }
 
 export default function WaitingPassengers() {
-  const [location, setLocation] = useState<Position | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      await loaderEffect(async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-
-        if (status !== 'granted') {
-          showFailureMessage('No se pudo acceder a la ubicacion.');
-        }
-
-        const locationObject = await Location.getCurrentPositionAsync({});
-
-        setLocation({
-          latitude: locationObject.coords.latitude,
-          longitude: locationObject.coords.longitude,
-        });
-      }, setLoading);
-    })();
-  }, []);
-
   const finishTravel = async () => {
     router.push('/user/maps');
+    showSuccessMessage('Viaje finalizado.', 'Que hayas disfrutado del viaje');
+  };
+
+  const cancelTravel = async () => {
+    router.push('/user/maps');
+    showFailureMessage('Viaje cancelado.');
   };
 
   const profiles: PassengerProfile[] = [
@@ -92,7 +76,7 @@ export default function WaitingPassengers() {
           <InputButton
             typeButton={'depositGreen'}
             label={'Cancelar'}
-            onPress={finishTravel}
+            onPress={cancelTravel}
           />
         </View>
       </View>
