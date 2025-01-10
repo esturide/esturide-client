@@ -17,10 +17,13 @@ import PassengerProfileScreen from './dummy/PassengerProfileScreen';
 import PassengerDepositSuccessScreen from './dummy/PassengerDepositSuccessScreen';
 import EmptyTripsScreenPassenger from './dummy/EmptyTripsScreenPassenger';
 
+import DriveFeedCommunity from './dummy/driver/community/DriveFeedCommunity';
+
+
 export const StartPage = () => {
   const router = useRouter();
 
-  useEffect(() => {
+  /*useEffect(() => {
     const timer = setTimeout(() => {
       if (Platform.OS == 'android' || Platform.OS == 'ios') {
         router.replace('/sign-up/log-in');
@@ -31,18 +34,28 @@ export const StartPage = () => {
     return () => clearTimeout(timer);
   }, [router]);
 
+
+
   return (
     <View style={styles.flexContainer}>
       <Logo />
       <Title>ESTU RIDE</Title>
+      
+    </View>
+  );
+};
+*/
+  return (
+     <View style={{ flex: 1 }}>
+      <DriveFeedCommunity/>
     </View>
   );
 };
 
 let AppEntryPoint = StartPage;
 
-if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+/*if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
   AppEntryPoint = require('../.ondevice').default;
 }
-
+*/
 export default AppEntryPoint;
