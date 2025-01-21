@@ -12,7 +12,7 @@ export default function FirstRegister() {
     name: string,
     firstLastName: string,
     secondLastName: string,
-    code: string,
+    code: number,
     birthDate: Date,
   ) => {
     return true;

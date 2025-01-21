@@ -1,5 +1,5 @@
-import { View } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Slot } from 'expo-router';
 import NavigationBar from '@components/tabs/NavigationBar';
 
@@ -9,6 +9,7 @@ import notifyIcon from '@assets/icons/tabs/notify.png';
 import profileIcon from '@assets/icons/tabs/user.png';
 
 import styles from '@styles/layouts/UserLayout';
+import UserContext from '@components/context/UserProfileContext';
 
 export default function UserLayout() {
   const navigationItem = [
@@ -19,7 +20,7 @@ export default function UserLayout() {
     },
     {
       icon: addIcon,
-      href: '/user',
+      href: '/user/maps',
       onPress: async () => console.log('Travels and rides page'),
     },
     {
@@ -36,9 +37,12 @@ export default function UserLayout() {
 
   return (
     <View style={styles.flexContainer}>
-      <Slot />
-
-      <NavigationBar navigationItems={navigationItem} />
+      <UserContext>
+        <View style={styles.container}>
+          <Slot />
+        </View>
+        <NavigationBar navigationItems={navigationItem} />
+      </UserContext>
     </View>
   );
 }

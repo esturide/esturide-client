@@ -1,24 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useAtom } from 'jotai';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
 import LoginForm from '@components/forms/register/LoginForm';
-import Logo from '@components/resources/Logo';
+import Logo from '@components/visuals/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import Loading from '@components/visuals/resources/Loading';
+import { loginUser } from '@libs/request/loginUser';
+import loaderEffect from '@libs/loaderEffect';
+import { timing } from '@libs/timing';
+import { authTokenAtom } from '@stores/token';
+
+import 'react-native-reanimated';
+import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
+import { userCodeAtom } from '@stores/user';
+import { stringToInteger } from '@libs/cast';
 
 export default function LogIn() {
-  const onLogin = async (username: string, password: string) => {
-    console.log({
-      username: username,
-      password: password,
-    });
+  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [userCode, setUserCode] = useAtom(userCodeAtom);
+  const [loading, setLoading] = useState(false);
 
-    if (username === '' && password === '') {
-      return false;
+  const onLogin = async (code: string, password: string) => {
+    const data = { code: code, password: password };
+    let status = false;
+
+    await loaderEffect(async () => {
+      status = await loginUser(data, setAuthToken);
+
+      if (status) {
+        setUserCode(code);
+      }
+    }, setLoading);
+
+    if (status) {
+      showSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
+    } else {
+      showFailureMessage('Nombre de usuario o contraseña incorrectos ⚠️.');
     }
 
-    return true;
+    return status;
   };
 
   const onHyperLinkPressed = async () => {
@@ -37,6 +60,7 @@ export default function LogIn() {
             label={'¿No tienes cuenta? Regístrate'}
             href={'/sign-up/user-register'}
           />
+          <Loading visible={loading} modal />
         </ScrollLayout>
       </LayoutRegister>
     </>
