@@ -25,7 +25,7 @@ export default function UserLayout() {
     },
     {
       icon: notifyIcon,
-      href: '/user',
+      href: '/user/notify',
       onPress: async () => console.log('Notifications page'),
     },
     {
