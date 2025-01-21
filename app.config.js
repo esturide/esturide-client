@@ -4,7 +4,8 @@ export default ({ config }) => ({
   ...config,
   name: 'EstuRide',
   slug: 'esturide',
-  version: '0.0.1',
+  owner: 'esturide',
+  version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
   extra: {
@@ -20,6 +21,10 @@ export default ({ config }) => ({
   },
   updates: {
     fallbackToCacheTimeout: 0,
+    url: `https://u.expo.dev/${process.env.EXPO_PUBLIC_PROJECT_ID}`,
+  },
+  runtimeVersion: {
+    policy: 'appVersion',
   },
   assetBundlePatterns: ['**/*'],
   ios: {
