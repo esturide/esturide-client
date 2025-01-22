@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import styles from '@styles/Sheets';
+import styles from '@styles/BottomSheetsStyle';
 
 const BottomSheet = () => {
   return (
