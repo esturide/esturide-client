@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import * as Location from 'expo-location';
-import { router } from 'expo-router';
-import loaderEffect from '@libs/loaderEffect';
-import { showFailureMessage } from '@libs/toast/messages';
-import Loading from '@components/visuals/resources/Loading';
 import Map, { Position } from '@components/cards/Map';
-import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
+import loaderEffect from '@libs/loaderEffect';
+import * as Location from 'expo-location';
+import { showFailureMessage } from '@libs/toast/messages';
+import { router } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
+import Loading from '@components/visuals/resources/Loading';
 import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
+import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
+import { SelectMap } from '@components/cards/SelectMap';
 
-export default function SelectMap() {
+export default function SelectDestination() {
   const [location, setLocation] = useState<Position | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -33,27 +34,19 @@ export default function SelectMap() {
   }, []);
 
   const onPress = async () => {
-    router.push('/user/maps/driver/schedule-travel');
+    router.back();
   };
 
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <Loading visible={true} />
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Map origin={location} />
-        {location !== null && (
-          <AbsoluteLayout>
-            <ButtonLocationBlue onPress={onPress} />
-          </AbsoluteLayout>
-        )}
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <SelectMap />
+      {location !== null && (
+        <AbsoluteLayout>
+          <ButtonLocationBlue onPress={onPress} />
+        </AbsoluteLayout>
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import RequestProfile, { getFullName } from '@const/RequestProfile';
 
-type Seat = 'A' | 'B' | 'C';
+export type Seat = 'A' | 'B' | 'C';
 
 type Props = {
   seat: Seat;
