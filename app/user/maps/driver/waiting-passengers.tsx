@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, StyleSheet, Text, View } from 'react-native';
-import * as Location from 'expo-location';
-import { Position } from '@components/cards/Map';
-import loaderEffect from '@libs/loaderEffect';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 import { InputButton } from '@components/buttons/InputButton';
-import Passengers, { Seat } from '@components/cards/passangers/Passengers';
+import { Seat } from '@components/cards/passangers/Passengers';
 import RequestProfile from '@const/RequestProfile';
 import AdBanner from '@components/banners/AdBanner';
 import { router } from 'expo-router';
 
-import * as Crypto from 'expo-crypto';
+import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
+import BottomSheet from '@components/modals/sheets/BottomSheet';
 
 interface PassengerProfile extends RequestProfile {
   seat: Seat;
 }
 
 export default function WaitingPassengers() {
+  const [visible, setVisible] = useState(false);
+
   const finishTravel = async () => {
     router.push('/user/maps');
     showSuccessMessage('Viaje finalizado.', 'Que hayas disfrutado del viaje');
@@ -26,6 +26,8 @@ export default function WaitingPassengers() {
     router.push('/user/maps');
     showFailureMessage('Viaje cancelado.');
   };
+
+  const onPressModal = async (close: boolean) => {};
 
   const profiles: PassengerProfile[] = [
     {
@@ -48,6 +50,8 @@ export default function WaitingPassengers() {
     },
   ];
 
+  const seats: SeatsArr[] = [{ value: '1' }];
+
   return (
     <>
       <AdBanner />
@@ -57,14 +61,13 @@ export default function WaitingPassengers() {
         </View>
 
         <View style={styles.containerPassengers}>
-          <Text style={styles.title}>Lista de pasajeros</Text>
-          <View style={styles.passengerList}>
-            {profiles.map((profile) => (
-              <View key={Crypto.randomUUID()}>
-                <Passengers seat={profile.seat} profile={profile} />
-              </View>
-            ))}
-          </View>
+          <CardTravel
+            typeCard={'driver'}
+            departTime={'1'}
+            arrivalTime={'1'}
+            price={1}
+            seatsArr={seats}
+          />
         </View>
 
         <View style={styles.containerButtons}>
@@ -78,7 +81,23 @@ export default function WaitingPassengers() {
             label={'Cancelar'}
             onPress={cancelTravel}
           />
+          <InputButton
+            typeButton={'depositGreen'}
+            label={'Abrir modal'}
+            onPress={async () => {
+              setVisible(true);
+            }}
+          />
         </View>
+
+        <BottomSheet
+          isVisible={visible}
+          onClose={setVisible}
+          onPress={onPressModal}
+        >
+          <Text>Hello world</Text>
+          <InputButton typeButton={'depositGreen'} label={'A'} />
+        </BottomSheet>
       </View>
     </>
   );
@@ -90,13 +109,7 @@ const styles = StyleSheet.create({
     gap: 5,
     margin: 15,
   },
-  containerPassengers: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#e4e4e4',
-    padding: 15,
-    gap: 15,
-  },
+  containerPassengers: {},
   title: {
     fontWeight: 'bold',
   },
