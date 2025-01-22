@@ -31,7 +31,7 @@ export default function WaitingPassengers() {
       <AdBanner />
       <View style={styles.container}>
         <View style={styles.cardContainer}>
-          <Text style={styles.title}>Lista de pasajeros</Text>
+          <Text style={styles.title}>Viajando</Text>
         </View>
 
         <View style={styles.containerPassengers}>

@@ -4,6 +4,7 @@ import styles, {
   DefaultPassengerColor,
 } from '@styles/CardTravelStyle';
 import * as Crypto from 'expo-crypto';
+import MapView from 'react-native-maps';
 
 export interface SeatsArr {
   value: string;
@@ -80,6 +81,10 @@ export default function CardTravel({
               ))}
           </View>
         </View>
+      </View>
+
+      <View style={styles.mapsContainer}>
+        <MapView style={styles.maps}></MapView>
       </View>
     </View>
   );

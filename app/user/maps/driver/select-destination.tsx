@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
-import { Position } from '@components/cards/Map';
 import loaderEffect from '@libs/loaderEffect';
 import { showFailureMessage } from '@libs/toast/messages';
 import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import { SelectMap } from '@components/cards/SelectMap';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { Position } from '@const/Position';
 
 export default function SelectDestination() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
