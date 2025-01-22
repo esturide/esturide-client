@@ -8,8 +8,10 @@ import Loading from '@components/visuals/resources/Loading';
 import Map, { Position } from '@components/cards/Map';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 export default function SelectMap() {
+  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
   const [location, setLocation] = useState<Position | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +35,7 @@ export default function SelectMap() {
   }, []);
 
   const onPress = async () => {
-    router.push('/user/maps/driver/schedule-travel');
+    setCurrentRoute('/user/maps/driver/schedule-travel');
   };
 
   if (loading) {

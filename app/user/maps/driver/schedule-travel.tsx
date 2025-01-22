@@ -8,8 +8,10 @@ import { router } from 'expo-router';
 import { stringToInteger } from '@libs/cast';
 import { showMessage } from '@libs/alerts/toast';
 import CardSeat from '@components/cards/CardSeat';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 export default function ScheduleTravel() {
+  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [startTime, setStartTime] = useState(new Date());
   const [finishedTime, setFinishedTime] = useState(new Date());
@@ -33,7 +35,7 @@ export default function ScheduleTravel() {
       const price = stringToInteger(travelPrice);
 
       if (price > 0) {
-        router.replace('/user/maps/driver/waiting-passengers');
+        setCurrentRoute('/user/maps/driver/waiting-passengers');
       } else {
         showMessage('Los viajes deben tener un precio.');
       }
@@ -43,7 +45,8 @@ export default function ScheduleTravel() {
   };
 
   const travelDestinationSelect = async () => {
-    router.push('/user/maps/driver/select-destination');
+    // router.push('/user/maps/driver/select-destination');
+    setCurrentRoute('/user/maps/driver/select-destination');
   };
 
   const setPrice = (value) => {

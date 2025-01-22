@@ -5,25 +5,26 @@ import { InputButton } from '@components/buttons/InputButton';
 import { Seat } from '@components/cards/passangers/Passengers';
 import RequestProfile from '@const/RequestProfile';
 import AdBanner from '@components/banners/AdBanner';
-import { router } from 'expo-router';
 
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 interface PassengerProfile extends RequestProfile {
   seat: Seat;
 }
 
 export default function WaitingPassengers() {
+  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
   const [visible, setVisible] = useState(false);
 
   const finishTravel = async () => {
-    router.push('/user/maps');
+    setCurrentRoute('/user/maps');
     showSuccessMessage('Viaje finalizado.', 'Que hayas disfrutado del viaje');
   };
 
   const cancelTravel = async () => {
-    router.push('/user/maps');
+    setCurrentRoute('/user/maps');
     showFailureMessage('Viaje cancelado.');
   };
 
@@ -72,18 +73,8 @@ export default function WaitingPassengers() {
 
         <View style={styles.containerButtons}>
           <InputButton
-            typeButton={'depositBlue'}
-            label={'Terminar viaje'}
-            onPress={finishTravel}
-          />
-          <InputButton
             typeButton={'depositGreen'}
-            label={'Cancelar'}
-            onPress={cancelTravel}
-          />
-          <InputButton
-            typeButton={'depositGreen'}
-            label={'Abrir modal'}
+            label={'Acciones'}
             onPress={async () => {
               setVisible(true);
             }}
@@ -95,8 +86,18 @@ export default function WaitingPassengers() {
           onClose={setVisible}
           onPress={onPressModal}
         >
-          <Text>Hello world</Text>
-          <InputButton typeButton={'depositGreen'} label={'A'} />
+          <View style={styles.containerButtons}>
+            <InputButton
+              typeButton={'depositBlue'}
+              label={'Terminar viaje'}
+              onPress={finishTravel}
+            />
+            <InputButton
+              typeButton={'depositGreen'}
+              label={'Cancelar'}
+              onPress={cancelTravel}
+            />
+          </View>
         </BottomSheet>
       </View>
     </>

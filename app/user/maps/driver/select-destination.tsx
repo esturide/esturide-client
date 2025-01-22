@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import Map, { Position } from '@components/cards/Map';
-import loaderEffect from '@libs/loaderEffect';
-import * as Location from 'expo-location';
-import { showFailureMessage } from '@libs/toast/messages';
-import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import Loading from '@components/visuals/resources/Loading';
+import * as Location from 'expo-location';
+import { router } from 'expo-router';
+import { Position } from '@components/cards/Map';
+import loaderEffect from '@libs/loaderEffect';
+import { showFailureMessage } from '@libs/toast/messages';
 import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import { SelectMap } from '@components/cards/SelectMap';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 export default function SelectDestination() {
+  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
   const [location, setLocation] = useState<Position | null>(null);
   const [loading, setLoading] = useState(false);
 
