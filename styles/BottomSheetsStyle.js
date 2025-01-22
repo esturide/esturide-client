@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: '#f0f0f0',
   },
+  container: {
+    flex: 1,
+  },
 });
 
 export default styles;

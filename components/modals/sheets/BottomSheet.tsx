@@ -1,33 +1,31 @@
-import { Button, Modal, Pressable, View } from 'react-native';
+import { Modal, Pressable, View } from 'react-native';
 import { PropsWithChildren, useState } from 'react';
 
 import styles from '@styles/BottomSheetsStyle';
 
 type Props = PropsWithChildren<{
-  title?: string;
   isVisible: boolean;
-  onClose?: (close: boolean) => Promise<void>;
+  onClose: (close: boolean) => void;
+  onPress?: (visible: boolean) => Promise<void>;
 }>;
 
-const BottomSheet = ({ title = '', isVisible, children, onClose }: Props) => {
-  const [closeModal, setCloseModal] = useState(isVisible);
-
+const BottomSheet = ({ isVisible, children, onClose, onPress }: Props) => {
   const onChange = async () => {
-    setCloseModal(false);
+    onClose(false);
 
-    if (onClose !== null) {
-      await onClose(closeModal);
+    if (onPress !== null) {
+      await onPress(isVisible);
     }
   };
 
   return (
-    <Modal animationType="slide" transparent={true} visible={closeModal}>
+    <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.bottomSheet}>
         <Pressable onPress={onChange}>
           <View style={styles.bottomSheetGrabHandle} />
         </Pressable>
 
-        <View>{children}</View>
+        <View style={styles.container}>{children}</View>
       </View>
     </Modal>
   );
