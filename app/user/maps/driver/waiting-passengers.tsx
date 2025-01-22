@@ -2,17 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 import { InputButton } from '@components/buttons/InputButton';
-import { Seat } from '@components/cards/passangers/Passengers';
-import RequestProfile from '@const/RequestProfile';
 import AdBanner from '@components/banners/AdBanner';
 
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
-
-interface PassengerProfile extends RequestProfile {
-  seat: Seat;
-}
 
 export default function WaitingPassengers() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
@@ -29,27 +23,6 @@ export default function WaitingPassengers() {
   };
 
   const onPressModal = async (close: boolean) => {};
-
-  const profiles: PassengerProfile[] = [
-    {
-      seat: 'A',
-      firstName: 'Diego',
-      paternalSurname: 'Valderrama',
-      maternalSurname: 'Garcia',
-      userCode: 10222,
-      role: 'student',
-      email: 'a@mail.com',
-    },
-    {
-      seat: 'B',
-      firstName: 'Guillermo',
-      paternalSurname: 'Obregon',
-      maternalSurname: 'Garcia',
-      userCode: 10223,
-      role: 'student',
-      email: 'b@mail.com',
-    },
-  ];
 
   const seats: SeatsArr[] = [{ value: '1' }];
 
@@ -74,9 +47,9 @@ export default function WaitingPassengers() {
         <View style={styles.containerButtons}>
           <InputButton
             typeButton={'depositGreen'}
-            label={'Acciones'}
+            label={'Opciones'}
             onPress={async () => {
-              setVisible(true);
+              setVisible(!visible);
             }}
           />
         </View>
@@ -125,7 +98,7 @@ const styles = StyleSheet.create({
   },
   containerButtons: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
     gap: 15,
   },
 });
