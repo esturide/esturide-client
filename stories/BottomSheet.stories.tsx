@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { View } from 'react-native';
-import BottomSheet from '@components/sheets/BottomSheet';
-import styles from '@styles/Sheets';
+import BottomSheet from '@components/modals/sheets/BottomSheet';
+import styles from '@styles/BottomSheetsStyle';
 
 const meta: Meta<typeof BottomSheet> = {
   title: 'Components/BottomSheet',
