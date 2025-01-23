@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Map from '@components/cards/Map';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
-import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
+import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import { useCurrentPosition } from '@components/context/LocationContext';
 
@@ -18,9 +18,9 @@ export default function SelectMap() {
     <View style={styles.container}>
       <Map origin={location} />
       {location !== null && (
-        <AbsoluteLayout>
+        <AbsoluteBottomLayout>
           <ButtonLocationBlue onPress={onPress} />
-        </AbsoluteLayout>
+        </AbsoluteBottomLayout>
       )}
     </View>
   );

@@ -4,7 +4,6 @@ import styles, {
   DefaultPassengerColor,
 } from '@styles/CardTravelStyle';
 import * as Crypto from 'expo-crypto';
-import MapView, { Marker } from 'react-native-maps';
 import { useCurrentPosition } from '@components/context/LocationContext';
 
 export interface SeatsArr {
@@ -84,33 +83,6 @@ export default function CardTravel({
               ))}
           </View>
         </View>
-      </View>
-
-      <View style={styles.mapsContainer}>
-        <MapView
-          initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
-            latitudeDelta: 0.0021,
-            longitudeDelta: 0.0021,
-          }}
-          style={styles.maps}
-          scrollEnabled={false}
-        >
-          <Marker
-            coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }}
-            title={'Conductor'}
-            description={'Origen'}
-          >
-            <Image
-              source={require('@assets/markers/driver.png')}
-              style={styles.marker}
-            ></Image>
-          </Marker>
-        </MapView>
       </View>
     </View>
   );

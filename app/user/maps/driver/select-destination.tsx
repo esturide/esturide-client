@@ -4,7 +4,7 @@ import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import loaderEffect from '@libs/loaderEffect';
 import { showFailureMessage } from '@libs/toast/messages';
-import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
+import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import { SelectMap } from '@components/cards/SelectMap';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
@@ -42,9 +42,9 @@ export default function SelectDestination() {
     <View style={styles.container}>
       <SelectMap />
       {location !== null && (
-        <AbsoluteLayout>
+        <AbsoluteBottomLayout>
           <ButtonLocationBlue onPress={onPress} />
-        </AbsoluteLayout>
+        </AbsoluteBottomLayout>
       )}
     </View>
   );

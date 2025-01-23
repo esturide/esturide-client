@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   cardContainer: {
-    height: 376,
+    height: 150,
     borderWidth: 2,
     borderRadius: 20,
     paddingHorizontal: 25,
