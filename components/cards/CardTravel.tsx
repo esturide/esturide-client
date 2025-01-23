@@ -1,10 +1,11 @@
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import styles, {
   DefaultDriverColor,
   DefaultPassengerColor,
 } from '@styles/CardTravelStyle';
 import * as Crypto from 'expo-crypto';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import { useCurrentPosition } from '@components/context/LocationContext';
 
 export interface SeatsArr {
   value: string;
@@ -25,6 +26,8 @@ export default function CardTravel({
   price,
   seatsArr,
 }: CardTravelProps) {
+  const location = useCurrentPosition();
+
   const containerStyles = {
     driver: { ...styles.cardContainer, borderColor: DefaultDriverColor },
     passenger: { ...styles.cardContainer, borderColor: DefaultPassengerColor },
@@ -84,7 +87,30 @@ export default function CardTravel({
       </View>
 
       <View style={styles.mapsContainer}>
-        <MapView style={styles.maps}></MapView>
+        <MapView
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.0021,
+            longitudeDelta: 0.0021,
+          }}
+          style={styles.maps}
+          scrollEnabled={false}
+        >
+          <Marker
+            coordinate={{
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }}
+            title={'Conductor'}
+            description={'Origen'}
+          >
+            <Image
+              source={require('@assets/markers/driver.png')}
+              style={styles.marker}
+            ></Image>
+          </Marker>
+        </MapView>
       </View>
     </View>
   );

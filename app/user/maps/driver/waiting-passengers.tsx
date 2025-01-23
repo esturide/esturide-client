@@ -7,6 +7,7 @@ import AdBanner from '@components/banners/AdBanner';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useCurrentPosition } from '@components/context/LocationContext';
 
 export default function WaitingPassengers() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();

@@ -33,13 +33,10 @@ export default function LocationContext({ children }: PropsWithChildren) {
       await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.High,
-          timeInterval: 50,
+          timeInterval: 5,
           distanceInterval: 1,
         },
         (newLocation: LocationObject) => {
-          console.log(newLocation);
-          console.log(location);
-
           setLocation({
             latitude: newLocation.coords.latitude,
             longitude: newLocation.coords.longitude,

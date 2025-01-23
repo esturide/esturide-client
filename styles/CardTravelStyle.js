@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   cardContainer: {
-    height: 350,
+    height: 376,
     borderWidth: 2,
     borderRadius: 20,
     paddingHorizontal: 25,
@@ -43,6 +43,10 @@ const styles = StyleSheet.create({
   maps: {
     width: '100%',
     height: '100%',
+  },
+  marker: {
+    width: 35,
+    height: 40,
   },
 });
 
