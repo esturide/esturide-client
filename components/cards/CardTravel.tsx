@@ -25,8 +25,6 @@ export default function CardTravel({
   price,
   seatsArr,
 }: CardTravelProps) {
-  const location = useCurrentPosition();
-
   const containerStyles = {
     driver: { ...styles.cardContainer, borderColor: DefaultDriverColor },
     passenger: { ...styles.cardContainer, borderColor: DefaultPassengerColor },

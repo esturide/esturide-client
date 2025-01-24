@@ -1,19 +1,41 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { StyleSheet, View } from 'react-native';
+import MapView from 'react-native-maps';
 import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 import { InputButton } from '@components/buttons/InputButton';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useCurrentPosition } from '@components/context/LocationContext';
 import AdBanner from '@components/banners/AdBanner';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
-import { useCurrentPosition } from '@components/context/LocationContext';
 import AbsoluteTopLayout from '@components/layouts/AbsoluteTopLayout';
+import Loading from '@components/visuals/resources/Loading';
 
 export default function WaitingPassengers() {
   const location = useCurrentPosition();
-  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
+  const { setCurrentRoute } = useTravelScheduleRoute();
   const [visible, setVisible] = useState(false);
+
+  const CurrentLocation = () => {
+    if (location !== null) {
+      return (
+        <MapView
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.0021,
+            longitudeDelta: 0.0021,
+          }}
+          style={styles.maps}
+          scrollEnabled={true}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+        ></MapView>
+      );
+    } else {
+      return <Loading visible={true} />;
+    }
+  };
 
   const ShowMap = () => {
     return (
@@ -63,30 +85,7 @@ export default function WaitingPassengers() {
             </View>
           </AbsoluteTopLayout>
 
-          <MapView
-            initialRegion={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-              latitudeDelta: 0.0021,
-              longitudeDelta: 0.0021,
-            }}
-            style={styles.maps}
-            scrollEnabled={false}
-          >
-            <Marker
-              coordinate={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-              }}
-              title={'Conductor'}
-              description={'Origen'}
-            >
-              <Image
-                source={require('@assets/markers/driver.png')}
-                style={styles.marker}
-              ></Image>
-            </Marker>
-          </MapView>
+          <CurrentLocation />
         </View>
       </>
     );
@@ -106,7 +105,11 @@ export default function WaitingPassengers() {
 
   const seats: SeatsArr[] = [{ value: '1' }];
 
-  return <ShowMap />;
+  return (
+    <>
+      <ShowMap />
+    </>
+  );
 }
 
 const styles = StyleSheet.create({

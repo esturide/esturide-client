@@ -5,19 +5,19 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { LocationObject } from 'expo-location';
 import * as Location from 'expo-location';
 import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/messages';
-import { LocationObject } from 'expo-location';
 
-export const CurrentPosition = createContext<Position>(null);
+export const CurrentPosition = createContext(null);
 
 export default function LocationContext({ children }: PropsWithChildren) {
   const [location, setLocation] = useState<Position | null>(null);
 
   useEffect(() => {
     const updateLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== 'granted') {
         showFailureMessage('No se pudo acceder a la ubicacion.');
@@ -33,7 +33,7 @@ export default function LocationContext({ children }: PropsWithChildren) {
       await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.High,
-          timeInterval: 5,
+          timeInterval: 1000,
           distanceInterval: 1,
         },
         (newLocation: LocationObject) => {

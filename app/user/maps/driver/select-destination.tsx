@@ -18,7 +18,7 @@ export default function SelectDestination() {
   useEffect(() => {
     (async () => {
       await loaderEffect(async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
+        const { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== 'granted') {
           showFailureMessage('No se pudo acceder a la ubicacion.');

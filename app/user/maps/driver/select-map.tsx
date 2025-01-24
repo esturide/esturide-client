@@ -8,7 +8,7 @@ import { useCurrentPosition } from '@components/context/LocationContext';
 
 export default function SelectMap() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
-  const location = useCurrentPosition();
+  const { location } = useCurrentPosition();
 
   const onPress = async () => {
     setCurrentRoute('/user/maps/driver/schedule-travel');
