@@ -4,15 +4,15 @@ import MapView from 'react-native-maps';
 import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 import { InputButton } from '@components/buttons/InputButton';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
-import { useCurrentPosition } from '@components/context/LocationContext';
 import AdBanner from '@components/banners/AdBanner';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
 import AbsoluteTopLayout from '@components/layouts/AbsoluteTopLayout';
 import Loading from '@components/visuals/resources/Loading';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
 
 export default function WaitingPassengers() {
-  const location = useCurrentPosition();
+  const { setRefresh, location } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [visible, setVisible] = useState(false);
 

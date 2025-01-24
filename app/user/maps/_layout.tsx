@@ -1,13 +1,13 @@
 import React from 'react';
 import { Slot } from 'expo-router';
-import LocationContext from '@components/context/LocationContext';
+import UserCurrentLocation from '@components/context/UserCurrentLocation';
 
 export default function LayoutMap() {
   return (
     <>
-      <LocationContext>
+      <UserCurrentLocation>
         <Slot />
-      </LocationContext>
+      </UserCurrentLocation>
     </>
   );
 }

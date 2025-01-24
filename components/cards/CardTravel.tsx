@@ -1,10 +1,9 @@
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import styles, {
   DefaultDriverColor,
   DefaultPassengerColor,
 } from '@styles/CardTravelStyle';
 import * as Crypto from 'expo-crypto';
-import { useCurrentPosition } from '@components/context/LocationContext';
 
 export interface SeatsArr {
   value: string;

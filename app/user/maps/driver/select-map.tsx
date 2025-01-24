@@ -4,11 +4,11 @@ import Map from '@components/cards/Map';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
-import { useCurrentPosition } from '@components/context/LocationContext';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
 
 export default function SelectMap() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
-  const { location } = useCurrentPosition();
+  const { location } = useUserPosition();
 
   const onPress = async () => {
     setCurrentRoute('/user/maps/driver/schedule-travel');
