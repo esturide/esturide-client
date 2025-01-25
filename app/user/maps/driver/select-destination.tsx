@@ -6,7 +6,7 @@ import loaderEffect from '@libs/loaderEffect';
 import { showFailureMessage } from '@libs/toast/messages';
 import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
-import { SelectMap } from '@components/cards/SelectMap';
+import { SelectMap } from '@components/cards/maps/SelectMap';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import { Position } from '@const/Position';
 

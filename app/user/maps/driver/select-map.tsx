@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Map from '@components/cards/Map';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
+import UserMapViewer from '@components/cards/maps/UserMapViewer';
 
 export default function SelectMap() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
@@ -16,7 +16,7 @@ export default function SelectMap() {
 
   return (
     <View style={styles.container}>
-      <Map origin={location} />
+      <UserMapViewer latitudeDelta={0.0021} longitudeDelta={0.0021} />
       {location !== null && (
         <AbsoluteBottomLayout>
           <ButtonLocationBlue onPress={onPress} />

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import InputTime, { Time } from '@components/inputs/InputTime';
+import InputTime from '@components/inputs/InputTime';
 import { InputButton } from '@components/buttons/InputButton';
 import InputLabel from '@components/inputs/InputLabel';
-import { router } from 'expo-router';
 import { stringToInteger } from '@libs/cast';
 import { showMessage } from '@libs/alerts/toast';
 import CardSeat from '@components/cards/CardSeat';
@@ -74,12 +73,14 @@ export default function ScheduleTravel() {
           </View>
         </View>
 
-        <InputLabel
-          label={'Precio'}
-          onChangeText={setPrice}
-          value={`${travelPrice}`}
-          typeInput={'numeric'}
-        />
+        <View>
+          <InputLabel
+            label={'Precio'}
+            onChangeText={setPrice}
+            value={`${travelPrice}`}
+            typeInput={'numeric'}
+          />
+        </View>
 
         <InputButton
           typeButton={'submit'}

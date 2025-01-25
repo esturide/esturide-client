@@ -10,6 +10,7 @@ import BottomSheet from '@components/modals/sheets/BottomSheet';
 import AbsoluteTopLayout from '@components/layouts/AbsoluteTopLayout';
 import Loading from '@components/visuals/resources/Loading';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
+import UserMapViewer from '@components/cards/maps/UserMapViewer';
 
 export default function WaitingPassengers() {
   const { setRefresh, location } = useUserPosition();
@@ -28,7 +29,6 @@ export default function WaitingPassengers() {
           }}
           style={styles.maps}
           scrollEnabled={true}
-          showsUserLocation={true}
           showsMyLocationButton={true}
         ></MapView>
       );
@@ -85,7 +85,7 @@ export default function WaitingPassengers() {
             </View>
           </AbsoluteTopLayout>
 
-          <CurrentLocation />
+          <UserMapViewer latitudeDelta={0.0021} longitudeDelta={0.0021} />
         </View>
       </>
     );
