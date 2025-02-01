@@ -11,7 +11,6 @@ import { userCodeAtom } from '@stores/user';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { getFullName, UserType } from '@const/RequestProfile';
 import SwitchInput from '@components/switch/SwitchInput';
-import { defaultDriverColor } from '@const/DefaultColors';
 
 const DefaultMessageNotVerified = 'Verificar usuario';
 
