@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
-import { InputButton } from '@components/buttons/InputButton';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import AdBanner from '@components/banners/AdBanner';
-import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
-import BottomSheetModal from '@components/modals/sheets/BottomSheetModal';
-import AbsoluteTopLayout from '@components/layouts/AbsoluteTopLayout';
 import Loading from '@components/visuals/resources/Loading';
-import { useUserPosition } from '@components/context/UserCurrentLocation';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
-import BlueButton from '@components/buttons/BlueButton';
-import CancelButton from '@components/buttons/CancelButton';
-import CompactBlueButton from '@components/buttons/compact/CompactBlueButton';
 import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
-import GreenButton from '@components/buttons/GreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
+import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
 
 export default function WaitingPassengers() {
   const { setRefresh, location, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
-  const [visible, setVisible] = useState(true);
+  const [changePage, setChangePage] = useState(true);
+
+  useEffect(() => {}, [isLoading]);
 
   const finishTravel = async () => {
     setCurrentRoute('/user/maps');
@@ -35,14 +29,28 @@ export default function WaitingPassengers() {
   };
 
   const onChangePage = async () => {
-    setVisible(!visible);
+    setChangePage(!changePage);
   };
 
   const seats: SeatsArr[] = [{ value: '1' }];
 
   const StatusTravel = () => {
-    return (
-      <View>
+    const [viewPassengers, setViewPassengers] = useState(false);
+
+    const onChangePassengers = async () => {
+      setViewPassengers(!viewPassengers);
+    };
+
+    const Passengers = () => {
+      return (
+        <View>
+          <Text>Pasajero</Text>
+        </View>
+      );
+    };
+
+    const TravelStatus = () => {
+      return (
         <View style={styles.containerPassengers}>
           <CardTravel
             typeCard={'driver'}
@@ -52,23 +60,44 @@ export default function WaitingPassengers() {
             seatsArr={seats}
           />
         </View>
+      );
+    };
+
+    const ButtonControls = () => {
+      return (
         <View style={styles.containerButtons}>
-          <CompactGreenButton title={'Opciones'} onPress={onChangePage} />
+          <CompactGreenButton
+            title={'Pasajeros'}
+            onPress={onChangePassengers}
+          />
+          <CompactGreenButton title={'Terminar'} onPress={onChangePage} />
         </View>
-      </View>
+      );
+    };
+
+    return (
+      <>
+        {viewPassengers ? <Passengers /> : <TravelStatus />}
+
+        <ButtonControls />
+      </>
     );
   };
 
-  const ControlTravel = () => {
+  const ModifyTravel = () => {
     return (
-      <View>
+      <>
         <View style={styles.containerButtons}>
           <CompactGreenButton title={'Atras'} onPress={onChangePage} />
-          <CompactGreenButton title={'Terminar'} onPress={finishTravel} />
+          <CompactGreenButton title={'Finalizar'} onPress={finishTravel} />
           <CompactCancelButton title={'Cancelar'} onPress={cancelTravel} />
         </View>
-      </View>
+      </>
     );
+  };
+
+  const onPressBottomSheet = async () => {
+    console.log('Is pressed');
   };
 
   if (isLoading) {
@@ -80,11 +109,11 @@ export default function WaitingPassengers() {
       <View style={styles.container}>
         <UserMapViewer />
 
-        <BottomSheet>
+        <BottomSheet onPress={onPressBottomSheet}>
           <AdBanner />
 
           <View style={styles.container}>
-            {visible ? <StatusTravel /> : <ControlTravel />}
+            {changePage ? <StatusTravel /> : <ModifyTravel />}
           </View>
         </BottomSheet>
       </View>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { router } from 'expo-router';
 import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';

@@ -69,9 +69,7 @@ export const CreditCard = ({
   };
 
   const ModalCard = () => {
-    return (
-      <GenericModal isVisible={false} onClose={onCloseModal}></GenericModal>
-    );
+    return <GenericModal visible={false} onClose={onCloseModal}></GenericModal>;
   };
 
   const onSubmitCard = async (
@@ -104,7 +102,7 @@ export const CreditCard = ({
         <Text>Agregar Tarjeta</Text>
       </View>
 
-      <GenericModal isVisible={showModal} onClose={changeVisibility}>
+      <GenericModal visible={showModal} onClose={changeVisibility}>
         <CheckoutCardForm onSubmit={onSubmitCard} onClose={onCloseModal} />
       </GenericModal>
 

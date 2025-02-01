@@ -8,7 +8,6 @@ import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContex
 
 import InputTime from '@components/inputs/InputTime';
 import CancelButton from '@components/buttons/CancelButton';
-import BlueButton from '@components/buttons/BlueButton';
 import InputLabel from '@components/inputs/InputLabel';
 import GreenButton from '@components/buttons/GreenButton';
 
@@ -55,7 +54,11 @@ export default function ScheduleTravel() {
   };
 
   return (
-    <GenericModal title={'Agendar viaje'} isVisible onClose={cancelSchedule}>
+    <GenericModal
+      title={'Agendar viaje'}
+      onClose={cancelSchedule}
+      visible={true}
+    >
       <View style={styles.container}>
         <View style={styles.containerRow}>
           <InputTime label={'Inicio'} />

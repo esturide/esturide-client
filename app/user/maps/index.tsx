@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import AdBanner from '@components/banners/AdBanner';
-import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
-import BlueButton from '@components/buttons/BlueButton';
 import GreenButton from '@components/buttons/GreenButton';
 
 export default function Index() {

@@ -7,20 +7,20 @@ import styles from '@styles/modals/GenericModalStyle';
 
 type Props = PropsWithChildren<{
   title?: string;
-  isVisible: boolean;
+  visible: boolean;
   onClose?: () => Promise<void>;
 }>;
 
 export function GenericModal({
   title = '',
-  isVisible,
+  visible,
   children,
   onClose = async () => {
     router.back();
   },
 }: Props) {
   return (
-    <Modal animationType="slide" transparent={false} visible={isVisible}>
+    <Modal animationType="slide" transparent={false} visible={visible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>

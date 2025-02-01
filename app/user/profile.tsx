@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AdBanner from '@components/banners/AdBanner';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
