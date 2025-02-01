@@ -5,7 +5,7 @@ import { useUserManagerContext } from '@components/context/UserManagerContext';
 export default function LayoutPassenger() {
   const { userType } = useUserManagerContext();
 
-  if (userType === 'driver') {
+  if (userType === 'Passenger') {
     return (
       <>
         <Slot />

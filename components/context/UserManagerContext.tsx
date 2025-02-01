@@ -37,20 +37,26 @@ export default function UserManagerContextProvider({
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
 
   useEffect(() => {
-    console.log(`User code is: ${userCode}`);
-
     const loadProfile = async () => {
-      const statusProfile = await requestProfile(userCode, setUserProfile);
+      if (sessionStatus === 'Success') {
+        const statusProfile = await requestProfile(setUserProfile);
 
-      if (statusProfile && authToken.length != 0) {
-        setSessionStatus('Success');
+        console.log(`User code is: ${userCode}`);
+        console.log(`Auth token is: ${authToken}`);
+
+        if (statusProfile) {
+          setUserType(userProfile.role);
+
+          console.log(`User profile: `, userProfile);
+          console.log(`User type is set in: ${userType}`);
+        } else {
+          setSessionStatus('Failure');
+        }
       }
-
-      setUserType(userProfile.role);
     };
 
     loadProfile();
-  }, [userCode]);
+  }, [sessionStatus, authToken]);
 
   useEffect(() => {
     console.log(`Session status: ${sessionStatus}`);

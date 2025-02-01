@@ -16,6 +16,7 @@ type Props = {
   thirdStateStyle?: string;
 
   disabled?: boolean;
+  swapState?: boolean;
 };
 
 const SwitchInput = ({
@@ -30,8 +31,9 @@ const SwitchInput = ({
   thirdStateStyle = 'gray',
 
   disabled = false,
+  swapState = false,
 }: Props) => {
-  const [isOn, setIsOn] = useState(false);
+  const [isOn, setIsOn] = useState(swapState);
 
   const toggleSwitch = async () => {
     if (!disabled) {

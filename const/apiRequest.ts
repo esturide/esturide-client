@@ -6,8 +6,12 @@ export const clientRoot = axios.create({
   baseURL: baseURL,
 });
 
-export const clientUserManagementSystem = axios.create({
-  baseURL: `${baseURL}/user_management_system`,
+export const clientUserManagement = axios.create({
+  baseURL: `${baseURL}/user_management`,
+});
+
+export const clientTravelMatchNetwork = axios.create({
+  baseURL: `${baseURL}/travel_match_network`,
 });
 
 export const config: AxiosRequestConfig = {

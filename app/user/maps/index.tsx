@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import AdBanner from '@components/banners/AdBanner';
@@ -18,9 +18,9 @@ export default function Index() {
   const onScheduleNewTravel = async () => {
     await onUpdate();
 
-    if (userType == 'driver') {
+    if (userType === 'Driver') {
       router.push('/user/maps/driver/select-map');
-    } else if (userType == 'passenger') {
+    } else if (userType === 'Passenger') {
       router.push('/user/maps/passenger/search-travel');
     }
   };
@@ -52,7 +52,7 @@ export default function Index() {
         </View>
 
         <View style={styles.controls}>
-          <BlueButton title={'Solicitar'} />
+          <BlueButton title={'Solicitar'} onPress={onScheduleNewTravel} />
         </View>
       </>
     );
@@ -62,7 +62,7 @@ export default function Index() {
     <>
       <AdBanner />
       <View style={styles.container}>
-        {userType == 'driver' ? <ScheduleNewTravel /> : <RequestNewRide />}
+        {userType === 'Driver' ? <ScheduleNewTravel /> : <RequestNewRide />}
       </View>
     </>
   );

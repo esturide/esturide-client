@@ -6,48 +6,36 @@ import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
 import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIdentity';
 import { useAtom } from 'jotai/index';
-import { authTokenAtom } from '@stores/token';
 import { userCodeAtom } from '@stores/user';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { getFullName, UserType } from '@const/RequestProfile';
 import SwitchInput from '@components/switch/SwitchInput';
-
-const DefaultMessageNotVerified = 'Verificar usuario';
 
 export default function UserProfile() {
   const { setUserType, userType, onTraveling, setSessionStatus, userProfile } =
     useUserManagerContext();
 
   const [userCode, setUserCode] = useAtom(userCodeAtom);
-  const [authToken, setAuthToken] = useAtom(authTokenAtom);
-
-  const [messageRole, setMessageRole] = useState(DefaultMessageNotVerified);
-  const [disableSwap, setDisableSwap] = useState(false);
+  const [disableSwap, setDisableSwap] = useState(userType === 'Not-Verified');
 
   useEffect(() => {
-    console.log('Perfil de usuario: ', userProfile);
+    setUserType(userProfile.role);
   }, [userProfile]);
 
   useEffect(() => {
-    setDisableSwap(userType != 'Not Verified');
+    setDisableSwap(userType === 'Not-Verified');
   }, [userType]);
 
   const swapUserMessage = (user: UserType, traveling: boolean) => {
-    if (traveling) {
-      if (user == 'Driver') {
-        setMessageRole('Cambiar a conductor');
-        setUserType('driver');
-      } else if (user == 'Passenger') {
-        setMessageRole('Cambiar a pasajero');
-        setUserType('passenger');
-      }
-    } else {
-      if (user == 'Driver') {
-        setMessageRole('Cambiar a pasajero');
-        setUserType('passenger');
-      } else if (user == 'Passenger') {
-        setMessageRole('Cambiar a conductor');
-        setUserType('driver');
+    if (disableSwap) {
+      return;
+    }
+
+    if (!traveling) {
+      if (user === 'Driver') {
+        setUserType('Passenger');
+      } else if (user === 'Passenger') {
+        setUserType('Driver');
       }
     }
   };
@@ -56,7 +44,7 @@ export default function UserProfile() {
     setSessionStatus('Logout');
   };
 
-  const swapUser = async () => {
+  const onSwapUser = async () => {
     swapUserMessage(userType, onTraveling);
   };
 
@@ -70,21 +58,29 @@ export default function UserProfile() {
     },
   ];
 
+  const SwitchSwapUserType = () => {
+    return (
+      <SwitchInput
+        firstLabel={'Cambiar a conductor'}
+        secondLabel={'Cambiar a Pasajero'}
+        thirdLabel={'No verificado'}
+        disabled={disableSwap}
+        onToggleSwitch={onSwapUser}
+        swapState={userType !== 'Driver'}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       <AdBanner />
-      <ProfileHeader name={getFullName(userProfile)} role={userProfile.role} />
+      <ProfileHeader name={getFullName(userProfile)} role={userType} />
 
       <VerifyUserIdentity code={`#${userCode}`} />
 
       <InfoSection />
 
-      <SwitchInput
-        firstLabel={'Conductor'}
-        secondLabel={'Pasajero'}
-        thirdLabel={'No verificado'}
-        disabled={disableSwap}
-      />
+      <SwitchSwapUserType />
 
       {actionItems.map((item, index) => (
         <ActionItem

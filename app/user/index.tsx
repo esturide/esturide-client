@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AdBanner from '@components/banners/AdBanner';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export function MainIndexUser() {
-  const { userType, setUserType } = useUserManagerContext();
-
-  useEffect(() => {
-    setUserType('driver');
-  }, []);
+  const { userType } = useUserManagerContext();
 
   return (
     <View style={styles.container}>
@@ -20,8 +16,8 @@ export function MainIndexUser() {
           Estamos trabajando en esta funcionalidad para ofrecerte una mejor
           experiencia.
         </Text>
-        {userType === 'driver' && <Text>Conductor</Text>}
-        {userType === 'passenger' && <Text>Pasajero</Text>}
+        {userType === 'Driver' && <Text>Conductor</Text>}
+        {userType === 'Passenger' && <Text>Pasajero</Text>}
       </View>
     </View>
   );

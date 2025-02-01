@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { clientUserManagementSystem, config } from '@const/apiRequest';
+import { clientUserManagement, config } from '@const/apiRequest';
 import { formatDate } from '@libs/format/dates';
 
 export const createUser = async (
@@ -24,7 +24,7 @@ export const createUser = async (
       password: password,
     };
 
-    const response: AxiosResponse = await clientUserManagementSystem.post(
+    const response: AxiosResponse = await clientUserManagement.post(
       `/user/`,
       data,
       config,
