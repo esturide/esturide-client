@@ -1,12 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-
+import { router } from 'expo-router';
 import AdBanner from '@components/banners/AdBanner';
 import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
-import { router } from 'expo-router';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
+import BlueButton from '@components/buttons/BlueButton';
+import GreenButton from '@components/buttons/GreenButton';
 
 export default function Index() {
-  const onPress = async () => {
+  const { setRefresh } = useUserPosition();
+
+  const onUpdate = async () => {
+    setRefresh(true);
+  };
+
+  const onScheduleNewTravel = async () => {
+    await onUpdate();
     router.push('/user/maps/driver/select-map');
   };
 
@@ -19,8 +28,12 @@ export default function Index() {
             Aun no tienes un viaje en tu lista.
           </Text>
         </View>
+
         <View style={styles.controls}>
-          <ButtonLocationBlue onPress={onPress} />
+          <GreenButton
+            title={'Planificar nuevo viaje'}
+            onPress={onScheduleNewTravel}
+          />
         </View>
       </View>
     </>
@@ -44,5 +57,10 @@ const styles = StyleSheet.create({
   },
   controls: {
     flexDirection: 'row-reverse',
+    alignContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
   },
 });

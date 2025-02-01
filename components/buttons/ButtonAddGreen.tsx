@@ -6,7 +6,7 @@ import styles from '@styles/InputButtons';
 const ButtonAddGreen = () => {
   return (
     <View style={styles.btnAddGreen}>
-      <Icon name="add" style={styles.btnAddIcon} />
+      <Icon name={'add'} style={styles.btnAddIcon} />
     </View>
   );
 };

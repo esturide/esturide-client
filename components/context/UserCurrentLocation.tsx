@@ -8,29 +8,36 @@ import React, {
 import * as Location from 'expo-location';
 import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/messages';
+import loaderEffect from '@libs/loaderEffect';
 
 const CurrentUserPosition = createContext(null);
 
 export default function UserCurrentLocation({ children }: PropsWithChildren) {
   const [update, setUpdate] = useState(false);
-  const [location, setLocation] = useState<Position | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [location, setLocation] = useState<Position>({
+    latitude: 0,
+    longitude: 0,
+  });
 
   useEffect(() => {
     const updateLocation = async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
+      loaderEffect(async () => {
+        const { status } = await Location.requestForegroundPermissionsAsync();
 
-      if (status !== 'granted') {
-        showFailureMessage('No se pudo acceder a la ubicacion.');
-      }
+        if (status !== 'granted') {
+          showFailureMessage('No se pudo acceder a la ubicacion.');
+        }
 
-      const locationObject = await Location.getCurrentPositionAsync({});
+        const locationObject = await Location.getCurrentPositionAsync({});
 
-      setLocation({
-        latitude: locationObject.coords.latitude,
-        longitude: locationObject.coords.longitude,
-      });
+        setLocation({
+          latitude: locationObject.coords.latitude,
+          longitude: locationObject.coords.longitude,
+        });
 
-      setUpdate(false);
+        setUpdate(false);
+      }, setLoading);
     };
 
     updateLocation();
@@ -38,7 +45,7 @@ export default function UserCurrentLocation({ children }: PropsWithChildren) {
 
   return (
     <CurrentUserPosition.Provider
-      value={{ setRefresh: setUpdate, location: location }}
+      value={{ setRefresh: setUpdate, location: location, isLoading: loading }}
     >
       {children}
     </CurrentUserPosition.Provider>

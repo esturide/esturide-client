@@ -1,12 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { View } from 'react-native';
-import BottomSheet from '@components/modals/sheets/BottomSheet';
-import styles from '@styles/BottomSheetsStyle';
+import BottomSheetModal from '@components/modals/sheets/BottomSheetModal';
+import styles from '@styles/modals/BottomSheetsStyleModal';
 
-const meta: Meta<typeof BottomSheet> = {
+const meta: Meta<typeof BottomSheetModal> = {
   title: 'Components/BottomSheet',
-  component: BottomSheet,
+  component: BottomSheetModal,
   decorators: [
     (Story) => (
       <View style={styles.bottomSheetContainer}>
@@ -18,9 +18,9 @@ const meta: Meta<typeof BottomSheet> = {
 
 export default meta;
 
-const Template: Story<typeof BottomSheet> = (args) => (
+const Template: Story<typeof BottomSheetModal> = (args) => (
   <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-    <BottomSheet />
+    <BottomSheetModal />
   </View>
 );
 

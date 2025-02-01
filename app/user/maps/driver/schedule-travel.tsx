@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import InputTime from '@components/inputs/InputTime';
-import { InputButton } from '@components/buttons/InputButton';
-import InputLabel from '@components/inputs/InputLabel';
 import { stringToInteger } from '@libs/cast';
 import { showMessage } from '@libs/alerts/toast';
 import CardSeat from '@components/cards/CardSeat';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+
+import InputTime from '@components/inputs/InputTime';
+import CancelButton from '@components/buttons/CancelButton';
+import BlueButton from '@components/buttons/BlueButton';
+import InputLabel from '@components/inputs/InputLabel';
+import GreenButton from '@components/buttons/GreenButton';
 
 export default function ScheduleTravel() {
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
@@ -44,22 +47,17 @@ export default function ScheduleTravel() {
   };
 
   const travelDestinationSelect = async () => {
-    // router.push('/user/maps/driver/select-destination');
     setCurrentRoute('/user/maps/driver/select-destination');
   };
 
-  const setPrice = (value) => {
-    try {
-      setTravelPrice(value);
-    } catch (e) {
-      // TO DO
-    }
+  const cancelSchedule = async () => {
+    setCurrentRoute('/user/maps/');
   };
 
   return (
-    <GenericModal title={'Agendar viaje'} isVisible>
+    <GenericModal title={'Agendar viaje'} isVisible onClose={cancelSchedule}>
       <View style={styles.container}>
-        <View style={styles.inputs}>
+        <View style={styles.containerRow}>
           <InputTime label={'Inicio'} />
           <InputTime label={'Terminar'} />
         </View>
@@ -73,26 +71,20 @@ export default function ScheduleTravel() {
           </View>
         </View>
 
-        <View>
-          <InputLabel
-            label={'Precio'}
-            onChangeText={setPrice}
-            value={`${travelPrice}`}
-            typeInput={'numeric'}
-          />
+        <View style={styles.containerColumns}>
+          <View>
+            <InputLabel
+              label={'Precio'}
+              onChangeText={setTravelPrice}
+              value={`${travelPrice}`}
+              typeInput={'numeric'}
+            />
+          </View>
+
+          <GreenButton title={'Confirmar'} onPress={travelConfirm} />
+          <GreenButton title={'Destino'} onPress={travelDestinationSelect} />
+          <CancelButton title={'Cancelar'} onPress={cancelSchedule} />
         </View>
-
-        <InputButton
-          typeButton={'submit'}
-          label={'Confirmar'}
-          onPress={travelConfirm}
-        />
-
-        <InputButton
-          typeButton={'submit'}
-          label={'Destino'}
-          onPress={travelDestinationSelect}
-        />
       </View>
     </GenericModal>
   );
@@ -106,18 +98,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-
-  inputs: {
+  containerRow: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: 10,
   },
-
   containerSeats: {
     flex: 1,
   },
-
+  containerColumns: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
   seats: {
     flexDirection: 'row',
     gap: 15,

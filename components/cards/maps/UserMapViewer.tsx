@@ -4,15 +4,15 @@ import { useUserPosition } from '@components/context/UserCurrentLocation';
 import { StyleSheet } from 'react-native';
 
 type Props = {
-  latitudeDelta: number;
-  longitudeDelta: number;
+  latitudeDelta?: number;
+  longitudeDelta?: number;
 };
 
 export default function UserMapViewer({
-  latitudeDelta,
-  longitudeDelta,
+  latitudeDelta = 0.0021,
+  longitudeDelta = 0.0021,
 }: Props) {
-  const { setRefresh, location } = useUserPosition();
+  const { location } = useUserPosition();
 
   return (
     <MapView
@@ -32,7 +32,6 @@ export default function UserMapViewer({
 
 const styles = StyleSheet.create({
   maps: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
   },
 });

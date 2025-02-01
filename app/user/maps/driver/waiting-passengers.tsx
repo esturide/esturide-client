@@ -6,90 +6,23 @@ import { InputButton } from '@components/buttons/InputButton';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import AdBanner from '@components/banners/AdBanner';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
-import BottomSheet from '@components/modals/sheets/BottomSheet';
+import BottomSheetModal from '@components/modals/sheets/BottomSheetModal';
 import AbsoluteTopLayout from '@components/layouts/AbsoluteTopLayout';
 import Loading from '@components/visuals/resources/Loading';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
+import BottomSheet from '@components/modals/sheets/BottomSheet';
+import BlueButton from '@components/buttons/BlueButton';
+import CancelButton from '@components/buttons/CancelButton';
+import CompactBlueButton from '@components/buttons/compact/CompactBlueButton';
+import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
+import GreenButton from '@components/buttons/GreenButton';
+import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 
 export default function WaitingPassengers() {
-  const { setRefresh, location } = useUserPosition();
+  const { setRefresh, location, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
-  const [visible, setVisible] = useState(false);
-
-  const CurrentLocation = () => {
-    if (location !== null) {
-      return (
-        <MapView
-          initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
-            latitudeDelta: 0.0021,
-            longitudeDelta: 0.0021,
-          }}
-          style={styles.maps}
-          scrollEnabled={true}
-          showsMyLocationButton={true}
-        ></MapView>
-      );
-    } else {
-      return <Loading visible={true} />;
-    }
-  };
-
-  const ShowMap = () => {
-    return (
-      <>
-        <View style={styles.container}>
-          <AbsoluteTopLayout>
-            <AdBanner />
-            <View style={styles.container}>
-              <View style={styles.containerPassengers}>
-                <CardTravel
-                  typeCard={'driver'}
-                  departTime={'1'}
-                  arrivalTime={'1'}
-                  price={1}
-                  seatsArr={seats}
-                />
-              </View>
-
-              <View style={styles.containerButtons}>
-                <InputButton
-                  typeButton={'depositGreen'}
-                  label={'Opciones'}
-                  onPress={async () => {
-                    setVisible(!visible);
-                  }}
-                />
-              </View>
-
-              <BottomSheet
-                isVisible={visible}
-                onClose={setVisible}
-                onPress={onPressModal}
-              >
-                <View style={styles.containerButtons}>
-                  <InputButton
-                    typeButton={'depositBlue'}
-                    label={'Terminar viaje'}
-                    onPress={finishTravel}
-                  />
-                  <InputButton
-                    typeButton={'depositGreen'}
-                    label={'Cancelar'}
-                    onPress={cancelTravel}
-                  />
-                </View>
-              </BottomSheet>
-            </View>
-          </AbsoluteTopLayout>
-
-          <UserMapViewer latitudeDelta={0.0021} longitudeDelta={0.0021} />
-        </View>
-      </>
-    );
-  };
+  const [visible, setVisible] = useState(true);
 
   const finishTravel = async () => {
     setCurrentRoute('/user/maps');
@@ -101,13 +34,60 @@ export default function WaitingPassengers() {
     showFailureMessage('Viaje cancelado.');
   };
 
-  const onPressModal = async (close: boolean) => {};
+  const onChangePage = async () => {
+    setVisible(!visible);
+  };
 
   const seats: SeatsArr[] = [{ value: '1' }];
 
+  const StatusTravel = () => {
+    return (
+      <View>
+        <View style={styles.containerPassengers}>
+          <CardTravel
+            typeCard={'driver'}
+            departTime={'1'}
+            arrivalTime={'1'}
+            price={1}
+            seatsArr={seats}
+          />
+        </View>
+        <View style={styles.containerButtons}>
+          <CompactGreenButton title={'Opciones'} onPress={onChangePage} />
+        </View>
+      </View>
+    );
+  };
+
+  const ControlTravel = () => {
+    return (
+      <View>
+        <View style={styles.containerButtons}>
+          <CompactGreenButton title={'Atras'} onPress={onChangePage} />
+          <CompactGreenButton title={'Terminar'} onPress={finishTravel} />
+          <CompactCancelButton title={'Cancelar'} onPress={cancelTravel} />
+        </View>
+      </View>
+    );
+  };
+
+  if (isLoading) {
+    return <Loading visible={true} />;
+  }
+
   return (
     <>
-      <ShowMap />
+      <View style={styles.container}>
+        <UserMapViewer />
+
+        <BottomSheet>
+          <AdBanner />
+
+          <View style={styles.container}>
+            {visible ? <StatusTravel /> : <ControlTravel />}
+          </View>
+        </BottomSheet>
+      </View>
     </>
   );
 }
@@ -130,6 +110,7 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   containerButtons: {
+    marginVertical: 10,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: 15,
