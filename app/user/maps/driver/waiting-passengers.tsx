@@ -10,21 +10,28 @@ import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
+import { useUserTypeContext } from '@components/context/UserTypeContext';
 
 export default function WaitingPassengers() {
+  const { setOnTraveling } = useUserTypeContext();
   const { setRefresh, location, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [changePage, setChangePage] = useState(true);
 
   useEffect(() => {}, [isLoading]);
 
-  const finishTravel = async () => {
+  const travelIsOver = async () => {
     setCurrentRoute('/user/maps');
+    setOnTraveling(false);
+  };
+
+  const finishTravel = async () => {
+    travelIsOver();
     showSuccessMessage('Viaje finalizado.', 'Que hayas disfrutado del viaje');
   };
 
   const cancelTravel = async () => {
-    setCurrentRoute('/user/maps');
+    travelIsOver();
     showFailureMessage('Viaje cancelado.');
   };
 

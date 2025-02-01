@@ -10,8 +10,10 @@ import InputTime from '@components/inputs/InputTime';
 import CancelButton from '@components/buttons/CancelButton';
 import InputLabel from '@components/inputs/InputLabel';
 import GreenButton from '@components/buttons/GreenButton';
+import { useUserTypeContext } from '@components/context/UserTypeContext';
 
 export default function ScheduleTravel() {
+  const { setOnTraveling } = useUserTypeContext();
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [startTime, setStartTime] = useState(new Date());
@@ -37,11 +39,12 @@ export default function ScheduleTravel() {
 
       if (price > 0) {
         setCurrentRoute('/user/maps/driver/waiting-passengers');
+        setOnTraveling(true);
       } else {
         showMessage('Los viajes deben tener un precio.');
       }
     } catch (e) {
-      return;
+      showMessage('Precio invalido.');
     }
   };
 

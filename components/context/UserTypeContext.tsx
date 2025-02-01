@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useState } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 export type UserType = 'driver' | 'passenger';
 
@@ -8,12 +14,15 @@ export default function UserTypeContextProvider({
   children,
 }: PropsWithChildren) {
   const [userType, setUserType] = useState<UserType>('passenger');
+  const [onTraveling, setOnTraveling] = useState(false);
 
   return (
     <UserTypeContext.Provider
       value={{
         userType: userType,
         setUserType: setUserType,
+        onTraveling: onTraveling,
+        setOnTraveling: setOnTraveling,
       }}
     >
       {children}

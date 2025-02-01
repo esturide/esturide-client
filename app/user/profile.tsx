@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AdBanner from '@components/banners/AdBanner';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
@@ -10,26 +10,55 @@ import { useAtom } from 'jotai/index';
 import { authTokenAtom } from '@stores/token';
 import { userCodeAtom } from '@stores/user';
 import { UserProfileContext } from '@components/context/UserProfileContext';
+import {
+  UserType,
+  useUserTypeContext,
+} from '@components/context/UserTypeContext';
 
 export default function UserProfile() {
+  const { userType, setUserType, onTraveling } = useUserTypeContext();
+  const [messageTypeUser, setMessageTypeUser] = useState('');
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [userCode, setUserCode] = useAtom(userCodeAtom);
   const userProfile = useContext(UserProfileContext);
+
+  useEffect(() => {
+    modifyUser(userType, onTraveling);
+  }, []);
+
+  const modifyUser = (user: UserType, traveling: boolean) => {
+    if (traveling) {
+      if (user == 'driver') {
+        setMessageTypeUser('Cambiar a conductor');
+        setUserType('driver');
+      } else if (user == 'passenger') {
+        setMessageTypeUser('Cambiar a pasajero');
+        setUserType('passenger');
+      }
+    } else {
+      if (user == 'driver') {
+        setMessageTypeUser('Cambiar a pasajero');
+        setUserType('passenger');
+      } else if (user == 'passenger') {
+        setMessageTypeUser('Cambiar a conductor');
+        setUserType('driver');
+      }
+    }
+  };
 
   const closeSession = async () => {
     setAuthToken('');
     router.replace('/');
   };
 
+  const swapTypeUser = async () => {
+    modifyUser(userType, onTraveling);
+  };
+
   const actionItems = [
     {
-      title: 'Depositar Capital',
-    },
-    {
-      title: 'Retirar Capital',
-    },
-    {
-      title: 'Cambiar a Pasajero',
+      title: messageTypeUser,
+      onTouchTap: swapTypeUser,
     },
     {
       title: 'Cerrar sesion',

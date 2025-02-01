@@ -4,9 +4,12 @@ import { router } from 'expo-router';
 import AdBanner from '@components/banners/AdBanner';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import GreenButton from '@components/buttons/GreenButton';
+import { useUserTypeContext } from '@components/context/UserTypeContext';
+import BlueButton from '@components/buttons/BlueButton';
 
 export default function Index() {
   const { setRefresh } = useUserPosition();
+  const { userType } = useUserTypeContext();
 
   const onUpdate = async () => {
     setRefresh(true);
@@ -14,13 +17,17 @@ export default function Index() {
 
   const onScheduleNewTravel = async () => {
     await onUpdate();
-    router.push('/user/maps/driver/select-map');
+
+    if (userType == 'driver') {
+      router.push('/user/maps/driver/select-map');
+    } else if (userType == 'passenger') {
+      router.push('/user/maps/passenger/search-travel');
+    }
   };
 
-  return (
-    <>
-      <AdBanner />
-      <View style={styles.container}>
+  const ScheduleNewTravel = () => {
+    return (
+      <>
         <View style={styles.message}>
           <Text style={styles.messageText}>
             Aun no tienes un viaje en tu lista.
@@ -33,6 +40,29 @@ export default function Index() {
             onPress={onScheduleNewTravel}
           />
         </View>
+      </>
+    );
+  };
+
+  const RequestNewRide = () => {
+    return (
+      <>
+        <View style={styles.message}>
+          <Text style={styles.messageText}>Aun no tienes un ride.</Text>
+        </View>
+
+        <View style={styles.controls}>
+          <BlueButton title={'Solicitar'} />
+        </View>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <AdBanner />
+      <View style={styles.container}>
+        {userType == 'driver' ? <ScheduleNewTravel /> : <RequestNewRide />}
       </View>
     </>
   );
