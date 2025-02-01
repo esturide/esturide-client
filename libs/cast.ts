@@ -7,3 +7,12 @@ export function stringToInteger(str: string): number {
 
   return parsed;
 }
+export function stringToNumber(str: string): [boolean, number] {
+  const number = parseInt(str, 10);
+
+  if (isNaN(number)) {
+    return [false, 0];
+  }
+
+  return [true, number];
+}

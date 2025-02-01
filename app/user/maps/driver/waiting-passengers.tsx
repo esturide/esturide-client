@@ -10,10 +10,10 @@ import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
-import { useUserTypeContext } from '@components/context/UserTypeContext';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export default function WaitingPassengers() {
-  const { setOnTraveling } = useUserTypeContext();
+  const { setOnTraveling } = useUserManagerContext();
   const { setRefresh, location, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [changePage, setChangePage] = useState(true);

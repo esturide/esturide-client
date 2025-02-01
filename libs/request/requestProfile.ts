@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { clientUserManagementSystem, config } from '@const/apiRequest';
-import RequestProfile from '@const/RequestProfile';
+import RequestProfile, { getRoleFromRequest } from '@const/RequestProfile';
 
 export const requestProfile = async (
   code: number,
@@ -20,13 +20,11 @@ export const requestProfile = async (
       maternalSurname: data.maternal_surname,
       paternalSurname: data.paternal_surname,
       email: data.email,
-      role: data.role,
+      role: getRoleFromRequest(data.role),
     });
 
     return response.status === 200 || response.status === 201;
   } catch (e) {
-    console.log(e);
-
     if (axios.isAxiosError(e)) {
       return false;
     }

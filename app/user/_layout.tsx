@@ -9,7 +9,6 @@ import notifyIcon from '@assets/icons/tabs/notify.png';
 import profileIcon from '@assets/icons/tabs/user.png';
 
 import styles from '@styles/layouts/UserLayout';
-import UserContext from '@components/context/UserProfileContext';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 export default function UserLayout() {
@@ -46,12 +45,10 @@ export default function UserLayout() {
 
   return (
     <View style={styles.flexContainer}>
-      <UserContext>
-        <View style={styles.container}>
-          <Slot />
-        </View>
-        <NavigationBar navigationItems={navigationItem} />
-      </UserContext>
+      <View style={styles.container}>
+        <Slot />
+      </View>
+      <NavigationBar navigationItems={navigationItem} />
     </View>
   );
 }

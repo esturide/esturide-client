@@ -1,64 +1,69 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AdBanner from '@components/banners/AdBanner';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
 import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
 import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIdentity';
-import { router } from 'expo-router';
 import { useAtom } from 'jotai/index';
 import { authTokenAtom } from '@stores/token';
 import { userCodeAtom } from '@stores/user';
-import { UserProfileContext } from '@components/context/UserProfileContext';
-import {
-  UserType,
-  useUserTypeContext,
-} from '@components/context/UserTypeContext';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
+import { getFullName, UserType } from '@const/RequestProfile';
+import SwitchInput from '@components/switch/SwitchInput';
+import { defaultDriverColor } from '@const/DefaultColors';
+
+const DefaultMessageNotVerified = 'Verificar usuario';
 
 export default function UserProfile() {
-  const { userType, setUserType, onTraveling } = useUserTypeContext();
-  const [messageTypeUser, setMessageTypeUser] = useState('');
-  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const { setUserType, userType, onTraveling, setSessionStatus, userProfile } =
+    useUserManagerContext();
+
   const [userCode, setUserCode] = useAtom(userCodeAtom);
-  const userProfile = useContext(UserProfileContext);
+  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+
+  const [messageRole, setMessageRole] = useState(DefaultMessageNotVerified);
+  const [disableSwap, setDisableSwap] = useState(false);
 
   useEffect(() => {
-    modifyUser(userType, onTraveling);
-  }, []);
+    console.log('Perfil de usuario: ', userProfile);
+  }, [userProfile]);
 
-  const modifyUser = (user: UserType, traveling: boolean) => {
+  useEffect(() => {
+    setDisableSwap(userType != 'Not Verified');
+  }, [userType]);
+
+  const swapUserMessage = (user: UserType, traveling: boolean) => {
     if (traveling) {
-      if (user == 'driver') {
-        setMessageTypeUser('Cambiar a conductor');
+      if (user == 'Driver') {
+        setMessageRole('Cambiar a conductor');
         setUserType('driver');
-      } else if (user == 'passenger') {
-        setMessageTypeUser('Cambiar a pasajero');
+      } else if (user == 'Passenger') {
+        setMessageRole('Cambiar a pasajero');
         setUserType('passenger');
       }
     } else {
-      if (user == 'driver') {
-        setMessageTypeUser('Cambiar a pasajero');
+      if (user == 'Driver') {
+        setMessageRole('Cambiar a pasajero');
         setUserType('passenger');
-      } else if (user == 'passenger') {
-        setMessageTypeUser('Cambiar a conductor');
+      } else if (user == 'Passenger') {
+        setMessageRole('Cambiar a conductor');
         setUserType('driver');
       }
     }
   };
 
   const closeSession = async () => {
-    setAuthToken('');
-    router.replace('/');
+    setSessionStatus('Logout');
   };
 
-  const swapTypeUser = async () => {
-    modifyUser(userType, onTraveling);
+  const swapUser = async () => {
+    swapUserMessage(userType, onTraveling);
   };
 
   const actionItems = [
     {
-      title: messageTypeUser,
-      onTouchTap: swapTypeUser,
+      title: 'Acerca de',
     },
     {
       title: 'Cerrar sesion',
@@ -66,18 +71,21 @@ export default function UserProfile() {
     },
   ];
 
-  const fullName = `${userProfile.firstName} ${userProfile.maternalSurname} ${userProfile.paternalSurname}`;
-  const userIdentify = `#${userCode}`;
-  const role = userProfile.role;
-
   return (
     <View style={styles.container}>
       <AdBanner />
-      <ProfileHeader name={fullName} role={role} />
+      <ProfileHeader name={getFullName(userProfile)} role={userProfile.role} />
 
-      <VerifyUserIdentity code={userIdentify} />
+      <VerifyUserIdentity code={`#${userCode}`} />
 
       <InfoSection />
+
+      <SwitchInput
+        firstLabel={'Conductor'}
+        secondLabel={'Pasajero'}
+        thirdLabel={'No verificado'}
+        disabled={disableSwap}
+      />
 
       {actionItems.map((item, index) => (
         <ActionItem

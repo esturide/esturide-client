@@ -4,12 +4,12 @@ import { router } from 'expo-router';
 import AdBanner from '@components/banners/AdBanner';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import GreenButton from '@components/buttons/GreenButton';
-import { useUserTypeContext } from '@components/context/UserTypeContext';
 import BlueButton from '@components/buttons/BlueButton';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export default function Index() {
   const { setRefresh } = useUserPosition();
-  const { userType } = useUserTypeContext();
+  const { userType } = useUserManagerContext();
 
   const onUpdate = async () => {
     setRefresh(true);

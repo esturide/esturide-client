@@ -5,19 +5,19 @@ import { Provider } from 'jotai';
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
 import RouteNavigatorContext from '@components/context/RouteNavigatorContext';
-import UserTypeContextProvider from '@components/context/UserTypeContext';
+import UserManagerContextProvider from '@components/context/UserManagerContext';
 
 export default function RootLayout() {
   return (
     <>
-      <UserTypeContextProvider>
-        <RouteNavigatorContext>
-          <Provider>
+      <Provider>
+        <UserManagerContextProvider>
+          <RouteNavigatorContext>
             <Slot />
-          </Provider>
-          <Toast />
-        </RouteNavigatorContext>
-      </UserTypeContextProvider>
+            <Toast />
+          </RouteNavigatorContext>
+        </UserManagerContextProvider>
+      </Provider>
     </>
   );
 }

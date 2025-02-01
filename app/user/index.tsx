@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AdBanner from '@components/banners/AdBanner';
-import { useUserTypeContext } from '@components/context/UserTypeContext';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export function MainIndexUser() {
-  const { userType, setUserType } = useUserTypeContext();
+  const { userType, setUserType } = useUserManagerContext();
 
   useEffect(() => {
     setUserType('driver');

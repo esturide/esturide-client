@@ -10,10 +10,10 @@ import InputTime from '@components/inputs/InputTime';
 import CancelButton from '@components/buttons/CancelButton';
 import InputLabel from '@components/inputs/InputLabel';
 import GreenButton from '@components/buttons/GreenButton';
-import { useUserTypeContext } from '@components/context/UserTypeContext';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export default function ScheduleTravel() {
-  const { setOnTraveling } = useUserTypeContext();
+  const { setOnTraveling } = useUserManagerContext();
   const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [startTime, setStartTime] = useState(new Date());

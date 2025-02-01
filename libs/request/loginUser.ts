@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import { clientRoot, config } from '@const/apiRequest';
 
 export interface UserDataLogin {
-  code: string;
-  password: string;
+  readonly code: number;
+  readonly password: string;
 }
 
 export const loginUser = async (

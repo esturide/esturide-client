@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from '@expo/vector-icons';
 import styles from '@styles/InputButtons';
 
 const ButtonAddGreen = () => {
   return (
     <View style={styles.btnAddGreen}>
-      <Icon name={'add'} style={styles.btnAddIcon} />
+      <MaterialIcons name={'add'} style={styles.btnAddIcon} color={'white'} />
     </View>
   );
 };
