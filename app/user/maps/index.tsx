@@ -15,7 +15,7 @@ export default function Index() {
     setRefresh(true);
   };
 
-  const onScheduleNewTravel = async () => {
+  const onNewRequest = async () => {
     await onUpdate();
 
     if (userType === 'Driver') {
@@ -37,7 +37,7 @@ export default function Index() {
         <View style={styles.controls}>
           <GreenButton
             title={'Planificar nuevo viaje'}
-            onPress={onScheduleNewTravel}
+            onPress={onNewRequest}
           />
         </View>
       </>
@@ -52,7 +52,7 @@ export default function Index() {
         </View>
 
         <View style={styles.controls}>
-          <BlueButton title={'Solicitar'} onPress={onScheduleNewTravel} />
+          <BlueButton title={'Solicitar'} onPress={onNewRequest} />
         </View>
       </>
     );

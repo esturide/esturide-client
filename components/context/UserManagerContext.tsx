@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   PropsWithChildren,
   useContext,
@@ -45,10 +45,7 @@ export default function UserManagerContextProvider({
         console.log(`Auth token is: ${authToken}`);
 
         if (statusProfile) {
-          setUserType(userProfile.role);
-
-          console.log(`User profile: `, userProfile);
-          console.log(`User type is set in: ${userType}`);
+          setSessionStatus('Success');
         } else {
           setSessionStatus('Failure');
         }
@@ -57,6 +54,15 @@ export default function UserManagerContextProvider({
 
     loadProfile();
   }, [sessionStatus, authToken]);
+
+  useEffect(() => {
+    console.log(`User profile: `, userProfile);
+    setUserType(userProfile.role);
+  }, [userProfile]);
+
+  useEffect(() => {
+    console.log(`User type is set in: ${userType}`);
+  }, [userProfile]);
 
   useEffect(() => {
     console.log(`Session status: ${sessionStatus}`);

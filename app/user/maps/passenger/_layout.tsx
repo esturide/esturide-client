@@ -2,7 +2,7 @@ import React from 'react';
 import { router, Slot } from 'expo-router';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 
-export default function LayoutPassenger() {
+export default function LayoutDriver() {
   const { userType } = useUserManagerContext();
 
   if (userType === 'Passenger') {
