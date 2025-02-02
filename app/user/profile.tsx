@@ -19,7 +19,7 @@ export default function UserProfile() {
   const [disableSwap, setDisableSwap] = useState(userType === 'Not-Verified');
 
   useEffect(() => {
-    setUserType(userProfile.role);
+    console.log(`Update profile, role: ${userType}`);
   }, [userProfile]);
 
   useEffect(() => {
