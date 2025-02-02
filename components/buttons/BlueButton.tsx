@@ -14,11 +14,11 @@ export default BlueButton;
 
 const styles = StyleSheet.create({
   btn: {
+    flex: 1,
     borderTopLeftRadius: 12,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     backgroundColor: '#4b61b9',
-    margin: 10,
     height: 51,
     overflow: 'hidden',
     flexDirection: 'row',
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 44,
     paddingVertical: 7,
-    marginVertical: 5,
   },
   text: {
     fontSize: 16,

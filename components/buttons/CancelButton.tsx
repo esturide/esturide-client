@@ -14,7 +14,7 @@ export default CancelButton;
 
 const styles = StyleSheet.create({
   btn: {
-    margin: 10,
+    flex: 1,
     borderTopLeftRadius: 12,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 44,
     paddingVertical: 7,
-    marginVertical: 5,
   },
   text: {
     fontSize: 16,
