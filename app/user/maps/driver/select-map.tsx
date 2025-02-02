@@ -29,8 +29,10 @@ export default function SelectMap() {
       <UserMapViewer />
 
       <BottomSheet>
-        <GreenButton title={'Crear'} onPress={onSchedule} />
-        <CancelButton title={'Cancelar'} onPress={onCancel} />
+        <View style={styles.containerControls}>
+          <GreenButton title={'Iniciar'} onPress={onSchedule} />
+          <CancelButton title={'Cancelar'} onPress={onCancel} />
+        </View>
       </BottomSheet>
     </View>
   );
@@ -39,5 +41,13 @@ export default function SelectMap() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerControls: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    gap: 10,
   },
 });

@@ -10,6 +10,7 @@ import { userCodeAtom } from '@stores/user';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { getFullName, UserType } from '@const/RequestProfile';
 import SwitchInput from '@components/switch/SwitchInput';
+import CancelButton from '@components/buttons/CancelButton';
 
 export default function UserProfile() {
   const { setUserType, userType, onTraveling, setSessionStatus, userProfile } =
@@ -46,26 +47,9 @@ export default function UserProfile() {
 
   const actionItems = [
     {
-      title: 'Acerca de',
-    },
-    {
-      title: 'Cerrar sesion',
-      onTouchTap: closeSession,
+      title: 'Informacion del proyecto',
     },
   ];
-
-  const SwitchSwapUserType = () => {
-    return (
-      <SwitchInput
-        firstLabel={'Cambiar a conductor'}
-        secondLabel={'Cambiar a Pasajero'}
-        thirdLabel={'No verificado'}
-        disabled={disableSwap}
-        onToggleSwitch={onSwapUser}
-        swapState={userType !== 'Driver'}
-      />
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -76,14 +60,24 @@ export default function UserProfile() {
 
       <InfoSection />
 
-      <SwitchSwapUserType />
+      <View style={styles.containerControls}>
+        {!onTraveling && (
+          <>
+            <SwitchInput
+              firstLabel={'Cambiar a conductor'}
+              secondLabel={'Cambiar a Pasajero'}
+              thirdLabel={'No verificado'}
+              disabled={disableSwap}
+              onToggleSwitch={onSwapUser}
+              swapState={userType !== 'Driver'}
+            />
+            <CancelButton title={'Cerrar sesion'} onPress={closeSession} />
+          </>
+        )}
+      </View>
 
       {actionItems.map((item, index) => (
-        <ActionItem
-          key={index}
-          title={item.title}
-          onTouchTap={item.onTouchTap}
-        />
+        <ActionItem key={index} title={item.title} />
       ))}
     </View>
   );
@@ -92,7 +86,6 @@ export default function UserProfile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
   },
   divider: {
     width: 170,
@@ -105,4 +98,5 @@ const styles = StyleSheet.create({
     aspectRatio: 4.08,
     marginTop: 82,
   },
+  containerControls: {},
 });

@@ -11,6 +11,8 @@ import CancelButton from '@components/buttons/CancelButton';
 import InputLabel from '@components/inputs/InputLabel';
 import GreenButton from '@components/buttons/GreenButton';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
+import InputPrice from '@components/inputs/InputPrice';
+import InputSeats from '@components/inputs/InputSeats';
 
 export default function ScheduleTravel() {
   const { setOnTraveling } = useUserManagerContext();
@@ -18,7 +20,7 @@ export default function ScheduleTravel() {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [startTime, setStartTime] = useState(new Date());
   const [finishedTime, setFinishedTime] = useState(new Date());
-  const [travelPrice, setTravelPrice] = useState('');
+  const [travelPrice, setTravelPrice] = useState(0);
 
   const showDatePicker = async () => {
     setDatePickerVisibility(true);
@@ -34,17 +36,13 @@ export default function ScheduleTravel() {
   };
 
   const travelConfirm = async () => {
-    try {
-      const price = stringToInteger(travelPrice);
+    if (travelPrice > 0) {
+      console.log(`Travel price: ${travelPrice}`);
 
-      if (price > 0) {
-        setCurrentRoute('/user/maps/driver/waiting-passengers');
-        setOnTraveling(true);
-      } else {
-        showMessage('Los viajes deben tener un precio.');
-      }
-    } catch (e) {
-      showMessage('Precio invalido.');
+      setCurrentRoute('/user/maps/driver/waiting-passengers');
+      setOnTraveling(true);
+    } else {
+      showMessage('Los viajes deben tener un precio.');
     }
   };
 
@@ -68,28 +66,20 @@ export default function ScheduleTravel() {
           <InputTime label={'Terminar'} />
         </View>
 
-        <View style={styles.containerSeats}>
-          <Text>Asientos disponibles</Text>
-          <View style={styles.seats}>
-            <CardSeat seat={'A'} />
-            <CardSeat seat={'B'} />
-            <CardSeat seat={'C'} />
-          </View>
+        <View style={styles.containerRow}>
+          <InputPrice setPrice={setTravelPrice} />
+
+          <InputSeats />
         </View>
 
         <View style={styles.containerColumns}>
-          <View>
-            <InputLabel
-              label={'Precio'}
-              onChangeText={setTravelPrice}
-              value={`${travelPrice}`}
-              typeInput={'numeric'}
-            />
+          <View style={styles.containerRow}>
+            <GreenButton title={'Confirmar'} onPress={travelConfirm} />
+            <GreenButton title={'Destino'} onPress={travelDestinationSelect} />
           </View>
-
-          <GreenButton title={'Confirmar'} onPress={travelConfirm} />
-          <GreenButton title={'Destino'} onPress={travelDestinationSelect} />
-          <CancelButton title={'Cancelar'} onPress={cancelSchedule} />
+          <View style={styles.containerRow}>
+            <CancelButton title={'Cancelar'} onPress={cancelSchedule} />
+          </View>
         </View>
       </View>
     </GenericModal>
@@ -105,22 +95,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerRow: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignSelf: 'center',
+    alignItems: 'center',
     gap: 10,
   },
-  containerSeats: {
-    flex: 1,
-  },
   containerColumns: {
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-end',
-  },
-  seats: {
-    flexDirection: 'row',
-    gap: 15,
-    margin: 5,
+    alignSelf: 'center',
+    alignItems: 'center',
+    gap: 10,
   },
 });
