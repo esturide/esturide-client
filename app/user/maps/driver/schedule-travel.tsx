@@ -68,7 +68,6 @@ export default function ScheduleTravel() {
 
         <View style={styles.containerRow}>
           <InputPrice setPrice={setTravelPrice} />
-
           <InputSeats />
         </View>
 
@@ -93,19 +92,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
+    gap: 10,
   },
   containerRow: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignSelf: 'center',
     alignItems: 'center',
-    gap: 10,
+    gap: 17,
   },
   containerColumns: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignSelf: 'center',
     alignItems: 'center',
-    gap: 10,
+    gap: 17,
   },
 });

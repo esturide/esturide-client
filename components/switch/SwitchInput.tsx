@@ -73,8 +73,9 @@ const SwitchInput = ({
 
 const styles = StyleSheet.create({
   switch: {
+    flex: 1,
+    paddingHorizontal: 44,
     paddingVertical: 16,
-    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,

@@ -4,7 +4,6 @@ import {
   Platform,
   Text,
   TextInput,
-  TextInputProps,
   UIManager,
   View,
   ViewStyle,

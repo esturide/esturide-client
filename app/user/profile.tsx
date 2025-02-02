@@ -54,15 +54,20 @@ export default function UserProfile() {
   return (
     <View style={styles.container}>
       <AdBanner />
-      <ProfileHeader name={getFullName(userProfile)} role={userType} />
 
+      <ProfileHeader name={getFullName(userProfile)} role={userType} />
       <VerifyUserIdentity code={`#${userCode}`} />
 
-      <InfoSection />
+      <View style={styles.section}>
+        <View style={styles.item}>
+          <InfoSection />
+          {actionItems.map((item, index) => (
+            <ActionItem key={index} title={item.title} />
+          ))}
+        </View>
 
-      <View style={styles.containerControls}>
         {!onTraveling && (
-          <>
+          <View style={styles.controls}>
             <SwitchInput
               firstLabel={'Cambiar a conductor'}
               secondLabel={'Cambiar a Pasajero'}
@@ -72,13 +77,9 @@ export default function UserProfile() {
               swapState={userType !== 'Driver'}
             />
             <CancelButton title={'Cerrar sesion'} onPress={closeSession} />
-          </>
+          </View>
         )}
       </View>
-
-      {actionItems.map((item, index) => (
-        <ActionItem key={index} title={item.title} />
-      ))}
     </View>
   );
 }
@@ -86,17 +87,27 @@ export default function UserProfile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
   },
-  divider: {
-    width: 170,
-    aspectRatio: 1,
-    alignSelf: 'center',
-    marginVertical: 20,
+  section: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 5,
+    paddingHorizontal: 17,
   },
-  footer: {
-    width: '100%',
-    aspectRatio: 4.08,
-    marginTop: 82,
+  item: {
+    alignSelf: 'stretch',
+    flexShrink: 1,
+    flexGrow: 0,
   },
-  containerControls: {},
+  controls: {
+    flexDirection: 'column',
+    alignSelf: 'stretch',
+    flexShrink: 1,
+    flexGrow: 0,
+    gap: 15,
+    minHeight: 150,
+  },
 });

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { GenericButtonProps } from '@components/buttons/props/ButtonProps';
 
 const GreenButton = ({ title, onPress }: GenericButtonProps) => {
   return (
-    <Pressable onPress={onPress} style={styles.btn}>
+    <TouchableOpacity onPress={onPress} style={styles.btn}>
       <Text style={styles.text}>{title}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

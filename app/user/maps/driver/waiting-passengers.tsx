@@ -6,11 +6,12 @@ import AdBanner from '@components/banners/AdBanner';
 import Loading from '@components/visuals/resources/Loading';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
-import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
-import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
+import GreenButton from '@components/buttons/GreenButton';
+import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
+import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 
 export default function WaitingPassengers() {
   const { setOnTraveling } = useUserManagerContext();
@@ -44,7 +45,7 @@ export default function WaitingPassengers() {
   const StatusTravel = () => {
     const [viewPassengers, setViewPassengers] = useState(false);
 
-    const onChangePassengers = async () => {
+    const onChangeView = async () => {
       setViewPassengers(!viewPassengers);
     };
 
@@ -73,11 +74,12 @@ export default function WaitingPassengers() {
     const ButtonControls = () => {
       return (
         <View style={styles.containerButtons}>
-          <CompactGreenButton
-            title={'Pasajeros'}
-            onPress={onChangePassengers}
-          />
-          <CompactGreenButton title={'Terminar'} onPress={onChangePage} />
+          {viewPassengers ? (
+            <GreenButton title={'Monitoreo'} onPress={onChangeView} />
+          ) : (
+            <GreenButton title={'Pasajeros'} onPress={onChangeView} />
+          )}
+          <GreenButton title={'Terminar'} onPress={onChangePage} />
         </View>
       );
     };
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
   containerButtons: {
     marginVertical: 10,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-around',
     gap: 15,
   },
   maps: {
