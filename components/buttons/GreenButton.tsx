@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     backgroundColor: '#2f7265',
-    width: 302,
+    margin: 10,
     height: 51,
     overflow: 'hidden',
     flexDirection: 'row',
