@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
@@ -10,7 +10,11 @@ import GreenButton from '@components/buttons/GreenButton';
 
 export default function SelectMap() {
   const { setCurrentRoute } = useTravelScheduleRoute();
-  const { isLoading } = useUserPosition();
+  const { setRefresh, location, isLoading } = useUserPosition();
+
+  useEffect(() => {
+    setRefresh(true);
+  }, []);
 
   const onSchedule = async () => {
     setCurrentRoute('/user/maps/driver/schedule-travel');

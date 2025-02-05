@@ -19,7 +19,9 @@ export default function WaitingPassengers() {
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [changePage, setChangePage] = useState(true);
 
-  useEffect(() => {}, [isLoading]);
+  useEffect(() => {
+    setRefresh(true);
+  }, []);
 
   const travelIsOver = async () => {
     setCurrentRoute('/user/maps');

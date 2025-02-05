@@ -73,7 +73,7 @@ export default function ScheduleTravel() {
 
         <View style={styles.containerColumns}>
           <View style={styles.containerRow}>
-            <GreenButton title={'Confirmar'} onPress={travelConfirm} />
+            <GreenButton title={'Confirmar'} onPress={travelConfirm} disabled />
             <GreenButton title={'Destino'} onPress={travelDestinationSelect} />
           </View>
           <View style={styles.containerRow}>

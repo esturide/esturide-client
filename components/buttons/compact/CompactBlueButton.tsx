@@ -2,9 +2,13 @@ import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { GenericButtonProps } from '@components/buttons/props/ButtonProps';
 
-const CompactBlueButton = ({ title, onPress }: GenericButtonProps) => {
+const CompactBlueButton = ({
+  title,
+  onPress,
+  disabled = false,
+}: GenericButtonProps) => {
   return (
-    <TouchableOpacity style={styles.btn} onPress={onPress}>
+    <TouchableOpacity style={styles.btn} onPress={onPress} disabled={disabled}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

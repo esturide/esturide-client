@@ -1,5 +1,5 @@
 import MapView from 'react-native-maps';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import { StyleSheet } from 'react-native';
 
@@ -13,6 +13,10 @@ export default function UserMapViewer({
   longitudeDelta = 0.0021,
 }: Props) {
   const { location } = useUserPosition();
+
+  useEffect(() => {
+    console.log('Current location set in: ', location);
+  }, [location]);
 
   return (
     <MapView

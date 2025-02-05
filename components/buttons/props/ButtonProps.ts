@@ -5,4 +5,5 @@ export interface ButtonProps {
 export interface GenericButtonProps {
   title: string;
   onPress?: () => Promise<void>;
+  disabled?: boolean;
 }

@@ -25,7 +25,7 @@ export const loginUser = async (
     setAuthToken(accessToken);
     config.headers.Authorization = `Bearer ${accessToken}`;
 
-    return response.status === 200;
+    return response.status === 200 || response.status === 201;
   } catch (e) {
     if (axios.isAxiosError(e)) {
       return false;

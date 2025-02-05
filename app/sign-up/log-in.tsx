@@ -39,9 +39,13 @@ export default function LogIn() {
       await loaderEffect(async () => {
         status = await loginUser(data, setAuthToken);
 
+        console.log(`Status login: ${status}`);
+
         if (status) {
           setUserCode(userCodeNumber);
           setSessionStatus('Success');
+        } else {
+          setSessionStatus('Failure');
         }
       }, setLoading);
     }
