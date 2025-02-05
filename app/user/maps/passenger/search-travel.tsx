@@ -1,6 +1,6 @@
+import React from 'react';
 import AdBanner from '@components/banners/AdBanner';
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
 
 export default function SearchTravel() {
   return (
