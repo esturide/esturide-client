@@ -5,22 +5,16 @@ import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
 import CancelButton from '@components/buttons/CancelButton';
-import GreenButton from '@components/buttons/GreenButton';
+import BlueButton from '@components/buttons/BlueButton';
 
-export default function SelectMap() {
+export default function SelectMapRide() {
   const { setCurrentRoute } = useTravelScheduleRoute();
   const { location, isLoading } = useUserPosition();
 
-  useEffect(() => {
-    if (isLoading) {
-      console.log(`MapView is loading`);
-    } else {
-      console.log(`MapView is load`);
-    }
-  }, [isLoading]);
+  useEffect(() => {}, [isLoading]);
 
   const onSchedule = async () => {
-    setCurrentRoute('/user/maps/driver/schedule-travel');
+    setCurrentRoute('/user/maps/passenger/search-travel');
   };
 
   const onCancel = async () => {
@@ -32,7 +26,7 @@ export default function SelectMap() {
       <UserMapViewer location={location} />
       <BottomSheet>
         <View style={styles.containerControls}>
-          <GreenButton title={'Iniciar'} onPress={onSchedule} />
+          <BlueButton title={'Iniciar'} onPress={onSchedule} />
           <CancelButton title={'Cancelar'} onPress={onCancel} />
         </View>
       </BottomSheet>

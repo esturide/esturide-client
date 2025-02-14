@@ -7381,6 +7381,11 @@ expo-modules-core@2.1.4:
   dependencies:
     invariant "^2.2.4"
 
+expo-permissions@^14.4.0:
+  version "14.4.0"
+  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-14.4.0.tgz#d7bb2f0026b87e1294ee551969c35306193f4ad3"
+  integrity sha512-oAcnJ7dlZhpBydK73cwomA2xofizayVUz+FW5REl7dMu7MYyeN/3aqhlpZ3mYddrxvG161bqu97MQr01UixUnw==
+
 expo-router@~4.0.5:
   version "4.0.17"
   resolved "https://registry.yarnpkg.com/expo-router/-/expo-router-4.0.17.tgz#8cecc68f189fd93d69b239986f63e040ee15f63a"

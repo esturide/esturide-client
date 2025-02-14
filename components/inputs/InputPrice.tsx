@@ -1,35 +1,45 @@
 import React, { useState } from 'react';
-import Slider from '@react-native-community/slider';
-import CardItemPresentation from '@components/cards/item/CardItemPresentation';
-
-const minimumPrice = 5;
+import { View, StyleSheet } from 'react-native';
+import InputLabel from '@components/inputs/InputLabel';
+import { stringToNumber } from '@libs/cast';
 
 type Props = {
+  label: string;
   maxPrice?: number;
   setPrice?: (price: number) => void;
 };
 
-export default function InputPrice({ setPrice, maxPrice = 100 }: Props) {
-  const [travelPrice, setTravelPrice] = useState(minimumPrice);
+export default function InputPrice({ label, setPrice }: Props) {
+  const [travelPrice, setTravelPrice] = useState('');
+  const [isValidPrice, setIsValidPrice] = useState(false);
 
-  const onSetValue = (value: number) => {
+  const onSetValue = async (value: string) => {
+    const [status, integer] = stringToNumber(value);
+
     setTravelPrice(value);
 
-    if (setPrice !== null) {
-      setPrice(value);
+    if (setPrice !== null && status) {
+      setPrice(integer);
     }
+
+    setIsValidPrice(!status);
   };
 
   return (
-    <CardItemPresentation title={`Precio ${travelPrice}`}>
-      <Slider
-        minimumValue={minimumPrice}
-        maximumValue={maxPrice}
-        step={1}
-        minimumTrackTintColor="#FFFFFF"
-        maximumTrackTintColor="#000000"
-        onValueChange={onSetValue}
+    <View style={styles.container}>
+      <InputLabel
+        label={label}
+        value={`${travelPrice}`}
+        onChangeText={onSetValue}
+        typeInput={'numeric'}
+        error={isValidPrice}
       />
-    </CardItemPresentation>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

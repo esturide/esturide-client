@@ -1,30 +1,100 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import AbsoluteBottomLayout from '@components/layouts/AbsoluteBottomLayout';
-import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import Loading from '@components/visuals/resources/Loading';
-import SelectMap from '@components/cards/maps/SelectMap';
+import SelectDestinationMap from '@components/cards/maps/SelectDestinationMap';
+import BottomSheet from '@components/modals/sheets/BottomSheet';
+import CardButton from '@components/buttons/cards/CardButton';
+import SwitchButton from '@components/buttons/switch/SwitchButton';
+import InputSwitch from '@components/inputs/InputSwitch';
+import CardItemPresentation from '@components/cards/item/CardItemPresentation';
+import GreenButton from '@components/buttons/GreenButton';
+import { SearchBar } from '@components/cards/SearchBar';
+import InputLabel from '@components/inputs/InputLabel';
+import { GenericModal } from '@components/modals/GenericModal';
+import MapView from 'react-native-maps';
+import UserMapViewer from '@components/cards/maps/UserMapViewer';
 
 export default function SelectDestination() {
   const { setCurrentRoute } = useTravelScheduleRoute();
-  const { isLoading } = useUserPosition();
+  const { location, isLoading } = useUserPosition();
+  const [showSearchModal, setShowSearchModal] = useState(false);
+
+  useEffect(() => {
+    if (isLoading) {
+      console.log(`MapView is loading`);
+    } else {
+      console.log(`MapView is load`);
+    }
+  }, [isLoading]);
 
   const onPress = async () => {
     setCurrentRoute('/user/maps/driver/schedule-travel');
   };
 
-  if (isLoading) {
-    return <Loading visible={true} />;
-  }
+  const onShowSearchModal = async () => {
+    setShowSearchModal(true);
+  };
+
+  const onCloseSearchModal = async () => {
+    setShowSearchModal(false);
+  };
+
+  const SwitchDestination = () => {
+    return (
+      <CardItemPresentation title={'Destino'}>
+        <SwitchButton
+          firstLabel={'CUTONALA'}
+          secondLabel={'Casa'}
+          thirdLabel={'Personalizado'}
+          firstStateStyle={'#449e92'}
+          secondStateStyle={'#125046'}
+          thirdStateStyle={'#125046'}
+        />
+        <GreenButton title={'Buscar'} onPress={onShowSearchModal} />
+      </CardItemPresentation>
+    );
+  };
+
+  const OptionsMap = () => {
+    return (
+      <CardItemPresentation title={'Filtros'}>
+        <InputSwitch label={'Comida'} scheme={'green'} />
+        <InputSwitch label={'Bebidas'} scheme={'green'} />
+      </CardItemPresentation>
+    );
+  };
+
+  const SearchModal = () => {
+    return (
+      <GenericModal visible={showSearchModal} onClose={onCloseSearchModal}>
+        <View style={styles.containerSearchModal}>
+          <View>
+            <SearchBar />
+            <GreenButton title={'Buscar'} onPress={onCloseSearchModal} />
+          </View>
+        </View>
+      </GenericModal>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <SelectMap />
-      <AbsoluteBottomLayout>
-        <ButtonLocationBlue onPress={onPress} />
-      </AbsoluteBottomLayout>
+      <SelectDestinationMap location={location} />
+      <BottomSheet>
+        <View style={styles.containerControls}>
+          <View style={styles.controlsRow}>
+            <SwitchDestination />
+            <OptionsMap />
+          </View>
+
+          <View style={styles.controlsRow}>
+            <GreenButton title={'Establecer'} onPress={onPress} />
+          </View>
+        </View>
+      </BottomSheet>
+      <SearchModal />
     </View>
   );
 }
@@ -32,5 +102,32 @@ export default function SelectDestination() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerControls: {
+    flexDirection: 'column',
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    gap: 16,
+  },
+  controlsRow: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
+    gap: 5,
+  },
+  controlsColumn: {
+    flexDirection: 'column',
+    alignSelf: 'center',
+    alignItems: 'center',
+    gap: 5,
+  },
+  containerSearchModal: {
+    flex: 1,
+    margin: 25,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    gap: 5,
   },
 });

@@ -11,7 +11,10 @@ import Loading from '@components/visuals/resources/Loading';
 import { loginUser, UserDataLogin } from '@libs/request/loginUser';
 import loaderEffect from '@libs/loaderEffect';
 
-import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
 import { stringToNumber } from '@libs/cast';
 
 import 'react-native-reanimated';
@@ -51,7 +54,7 @@ export default function LogIn() {
     }
 
     if (status) {
-      showSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
+      showLongSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
     } else {
       showFailureMessage('Nombre de usuario o contraseña incorrectos ⚠️.');
     }

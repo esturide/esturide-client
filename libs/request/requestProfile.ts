@@ -6,9 +6,8 @@ export const requestProfile = async (
   setProfile: (date: RequestProfile) => void,
 ) => {
   try {
-    const response: AxiosResponse = await clientUserManagement.post(
-      `/user/profile`,
-      new URLSearchParams(),
+    const response: AxiosResponse = await clientUserManagement.get(
+      `/profile/`,
       config,
     );
 

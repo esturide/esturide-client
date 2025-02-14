@@ -1,13 +1,43 @@
 import React from 'react';
 import AdBanner from '@components/banners/AdBanner';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import BlueButton from '@components/buttons/BlueButton';
+import { SearchBar } from '@components/cards/SearchBar';
+import { defaultPassengerColor } from '@const/DefaultColors';
+import CompactBlueButton from '@components/buttons/compact/CompactBlueButton';
 
 export default function SearchTravel() {
+  const CardTravel = () => {
+    return (
+      <View style={styles.travelCard}>
+        <Text>CUTONALA</Text>
+        <Text>Hora de Salida: 5:45pm</Text>
+        <CompactBlueButton title={'Solicitar'} />
+      </View>
+    );
+  };
+
   return (
     <>
       <AdBanner />
+
       <View style={styles.container}>
-        <Text>Buscar viajes</Text>
+        <View style={styles.controls}>
+          <SearchBar />
+        </View>
+
+        <View style={styles.travelList}>
+          <ScrollView>
+            <CardTravel />
+            <CardTravel />
+            <CardTravel />
+          </ScrollView>
+        </View>
+
+        <View style={styles.controls}>
+          <BlueButton title={'Actualizar'} />
+          <BlueButton title={'Filtrar'} />
+        </View>
       </View>
     </>
   );
@@ -35,5 +65,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
+  },
+  travelList: {
+    flex: 1,
+    gap: 5,
+    flexDirection: 'column',
+  },
+  travelCard: {
+    gap: 15,
+    margin: 5,
+    padding: 15,
+    borderRadius: 10,
+    borderWidth: 3,
+    borderColor: defaultPassengerColor,
   },
 });

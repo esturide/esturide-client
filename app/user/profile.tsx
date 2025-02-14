@@ -9,7 +9,7 @@ import { useAtom } from 'jotai/index';
 import { userCodeAtom } from '@stores/user';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { getFullName, UserType } from '@const/RequestProfile';
-import SwitchInput from '@components/switch/SwitchInput';
+import SwitchButton from '@components/buttons/switch/SwitchButton';
 import CancelButton from '@components/buttons/CancelButton';
 
 export default function UserProfile() {
@@ -68,7 +68,7 @@ export default function UserProfile() {
 
         {!onTraveling && (
           <View style={styles.controls}>
-            <SwitchInput
+            <SwitchButton
               firstLabel={'Cambiar a conductor'}
               secondLabel={'Cambiar a Pasajero'}
               thirdLabel={'No verificado'}

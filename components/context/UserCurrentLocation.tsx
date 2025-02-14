@@ -22,7 +22,7 @@ export default function UserCurrentLocation({ children }: PropsWithChildren) {
 
   useEffect(() => {
     const updateLocation = async () => {
-      loaderEffect(async () => {
+      await loaderEffect(async () => {
         const { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== 'granted') {

@@ -19,17 +19,14 @@ type Props = {
   swapState?: boolean;
 };
 
-const SwitchInput = ({
+const SwitchButton = ({
   onToggleSwitch,
-
   firstLabel,
   secondLabel,
   thirdLabel = 'Disabled',
-
   firstStateStyle = defaultDriverColor,
   secondStateStyle = defaultPassengerColor,
   thirdStateStyle = 'gray',
-
   disabled = false,
   swapState = false,
 }: Props) => {
@@ -87,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SwitchInput;
+export default SwitchButton;

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import AdBanner from '@components/banners/AdBanner';
 import Loading from '@components/visuals/resources/Loading';
@@ -14,8 +17,9 @@ import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 
 export default function WaitingPassengers() {
+  const { location } = useUserPosition();
   const { setOnTraveling } = useUserManagerContext();
-  const { setRefresh, location, isLoading } = useUserPosition();
+  const { setRefresh, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [changePage, setChangePage] = useState(true);
 
@@ -30,7 +34,10 @@ export default function WaitingPassengers() {
 
   const finishTravel = async () => {
     travelIsOver();
-    showSuccessMessage('Viaje finalizado.', 'Que hayas disfrutado del viaje');
+    showLongSuccessMessage(
+      'Viaje finalizado.',
+      'Que hayas disfrutado del viaje',
+    );
   };
 
   const cancelTravel = async () => {
@@ -118,7 +125,7 @@ export default function WaitingPassengers() {
   return (
     <>
       <View style={styles.container}>
-        <UserMapViewer />
+        <UserMapViewer location={location} />
 
         <BottomSheet onPress={onPressBottomSheet}>
           <AdBanner />

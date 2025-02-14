@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import { stringToInteger } from '@libs/cast';
 import { showMessage } from '@libs/alerts/toast';
-import CardSeat from '@components/cards/CardSeat';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 import InputTime from '@components/inputs/InputTime';
 import CancelButton from '@components/buttons/CancelButton';
-import InputLabel from '@components/inputs/InputLabel';
 import GreenButton from '@components/buttons/GreenButton';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import InputPrice from '@components/inputs/InputPrice';
 import InputSeats from '@components/inputs/InputSeats';
+import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
+import CardItemPresentation from '@components/cards/item/CardItemPresentation';
+import CardButton from '@components/buttons/cards/CardButton';
+import { SearchBar } from '@components/cards/SearchBar';
+import AuthUser from '@components/forms/AuthUser';
 
 export default function ScheduleTravel() {
   const { setOnTraveling } = useUserManagerContext();
@@ -21,19 +23,16 @@ export default function ScheduleTravel() {
   const [startTime, setStartTime] = useState(new Date());
   const [finishedTime, setFinishedTime] = useState(new Date());
   const [travelPrice, setTravelPrice] = useState(0);
+  const [travelCanStart, settravelCanStart] = useState(false);
+  const [validateTravel, setValidateTravel] = useState(false);
 
-  const showDatePicker = async () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date: Date) => {
-    console.warn('A date has been picked: ', date);
-    hideDatePicker();
-  };
+  useEffect(() => {
+    if (travelPrice > 0) {
+      settravelCanStart(true);
+    } else {
+      settravelCanStart(false);
+    }
+  }, [travelPrice]);
 
   const travelConfirm = async () => {
     if (travelPrice > 0) {
@@ -41,8 +40,10 @@ export default function ScheduleTravel() {
 
       setCurrentRoute('/user/maps/driver/waiting-passengers');
       setOnTraveling(true);
+      settravelCanStart(true);
     } else {
       showMessage('Los viajes deben tener un precio.');
+      settravelCanStart(false);
     }
   };
 
@@ -52,6 +53,10 @@ export default function ScheduleTravel() {
 
   const cancelSchedule = async () => {
     setCurrentRoute('/user/maps/');
+  };
+
+  const authTravel = async (validate: boolean) => {
+    setValidateTravel(true);
   };
 
   return (
@@ -67,15 +72,32 @@ export default function ScheduleTravel() {
         </View>
 
         <View style={styles.containerRow}>
-          <InputPrice setPrice={setTravelPrice} />
-          <InputSeats />
+          <InputPrice label={'Precio'} setPrice={setTravelPrice} />
         </View>
 
+        <View style={styles.containerRow}>
+          <InputSeats />
+
+          <CardButton
+            title={'Destino'}
+            label={'Establecer'}
+            onPress={travelDestinationSelect}
+            scheme={'green'}
+          />
+        </View>
         <View style={styles.containerColumns}>
           <View style={styles.containerRow}>
-            <GreenButton title={'Confirmar'} onPress={travelConfirm} disabled />
-            <GreenButton title={'Destino'} onPress={travelDestinationSelect} />
+            <AuthUser label={'Validar viaje'} onValidate={authTravel} />
           </View>
+
+          <View style={styles.containerRow}>
+            <GreenButton
+              title={'Confirmar'}
+              onPress={travelConfirm}
+              disabled={!(travelCanStart && validateTravel)}
+            />
+          </View>
+
           <View style={styles.containerRow}>
             <CancelButton title={'Cancelar'} onPress={cancelSchedule} />
           </View>
@@ -92,7 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
-    gap: 10,
+    gap: 5,
   },
   containerRow: {
     flexDirection: 'row',

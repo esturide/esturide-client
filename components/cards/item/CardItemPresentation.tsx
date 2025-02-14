@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    gap: 5,
   },
   textHeader: {
     fontFamily: 'Inter, sans-serif',

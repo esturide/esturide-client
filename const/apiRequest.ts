@@ -7,11 +7,11 @@ export const clientRoot = axios.create({
 });
 
 export const clientUserManagement = axios.create({
-  baseURL: `${baseURL}/user_management`,
+  baseURL: `${baseURL}/v1/user-management`,
 });
 
 export const clientTravelMatchNetwork = axios.create({
-  baseURL: `${baseURL}/travel_match_network`,
+  baseURL: `${baseURL}/v1/travel-match_network`,
 });
 
 export const config: AxiosRequestConfig = {

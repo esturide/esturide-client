@@ -21,6 +21,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height: 56,
   },
+  inputErrorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#bc1717',
+    borderWidth: 1,
+    borderRadius: 32,
+    backgroundColor: '#fff',
+    height: 56,
+    shadowColor: '#ff004f',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.45,
+    shadowRadius: 6,
+    elevation: 5,
+  },
   input: {
     flex: 1,
     padding: 10,
