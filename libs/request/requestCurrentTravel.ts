@@ -19,3 +19,22 @@ export const requestCurrentScheduleTravel = async () => {
 
   return {};
 };
+
+export const requestCurrentUUIDScheduleTravel = async () => {
+  try {
+    const response: AxiosResponse = await clientTravelMatchNetwork.get(
+      `/schedule/current`,
+      config,
+    );
+
+    return response.data['uuid'];
+  } catch (e) {
+    console.error(e);
+
+    if (axios.isAxiosError(e)) {
+      return '';
+    }
+  }
+
+  return '';
+};

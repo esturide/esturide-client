@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import { showMessage } from '@libs/alerts/toast';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 import InputTime from '@components/inputs/InputTime';
@@ -51,7 +50,6 @@ export default function ScheduleTravel() {
     setOnTraveling(status);
 
     if (status) {
-      showMessage('Viaje iniciado correctamente.');
       setCurrentRoute('/user/maps/driver/waiting-passengers');
     } else {
       showFailureMessage('Error en tu solicitud.');

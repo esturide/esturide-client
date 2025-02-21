@@ -8,6 +8,7 @@ export const changeStatusTravel = async (mode: StatusMode, uuid: string) => {
   try {
     const response: AxiosResponse = await clientTravelMatchNetwork.patch(
       `/schedule/${mode}/${uuid}`,
+      {},
       config,
     );
 
