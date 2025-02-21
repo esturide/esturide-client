@@ -20,9 +20,10 @@ export const requestScheduleTravel = async (
         latitude: end.latitude,
         longitude: start.longitude,
       },
-      price: price,
-      max_passengers: seats,
+      maxPassengers: seats,
     };
+
+    console.log(data);
 
     const response: AxiosResponse = await clientTravelMatchNetwork.post(
       `/schedule/`,

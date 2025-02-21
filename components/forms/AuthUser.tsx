@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { InputButton } from '@components/buttons/InputButton';
 import GreenButton from '@components/buttons/GreenButton';
-import { showSuccessMessage } from '@libs/toast/messages';
+import {
+  showLongSuccessMessage,
+  showSuccessMessage,
+} from '@libs/toast/messages';
 
 type Props = {
   label: string;
@@ -32,10 +34,8 @@ export default function AuthUser({ label, onValidate }: Props) {
         fallbackLabel: 'Usar contraseña',
       });
 
-      setAuthenticated(result.success);
-
       if (result.success) {
-        Alert.alert('Éxito', 'Autenticación exitosa');
+        setAuthenticated(result.success);
       } else {
         Alert.alert('Error', 'Autenticación fallida');
       }

@@ -14,7 +14,10 @@ import AuthUser from '@components/forms/AuthUser';
 import Loading from '@components/visuals/resources/Loading';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
-import { showFailureMessage } from '@libs/toast/messages';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
 import loaderEffect from '@libs/loaderEffect';
 import { requestScheduleTravel } from '@libs/request/requestScheduleTravel';
 
@@ -29,16 +32,12 @@ export default function ScheduleTravel() {
     setFinishedTime,
     setTravelPrice,
     setDestinationEstablished,
-    setTravelCanStart,
     setValidateTravel,
     validTravel,
   } = useTravelScheduleRoute();
 
   const travelConfirm = async () => {
     let status = false;
-
-    console.log(location);
-    console.log(travelRequestForm);
 
     await loaderEffect(async () => {
       status = await requestScheduleTravel(
@@ -50,7 +49,6 @@ export default function ScheduleTravel() {
     }, setLoadingRequest);
 
     setOnTraveling(status);
-    setTravelCanStart(status);
 
     if (status) {
       showMessage('Viaje iniciado correctamente.');
@@ -67,13 +65,15 @@ export default function ScheduleTravel() {
 
   const cancelSchedule = async () => {
     setCurrentRoute('/user/maps/');
+    setValidateTravel(false);
+    setOnTraveling(false);
   };
 
   const authTravel = async (validate: boolean) => {
     setValidateTravel(validate);
 
     if (validate) {
-      showMessage('Viaje validado correctamente.');
+      showLongSuccessMessage('Exito', 'Validado correcta.');
     } else {
       showFailureMessage('Error al validar viaje.');
     }

@@ -15,7 +15,7 @@ export interface CreateTravelRequest {
   finishedTime: Date;
   travelPrice: number;
   destinationEstablished: boolean;
-  travelCanStart: boolean;
+  validPrice: boolean;
   validateTravel: boolean;
   destination: Position;
 }
@@ -30,7 +30,7 @@ export default function RouteNavigatorContext({ children }: PropsWithChildren) {
       finishedTime: new Date(),
       travelPrice: 1,
       destinationEstablished: false,
-      travelCanStart: false,
+      validPrice: true,
       validateTravel: false,
       destination: {
         longitude: 0,
@@ -39,23 +39,19 @@ export default function RouteNavigatorContext({ children }: PropsWithChildren) {
     });
 
   useEffect(() => {
-    if (travelRequestForm.travelPrice >= 1) {
-      setTravelCanStart(true);
-    } else {
-      setTravelCanStart(false);
-    }
+    setValidPrice(travelRequestForm.travelPrice >= 1);
   }, [travelRequestForm.travelPrice]);
 
   useEffect(() => {
     setValidTravel(
       !(
-        travelRequestForm.travelCanStart &&
+        travelRequestForm.validPrice &&
         travelRequestForm.validateTravel &&
         travelRequestForm.destinationEstablished
       ),
     );
   }, [
-    travelRequestForm.travelCanStart,
+    travelRequestForm.validPrice,
     travelRequestForm.validateTravel,
     travelRequestForm.destinationEstablished,
   ]);
@@ -95,10 +91,10 @@ export default function RouteNavigatorContext({ children }: PropsWithChildren) {
     });
   };
 
-  const setTravelCanStart = (value: boolean) => {
+  const setValidPrice = (value: boolean) => {
     setTravelRequestForm({
       ...travelRequestForm,
-      ['travelCanStart']: value,
+      ['validPrice']: value,
     });
   };
 
@@ -130,7 +126,7 @@ export default function RouteNavigatorContext({ children }: PropsWithChildren) {
         setFinishedTime: setFinishedTime,
         setTravelPrice: setTravelPrice,
         setDestinationEstablished: setDestinationEstablished,
-        setTravelCanStart: setTravelCanStart,
+        setValidPrice: setValidPrice,
         setValidateTravel: setValidateTravel,
         setDestination: setDestination,
       }}

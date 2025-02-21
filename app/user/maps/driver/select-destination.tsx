@@ -17,6 +17,7 @@ export default function SelectDestination() {
   const { travelRequestForm, setCurrentRoute, setDestination } =
     useTravelScheduleRoute();
   const [showSearchModal, setShowSearchModal] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState(false);
 
   useEffect(() => {
     if (isLoading) {
@@ -32,7 +33,7 @@ export default function SelectDestination() {
 
   const onPressMark = async (location: Position) => {
     setDestination(location);
-    console.log(travelRequestForm.destination);
+    setSelectedDestination(true);
   };
 
   const onShowSearchModal = async () => {
@@ -87,13 +88,14 @@ export default function SelectDestination() {
 
       <BottomSheet>
         <View style={styles.containerControls}>
-          <View style={styles.controlsRow}>
-            <SwitchDestination />
-            <OptionsMap />
-          </View>
+          <View style={styles.controlsRow}></View>
 
           <View style={styles.controlsRow}>
-            <GreenButton title={'Establecer'} onPress={onPress} />
+            <GreenButton
+              title={'Establecer'}
+              onPress={onPress}
+              disabled={!selectedDestination}
+            />
           </View>
         </View>
       </BottomSheet>

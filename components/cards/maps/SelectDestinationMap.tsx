@@ -58,7 +58,6 @@ export default function SelectDestinationMap({
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           ).then((granted) => {
             setLoading(false);
-            showSuccessMessage('Mapa cargado ✅.');
           });
         }}
       >
