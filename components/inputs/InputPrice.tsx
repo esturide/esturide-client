@@ -7,10 +7,11 @@ type Props = {
   label: string;
   maxPrice?: number;
   setPrice?: (price: number) => void;
+  price?: number;
 };
 
-export default function InputPrice({ label, setPrice }: Props) {
-  const [travelPrice, setTravelPrice] = useState('');
+export default function InputPrice({ label, setPrice, price = 0 }: Props) {
+  const [travelPrice, setTravelPrice] = useState(`${price}`);
   const [isValidPrice, setIsValidPrice] = useState(false);
 
   const onSetValue = async (value: string) => {

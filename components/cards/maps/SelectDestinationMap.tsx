@@ -11,23 +11,32 @@ type Props = {
   latitudeDelta?: number;
   longitudeDelta?: number;
   location: Position;
+  onPress?: (location: Position) => Promise<void>;
 };
 
 export default function SelectDestinationMap({
   location,
   latitudeDelta = 0.0021,
   longitudeDelta = 0.0021,
+  onPress = null,
 }: Props) {
   const [loading, setLoading] = useState(true);
   const [markers, setMarkers] = useState([]);
 
-  const handlePress = (event) => {
+  const handlePress = async (event) => {
     const markerPosition = {
       key: Crypto.randomUUID(),
       coordinate: event.nativeEvent.coordinate,
     };
 
     setMarkers([markerPosition]);
+
+    if (onPress != null) {
+      await onPress({
+        latitude: event.nativeEvent.coordinate.latitude,
+        longitude: event.nativeEvent.coordinate.longitude,
+      });
+    }
   };
 
   return (

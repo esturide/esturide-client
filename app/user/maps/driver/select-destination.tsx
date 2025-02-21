@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
-import Loading from '@components/visuals/resources/Loading';
 import SelectDestinationMap from '@components/cards/maps/SelectDestinationMap';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
-import CardButton from '@components/buttons/cards/CardButton';
 import SwitchButton from '@components/buttons/switch/SwitchButton';
 import InputSwitch from '@components/inputs/InputSwitch';
 import CardItemPresentation from '@components/cards/item/CardItemPresentation';
 import GreenButton from '@components/buttons/GreenButton';
 import { SearchBar } from '@components/cards/SearchBar';
-import InputLabel from '@components/inputs/InputLabel';
 import { GenericModal } from '@components/modals/GenericModal';
-import MapView from 'react-native-maps';
-import UserMapViewer from '@components/cards/maps/UserMapViewer';
+import { Position } from '@const/Position';
 
 export default function SelectDestination() {
-  const { setCurrentRoute } = useTravelScheduleRoute();
   const { location, isLoading } = useUserPosition();
+  const { travelRequestForm, setCurrentRoute, setDestination } =
+    useTravelScheduleRoute();
   const [showSearchModal, setShowSearchModal] = useState(false);
 
   useEffect(() => {
@@ -31,6 +28,11 @@ export default function SelectDestination() {
 
   const onPress = async () => {
     setCurrentRoute('/user/maps/driver/schedule-travel');
+  };
+
+  const onPressMark = async (location: Position) => {
+    setDestination(location);
+    console.log(travelRequestForm.destination);
   };
 
   const onShowSearchModal = async () => {
@@ -81,7 +83,8 @@ export default function SelectDestination() {
 
   return (
     <View style={styles.container}>
-      <SelectDestinationMap location={location} />
+      <SelectDestinationMap location={location} onPress={onPressMark} />
+
       <BottomSheet>
         <View style={styles.containerControls}>
           <View style={styles.controlsRow}>

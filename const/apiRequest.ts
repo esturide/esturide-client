@@ -11,10 +11,11 @@ export const clientUserManagement = axios.create({
 });
 
 export const clientTravelMatchNetwork = axios.create({
-  baseURL: `${baseURL}/v1/travel-match_network`,
+  baseURL: `${baseURL}/v1/travel-match-network`,
 });
 
 export const config: AxiosRequestConfig = {
+  timeout: 12000,
   headers: {
     Accept: 'application/json',
   } as RawAxiosRequestHeaders,

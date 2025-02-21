@@ -32,8 +32,9 @@ export default function AuthUser({ label, onValidate }: Props) {
         fallbackLabel: 'Usar contraseña',
       });
 
+      setAuthenticated(result.success);
+
       if (result.success) {
-        setAuthenticated(true);
         Alert.alert('Éxito', 'Autenticación exitosa');
       } else {
         Alert.alert('Error', 'Autenticación fallida');
