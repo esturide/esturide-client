@@ -15,7 +15,10 @@ import { useUserManagerContext } from '@components/context/UserManagerContext';
 import GreenButton from '@components/buttons/GreenButton';
 import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
-import { requestCurrentScheduleTravel } from '@libs/request/requestCurrentTravel';
+import {
+  requestCurrentScheduleTravel,
+  requestCurrentUUIDScheduleTravel,
+} from '@libs/request/requestCurrentTravel';
 import { changeStatusTravel } from '@libs/request/changeStatusTravel';
 
 const formatDate = (date: Date): string => {
@@ -44,25 +47,34 @@ export default function WaitingPassengers() {
   };
 
   const finishTravel = async () => {
-    travelIsOver();
-    showLongSuccessMessage(
-      'Viaje finalizado.',
-      'Que hayas disfrutado del viaje',
-    );
+    const uuid = await requestCurrentUUIDScheduleTravel();
+
+    if (uuid === '') {
+      await travelIsOver();
+    }
+
+    const status = await changeStatusTravel('finished', uuid);
+
+    if (status) {
+      await travelIsOver();
+      showLongSuccessMessage(
+        'Viaje finalizado.',
+        'Que hayas disfrutado del viaje',
+      );
+    }
   };
 
   const cancelTravel = async () => {
-    const dataCurrentTravel = await requestCurrentScheduleTravel();
-    const uuid = dataCurrentTravel['uuid'];
+    const uuid = await requestCurrentUUIDScheduleTravel();
 
-    if (uuid === undefined) {
-      travelIsOver();
+    if (uuid === '') {
+      await travelIsOver();
     }
 
     const status = await changeStatusTravel('cancel', uuid);
 
     if (status) {
-      travelIsOver();
+      await travelIsOver();
       showFailureMessage('Viaje cancelado.');
     }
   };
