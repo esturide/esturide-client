@@ -5,7 +5,10 @@ import InputLabel from '@components/inputs/InputLabel';
 import InputDate from '@components/inputs/InputDate';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
-import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
 import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
 
 import styles from '@styles/forms/RegistrationFormStyle';
@@ -35,7 +38,7 @@ export default function UserRegistrationForm({
           );
 
           if (status) {
-            showSuccessMessage(
+            showLongSuccessMessage(
               'Datos enviados',
               'Usuario registrado correctamente.',
             );

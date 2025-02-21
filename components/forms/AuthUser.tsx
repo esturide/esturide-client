@@ -1,9 +1,14 @@
 import { useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { InputButton } from '@components/buttons/InputButton';
+import GreenButton from '@components/buttons/GreenButton';
 
-export default function AuthUser() {
+type Props = {
+  label: string;
+  onValidate?: (valid: boolean) => Promise<void>;
+};
+
+export default function AuthUser({ label, onValidate }: Props) {
   const [authenticated, setAuthenticated] = useState(false);
 
   const handleAuthentication = async () => {
@@ -25,28 +30,19 @@ export default function AuthUser() {
         fallbackLabel: 'Usar contraseña',
       });
 
-      console.log(result);
-
       if (result.success) {
-        setAuthenticated(true);
-        Alert.alert('Éxito', 'Autenticación exitosa');
+        setAuthenticated(result.success);
       } else {
         Alert.alert('Error', 'Autenticación fallida');
+      }
+
+      if (onValidate !== undefined) {
+        await onValidate(authenticated);
       }
     } catch (error) {
       Alert.alert('Error', `Ocurrió un error: ${error}`);
     }
   };
 
-  return (
-    <View>
-      <Text>{authenticated ? 'Autenticado' : 'No autenticado'}</Text>
-
-      <InputButton
-        label={'Autenticar con huella dactilar'}
-        typeButton={'submit'}
-        onPress={handleAuthentication}
-      />
-    </View>
-  );
+  return <GreenButton title={label} onPress={handleAuthentication} />;
 }

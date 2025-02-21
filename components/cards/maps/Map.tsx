@@ -1,12 +1,8 @@
 import { DimensionValue, View, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import { Position } from '@const/Position';
 
-export interface Position {
-  readonly latitude: number;
-  readonly longitude: number;
-}
-
-interface MapProps {
+export interface MapProps {
   mapSize?: { height: DimensionValue; width: DimensionValue };
   origin?: Position;
   destination?: Position;

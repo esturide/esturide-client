@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: 300, // Ajusta según sea necesario
+    height: 300,
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: '#f0f0f0',
+  },
+  container: {
+    flex: 1,
   },
 });
 

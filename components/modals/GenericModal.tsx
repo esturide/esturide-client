@@ -1,24 +1,26 @@
 import React, { PropsWithChildren } from 'react';
-import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Modal, View, Text, Pressable } from 'react-native';
 import { router } from 'expo-router';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
+import styles from '@styles/modals/GenericModalStyle';
 
 type Props = PropsWithChildren<{
   title?: string;
-  isVisible: boolean;
+  visible: boolean;
   onClose?: () => Promise<void>;
 }>;
 
 export function GenericModal({
   title = '',
-  isVisible,
+  visible,
   children,
   onClose = async () => {
     router.back();
   },
 }: Props) {
   return (
-    <Modal animationType="slide" transparent={true} visible={isVisible}>
+    <Modal animationType="slide" transparent={false} visible={visible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>
@@ -31,25 +33,3 @@ export function GenericModal({
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  modalContent: {
-    width: '100%',
-    backgroundColor: '#ffffff',
-    borderTopRightRadius: 18,
-    borderTopLeftRadius: 18,
-    position: 'absolute',
-  },
-  titleContainer: {
-    padding: 25,
-    backgroundColor: '#000000',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-});

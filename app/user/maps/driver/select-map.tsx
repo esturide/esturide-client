@@ -1,63 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import * as Location from 'expo-location';
-import { router } from 'expo-router';
-import loaderEffect from '@libs/loaderEffect';
-import { showFailureMessage } from '@libs/toast/messages';
-import Loading from '@components/visuals/resources/Loading';
-import Map, { Position } from '@components/cards/Map';
-import ButtonLocationBlue from '@components/buttons/location/ButtonLocationBlue';
-import AbsoluteLayout from '@components/layouts/AbsoluteLayout';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import UserMapViewer from '@components/cards/maps/UserMapViewer';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
+import BottomSheet from '@components/modals/sheets/BottomSheet';
+import CancelButton from '@components/buttons/CancelButton';
+import GreenButton from '@components/buttons/GreenButton';
 
 export default function SelectMap() {
-  const [location, setLocation] = useState<Position | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { setCurrentRoute } = useTravelScheduleRoute();
+  const { location, isLoading } = useUserPosition();
 
   useEffect(() => {
-    (async () => {
-      await loaderEffect(async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
+    if (isLoading) {
+      console.log(`MapView is loading`);
+    } else {
+      console.log(`MapView is load`);
+    }
+  }, [isLoading]);
 
-        if (status !== 'granted') {
-          showFailureMessage('No se pudo acceder a la ubicacion.');
-        }
-
-        let locationObject = await Location.getCurrentPositionAsync({});
-
-        setLocation({
-          latitude: locationObject.coords.latitude,
-          longitude: locationObject.coords.longitude,
-        });
-      }, setLoading);
-    })();
-  }, []);
-
-  const onPress = async () => {
-    router.push('/user/maps/driver/schedule-travel');
+  const onSchedule = async () => {
+    setCurrentRoute('/user/maps/driver/schedule-travel');
   };
 
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <Loading visible={true} />
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Map origin={location} />
-        {location !== null && (
-          <AbsoluteLayout>
-            <ButtonLocationBlue onPress={onPress} />
-          </AbsoluteLayout>
-        )}
-      </View>
-    );
-  }
+  const onCancel = async () => {
+    setCurrentRoute('/user/maps');
+  };
+
+  return (
+    <View style={styles.container}>
+      <UserMapViewer location={location} />
+      <BottomSheet>
+        <View style={styles.containerControls}>
+          <GreenButton title={'Iniciar'} onPress={onSchedule} />
+          <CancelButton title={'Cancelar'} onPress={onCancel} />
+        </View>
+      </BottomSheet>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerControls: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    gap: 10,
   },
 });

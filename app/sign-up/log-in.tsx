@@ -8,35 +8,53 @@ import Logo from '@components/visuals/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
 import Loading from '@components/visuals/resources/Loading';
-import { loginUser } from '@libs/request/loginUser';
+import { loginUser, UserDataLogin } from '@libs/request/loginUser';
 import loaderEffect from '@libs/loaderEffect';
-import { timing } from '@libs/timing';
-import { authTokenAtom } from '@stores/token';
+
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
+import { stringToNumber } from '@libs/cast';
 
 import 'react-native-reanimated';
-import { showFailureMessage, showSuccessMessage } from '@libs/toast/messages';
 import { userCodeAtom } from '@stores/user';
-import { stringToInteger } from '@libs/cast';
+import { authTokenAtom } from '@stores/token';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export default function LogIn() {
-  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const { setSessionStatus } = useUserManagerContext();
+
   const [userCode, setUserCode] = useAtom(userCodeAtom);
+  const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [loading, setLoading] = useState(false);
 
   const onLogin = async (code: string, password: string) => {
-    const data = { code: code, password: password };
+    const [statusCode, userCodeNumber] = stringToNumber(code);
+    const data: UserDataLogin = {
+      code: userCodeNumber,
+      password: password,
+    };
+
     let status = false;
 
-    await loaderEffect(async () => {
-      status = await loginUser(data, setAuthToken);
+    if (statusCode) {
+      await loaderEffect(async () => {
+        status = await loginUser(data, setAuthToken);
 
-      if (status) {
-        setUserCode(code);
-      }
-    }, setLoading);
+        console.log(`Status login: ${status}`);
+
+        if (status) {
+          setUserCode(userCodeNumber);
+          setSessionStatus('Success');
+        } else {
+          setSessionStatus('Failure');
+        }
+      }, setLoading);
+    }
 
     if (status) {
-      showSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
+      showLongSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
     } else {
       showFailureMessage('Nombre de usuario o contraseña incorrectos ⚠️.');
     }

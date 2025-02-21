@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { clientUserManagementSystem, config } from '@const/apiRequest';
+import { clientUserManagement, config } from '@const/apiRequest';
 import { formatDate } from '@libs/format/dates';
+import { showMessage } from '@libs/alerts/toast';
 
 export const createUser = async (
   code: number,
@@ -24,7 +25,7 @@ export const createUser = async (
       password: password,
     };
 
-    const response: AxiosResponse = await clientUserManagementSystem.post(
+    const response: AxiosResponse = await clientUserManagement.post(
       `/user/`,
       data,
       config,
@@ -33,6 +34,8 @@ export const createUser = async (
     return response.status === 200 || response.status === 201;
   } catch (e) {
     if (axios.isAxiosError(e)) {
+      showMessage(e.response.data.message);
+
       return false;
     }
 

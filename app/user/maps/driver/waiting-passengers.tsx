@@ -1,67 +1,161 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import * as Location from 'expo-location';
-import { Position } from '@components/cards/Map';
-import loaderEffect from '@libs/loaderEffect';
-import { showFailureMessage } from '@libs/toast/messages';
-import Passengers from '@components/cards/passangers/Passengers';
-import RequestProfile from '@const/RequestProfile';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import AdBanner from '@components/banners/AdBanner';
-import { InputButton } from '@components/buttons/InputButton';
+import Loading from '@components/visuals/resources/Loading';
+import UserMapViewer from '@components/cards/maps/UserMapViewer';
+import BottomSheet from '@components/modals/sheets/BottomSheet';
+import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
+import GreenButton from '@components/buttons/GreenButton';
+import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
+import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
+import { requestCurrentScheduleTravel } from '@libs/request/requestCurrentTravel';
+import { changeStatusTravel } from '@libs/request/changeStatusTravel';
 
+const formatDate = (date: Date): string => {
+  return date.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+};
 export default function WaitingPassengers() {
-  // 20.566719562492036, -103.22854245481798
-  const [location, setLocation] = useState<Position | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { location } = useUserPosition();
+  const { setOnTraveling } = useUserManagerContext();
+  const { setRefresh, isLoading } = useUserPosition();
+  const { setCurrentRoute } = useTravelScheduleRoute();
+  const [changePage, setChangePage] = useState(true);
+
+  const { travelRequestForm } = useTravelScheduleRoute();
 
   useEffect(() => {
-    (async () => {
-      await loaderEffect(async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-
-        if (status !== 'granted') {
-          showFailureMessage('No se pudo acceder a la ubicacion.');
-        }
-
-        let locationObject = await Location.getCurrentPositionAsync({});
-
-        setLocation({
-          latitude: locationObject.coords.latitude,
-          longitude: locationObject.coords.longitude,
-        });
-      }, setLoading);
-    })();
+    setRefresh(true);
   }, []);
 
-  const profile: RequestProfile = {
-    firstName: 'Diego',
-    paternalSurname: 'Valderrama',
-    maternalSurname: 'Garcia',
-    userCode: 10222,
-    role: 'student',
-    email: 'a@mail.com',
+  const travelIsOver = async () => {
+    setCurrentRoute('/user/maps');
+    setOnTraveling(false);
   };
+
+  const finishTravel = async () => {
+    travelIsOver();
+    showLongSuccessMessage(
+      'Viaje finalizado.',
+      'Que hayas disfrutado del viaje',
+    );
+  };
+
+  const cancelTravel = async () => {
+    const dataCurrentTravel = await requestCurrentScheduleTravel();
+    const uuid = dataCurrentTravel['uuid'];
+
+    if (uuid === undefined) {
+      travelIsOver();
+    }
+
+    const status = await changeStatusTravel('cancel', uuid);
+
+    if (status) {
+      travelIsOver();
+      showFailureMessage('Viaje cancelado.');
+    }
+  };
+
+  const onChangePage = async () => {
+    setChangePage(!changePage);
+  };
+
+  const seats: SeatsArr[] = [{ value: '1' }];
+
+  const StatusTravel = () => {
+    const [viewPassengers, setViewPassengers] = useState(false);
+
+    const onChangeView = async () => {
+      setViewPassengers(!viewPassengers);
+    };
+
+    const Passengers = () => {
+      return (
+        <View>
+          <Text>Pasajero</Text>
+        </View>
+      );
+    };
+
+    const TravelStatus = () => {
+      return (
+        <View style={styles.containerPassengers}>
+          <CardTravel
+            typeCard={'driver'}
+            departTime={formatDate(travelRequestForm.startTime)}
+            arrivalTime={formatDate(travelRequestForm.finishedTime)}
+            price={travelRequestForm.travelPrice}
+            seatsArr={seats}
+          />
+        </View>
+      );
+    };
+
+    const ButtonControls = () => {
+      return (
+        <View style={styles.containerButtons}>
+          {viewPassengers ? (
+            <GreenButton title={'Monitoreo'} onPress={onChangeView} />
+          ) : (
+            <GreenButton title={'Pasajeros'} onPress={onChangeView} />
+          )}
+          <GreenButton title={'Terminar'} onPress={onChangePage} />
+        </View>
+      );
+    };
+
+    return (
+      <>
+        {viewPassengers ? <Passengers /> : <TravelStatus />}
+
+        <ButtonControls />
+      </>
+    );
+  };
+
+  const ModifyTravel = () => {
+    return (
+      <>
+        <View style={styles.containerButtons}>
+          <CompactGreenButton title={'Atras'} onPress={onChangePage} />
+          <CompactGreenButton title={'Finalizar'} onPress={finishTravel} />
+          <CompactCancelButton title={'Cancelar'} onPress={cancelTravel} />
+        </View>
+      </>
+    );
+  };
+
+  const onPressBottomSheet = async () => {
+    console.log('Is pressed');
+  };
+
+  if (isLoading) {
+    return <Loading visible={true} />;
+  }
 
   return (
     <>
-      <AdBanner />
       <View style={styles.container}>
-        <View style={styles.cardContainer}>
-          <Text style={styles.title}>Lista de pasajeros</Text>
-        </View>
+        <UserMapViewer location={location} />
 
-        <View style={styles.containerPassengers}>
-          <Text style={styles.title}>Lista de pasajeros</Text>
-          <View style={styles.passengerList}>
-            <Passengers seat={'A'} profile={profile} />
-            <Passengers seat={'B'} profile={profile} />
+        <BottomSheet onPress={onPressBottomSheet}>
+          <AdBanner />
+
+          <View style={styles.container}>
+            {changePage ? <StatusTravel /> : <ModifyTravel />}
           </View>
-        </View>
-
-        <View style={styles.containerButtons}>
-          <InputButton typeButton={'depositBlue'} label={'Terminar viaje'} />
-          <InputButton typeButton={'depositGreen'} label={'Cancelar'} />
-        </View>
+        </BottomSheet>
       </View>
     </>
   );
@@ -70,16 +164,8 @@ export default function WaitingPassengers() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 5,
-    margin: 15,
   },
-  containerPassengers: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#e4e4e4',
-    padding: 15,
-    gap: 15,
-  },
+  containerPassengers: {},
   title: {
     fontWeight: 'bold',
   },
@@ -93,8 +179,17 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   containerButtons: {
+    marginVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-around',
     gap: 15,
+  },
+  maps: {
+    width: '100%',
+    height: '100%',
+  },
+  marker: {
+    width: 35,
+    height: 40,
   },
 });

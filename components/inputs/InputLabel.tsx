@@ -4,7 +4,6 @@ import {
   Platform,
   Text,
   TextInput,
-  TextInputProps,
   UIManager,
   View,
   ViewStyle,
@@ -22,6 +21,7 @@ type Props = {
   value?: string;
   readOnly?: boolean;
   typeInput?: TypeInput;
+  error?: boolean;
 };
 
 if (Platform.OS === 'android') {
@@ -37,6 +37,7 @@ const InputLabel = ({
   value = null,
   floatLabel = false,
   readOnly = false,
+  error = false,
   typeInput,
 }: Props) => {
   if (placeholder === undefined) {
@@ -80,7 +81,9 @@ const InputLabel = ({
         ]}
       >
         {showLabel && <Text style={styles.label}>{label}</Text>}
-        <View style={styles.inputContainer}>
+        <View
+          style={error ? styles.inputErrorContainer : styles.inputContainer}
+        >
           <TextInput
             style={styles.input}
             placeholder={textPlaceholder}
@@ -99,7 +102,7 @@ const InputLabel = ({
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputContainer}>
+      <View style={error ? styles.inputErrorContainer : styles.inputContainer}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeText}

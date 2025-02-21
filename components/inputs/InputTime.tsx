@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import InputLabel from '@components/inputs/InputLabel';
 import { formatTime } from '@libs/format/dates';
@@ -12,15 +12,10 @@ export interface Time {
 type Props = {
   label: string;
   setTime?: (time: Date) => void;
+  value?: Date;
 };
 
-export const setTimeData = (date: Date, hour: number, minute: number) => {
-  date.setHours(hour, minute, 0, 0);
-
-  return date;
-};
-
-export default function InputTime({ label, setTime }: Props) {
+export default function InputTime({ label, setTime, value = null }: Props) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [timeValue, setTimeValue] = useState(new Date());
 
@@ -56,6 +51,7 @@ export default function InputTime({ label, setTime }: Props) {
         mode={'time'}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        date={value}
       />
     </View>
   );
@@ -64,7 +60,5 @@ export default function InputTime({ label, setTime }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
   },
 });

@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import { VisualIcon } from '@components/visuals/VisualIcon';
+
 import styles from '@styles/InputButtons';
 
 const Option = () => {

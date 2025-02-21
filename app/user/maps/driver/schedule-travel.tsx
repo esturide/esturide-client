@@ -1,89 +1,171 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import InputTime, { Time } from '@components/inputs/InputTime';
-import { InputButton } from '@components/buttons/InputButton';
-import InputLabel from '@components/inputs/InputLabel';
-import { router } from 'expo-router';
-import { stringToInteger } from '@libs/cast';
 import { showMessage } from '@libs/alerts/toast';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+
+import InputTime from '@components/inputs/InputTime';
+import CancelButton from '@components/buttons/CancelButton';
+import GreenButton from '@components/buttons/GreenButton';
+import InputPrice from '@components/inputs/InputPrice';
+import InputSeats from '@components/inputs/InputSeats';
+import CardButton from '@components/buttons/cards/CardButton';
+import AuthUser from '@components/forms/AuthUser';
+import Loading from '@components/visuals/resources/Loading';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
+import { useUserPosition } from '@components/context/UserCurrentLocation';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
+import loaderEffect from '@libs/loaderEffect';
+import { requestScheduleTravel } from '@libs/request/requestScheduleTravel';
 
 export default function ScheduleTravel() {
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [startTime, setStartTime] = useState(new Date());
-  const [finishedTime, setFinishedTime] = useState(new Date());
-  const [travelPrice, setTravelPrice] = useState('');
-
-  const showDatePicker = async () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date: Date) => {
-    console.warn('A date has been picked: ', date);
-    hideDatePicker();
-  };
+  const { location, isLoading } = useUserPosition();
+  const [loadingRequest, setLoadingRequest] = useState(false);
+  const { setOnTraveling } = useUserManagerContext();
+  const {
+    travelRequestForm,
+    setCurrentRoute,
+    setStartTime,
+    setFinishedTime,
+    setTravelPrice,
+    setDestinationEstablished,
+    setValidateTravel,
+    validTravel,
+  } = useTravelScheduleRoute();
 
   const travelConfirm = async () => {
-    try {
-      const price = stringToInteger(travelPrice);
+    let status = false;
 
-      if (price > 0) {
-        router.replace('/user/maps/driver/waiting-passengers');
-      } else {
-        showMessage('Los viajes deben tener un precio.');
-      }
-    } catch (e) {
-      return;
+    await loaderEffect(async () => {
+      status = await requestScheduleTravel(
+        location,
+        travelRequestForm.destination,
+        travelRequestForm.travelPrice,
+        4,
+      );
+    }, setLoadingRequest);
+
+    setOnTraveling(status);
+
+    if (status) {
+      showMessage('Viaje iniciado correctamente.');
+      setCurrentRoute('/user/maps/driver/waiting-passengers');
+    } else {
+      showFailureMessage('Error en tu solicitud.');
     }
   };
 
-  const setPrice = (value) => {
-    try {
-      setTravelPrice(value);
-    } catch (e) {}
+  const travelDestinationSelect = async () => {
+    setDestinationEstablished(true);
+    setCurrentRoute('/user/maps/driver/select-destination');
+  };
+
+  const cancelSchedule = async () => {
+    setCurrentRoute('/user/maps/');
+    setValidateTravel(false);
+    setOnTraveling(false);
+  };
+
+  const authTravel = async (validate: boolean) => {
+    setValidateTravel(validate);
+
+    if (validate) {
+      showLongSuccessMessage('Exito', 'Validado correcta.');
+    } else {
+      showFailureMessage('Error al validar viaje.');
+    }
   };
 
   return (
-    <GenericModal title={'Agendar viaje'} isVisible>
-      <View style={styles.container}>
-        <View style={styles.inputs}>
-          <InputTime label={'Inicio'} />
-          <InputTime label={'Terminar'} />
+    <>
+      <GenericModal
+        title={'Agendar viaje'}
+        onClose={cancelSchedule}
+        visible={true}
+      >
+        <View style={styles.containerForm}>
+          <View style={styles.containerRow}>
+            <InputTime
+              label={'Inicio'}
+              setTime={setStartTime}
+              value={travelRequestForm.startTime}
+            />
+            <InputTime
+              label={'Terminar'}
+              setTime={setFinishedTime}
+              value={travelRequestForm.finishedTime}
+            />
+          </View>
+
+          <View style={styles.containerRow}>
+            <InputPrice
+              label={'Precio'}
+              setPrice={setTravelPrice}
+              price={travelRequestForm.travelPrice}
+            />
+          </View>
+
+          <View style={styles.containerRow}>
+            <InputSeats />
+
+            <CardButton
+              title={'Destino'}
+              label={'Establecer'}
+              onPress={travelDestinationSelect}
+              scheme={'green'}
+            />
+          </View>
+          <View style={styles.containerColumns}>
+            <View style={styles.containerRow}>
+              <AuthUser label={'Validar viaje'} onValidate={authTravel} />
+            </View>
+
+            <View style={styles.containerRow}>
+              <GreenButton
+                title={'Confirmar'}
+                onPress={travelConfirm}
+                disabled={validTravel}
+              />
+            </View>
+
+            <View style={styles.containerRow}>
+              <CancelButton title={'Cancelar'} onPress={cancelSchedule} />
+            </View>
+          </View>
         </View>
-
-        <InputLabel
-          label={'Precio'}
-          onChangeText={setPrice}
-          value={`${travelPrice}`}
-          typeInput={'numeric'}
-        />
-
-        <InputButton
-          typeButton={'submit'}
-          label={'Confirmar'}
-          onPress={travelConfirm}
-        />
-      </View>
-    </GenericModal>
+      </GenericModal>
+      <Loading visible={loadingRequest || isLoading} modal />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerForm: {
+    flex: 1,
     margin: 25,
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
+    gap: 5,
   },
-  inputs: {
-    flex: 1,
+  containerRow: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    gap: 10,
+    alignSelf: 'center',
+    alignItems: 'center',
+    gap: 17,
+  },
+  containerColumns: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    alignItems: 'center',
+    gap: 17,
   },
 });
