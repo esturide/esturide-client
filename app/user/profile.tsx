@@ -1,51 +1,85 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import AdBanner from '@components/banners/AdBanner';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
 import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
-import AdBanner from '@components/banners/AdBanner';
 import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIdentity';
-import { router } from 'expo-router';
+import { useAtom } from 'jotai/index';
+import { userCodeAtom } from '@stores/user';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
+import { getFullName, UserType } from '@const/RequestProfile';
+import SwitchButton from '@components/buttons/switch/SwitchButton';
+import CancelButton from '@components/buttons/CancelButton';
 
 export default function UserProfile() {
+  const { setUserType, userType, onTraveling, setSessionStatus, userProfile } =
+    useUserManagerContext();
+
+  const [userCode, setUserCode] = useAtom(userCodeAtom);
+  const [disableSwap, setDisableSwap] = useState(userType === 'Not-Verified');
+
+  useEffect(() => {
+    setDisableSwap(userType === 'Not-Verified');
+  }, [userType]);
+
+  const swapUserMessage = (user: UserType, traveling: boolean) => {
+    if (disableSwap) {
+      return;
+    }
+
+    if (!traveling) {
+      if (user === 'Driver') {
+        setUserType('Passenger');
+      } else if (user === 'Passenger') {
+        setUserType('Driver');
+      }
+    }
+  };
+
+  const closeSession = async () => {
+    setSessionStatus('Logout');
+  };
+
+  const onSwapUser = async () => {
+    swapUserMessage(userType, onTraveling);
+  };
+
   const actionItems = [
     {
-      title: 'Depositar Capital',
-    },
-    {
-      title: 'Retirar Capital',
-    },
-    {
-      title: 'Cambiar a Pasajero',
-    },
-    {
-      title: 'Cerrar sesion',
-      onTouchTap: async () => {
-        router.replace('/');
-      },
+      title: 'Informacion del proyecto',
     },
   ];
 
   return (
     <View style={styles.container}>
       <AdBanner />
-      <ProfileHeader
-        name="Mary Jiménez Rodríguez"
-        role="Conductor"
-        avatarUri="https://thispersondoesnotexist.com/"
-      />
 
-      <VerifyUserIdentity code={'Hello world'} />
+      <ProfileHeader name={getFullName(userProfile)} role={userType} />
+      <VerifyUserIdentity code={`#${userCode}`} />
 
-      <InfoSection />
+      <View style={styles.section}>
+        <View style={styles.item}>
+          <InfoSection />
+          {actionItems.map((item, index) => (
+            <ActionItem key={index} title={item.title} />
+          ))}
+        </View>
 
-      {actionItems.map((item, index) => (
-        <ActionItem
-          key={index}
-          title={item.title}
-          onTouchTap={item.onTouchTap}
-        />
-      ))}
+        {!onTraveling && (
+          <View style={styles.controls}>
+            <SwitchButton
+              firstLabel={'Cambiar a conductor'}
+              secondLabel={'Cambiar a Pasajero'}
+              thirdLabel={'No verificado'}
+              disabled={disableSwap}
+              onToggleSwitch={onSwapUser}
+              swapState={userType !== 'Driver'}
+            />
+            <CancelButton title={'Cerrar sesion'} onPress={closeSession} />
+          </View>
+        )}
+      </View>
     </View>
   );
 }
@@ -53,17 +87,27 @@ export default function UserProfile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    flexDirection: 'column',
   },
-  divider: {
-    width: 170,
-    aspectRatio: 1,
-    alignSelf: 'center',
-    marginVertical: 20,
+  section: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 5,
+    paddingHorizontal: 17,
   },
-  footer: {
-    width: '100%',
-    aspectRatio: 4.08,
-    marginTop: 82,
+  item: {
+    alignSelf: 'stretch',
+    flexShrink: 1,
+    flexGrow: 0,
+  },
+  controls: {
+    flexDirection: 'column',
+    alignSelf: 'stretch',
+    flexShrink: 1,
+    flexGrow: 0,
+    gap: 15,
+    minHeight: 150,
   },
 });

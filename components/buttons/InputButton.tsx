@@ -12,6 +12,8 @@ interface InputButtonProps {
     | 'depositBlue'
     | 'depositGreen'
     | 'submit'
+    | 'cancel'
+    | 'withdraw'
     | 'btnPassenger'
     | 'btnDriver';
   /**
@@ -37,6 +39,7 @@ export const InputButton = ({
     depositGreen: [style.btnDepositGreen, style.btnDepositGreenText],
     submit: [style.btnSubmit, style.btnSubmitText],
     withdraw: [style.btnWithdraw, style.btnWithdrawText],
+    cancel: [style.btnCancel, style.btnCancelText],
     addBlue: [style.btnAddBlue, style.btnAddIcon],
     addGreen: [style.btnAddGreen, style.btnAddIcon],
     filterGreen: [style.btnFilterGreen, style.filterIcon],

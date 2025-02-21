@@ -1,24 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useAtom } from 'jotai';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
 import LoginForm from '@components/forms/register/LoginForm';
-import Logo from '@components/resources/Logo';
+import Logo from '@components/visuals/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
+import Loading from '@components/visuals/resources/Loading';
+import { loginUser, UserDataLogin } from '@libs/request/loginUser';
+import loaderEffect from '@libs/loaderEffect';
+
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
+import { stringToNumber } from '@libs/cast';
+
+import 'react-native-reanimated';
+import { userCodeAtom } from '@stores/user';
+import { authTokenAtom } from '@stores/token';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export default function LogIn() {
-  const onLogin = async (username: string, password: string) => {
-    console.log({
-      username: username,
-      password: password,
-    });
+  const { setSessionStatus } = useUserManagerContext();
 
-    if (username === '' && password === '') {
-      return false;
+  const [userCode, setUserCode] = useAtom(userCodeAtom);
+  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [loading, setLoading] = useState(false);
+
+  const onLogin = async (code: string, password: string) => {
+    const [statusCode, userCodeNumber] = stringToNumber(code);
+    const data: UserDataLogin = {
+      code: userCodeNumber,
+      password: password,
+    };
+
+    let status = false;
+
+    if (statusCode) {
+      await loaderEffect(async () => {
+        status = await loginUser(data, setAuthToken);
+
+        console.log(`Status login: ${status}`);
+
+        if (status) {
+          setUserCode(userCodeNumber);
+          setSessionStatus('Success');
+        } else {
+          setSessionStatus('Failure');
+        }
+      }, setLoading);
     }
 
-    return true;
+    if (status) {
+      showLongSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
+    } else {
+      showFailureMessage('Nombre de usuario o contraseña incorrectos ⚠️.');
+    }
+
+    return status;
   };
 
   const onHyperLinkPressed = async () => {
@@ -37,6 +78,7 @@ export default function LogIn() {
             label={'¿No tienes cuenta? Regístrate'}
             href={'/sign-up/user-register'}
           />
+          <Loading visible={loading} modal />
         </ScrollLayout>
       </LayoutRegister>
     </>

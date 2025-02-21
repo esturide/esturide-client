@@ -1,6 +1,6 @@
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import React from 'react';
-import { Slot } from 'expo-router';
+import { router, Slot } from 'expo-router';
 import NavigationBar from '@components/tabs/NavigationBar';
 
 import homeIcon from '@assets/icons/tabs/home.png';
@@ -9,8 +9,15 @@ import notifyIcon from '@assets/icons/tabs/notify.png';
 import profileIcon from '@assets/icons/tabs/user.png';
 
 import styles from '@styles/layouts/UserLayout';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 
 export default function UserLayout() {
+  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
+
+  useEffect(() => {
+    router.replace(currentRoute);
+  }, [currentRoute]);
+
   const navigationItem = [
     {
       icon: homeIcon,
@@ -19,12 +26,14 @@ export default function UserLayout() {
     },
     {
       icon: addIcon,
-      href: '/user',
-      onPress: async () => console.log('Travels and rides page'),
+      href: currentRoute,
+      onPress: async () => {
+        console.log('Travels and rides page');
+      },
     },
     {
       icon: notifyIcon,
-      href: '/user',
+      href: '/user/notify',
       onPress: async () => console.log('Notifications page'),
     },
     {
@@ -36,8 +45,9 @@ export default function UserLayout() {
 
   return (
     <View style={styles.flexContainer}>
-      <Slot />
-
+      <View style={styles.container}>
+        <Slot />
+      </View>
       <NavigationBar navigationItems={navigationItem} />
     </View>
   );

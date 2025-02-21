@@ -1,42 +1,59 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { router } from 'expo-router';
 
 import InputLabel from '@components/inputs/InputLabel';
 import InputDate from '@components/inputs/InputDate';
-import styles from '@styles/forms/RegistrationFormStyle';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
-import { showMessage } from '@libs/alerts/toast';
+import {
+  showFailureMessage,
+  showLongSuccessMessage,
+} from '@libs/toast/messages';
+import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
+
+import styles from '@styles/forms/RegistrationFormStyle';
 
 export default function UserRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationUserFormProps) {
-  const [name, setName] = useState<string>('');
-  const [firstLastName, setFirstLastName] = useState<string>('');
-  const [secondLastName, setSecondLastName] = useState<string>('');
-  const [code, setCode] = useState<string>('');
-  const [birthDate, setBirthDate] = useState<Date | null>(null);
+  const { userFormRequest, setUserFormRequest } = useContext(
+    UserRegisterFormContext,
+  );
+
+  const handleChange = (name: string, value) => {
+    setUserFormRequest({ ...userFormRequest, [name]: value });
+  };
 
   const onPressButton = async () => {
     if (onSubmit) {
-      if (birthDate !== null) {
-        const status = await onSubmit(
-          name,
-          firstLastName,
-          secondLastName,
-          code,
-          birthDate,
-        );
+      if (userFormRequest.birthDate !== null) {
+        if (userFormRequest.code > 1000000000) {
+          const status = await onSubmit(
+            userFormRequest.name,
+            userFormRequest.firstLastName,
+            userFormRequest.secondLastName,
+            userFormRequest.code,
+            userFormRequest.birthDate,
+          );
 
-        if (status) {
-          showMessage('Usuario registrado correctamente');
-          router.push(redirect);
+          if (status) {
+            showLongSuccessMessage(
+              'Datos enviados',
+              'Usuario registrado correctamente.',
+            );
+
+            router.push(redirect);
+          } else {
+            showFailureMessage(
+              'Datos invalidos, vuelve a ingresarlos correctamente.',
+            );
+          }
         } else {
-          showMessage('Datos invalidos, vuelve a ingresarlos correctamente');
+          showFailureMessage('Codigo invalido.');
         }
       } else {
-        showMessage('Ingrese una fecha valida');
+        showFailureMessage('Ingrese una fecha valida.');
       }
     }
   };
@@ -45,28 +62,36 @@ export default function UserRegistrationForm({
     <>
       <InputLabel
         label="Nombre"
-        onChangeText={setName}
+        value={userFormRequest.name}
+        onChangeText={(name) => handleChange('name', name)}
         style={styles.userInputMargin}
       />
       <InputLabel
         label="Primer Apellido"
-        onChangeText={setFirstLastName}
+        value={userFormRequest.firstLastName}
+        onChangeText={(firstLastName) =>
+          handleChange('firstLastName', firstLastName)
+        }
         style={styles.userInputMargin}
       />
       <InputLabel
         label="Segundo Apellido"
-        onChangeText={setSecondLastName}
+        value={userFormRequest.secondLastName}
+        onChangeText={(secondLastName) =>
+          handleChange('secondLastName', secondLastName)
+        }
         style={styles.userInputMargin}
       />
       <InputLabel
         label="Código"
-        onChangeText={setCode}
+        value={`${userFormRequest.code}`}
+        onChangeText={(code) => handleChange('code', parseInt(code))}
         style={styles.userInputMargin}
       />
       <InputDate
         label="Fecha de Nacimiento"
-        onChange={setBirthDate}
-        value={birthDate}
+        onChange={(birthDate) => handleChange('birthDate', birthDate)}
+        value={userFormRequest.birthDate}
         style={[styles.userInputMargin, styles.dateInputMargin]}
       />
       <InputButton

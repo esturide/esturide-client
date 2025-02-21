@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, ScrollView, View, ViewStyle } from 'react-native';
+import { Image, StyleSheet, ScrollView, View } from 'react-native';
 import { SecureButton } from '@components/buttons/SecureButton';
 import InputLabel from '@components/inputs/InputLabel';
 import { default as InputSecure } from '@components/inputs/InputPassword';

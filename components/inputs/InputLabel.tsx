@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   LayoutAnimation,
   Platform,
@@ -10,12 +10,18 @@ import {
 } from 'react-native';
 import styles from '@styles/Inputs';
 
+type TypeInput = 'text' | 'numeric';
+
 type Props = {
   label: string;
-  onChangeText: (text: string) => void;
-  style: ViewStyle;
+  onChangeText?: (text: string) => void;
+  style?: ViewStyle;
   placeholder?: string;
   floatLabel?: boolean;
+  value?: string;
+  readOnly?: boolean;
+  typeInput?: TypeInput;
+  error?: boolean;
 };
 
 if (Platform.OS === 'android') {
@@ -28,7 +34,11 @@ const InputLabel = ({
   placeholder,
   onChangeText,
   style,
+  value = null,
   floatLabel = false,
+  readOnly = false,
+  error = false,
+  typeInput,
 }: Props) => {
   if (placeholder === undefined) {
     placeholder = label;
@@ -71,13 +81,18 @@ const InputLabel = ({
         ]}
       >
         {showLabel && <Text style={styles.label}>{label}</Text>}
-        <View style={styles.inputContainer}>
+        <View
+          style={error ? styles.inputErrorContainer : styles.inputContainer}
+        >
           <TextInput
             style={styles.input}
             placeholder={textPlaceholder}
             onChangeText={onInputEvent}
             onFocus={toggleShowLabel(true)}
             onBlur={toggleShowLabel(false)}
+            value={value}
+            readOnly={readOnly}
+            keyboardType={typeInput == 'text' ? 'default' : 'numeric'}
           />
         </View>
       </View>
@@ -87,11 +102,14 @@ const InputLabel = ({
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputContainer}>
+      <View style={error ? styles.inputErrorContainer : styles.inputContainer}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeText}
           placeholder={textPlaceholder}
+          value={value}
+          readOnly={readOnly}
+          keyboardType={typeInput == 'text' ? 'default' : 'numeric'}
         />
       </View>
     </View>

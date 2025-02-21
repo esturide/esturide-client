@@ -1,6 +1,26 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  btnCancel: {
+    borderTopLeftRadius: 12,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 12,
+    backgroundColor: '#cc1616',
+    width: 302,
+    height: 51,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 44,
+    paddingVertical: 7,
+    marginVertical: 5,
+  },
+  btnCancelText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
   btnSubmit: {
     borderTopLeftRadius: 12,
     borderBottomRightRadius: 12,
@@ -15,6 +35,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 44,
     paddingVertical: 7,
     marginVertical: 5,
+  },
+  blueBtnPressed: {
+    backgroundColor: '#4b61b9',
+  },
+  blueBtn: {
+    borderTopLeftRadius: 12,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 12,
+    backgroundColor: '#4b61b9',
+    width: 302,
+    height: 51,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 44,
+    paddingVertical: 7,
+    marginVertical: 5,
+  },
+  blueBtnText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
   },
   btnSubmitPressed: {
     backgroundColor: '#2e6b5c',
@@ -169,6 +212,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   btnLocationBlue: {
     borderRadius: 50,

@@ -2,10 +2,10 @@ import { Text, View } from 'react-native';
 import styles, {
   DefaultDriverColor,
   DefaultPassengerColor,
-} from '@styles/CardTravel';
+} from '@styles/CardTravelStyle';
+import * as Crypto from 'expo-crypto';
 
-interface SeatsArr {
-  id: string;
+export interface SeatsArr {
   value: string;
 }
 
@@ -71,7 +71,10 @@ export default function CardTravel({
           <View style={styles.seatsContainer}>
             {seatsArr &&
               seatsArr.map((seat) => (
-                <View key={seat.id} style={seatViewStyles[typeCard]}>
+                <View
+                  key={Crypto.randomUUID()}
+                  style={seatViewStyles[typeCard]}
+                >
                   <Text style={styles.seatText}>{seat.value}</Text>
                 </View>
               ))}

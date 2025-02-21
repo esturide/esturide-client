@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import ProgressBarContainer from '@components/visuals/ProgressBarContainer';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
@@ -6,10 +6,39 @@ import AddressRegistrationForm from '@components/forms/register/AddressRegistrat
 import ScrollLayout from '@components/layouts/ScrollLayout';
 import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
+import loaderEffect from '@libs/loaderEffect';
+import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
+import { createUser } from '@libs/request/createUser';
+import Loading from '@components/visuals/resources/Loading';
 
 export default function SecondRegister() {
-  const eventRedirect = async () => {
-    console.log('Redirect to Register 3...');
+  const [loading, setLoading] = useState(false);
+  const { userFormRequest, setUserFormRequest } = useContext(
+    UserRegisterFormContext,
+  );
+
+  const eventRedirect = async (
+    address: string,
+    phoneNumber: string,
+    email: string,
+    password: string,
+  ) => {
+    let status = false;
+
+    await loaderEffect(async () => {
+      status = await createUser(
+        userFormRequest.code,
+        userFormRequest.name,
+        userFormRequest.firstLastName,
+        userFormRequest.secondLastName,
+        userFormRequest.curp,
+        userFormRequest.birthDate,
+        userFormRequest.email,
+        password,
+      );
+    }, setLoading);
+
+    return status;
   };
 
   return (
@@ -28,6 +57,7 @@ export default function SecondRegister() {
             onSubmit={eventRedirect}
           />
         </ScrollLayout>
+        <Loading visible={loading} modal />
       </LayoutRegister>
     </>
   );
