@@ -2,10 +2,6 @@ import { useState } from 'react';
 import { Alert } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
 import GreenButton from '@components/buttons/GreenButton';
-import {
-  showLongSuccessMessage,
-  showSuccessMessage,
-} from '@libs/toast/messages';
 
 type Props = {
   label: string;

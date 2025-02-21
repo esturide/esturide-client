@@ -15,13 +15,24 @@ import { useUserManagerContext } from '@components/context/UserManagerContext';
 import GreenButton from '@components/buttons/GreenButton';
 import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
+import { requestCurrentScheduleTravel } from '@libs/request/requestCurrentTravel';
+import { changeStatusTravel } from '@libs/request/changeStatusTravel';
 
+const formatDate = (date: Date): string => {
+  return date.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+};
 export default function WaitingPassengers() {
   const { location } = useUserPosition();
   const { setOnTraveling } = useUserManagerContext();
   const { setRefresh, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [changePage, setChangePage] = useState(true);
+
+  const { travelRequestForm } = useTravelScheduleRoute();
 
   useEffect(() => {
     setRefresh(true);
@@ -41,8 +52,19 @@ export default function WaitingPassengers() {
   };
 
   const cancelTravel = async () => {
-    travelIsOver();
-    showFailureMessage('Viaje cancelado.');
+    const dataCurrentTravel = await requestCurrentScheduleTravel();
+    const uuid = dataCurrentTravel['uuid'];
+
+    if (uuid === undefined) {
+      travelIsOver();
+    }
+
+    const status = await changeStatusTravel('cancel', uuid);
+
+    if (status) {
+      travelIsOver();
+      showFailureMessage('Viaje cancelado.');
+    }
   };
 
   const onChangePage = async () => {
@@ -71,9 +93,9 @@ export default function WaitingPassengers() {
         <View style={styles.containerPassengers}>
           <CardTravel
             typeCard={'driver'}
-            departTime={'1'}
-            arrivalTime={'1'}
-            price={1}
+            departTime={formatDate(travelRequestForm.startTime)}
+            arrivalTime={formatDate(travelRequestForm.finishedTime)}
+            price={travelRequestForm.travelPrice}
             seatsArr={seats}
           />
         </View>
