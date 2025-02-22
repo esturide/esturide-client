@@ -1,19 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
 import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
-import { RegistrationAddressFormProps } from '@components/forms/register/RegisterFormProps';
 import { showMessage } from '@libs/toast/alerts/toast';
 import { showFailureMessage } from '@libs/toast/message/messages';
 import { useCreateUserContext } from '@components/context/RegisterFormContext';
+import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
 
 export default function AddressRegistrationForm({
   onSubmit,
   redirect,
-}: RegistrationAddressFormProps) {
+}: RegistrationUserFormProps) {
   const { userFormRequest, handleChange } = useCreateUserContext();
 
   const [password, setPassword] = useState('');
@@ -26,12 +26,7 @@ export default function AddressRegistrationForm({
       if (password === confirmPassword && password.length > 8) {
         handleChange('password', password);
 
-        status = await onSubmit(
-          userFormRequest.address,
-          userFormRequest.phoneNumber,
-          userFormRequest.email,
-          password,
-        );
+        status = await onSubmit(userFormRequest);
       } else {
         if (password !== confirmPassword) {
           showMessage('La contraseña no es la misma.');

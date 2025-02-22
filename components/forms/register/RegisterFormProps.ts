@@ -1,21 +1,7 @@
-export type RegistrationUserFormProps = {
-  onSubmit?: (
-    name: string,
-    firstLastName: string,
-    secondLastName: string,
-    code: number,
-    birthDate: Date,
-  ) => Promise<boolean>;
-  redirect: string;
-};
+import { CreateUserRequest } from '@components/context/RegisterFormContext';
 
-export type RegistrationAddressFormProps = {
-  onSubmit?: (
-    address: string,
-    phoneNumber: string,
-    email: string,
-    password: string,
-  ) => Promise<boolean>;
+export type RegistrationUserFormProps = {
+  onSubmit?: (form: CreateUserRequest) => Promise<boolean>;
   redirect: string;
 };
 

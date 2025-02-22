@@ -8,16 +8,6 @@ import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import ScrollLayout from '@components/layouts/ScrollLayout';
 
 export default function FirstRegister() {
-  const handleSubmitRegister = async (
-    name: string,
-    firstLastName: string,
-    secondLastName: string,
-    code: number,
-    birthDate: Date,
-  ) => {
-    return true;
-  };
-
   const handleLogInRedirect = async () => {};
 
   return (
@@ -29,10 +19,7 @@ export default function FirstRegister() {
 
       <LayoutRegister>
         <ScrollLayout>
-          <UserRegistrationForm
-            onSubmit={handleSubmitRegister}
-            redirect={'/sign-up/address-register'}
-          />
+          <UserRegistrationForm redirect={'/sign-up/address-register'} />
           <HyperLink
             label={'¿Ya tienes cuenta? Inicia Sesión'}
             onClick={handleLogInRedirect}
