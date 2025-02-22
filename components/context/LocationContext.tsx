@@ -10,10 +10,13 @@ import * as Location from 'expo-location';
 import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/message/messages';
 
-export const CurrentPosition = createContext(null);
+const CurrentPosition = createContext(null);
 
 export default function LocationContext({ children }: PropsWithChildren) {
-  const [location, setLocation] = useState<Position | null>(null);
+  const [location, setLocation] = useState<Position>({
+    latitude: 0,
+    longitude: 0,
+  });
 
   useEffect(() => {
     const updateLocation = async () => {

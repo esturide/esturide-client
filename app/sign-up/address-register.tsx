@@ -7,15 +7,13 @@ import ScrollLayout from '@components/layouts/ScrollLayout';
 import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
 import loaderEffect from '@libs/loaderEffect';
-import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
+import { useCreateUserContext } from '@components/context/RegisterFormContext';
 import { createUser } from '@libs/request/createUser';
 import Loading from '@components/visuals/resources/Loading';
 
 export default function SecondRegister() {
   const [loading, setLoading] = useState(false);
-  const { userFormRequest, setUserFormRequest } = useContext(
-    UserRegisterFormContext,
-  );
+  const { userFormRequest } = useCreateUserContext();
 
   const eventRedirect = async (
     address: string,

@@ -8,19 +8,13 @@ import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationAddressFormProps } from '@components/forms/register/RegisterFormProps';
 import { showMessage } from '@libs/toast/alerts/toast';
 import { showFailureMessage } from '@libs/toast/message/messages';
-import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
+import { useCreateUserContext } from '@components/context/RegisterFormContext';
 
 export default function AddressRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationAddressFormProps) {
-  const { userFormRequest, setUserFormRequest } = useContext(
-    UserRegisterFormContext,
-  );
-
-  const handleChange = (name: string, value) => {
-    setUserFormRequest({ ...userFormRequest, [name]: value });
-  };
+  const { userFormRequest, handleChange } = useCreateUserContext();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

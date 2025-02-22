@@ -9,7 +9,7 @@ import {
   showFailureMessage,
   showLongSuccessMessage,
 } from '@libs/toast/message/messages';
-import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
+import { useCreateUserContext } from '@components/context/RegisterFormContext';
 
 import styles from '@styles/forms/RegistrationFormStyle';
 
@@ -17,13 +17,7 @@ export default function UserRegistrationForm({
   onSubmit,
   redirect,
 }: RegistrationUserFormProps) {
-  const { userFormRequest, setUserFormRequest } = useContext(
-    UserRegisterFormContext,
-  );
-
-  const handleChange = (name: string, value) => {
-    setUserFormRequest({ ...userFormRequest, [name]: value });
-  };
+  const { userFormRequest, handleChange } = useCreateUserContext();
 
   const onPressButton = async () => {
     if (onSubmit) {

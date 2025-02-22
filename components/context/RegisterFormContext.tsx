@@ -1,6 +1,11 @@
-import React, { createContext, PropsWithChildren, useState } from 'react';
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useState,
+} from 'react';
 
-export const UserRegisterFormContext = createContext(null);
+const UserRegisterFormContext = createContext(null);
 
 export interface CreateUserRequest {
   code: number;
@@ -29,14 +34,23 @@ export default function RegisterFormContext({ children }: PropsWithChildren) {
     phoneNumber: '',
   });
 
+  const handleChange = (name: string, value) => {
+    setUserFormRequest({ ...userFormRequest, [name]: value });
+  };
+
   return (
     <UserRegisterFormContext.Provider
       value={{
         userFormRequest: userFormRequest,
         setUserFormRequest: setUserFormRequest,
+        handleChange: handleChange,
       }}
     >
       {children}
     </UserRegisterFormContext.Provider>
   );
 }
+
+export const useCreateUserContext = () => {
+  return useContext(UserRegisterFormContext);
+};

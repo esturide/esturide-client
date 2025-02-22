@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import RequestProfile, { UserType } from '@const/RequestProfile';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { statusSessionAtom, userCodeAtom } from '@stores/user';
 import { authTokenAtom } from '@stores/token';
 import { requestProfile } from '@libs/request/requestProfile';
