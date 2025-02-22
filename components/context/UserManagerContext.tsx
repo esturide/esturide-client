@@ -89,8 +89,6 @@ export default function UserManagerContextProvider({
 
         onTraveling: onTraveling,
         setOnTraveling: setOnTraveling,
-
-        sessionStatus: sessionStatus,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useAtomValue } from 'jotai';
-import { userCodeAtom } from '@stores/user';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { statusSessionAtom, userCodeAtom } from '@stores/user';
 import AdBanner from '@components/banners/AdBanner';
 import SwitchButton from '@components/buttons/switch/SwitchButton';
 import CancelButton from '@components/buttons/CancelButton';
@@ -13,11 +13,12 @@ import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { getFullName, UserType } from '@const/RequestProfile';
 
 export default function UserProfile() {
-  const { setUserType, userType, onTraveling, setSessionStatus, userProfile } =
+  const { setUserType, userType, onTraveling, userProfile } =
     useUserManagerContext();
 
-  const userCode = useAtomValue(userCodeAtom);
   const [disableSwap, setDisableSwap] = useState(userType === 'Not-Verified');
+  const userCode = useAtomValue(userCodeAtom);
+  const setSessionStatus = useSetAtom(statusSessionAtom);
 
   useEffect(() => {
     setDisableSwap(userType === 'Not-Verified');
