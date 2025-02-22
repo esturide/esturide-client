@@ -3,7 +3,7 @@ import { PermissionsAndroid, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
 import { Position } from '@const/Position';
 import Loading from '@components/visuals/resources/Loading';
-import { showSuccessMessage } from '@libs/toast/messages';
+import { showSuccessMessage } from '@libs/toast/message/messages';
 
 type Props = {
   latitudeDelta?: number;

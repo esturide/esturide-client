@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {
   showFailureMessage,
   showLongSuccessMessage,
-} from '@libs/toast/messages';
+} from '@libs/toast/message/messages';
 import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
 import AdBanner from '@components/banners/AdBanner';
 import Loading from '@components/visuals/resources/Loading';
@@ -18,8 +18,8 @@ import CompactCancelButton from '@components/buttons/compact/CompactCancelButton
 import {
   requestCurrentScheduleTravel,
   requestCurrentUUIDScheduleTravel,
-} from '@libs/request/requestCurrentTravel';
-import { changeStatusTravel } from '@libs/request/changeStatusTravel';
+} from '@libs/request/travels/requestCurrentTravel';
+import { changeStatusTravel } from '@libs/request/travels/changeStatusTravel';
 
 const formatDate = (date: Date): string => {
   return date.toLocaleTimeString('en-US', {

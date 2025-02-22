@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import * as Location from 'expo-location';
 import { Position } from '@const/Position';
-import { showFailureMessage } from '@libs/toast/messages';
+import { showFailureMessage } from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
 
 const CurrentUserPosition = createContext(null);

@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
 import { Position } from '@const/Position';
-import { showMessage } from '@libs/alerts/toast';
+import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
 export const requestScheduleTravel = async (
   start: Position,
@@ -34,13 +34,8 @@ export const requestScheduleTravel = async (
 
     return response.status === 200 || response.status === 201;
   } catch (e) {
-    // console.error(e);
-
-    if (axios.isAxiosError(e)) {
-      showMessage(e.response.data.message);
-
-      return false;
-    }
+    console.error(e);
+    showAxiosExceptionMessage(e);
   }
 
   return false;

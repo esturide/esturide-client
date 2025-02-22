@@ -8,7 +8,7 @@ import { RegistrationUserFormProps } from '@components/forms/register/RegisterFo
 import {
   showFailureMessage,
   showLongSuccessMessage,
-} from '@libs/toast/messages';
+} from '@libs/toast/message/messages';
 import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
 
 import styles from '@styles/forms/RegistrationFormStyle';
@@ -28,7 +28,7 @@ export default function UserRegistrationForm({
   const onPressButton = async () => {
     if (onSubmit) {
       if (userFormRequest.birthDate !== null) {
-        if (userFormRequest.code > 1000000000) {
+        if (userFormRequest.code > 1000) {
           const status = await onSubmit(
             userFormRequest.name,
             userFormRequest.firstLastName,
@@ -87,6 +87,7 @@ export default function UserRegistrationForm({
         value={`${userFormRequest.code}`}
         onChangeText={(code) => handleChange('code', parseInt(code))}
         style={styles.userInputMargin}
+        typeInput={'numeric'}
       />
       <InputDate
         label="Fecha de Nacimiento"

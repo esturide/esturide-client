@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import LayoutRegister from '@components/layouts/register/LayoutRegister';
 import Title from '@components/layouts/Title';
 import LoginForm from '@components/forms/register/LoginForm';
@@ -8,25 +8,23 @@ import Logo from '@components/visuals/resources/Logo';
 import HyperLink from '@components/buttons/HyperLink';
 import ScrollLayout from '@components/layouts/ScrollLayout';
 import Loading from '@components/visuals/resources/Loading';
-import { loginUser, UserDataLogin } from '@libs/request/loginUser';
 import loaderEffect from '@libs/loaderEffect';
-
+import { statusSessionAtom, userCodeAtom } from '@stores/user';
+import { authTokenAtom } from '@stores/token';
+import { loginUser } from '@libs/request/loginUser';
+import { UserDataLogin } from '@const/RequestProfile';
 import {
   showFailureMessage,
   showLongSuccessMessage,
-} from '@libs/toast/messages';
+} from '@libs/toast/message/messages';
 import { stringToNumber } from '@libs/cast';
 
 import 'react-native-reanimated';
-import { userCodeAtom } from '@stores/user';
-import { authTokenAtom } from '@stores/token';
-import { useUserManagerContext } from '@components/context/UserManagerContext';
 
 export default function LogIn() {
-  const { setSessionStatus } = useUserManagerContext();
-
-  const [userCode, setUserCode] = useAtom(userCodeAtom);
-  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const setSessionStatus = useSetAtom(statusSessionAtom);
+  const setUserCode = useSetAtom(userCodeAtom);
+  const setAuthToken = useSetAtom(authTokenAtom);
   const [loading, setLoading] = useState(false);
 
   const onLogin = async (code: string, password: string) => {
@@ -56,7 +54,7 @@ export default function LogIn() {
     if (status) {
       showLongSuccessMessage('Bienvenido', 'Realiza tus viajes y agenda ✅️.');
     } else {
-      showFailureMessage('Nombre de usuario o contraseña incorrectos ⚠️.');
+      showFailureMessage('Nombre de usuario o contraseña incorrectos.');
     }
 
     return status;

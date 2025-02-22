@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
+import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
 export const requestCurrentScheduleTravel = async () => {
   try {
@@ -12,9 +13,7 @@ export const requestCurrentScheduleTravel = async () => {
   } catch (e) {
     console.error(e);
 
-    if (axios.isAxiosError(e)) {
-      return {};
-    }
+    showAxiosExceptionMessage(e);
   }
 
   return {};
@@ -31,9 +30,7 @@ export const requestCurrentUUIDScheduleTravel = async () => {
   } catch (e) {
     console.error(e);
 
-    if (axios.isAxiosError(e)) {
-      return '';
-    }
+    showAxiosExceptionMessage(e);
   }
 
   return '';

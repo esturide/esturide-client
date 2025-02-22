@@ -16,9 +16,9 @@ import { useUserPosition } from '@components/context/UserCurrentLocation';
 import {
   showFailureMessage,
   showLongSuccessMessage,
-} from '@libs/toast/messages';
+} from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
-import { requestScheduleTravel } from '@libs/request/requestScheduleTravel';
+import { requestScheduleTravel } from '@libs/request/travels/requestScheduleTravel';
 
 export default function ScheduleTravel() {
   const { location, isLoading } = useUserPosition();

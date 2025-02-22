@@ -38,7 +38,7 @@ const InputLabel = ({
   floatLabel = false,
   readOnly = false,
   error = false,
-  typeInput,
+  typeInput = 'text',
 }: Props) => {
   if (placeholder === undefined) {
     placeholder = label;

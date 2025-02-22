@@ -6,8 +6,8 @@ import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
 import { RegistrationAddressFormProps } from '@components/forms/register/RegisterFormProps';
-import { showMessage } from '@libs/alerts/toast';
-import { showFailureMessage } from '@libs/toast/messages';
+import { showMessage } from '@libs/toast/alerts/toast';
+import { showFailureMessage } from '@libs/toast/message/messages';
 import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
 
 export default function AddressRegistrationForm({

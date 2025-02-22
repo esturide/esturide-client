@@ -8,7 +8,7 @@ import React, {
 import { LocationObject } from 'expo-location';
 import * as Location from 'expo-location';
 import { Position } from '@const/Position';
-import { showFailureMessage } from '@libs/toast/messages';
+import { showFailureMessage } from '@libs/toast/message/messages';
 
 export const CurrentPosition = createContext(null);
 

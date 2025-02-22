@@ -10,7 +10,7 @@ import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import TypeAccountForm, {
   TypeAccount,
 } from '@components/forms/register/TypeAccountForm';
-import { showMessage } from '@libs/alerts/toast';
+import { showMessage } from '@libs/toast/alerts/toast';
 
 export default function ThirdRegister() {
   const handleSubmit = async (acceptTerms: boolean, account: TypeAccount) => {

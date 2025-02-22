@@ -1,5 +1,10 @@
 export type UserType = 'Driver' | 'Passenger' | 'Not-Verified';
 
+export interface UserDataLogin {
+  readonly code: number;
+  readonly password: string;
+}
+
 export default interface RequestProfile {
   readonly userCode: number;
   readonly firstName: string;

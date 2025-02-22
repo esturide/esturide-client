@@ -6,13 +6,12 @@ import React, {
   useState,
 } from 'react';
 import RequestProfile, { UserType } from '@const/RequestProfile';
-import { useAtom } from 'jotai/index';
-import { userCodeAtom } from '@stores/user';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { statusSessionAtom, userCodeAtom } from '@stores/user';
 import { authTokenAtom } from '@stores/token';
 import { requestProfile } from '@libs/request/requestProfile';
 import { router } from 'expo-router';
-
-export type SessionStatus = 'Success' | 'Logout' | 'Failure' | 'No-Login';
+import { requestValidationToken } from '@libs/request/requestValidationToken';
 
 const UserManagerContext = createContext(null);
 
@@ -28,21 +27,33 @@ const emptyProfile: RequestProfile = {
 export default function UserManagerContextProvider({
   children,
 }: PropsWithChildren) {
-  const [sessionStatus, setSessionStatus] = useState<SessionStatus>('No-Login');
   const [onTraveling, setOnTraveling] = useState(false);
   const [userType, setUserType] = useState<UserType>('Not-Verified');
   const [userProfile, setUserProfile] = useState<RequestProfile>(emptyProfile);
-
-  const [userCode, setUserCode] = useAtom(userCodeAtom);
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [sessionStatus, setSessionStatus] = useAtom(statusSessionAtom);
+  const setUserCode = useSetAtom(userCodeAtom);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      if (sessionStatus === 'Success') {
+        const status = await requestValidationToken();
+
+        if (!status) {
+          setSessionStatus('Logout');
+        }
+      }
+    };
+
+    const interval = setInterval(checkToken, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const loadProfile = async () => {
       if (sessionStatus === 'Success') {
         const statusProfile = await requestProfile(setUserProfile);
-
-        console.log(`User code is: ${userCode}`);
-        console.log(`Auth token is: ${authToken}`);
 
         if (statusProfile) {
           setSessionStatus('Success');
@@ -56,17 +67,10 @@ export default function UserManagerContextProvider({
   }, [sessionStatus, authToken]);
 
   useEffect(() => {
-    console.log(`User profile: `, userProfile);
     setUserType(userProfile.role);
   }, [userProfile]);
 
   useEffect(() => {
-    console.log(`User type is set in: ${userType}`);
-  }, [userProfile]);
-
-  useEffect(() => {
-    console.log(`Session status: ${sessionStatus}`);
-
     if (sessionStatus === 'Logout') {
       router.replace('/');
       setUserProfile(emptyProfile);
@@ -87,7 +91,6 @@ export default function UserManagerContextProvider({
         setOnTraveling: setOnTraveling,
 
         sessionStatus: sessionStatus,
-        setSessionStatus: setSessionStatus,
       }}
     >
       {children}
