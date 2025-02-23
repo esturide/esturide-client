@@ -7,8 +7,8 @@ import InputPassword from '@components/inputs/InputPassword';
 import { InputButton } from '@components/buttons/InputButton';
 import { showMessage } from '@libs/toast/alerts/toast';
 import { showFailureMessage } from '@libs/toast/message/messages';
-import { useCreateUserContext } from '@components/context/register/RegisterFormContext';
 import { RegistrationUserFormProps } from '@components/forms/register/RegisterFormProps';
+import {useCreateUserContext} from "@components/context/RegisterFormContext";
 
 export default function AddressRegistrationForm({
   onSubmit,
