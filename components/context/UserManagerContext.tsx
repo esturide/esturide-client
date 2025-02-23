@@ -15,7 +15,7 @@ import { requestValidationToken } from '@libs/request/requestValidationToken';
 
 const UserManagerContext = createContext(null);
 
-const emptyProfile: RequestProfile = {
+const EmptyProfile: RequestProfile = {
   userCode: 0,
   firstName: '',
   maternalSurname: '',
@@ -24,12 +24,14 @@ const emptyProfile: RequestProfile = {
   role: 'Not-Verified',
 };
 
+const defaultTimeRefresh = 3300000;
+
 export default function UserManagerContextProvider({
   children,
 }: PropsWithChildren) {
   const [onTraveling, setOnTraveling] = useState(false);
   const [userType, setUserType] = useState<UserType>('Not-Verified');
-  const [userProfile, setUserProfile] = useState<RequestProfile>(emptyProfile);
+  const [userProfile, setUserProfile] = useState<RequestProfile>(EmptyProfile);
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [sessionStatus, setSessionStatus] = useAtom(statusSessionAtom);
   const setUserCode = useSetAtom(userCodeAtom);
@@ -45,7 +47,7 @@ export default function UserManagerContextProvider({
       }
     };
 
-    const interval = setInterval(checkToken, 5000);
+    const interval = setInterval(checkToken, defaultTimeRefresh);
 
     return () => clearInterval(interval);
   }, []);
@@ -73,7 +75,7 @@ export default function UserManagerContextProvider({
   useEffect(() => {
     if (sessionStatus === 'Logout') {
       router.replace('/');
-      setUserProfile(emptyProfile);
+      setUserProfile(EmptyProfile);
       setUserCode(0);
       setAuthToken('');
     }

@@ -1,4 +1,4 @@
-import { CreateUserRequest } from '@components/context/RegisterFormContext';
+import { CreateUserRequest } from '@components/context/register/RegisterFormContext';
 
 export type RegistrationUserFormProps = {
   onSubmit?: (form: CreateUserRequest) => Promise<boolean>;

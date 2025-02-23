@@ -20,23 +20,25 @@ export interface CreateTravelRequest {
   destination: Position;
 }
 
+const EmptyTravel = {
+  isDatePickerVisible: false,
+  startTime: new Date(),
+  finishedTime: new Date(),
+  travelPrice: 1,
+  destinationEstablished: false,
+  validPrice: true,
+  validateTravel: false,
+  destination: {
+    longitude: 0,
+    latitude: 0,
+  },
+};
+
 export default function RouteNavigatorContext({ children }: PropsWithChildren) {
   const [validTravel, setValidTravel] = useState(false);
   const [currentRoute, setCurrentRoute] = useState('/user/maps');
   const [travelRequestForm, setTravelRequestForm] =
-    useState<CreateTravelRequest>({
-      isDatePickerVisible: false,
-      startTime: new Date(),
-      finishedTime: new Date(),
-      travelPrice: 1,
-      destinationEstablished: false,
-      validPrice: true,
-      validateTravel: false,
-      destination: {
-        longitude: 0,
-        latitude: 0,
-      },
-    });
+    useState<CreateTravelRequest>(EmptyTravel);
 
   useEffect(() => {
     setValidPrice(travelRequestForm.travelPrice >= 1);

@@ -8,7 +8,7 @@ import {
   showFailureMessage,
   showSuccessMessage,
 } from '@libs/toast/message/messages';
-import { useCreateUserContext } from '@components/context/RegisterFormContext';
+import { useCreateUserContext } from '@components/context/register/RegisterFormContext';
 import { stringToNumber } from '@libs/cast';
 
 import styles from '@styles/forms/RegistrationFormStyle';
