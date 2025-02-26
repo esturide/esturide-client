@@ -5,12 +5,12 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { LocationObject } from 'expo-location';
 import * as Location from 'expo-location';
+import { LocationObject } from 'expo-location';
 import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/message/messages';
 
-const CurrentPosition = createContext(null);
+const CurrentPosition = createContext<any | null>(null);
 
 export default function LocationContext({ children }: PropsWithChildren) {
   const [location, setLocation] = useState<Position>({

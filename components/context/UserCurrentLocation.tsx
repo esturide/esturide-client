@@ -1,6 +1,6 @@
 import React, {
-  createContext,
   PropsWithChildren,
+  createContext,
   useContext,
   useEffect,
   useState,
@@ -10,7 +10,7 @@ import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
 
-const CurrentUserPosition = createContext(null);
+const CurrentUserPosition = createContext<any | null>(null);
 
 export default function UserCurrentLocation({ children }: PropsWithChildren) {
   const [update, setUpdate] = useState(false);

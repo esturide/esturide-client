@@ -14,8 +14,7 @@ import { Position } from '@const/Position';
 
 export default function SelectDestination() {
   const { location, isLoading } = useUserPosition();
-  const { travelRequestForm, setCurrentRoute, setDestination } =
-    useTravelScheduleRoute();
+  const { setCurrentRoute, setDestination } = useTravelScheduleRoute();
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState(false);
 

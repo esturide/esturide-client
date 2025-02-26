@@ -1,3 +1,5 @@
+import {Position} from "@const/Position";
+
 export type UserType = 'Driver' | 'Passenger' | 'Not-Verified';
 
 export interface UserDataLogin {

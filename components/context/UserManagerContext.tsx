@@ -13,7 +13,7 @@ import { requestProfile } from '@libs/request/requestProfile';
 import { router } from 'expo-router';
 import { requestValidationToken } from '@libs/request/requestValidationToken';
 
-const UserManagerContext = createContext(null);
+const UserManagerContext = createContext<any | null>(null);
 
 const EmptyProfile: RequestProfile = {
   userCode: 0,

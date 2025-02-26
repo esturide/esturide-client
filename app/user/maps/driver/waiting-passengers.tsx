@@ -15,10 +15,7 @@ import { useUserManagerContext } from '@components/context/UserManagerContext';
 import GreenButton from '@components/buttons/GreenButton';
 import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
-import {
-  requestCurrentScheduleTravel,
-  requestCurrentUUIDScheduleTravel,
-} from '@libs/request/travels/requestCurrentTravel';
+import { requestCurrentUUIDScheduleTravel } from '@libs/request/travels/requestCurrentTravel';
 import { changeStatusTravel } from '@libs/request/travels/changeStatusTravel';
 
 const formatDate = (date: Date): string => {

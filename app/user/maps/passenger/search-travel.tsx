@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AdBanner from '@components/banners/AdBanner';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import BlueButton from '@components/buttons/BlueButton';
 import { SearchBar } from '@components/cards/SearchBar';
 import { defaultPassengerColor } from '@const/DefaultColors';
 import CompactBlueButton from '@components/buttons/compact/CompactBlueButton';
+import {requestAllTravel} from "@libs/request/travels/requestAllTravels";
+import loaderEffect from "@libs/loaderEffect";
+import Loading from "@components/visuals/resources/Loading";
 
 export default function SearchTravel() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const queryRides = async () => {
+      loaderEffect(async () => {
+        const data = await requestAllTravel();
+
+        console.log(data);
+      }, setLoading)
+    };
+
+    queryRides();
+  }, []);
+
   const CardTravel = () => {
     return (
       <View style={styles.travelCard}>
@@ -39,6 +56,8 @@ export default function SearchTravel() {
           <BlueButton title={'Filtrar'} />
         </View>
       </View>
+
+      <Loading visible={loading} modal />
     </>
   );
 }

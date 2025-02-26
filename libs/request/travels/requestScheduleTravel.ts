@@ -24,8 +24,6 @@ export const requestScheduleTravel = async (
       maxPassengers: seats,
     };
 
-    console.log(data);
-
     const response: AxiosResponse = await clientTravelMatchNetwork.post(
       `/schedule/`,
       data,

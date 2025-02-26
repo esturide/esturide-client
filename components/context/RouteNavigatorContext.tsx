@@ -1,13 +1,13 @@
 import React, {
-  createContext,
   PropsWithChildren,
+  createContext,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import { Position } from '@const/Position';
 
-const RouteContext = createContext(null);
+const RouteContext = createContext<null | any>(null);
 
 export interface CreateTravelRequest {
   isDatePickerVisible: boolean;
