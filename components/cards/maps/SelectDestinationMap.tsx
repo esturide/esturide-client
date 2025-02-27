@@ -3,9 +3,8 @@ import { PermissionsAndroid, StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
 import MapMarker from '@components/cards/maps/markers/MapMarker';
 import { Position } from '@const/Position';
-import * as Crypto from 'expo-crypto';
 import Loading from '@components/visuals/resources/Loading';
-import { showSuccessMessage } from '@libs/toast/message/messages';
+import * as Crypto from 'expo-crypto';
 
 type Props = {
   latitudeDelta?: number;

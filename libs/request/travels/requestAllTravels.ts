@@ -1,9 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
 import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
-import {PublicProfile, Travel} from "@const/Travels";
+import { PublicProfile, Travel } from '@const/Travels';
 
-export const requestAllTravel = async (limit: number = 16): Travel[] => {
+export const requestAllTravel = async (
+  limit: number = 16,
+): Promise<Travel[]> => {
   try {
     const response: AxiosResponse = await clientTravelMatchNetwork.get(
       `/schedule/search`,
@@ -15,12 +17,9 @@ export const requestAllTravel = async (limit: number = 16): Travel[] => {
       },
     );
 
-    console.log(response.data);
-
     const travels: Travel[] = [];
 
-    for(let i = 0; i < response.data.length; i++) {
-      const travel = response.data[i];
+    for (const travel of response.data) {
       const driver = travel.driver;
       const origin = travel.origin;
       const destination = travel.destination;
@@ -57,7 +56,7 @@ export const requestAllTravel = async (limit: number = 16): Travel[] => {
         terminate: travel.terminate,
         cancel: travel.cancel,
         maxPassenger: travel.maxPassengers,
-        passengers: passengers,
+        passengers: [...passengers],
         origin: {
           latitude: origin.latitude,
           longitude: origin.longitude,

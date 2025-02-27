@@ -10,7 +10,22 @@ import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
 
-const CurrentUserPosition = createContext<any | null>(null);
+interface ContextProps {
+  setRefresh: (status: boolean) => void;
+  isLoading: boolean;
+  location: Position;
+}
+
+const CurrentUserPosition = createContext<ContextProps>({
+  setRefresh: (status: boolean) => {
+    return;
+  },
+  isLoading: false,
+  location: {
+    latitude: 0,
+    longitude: 0,
+  },
+});
 
 export default function UserCurrentLocation({ children }: PropsWithChildren) {
   const [update, setUpdate] = useState(false);

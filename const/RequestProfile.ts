@@ -1,4 +1,5 @@
 import {Position} from "@const/Position";
+import {PublicProfile} from "@const/Travels";
 
 export type UserType = 'Driver' | 'Passenger' | 'Not-Verified';
 
@@ -16,7 +17,7 @@ export default interface RequestProfile {
   readonly role: UserType;
 }
 
-export const getFullName = (profile: RequestProfile) => {
+export const getFullName = (profile: RequestProfile | PublicProfile) => {
   return `${profile.firstName} ${profile.paternalSurname} ${profile.maternalSurname}`;
 };
 

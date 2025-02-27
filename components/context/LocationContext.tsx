@@ -10,7 +10,10 @@ import { LocationObject } from 'expo-location';
 import { Position } from '@const/Position';
 import { showFailureMessage } from '@libs/toast/message/messages';
 
-const CurrentPosition = createContext<any | null>(null);
+const CurrentPosition = createContext<Position>({
+  latitude: 0,
+  longitude: 0,
+});
 
 export default function LocationContext({ children }: PropsWithChildren) {
   const [location, setLocation] = useState<Position>({

@@ -1,36 +1,98 @@
-import React, {useEffect, useState} from 'react';
-import AdBanner from '@components/banners/AdBanner';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import BlueButton from '@components/buttons/BlueButton';
 import { SearchBar } from '@components/cards/SearchBar';
-import { defaultPassengerColor } from '@const/DefaultColors';
+import AdBanner from '@components/banners/AdBanner';
+import BlueButton from '@components/buttons/BlueButton';
 import CompactBlueButton from '@components/buttons/compact/CompactBlueButton';
-import {requestAllTravel} from "@libs/request/travels/requestAllTravels";
-import loaderEffect from "@libs/loaderEffect";
-import Loading from "@components/visuals/resources/Loading";
+import Loading from '@components/visuals/resources/Loading';
+import MapCard from '@components/cards/maps/MapCard';
+import { requestAllTravel } from '@libs/request/travels/requestAllTravels';
+import loaderEffect from '@libs/loaderEffect';
+import { Travel } from '@const/Travels';
+import { getFullName } from '@const/RequestProfile';
+import { defaultPassengerColor } from '@const/DefaultColors';
+import * as Crypto from 'expo-crypto';
+import * as Location from 'expo-location';
+import { showFailureMessage } from '@libs/toast/message/messages';
+import { Position } from '@const/Position';
 
 export default function SearchTravel() {
-  const [loading, setLoading] = useState(false);
+  const [reloading, setReloading] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
+  const [loadingLocation, setLoadingLocation] = useState(false);
+  const [travels, setTravels] = useState<Travel[]>([]);
+  const [location, setLocation] = useState<Position>({
+    latitude: 0,
+    longitude: 0,
+  });
 
   useEffect(() => {
-    const queryRides = async () => {
-      loaderEffect(async () => {
-        const data = await requestAllTravel();
+    const updateLocation = async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
-        console.log(data);
-      }, setLoading)
+      if (status !== 'granted') {
+        showFailureMessage('The location could not be accessed.');
+      }
+
+      const locationObject = await Location.getCurrentPositionAsync({});
+
+      setLocation({
+        latitude: locationObject.coords.latitude,
+        longitude: locationObject.coords.longitude,
+      });
+
+      setLoadingLocation(false);
     };
 
-    queryRides();
+    updateLocation();
   }, []);
 
-  const CardTravel = () => {
+  useEffect(() => {
+    const queryAllTravels = async () => {
+      await loaderEffect(async () => {
+        const data = await requestAllTravel();
+
+        console.log(JSON.stringify(data));
+
+        setTravels(data);
+        setReloading(false);
+      }, setLoadingData);
+    };
+
+    queryAllTravels();
+  }, [reloading]);
+
+  const CardTravel = ({ travel }: { travel: Travel }) => {
+    const driver = travel.driver;
+
     return (
       <View style={styles.travelCard}>
-        <Text>CUTONALA</Text>
+        <Text>{getFullName(driver)}</Text>
         <Text>Hora de Salida: 5:45pm</Text>
+        <MapCard
+          region={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          origin={travel.origin}
+          destination={travel.destination}
+        />
         <CompactBlueButton title={'Solicitar'} />
       </View>
+    );
+  };
+
+  const AllTravels = () => {
+    return (
+      <>
+        <ScrollView>
+          {travels.map((travel) => (
+            <CardTravel travel={travel} key={Crypto.randomUUID()} />
+          ))}
+        </ScrollView>
+      </>
     );
   };
 
@@ -44,20 +106,24 @@ export default function SearchTravel() {
         </View>
 
         <View style={styles.travelList}>
-          <ScrollView>
-            <CardTravel />
-            <CardTravel />
-            <CardTravel />
-          </ScrollView>
+          {loadingData ? (
+            <Loading visible={true} modal={false} />
+          ) : (
+            <AllTravels />
+          )}
         </View>
 
         <View style={styles.controls}>
-          <BlueButton title={'Actualizar'} />
+          <BlueButton
+            title={'Actualizar'}
+            onPress={async () => {
+              setReloading(true);
+            }}
+          />
+
           <BlueButton title={'Filtrar'} />
         </View>
       </View>
-
-      <Loading visible={loading} modal />
     </>
   );
 }

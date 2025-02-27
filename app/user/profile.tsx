@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { statusSessionAtom, userCodeAtom } from '@stores/user';
 import AdBanner from '@components/banners/AdBanner';
 import SwitchButton from '@components/buttons/switch/SwitchButton';
