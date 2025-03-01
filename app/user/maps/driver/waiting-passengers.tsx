@@ -16,7 +16,11 @@ import GreenButton from '@components/buttons/GreenButton';
 import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
 import { requestCurrentUUIDScheduleTravel } from '@libs/request/travels/requestCurrentTravel';
-import { changeStatusTravel } from '@libs/request/travels/changeStatusTravel';
+import {
+  changeStatusTravel,
+  StatusMode,
+} from '@libs/request/travels/changeStatusTravel';
+import loaderEffect from '@libs/loaderEffect';
 
 const formatDate = (date: Date): string => {
   return date.toLocaleTimeString('en-US', {
@@ -25,18 +29,30 @@ const formatDate = (date: Date): string => {
     hour12: true,
   });
 };
+
 export default function WaitingPassengers() {
   const { location } = useUserPosition();
   const { setOnTraveling } = useUserManagerContext();
   const { setRefresh, isLoading } = useUserPosition();
   const { setCurrentRoute } = useTravelScheduleRoute();
   const [changePage, setChangePage] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const { travelRequestForm } = useTravelScheduleRoute();
 
   useEffect(() => {
     setRefresh(true);
   }, []);
+
+  const loadingChangeStatus = async (mode: StatusMode, uuid: string) => {
+    let status = false;
+
+    await loaderEffect(async () => {
+      status = await changeStatusTravel(mode, uuid);
+    }, setLoading);
+
+    return status;
+  };
 
   const travelIsOver = async () => {
     setCurrentRoute('/user/maps');
@@ -50,7 +66,7 @@ export default function WaitingPassengers() {
       await travelIsOver();
     }
 
-    const status = await changeStatusTravel('finished', uuid);
+    const status = await loadingChangeStatus('finished', uuid);
 
     if (status) {
       await travelIsOver();
@@ -68,7 +84,7 @@ export default function WaitingPassengers() {
       await travelIsOver();
     }
 
-    const status = await changeStatusTravel('cancel', uuid);
+    const status = await loadingChangeStatus('cancel', uuid);
 
     if (status) {
       await travelIsOver();
@@ -150,6 +166,10 @@ export default function WaitingPassengers() {
   };
 
   if (isLoading) {
+    return <Loading visible={true} />;
+  }
+
+  if (loading) {
     return <Loading visible={true} />;
   }
 

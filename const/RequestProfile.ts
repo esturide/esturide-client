@@ -1,5 +1,4 @@
-import {Position} from "@const/Position";
-import {PublicProfile} from "@const/Travels";
+import { PublicProfile } from '@const/Travels';
 
 export type UserType = 'Driver' | 'Passenger' | 'Not-Verified';
 

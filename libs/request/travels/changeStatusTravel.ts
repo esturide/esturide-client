@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
 import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
-type StatusMode = 'start' | 'finished' | 'cancel';
+export type StatusMode = 'start' | 'finished' | 'cancel';
 
 export const changeStatusTravel = async (mode: StatusMode, uuid: string) => {
   try {

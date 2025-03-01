@@ -24,7 +24,7 @@ const EmptyProfile: RequestProfile = {
   role: 'Not-Verified',
 };
 
-const defaultTimeRefresh = 3300000;
+const defaultTimeRefresh = 1800000;
 
 export default function UserManagerContextProvider({
   children,

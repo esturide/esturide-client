@@ -65,6 +65,9 @@ export const requestAllTravel = async (
           latitude: destination.latitude,
           longitude: destination.latitude,
         },
+        finished: new Date(travel.finished),
+        starting: new Date(travel.starting),
+        seats: travel.seats,
       });
     }
 

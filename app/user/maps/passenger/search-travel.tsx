@@ -8,18 +8,27 @@ import Loading from '@components/visuals/resources/Loading';
 import MapCard from '@components/cards/maps/MapCard';
 import { requestAllTravel } from '@libs/request/travels/requestAllTravels';
 import loaderEffect from '@libs/loaderEffect';
+import { showFailureMessage } from '@libs/toast/message/messages';
 import { Travel } from '@const/Travels';
 import { getFullName } from '@const/RequestProfile';
 import { defaultPassengerColor } from '@const/DefaultColors';
+import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { Position } from '@const/Position';
 import * as Crypto from 'expo-crypto';
 import * as Location from 'expo-location';
-import { showFailureMessage } from '@libs/toast/message/messages';
-import { Position } from '@const/Position';
+import { usePassengerContext } from '@components/context/PassengerContext';
+import { useUserManagerContext } from '@components/context/UserManagerContext';
+import {requestRide} from "@libs/request/rides/requestTravels";
 
 export default function SearchTravel() {
+  const { setOnTraveling } = useUserManagerContext();
+  const { setCurrentRoute } = useTravelScheduleRoute();
+  const { setTravelData, data } = usePassengerContext();
   const [reloading, setReloading] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
   const [loadingLocation, setLoadingLocation] = useState(false);
+  const [loadingRequest, setLoadingRequest] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [travels, setTravels] = useState<Travel[]>([]);
   const [location, setLocation] = useState<Position>({
     latitude: 0,
@@ -52,8 +61,6 @@ export default function SearchTravel() {
       await loaderEffect(async () => {
         const data = await requestAllTravel();
 
-        console.log(JSON.stringify(data));
-
         setTravels(data);
         setReloading(false);
       }, setLoadingData);
@@ -62,13 +69,56 @@ export default function SearchTravel() {
     queryAllTravels();
   }, [reloading]);
 
-  const CardTravel = ({ travel }: { travel: Travel }) => {
+  const showScheduleTimes = (date: Date) => {
+    return `${date.getHours()}:${date.getMinutes()}`;
+  };
+
+  type TravelProps = {
+    travel: Travel;
+  };
+
+  const TravelCard = ({ travel }: TravelProps) => {
     const driver = travel.driver;
+    const starting = travel.starting;
+    const finished = travel.finished;
+
+    return (
+      <View>
+        <Text>{getFullName(driver)}</Text>
+
+        <View>
+          <Text>Hora de Inicio: {showScheduleTimes(starting)}</Text>
+          <Text>Hora de Finalizacion: {showScheduleTimes(finished)}</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const CardTravelRequest = ({ travel }: TravelProps) => {
+    const requestTravel = async () => {
+      let status = false;
+
+      loaderEffect(async () => {
+        status = await requestRide({
+          uuid: travel.uuid,
+          origin: location,
+        });
+      }, setLoadingRequest);
+
+      if (status) {
+        setOnTraveling(true);
+        setShowModal(true);
+
+        setTravelData('current', travel);
+
+        setCurrentRoute('/user/maps/passenger/waiting-driver');
+      }
+    };
 
     return (
       <View style={styles.travelCard}>
-        <Text>{getFullName(driver)}</Text>
-        <Text>Hora de Salida: 5:45pm</Text>
+        <TravelCard travel={travel} />
+
         <MapCard
           region={{
             latitude: location.latitude,
@@ -79,17 +129,26 @@ export default function SearchTravel() {
           origin={travel.origin}
           destination={travel.destination}
         />
-        <CompactBlueButton title={'Solicitar'} />
+
+        <CompactBlueButton title={'Solicitar'} onPress={requestTravel} />
       </View>
     );
   };
 
+  const TitleHeader = () => {
+    return <Text style={styles.header}>Viajes no encontrados</Text>;
+  };
+
   const AllTravels = () => {
+    if (travels.length === 0) {
+      return <TitleHeader />;
+    }
+
     return (
       <>
         <ScrollView>
           {travels.map((travel) => (
-            <CardTravel travel={travel} key={Crypto.randomUUID()} />
+            <CardTravelRequest travel={travel} key={Crypto.randomUUID()} />
           ))}
         </ScrollView>
       </>
@@ -124,11 +183,18 @@ export default function SearchTravel() {
           <BlueButton title={'Filtrar'} />
         </View>
       </View>
+
+      <Loading visible={loadingRequest} modal={true} />
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#c3c3c3',
+  },
   container: {
     flex: 1,
     margin: 15,
