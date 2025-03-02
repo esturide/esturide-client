@@ -33,7 +33,19 @@ export default function ScheduleTravel() {
     setDestinationEstablished,
     setValidateTravel,
     validTravel,
+    addSeats,
+    removeSeats,
   } = useTravelScheduleRoute();
+
+  const setSeats = async (seat: string, status: boolean) => {
+    console.log(`Seat ${seat} pressed: ${status}`);
+
+    if (status) {
+      addSeats(seat);
+    } else {
+      removeSeats(seat);
+    }
+  };
 
   const travelConfirm = async () => {
     let status = false;
@@ -43,7 +55,10 @@ export default function ScheduleTravel() {
         location,
         travelRequestForm.destination,
         travelRequestForm.travelPrice,
-        4,
+        3,
+        travelRequestForm.startTime,
+        travelRequestForm.finishedTime,
+        travelRequestForm.seats,
       );
     }, setLoadingRequest);
 
@@ -68,10 +83,9 @@ export default function ScheduleTravel() {
   };
 
   const authTravel = async (validate: boolean) => {
-    setValidateTravel(validate);
-
     if (validate) {
       showLongSuccessMessage('Exito', 'Validado correcta.');
+      setValidateTravel(validate);
     } else {
       showFailureMessage('Error al validar viaje.');
     }
@@ -107,7 +121,7 @@ export default function ScheduleTravel() {
           </View>
 
           <View style={styles.containerRow}>
-            <InputSeats />
+            <InputSeats onPress={setSeats} />
 
             <CardButton
               title={'Destino'}

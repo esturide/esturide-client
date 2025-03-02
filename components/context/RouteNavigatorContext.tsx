@@ -18,6 +18,7 @@ export interface CreateTravelRequest {
   validPrice: boolean;
   validateTravel: boolean;
   destination: Position;
+  seats: string[];
 }
 
 const EmptyTravel = {
@@ -32,6 +33,7 @@ const EmptyTravel = {
     longitude: 0,
     latitude: 0,
   },
+  seats: [],
 };
 
 export default function RouteNavigatorContext({ children }: PropsWithChildren) {
@@ -114,6 +116,24 @@ export default function RouteNavigatorContext({ children }: PropsWithChildren) {
     });
   };
 
+  const addSeats = (value: string) => {
+    if (!travelRequestForm['seats'].includes(value)) {
+      travelRequestForm['seats'].push(value);
+    }
+
+    setTravelRequestForm({
+      ...travelRequestForm,
+      ['seats']: [...travelRequestForm['seats']],
+    });
+  };
+
+  const removeSeats = (value: string) => {
+    setTravelRequestForm({
+      ...travelRequestForm,
+      ['seats']: travelRequestForm['seats'].filter((item) => item !== value),
+    });
+  };
+
   return (
     <RouteContext.Provider
       value={{
@@ -131,6 +151,8 @@ export default function RouteNavigatorContext({ children }: PropsWithChildren) {
         setValidPrice: setValidPrice,
         setValidateTravel: setValidateTravel,
         setDestination: setDestination,
+        addSeats: addSeats,
+        removeSeats: removeSeats,
       }}
     >
       {children}

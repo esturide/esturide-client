@@ -15,7 +15,7 @@ export const requestRide = async (ride: Ride) => {
     };
 
     const response: AxiosResponse = await clientTravelMatchNetwork.post(
-      '/ride',
+      '/ride/',
       data,
       config,
     );

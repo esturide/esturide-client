@@ -7,7 +7,10 @@ export const requestScheduleTravel = async (
   start: Position,
   end: Position,
   price: number,
-  seats: number,
+  maxPassengers: number,
+  starting: Date,
+  finished: Date,
+  seats = [],
 ) => {
   try {
     const data = {
@@ -21,7 +24,11 @@ export const requestScheduleTravel = async (
         latitude: end.latitude,
         longitude: start.longitude,
       },
-      maxPassengers: seats,
+      maxPassengers: maxPassengers,
+      price: price,
+      starting: starting.toISOString(),
+      finished: finished.toISOString(),
+      seats: seats,
     };
 
     const response: AxiosResponse = await clientTravelMatchNetwork.post(

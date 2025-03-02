@@ -88,7 +88,6 @@ export default function SelectDestination() {
       <BottomSheet>
         <View style={styles.containerControls}>
           <View style={styles.controlsRow}>
-            <SwitchDestination />
           </View>
 
           <View style={styles.controlsRow}>

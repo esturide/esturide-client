@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   seat: string;
-  setEnabled?: (enabled: boolean) => Promise<void>;
+  onPress?: (enabled: boolean) => void;
 };
 
-export default function CardSeat({ seat, setEnabled }: Props) {
-  const [enabledSeat, setEnabledSeat] = useState(false);
+export default function CardSeat({ seat, onPress }: Props) {
+  const [enabledSeat, setEnabledSeat] = useState(true);
 
   const switchEnabled = async () => {
     setEnabledSeat(!enabledSeat);
 
-    if (setEnabled) {
-      await setEnabled(enabledSeat);
+    if (onPress) {
+      onPress(enabledSeat);
     }
   };
 
