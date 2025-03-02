@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { router, Slot } from 'expo-router';
 import NavigationBar from '@components/tabs/NavigationBar';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
-import { requestIsCurrentScheduleTravel } from '@libs/request/travels/requestCurrentTravel';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
+import {
+  requestCurrentScheduleTravel,
+  requestIsCurrentScheduleTravel,
+} from '@libs/request/travels/requestCurrentTravel';
 
 import styles from '@styles/layouts/UserLayout';
 
@@ -15,7 +18,7 @@ import profileIcon from '@assets/icons/tabs/user.png';
 
 export default function UserLayout() {
   const [haveCurrentTravel, setHaveCurrentTravel] = useState(false);
-  const { currentRoute, setCurrentRoute } = useTravelScheduleRoute();
+  const { currentRoute, setCurrentRoute } = useRouteNavigator();
   const { setOnTraveling } = useUserManagerContext();
   const { setUserType } = useUserManagerContext();
 

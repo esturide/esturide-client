@@ -33,7 +33,7 @@ export default function AuthUser({ label, onValidate }: Props) {
       setAuthenticated(false);
 
       if (result.success) {
-        setAuthenticated(true);
+        setAuthenticated(result.success);
       } else {
         Alert.alert('Error', 'Autenticación fallida');
       }

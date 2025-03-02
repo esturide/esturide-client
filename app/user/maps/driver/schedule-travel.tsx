@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 
 import InputTime from '@components/inputs/InputTime';
 import CancelButton from '@components/buttons/CancelButton';
@@ -19,27 +19,26 @@ import {
 } from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
 import { requestScheduleTravel } from '@libs/request/travels/requestScheduleTravel';
+import { useDriverContext } from '@components/context/DriverContext';
 
 export default function ScheduleTravel() {
   const { location, isLoading } = useUserPosition();
   const [loadingRequest, setLoadingRequest] = useState(false);
   const { setOnTraveling } = useUserManagerContext();
+  const { setCurrentRoute, validTravel } = useRouteNavigator();
+
   const {
     travelRequestForm,
-    setCurrentRoute,
     setStartTime,
     setFinishedTime,
     setTravelPrice,
     setDestinationEstablished,
     setValidateTravel,
-    validTravel,
     addSeats,
     removeSeats,
-  } = useTravelScheduleRoute();
+  } = useDriverContext();
 
   const setSeats = async (seat: string, status: boolean) => {
-    console.log(`Seat ${seat} pressed: ${status}`);
-
     if (status) {
       addSeats(seat);
     } else {

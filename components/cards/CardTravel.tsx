@@ -5,7 +5,7 @@ import styles, {
 } from '@styles/CardTravelStyle';
 import * as Crypto from 'expo-crypto';
 
-export interface SeatsArr {
+export interface ArrayPassengers {
   value: string;
 }
 
@@ -14,7 +14,7 @@ interface CardTravelProps {
   departTime: string;
   arrivalTime: string;
   price: number;
-  seatsArr: SeatsArr[];
+  seatsArr: ArrayPassengers[];
 }
 
 export default function CardTravel({

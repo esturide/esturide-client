@@ -4,45 +4,71 @@ import {
   showFailureMessage,
   showLongSuccessMessage,
 } from '@libs/toast/message/messages';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import AdBanner from '@components/banners/AdBanner';
 import Loading from '@components/visuals/resources/Loading';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
-import CardTravel, { SeatsArr } from '@components/cards/CardTravel';
+import CardTravel, { ArrayPassengers } from '@components/cards/CardTravel';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import GreenButton from '@components/buttons/GreenButton';
 import CompactGreenButton from '@components/buttons/compact/CompactGreenButton';
 import CompactCancelButton from '@components/buttons/compact/CompactCancelButton';
+import { useDriverContext } from '@components/context/DriverContext';
 import { requestCurrentUUIDScheduleTravel } from '@libs/request/travels/requestCurrentTravel';
 import {
   changeStatusTravel,
   StatusMode,
 } from '@libs/request/travels/changeStatusTravel';
 import loaderEffect from '@libs/loaderEffect';
-
-const formatDate = (date: Date): string => {
-  return date.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
-};
+import { TravelCardStatus } from '@components/cards/travel/TravelCardStatus';
 
 export default function WaitingPassengers() {
   const { location } = useUserPosition();
   const { setOnTraveling } = useUserManagerContext();
-  const { setRefresh, isLoading } = useUserPosition();
-  const { setCurrentRoute } = useTravelScheduleRoute();
+  const { isLoading } = useUserPosition();
+  const { setCurrentRoute } = useRouteNavigator();
+  const {
+    travelRequestForm,
+    travelData,
+    travelDataIsLoad,
+    setStartTime,
+    setFinishedTime,
+    setTravelPrice,
+    setDestinationEstablished,
+    setDestination,
+    addSeats,
+  } = useDriverContext();
   const [changePage, setChangePage] = useState(true);
   const [loading, setLoading] = useState(false);
-
-  const { travelRequestForm } = useTravelScheduleRoute();
+  const [seats, setSeats] = useState<ArrayPassengers[]>([]);
 
   useEffect(() => {
-    setRefresh(true);
-  }, []);
+    if (travelData !== undefined) {
+      setStartTime(travelData.starting);
+      setFinishedTime(travelData.finished);
+      setTravelPrice(travelData.price);
+      setDestinationEstablished(true);
+      setDestination(travelData.destination);
+
+      for (const seat of travelData.seats) {
+        addSeats(seat);
+      }
+    }
+  }, [travelDataIsLoad]);
+
+  useEffect(() => {
+    const allSeats: ArrayPassengers[] = [];
+
+    travelRequestForm.seats.forEach((seat: string) => {
+      allSeats.push({
+        value: seat,
+      });
+    });
+
+    setSeats(allSeats);
+  }, [travelRequestForm.seats]);
 
   const loadingChangeStatus = async (mode: StatusMode, uuid: string) => {
     let status = false;
@@ -96,8 +122,6 @@ export default function WaitingPassengers() {
     setChangePage(!changePage);
   };
 
-  const seats: SeatsArr[] = [{ value: '1' }];
-
   const StatusTravel = () => {
     const [viewPassengers, setViewPassengers] = useState(false);
 
@@ -109,20 +133,6 @@ export default function WaitingPassengers() {
       return (
         <View>
           <Text>Pasajero</Text>
-        </View>
-      );
-    };
-
-    const TravelStatus = () => {
-      return (
-        <View style={styles.containerPassengers}>
-          <CardTravel
-            typeCard={'driver'}
-            departTime={formatDate(travelRequestForm.startTime)}
-            arrivalTime={formatDate(travelRequestForm.finishedTime)}
-            price={travelRequestForm.travelPrice}
-            seatsArr={seats}
-          />
         </View>
       );
     };
@@ -142,7 +152,16 @@ export default function WaitingPassengers() {
 
     return (
       <>
-        {viewPassengers ? <Passengers /> : <TravelStatus />}
+        {viewPassengers ? (
+          <Passengers />
+        ) : (
+          <TravelCardStatus
+            price={travelData.price}
+            starting={travelData.starting}
+            finished={travelData.finished}
+            seats={seats}
+          />
+        )}
 
         <ButtonControls />
       </>
@@ -161,15 +180,7 @@ export default function WaitingPassengers() {
     );
   };
 
-  const onPressBottomSheet = async () => {
-    console.log('Is pressed');
-  };
-
-  if (isLoading) {
-    return <Loading visible={true} />;
-  }
-
-  if (loading) {
+  if (loading || isLoading || !travelDataIsLoad) {
     return <Loading visible={true} />;
   }
 
@@ -178,7 +189,7 @@ export default function WaitingPassengers() {
       <View style={styles.container}>
         <UserMapViewer location={location} />
 
-        <BottomSheet onPress={onPressBottomSheet}>
+        <BottomSheet>
           <AdBanner />
 
           <View style={styles.container}>

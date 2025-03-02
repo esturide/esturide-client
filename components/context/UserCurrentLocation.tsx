@@ -51,8 +51,6 @@ export default function UserCurrentLocation({ children }: PropsWithChildren) {
           longitude: locationObject.coords.longitude,
         });
 
-        console.log('Current location: ', location);
-
         setUpdate(false);
       }, setLoading);
     };

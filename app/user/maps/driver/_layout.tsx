@@ -1,6 +1,7 @@
 import React from 'react';
 import { router, Slot } from 'expo-router';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
+import DriverContextProvider from '@components/context/DriverContext';
 
 export default function LayoutDriver() {
   const { userType } = useUserManagerContext();
@@ -8,7 +9,9 @@ export default function LayoutDriver() {
   if (userType === 'Driver') {
     return (
       <>
-        <Slot />
+        <DriverContextProvider>
+          <Slot />
+        </DriverContextProvider>
       </>
     );
   } else {

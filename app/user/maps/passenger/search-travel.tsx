@@ -12,7 +12,7 @@ import { showFailureMessage } from '@libs/toast/message/messages';
 import { Travel } from '@const/Travels';
 import { getFullName } from '@const/RequestProfile';
 import { defaultPassengerColor } from '@const/DefaultColors';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import { Position } from '@const/Position';
 import * as Crypto from 'expo-crypto';
 import * as Location from 'expo-location';
@@ -22,7 +22,7 @@ import {requestRide} from "@libs/request/rides/requestTravels";
 
 export default function SearchTravel() {
   const { setOnTraveling } = useUserManagerContext();
-  const { setCurrentRoute } = useTravelScheduleRoute();
+  const { setCurrentRoute } = useRouteNavigator();
   const { setTravelData, data } = usePassengerContext();
   const [reloading, setReloading] = useState(false);
   const [loadingData, setLoadingData] = useState(true);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
@@ -8,7 +8,7 @@ import CancelButton from '@components/buttons/CancelButton';
 import BlueButton from '@components/buttons/BlueButton';
 
 export default function SelectMapRide() {
-  const { setCurrentRoute } = useTravelScheduleRoute();
+  const { setCurrentRoute } = useRouteNavigator();
   const { location } = useUserPosition();
 
   const onSchedule = async () => {
