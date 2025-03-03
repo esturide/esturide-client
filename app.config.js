@@ -4,7 +4,7 @@ export default ({ config }) => ({
   ...config,
   name: 'EstuRide',
   slug: 'esturide',
-  owner: 'sealfreak',
+  owner: 'esturide',
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
