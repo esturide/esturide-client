@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
-import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
 type Callback = ((uuid: string) => void) | ((uuid: string) => Promise<void>);
 

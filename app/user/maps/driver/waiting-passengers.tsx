@@ -155,17 +155,20 @@ export default function WaitingPassengers() {
 
     const ButtonControls = () => {
       return (
-        <View style={styles.containerButtons}>
-          {viewPassengers ? (
-            <GreenButton title={'Monitoreo'} onPress={onChangeView} />
-          ) : (
-            <GreenButton title={'Pasajeros'} onPress={onChangeView} />
-          )}
+        <View>
+          <View style={styles.containerButtons}>
+            {viewPassengers ? (
+              <GreenButton title={'Monitoreo'} onPress={onChangeView} />
+            ) : (
+              <GreenButton title={'Pasajeros'} onPress={onChangeView} />
+            )}
 
-          {travelActive ? (
             <CancelButton title={'Terminar'} onPress={onChangePage} />
-          ) : (
-            <GreenButton title={'Empezar'} onPress={onChangeStatusTravel} />
+          </View>
+          {!travelActive && (
+            <View style={styles.containerButtons}>
+              <GreenButton title={'Empezar'} onPress={onChangeStatusTravel} />
+            </View>
           )}
         </View>
       );
