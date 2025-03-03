@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GenericModal } from '@components/modals/GenericModal';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 
 import InputTime from '@components/inputs/InputTime';
 import CancelButton from '@components/buttons/CancelButton';
@@ -16,24 +16,35 @@ import { useUserPosition } from '@components/context/UserCurrentLocation';
 import {
   showFailureMessage,
   showLongSuccessMessage,
-} from '@libs/toast/messages';
+} from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
-import { requestScheduleTravel } from '@libs/request/requestScheduleTravel';
+import { requestScheduleTravel } from '@libs/request/travels/requestScheduleTravel';
+import { useDriverContext } from '@components/context/DriverContext';
 
 export default function ScheduleTravel() {
   const { location, isLoading } = useUserPosition();
   const [loadingRequest, setLoadingRequest] = useState(false);
   const { setOnTraveling } = useUserManagerContext();
+  const { setCurrentRoute, validTravel } = useRouteNavigator();
+
   const {
     travelRequestForm,
-    setCurrentRoute,
     setStartTime,
     setFinishedTime,
     setTravelPrice,
     setDestinationEstablished,
     setValidateTravel,
-    validTravel,
-  } = useTravelScheduleRoute();
+    addSeats,
+    removeSeats,
+  } = useDriverContext();
+
+  const setSeats = async (seat: string, status: boolean) => {
+    if (status) {
+      addSeats(seat);
+    } else {
+      removeSeats(seat);
+    }
+  };
 
   const travelConfirm = async () => {
     let status = false;
@@ -43,7 +54,10 @@ export default function ScheduleTravel() {
         location,
         travelRequestForm.destination,
         travelRequestForm.travelPrice,
-        4,
+        3,
+        travelRequestForm.startTime,
+        travelRequestForm.finishedTime,
+        travelRequestForm.seats,
       );
     }, setLoadingRequest);
 
@@ -68,10 +82,9 @@ export default function ScheduleTravel() {
   };
 
   const authTravel = async (validate: boolean) => {
-    setValidateTravel(validate);
-
     if (validate) {
       showLongSuccessMessage('Exito', 'Validado correcta.');
+      setValidateTravel(validate);
     } else {
       showFailureMessage('Error al validar viaje.');
     }
@@ -107,7 +120,7 @@ export default function ScheduleTravel() {
           </View>
 
           <View style={styles.containerRow}>
-            <InputSeats />
+            <InputSeats onPress={setSeats} />
 
             <CardButton
               title={'Destino'}

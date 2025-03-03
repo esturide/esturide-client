@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
@@ -8,7 +8,7 @@ import CancelButton from '@components/buttons/CancelButton';
 import GreenButton from '@components/buttons/GreenButton';
 
 export default function SelectMap() {
-  const { setCurrentRoute } = useTravelScheduleRoute();
+  const { setCurrentRoute } = useRouteNavigator();
   const { location, isLoading } = useUserPosition();
 
   useEffect(() => {

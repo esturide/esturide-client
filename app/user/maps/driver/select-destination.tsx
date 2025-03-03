@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import SelectDestinationMap from '@components/cards/maps/SelectDestinationMap';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
@@ -11,13 +11,14 @@ import GreenButton from '@components/buttons/GreenButton';
 import { SearchBar } from '@components/cards/SearchBar';
 import { GenericModal } from '@components/modals/GenericModal';
 import { Position } from '@const/Position';
+import {useDriverContext} from "@components/context/DriverContext";
 
 export default function SelectDestination() {
   const { location, isLoading } = useUserPosition();
-  const { travelRequestForm, setCurrentRoute, setDestination } =
-    useTravelScheduleRoute();
+  const { setCurrentRoute } = useRouteNavigator();
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState(false);
+  const { setDestination } = useDriverContext();
 
   useEffect(() => {
     if (isLoading) {

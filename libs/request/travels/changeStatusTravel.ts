@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
-import { showMessage } from '@libs/alerts/toast';
+import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
-type StatusMode = 'start' | 'finished' | 'cancel';
+export type StatusMode = 'start' | 'finished' | 'cancel';
 
 export const changeStatusTravel = async (mode: StatusMode, uuid: string) => {
   try {
@@ -16,11 +16,7 @@ export const changeStatusTravel = async (mode: StatusMode, uuid: string) => {
   } catch (e) {
     console.error(e);
 
-    if (axios.isAxiosError(e)) {
-      showMessage(e.response.data.message);
-
-      return false;
-    }
+    showAxiosExceptionMessage(e);
   }
 
   return false;

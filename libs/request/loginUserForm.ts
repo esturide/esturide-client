@@ -3,22 +3,21 @@ import { clientRoot, config } from '@const/apiRequest';
 import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 import { UserDataLogin } from '@const/RequestProfile';
 
-export const loginUser = async (
+export const loginUserForm = async (
   user: UserDataLogin,
   setAuthToken: (token: string) => void,
 ) => {
   try {
-    const data = {
-      username: user.code,
-      password: user.password,
-    };
+    const params = new URLSearchParams();
+    params.append('username', `${user.code}`);
+    params.append('password', `${user.password}`);
 
     const response: AxiosResponse = await clientRoot.post(
-      `/auth/login`,
-      data,
+      `/auth/`,
+      params,
       config,
     );
-    const accessToken = response.data.token;
+    const accessToken = response.data.access_token;
 
     setAuthToken(accessToken);
     config.headers.Authorization = `Bearer ${accessToken}`;

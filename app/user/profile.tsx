@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { statusSessionAtom, userCodeAtom } from '@stores/user';
 import AdBanner from '@components/banners/AdBanner';
+import SwitchButton from '@components/buttons/switch/SwitchButton';
+import CancelButton from '@components/buttons/CancelButton';
 import { ProfileHeader } from '@components/cards/profile/user/ProfileHeader';
 import { InfoSection } from '@components/cards/profile/user/InfoSection';
 import { ActionItem } from '@components/cards/profile/user/ActionItem';
 import { VerifyUserIdentity } from '@components/cards/profile/user/VerifyUserIdentity';
-import { useAtom } from 'jotai/index';
-import { userCodeAtom } from '@stores/user';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import { getFullName, UserType } from '@const/RequestProfile';
-import SwitchButton from '@components/buttons/switch/SwitchButton';
-import CancelButton from '@components/buttons/CancelButton';
 
 export default function UserProfile() {
-  const { setUserType, userType, onTraveling, setSessionStatus, userProfile } =
+  const { setUserType, userType, onTraveling, userProfile } =
     useUserManagerContext();
 
-  const [userCode, setUserCode] = useAtom(userCodeAtom);
   const [disableSwap, setDisableSwap] = useState(userType === 'Not-Verified');
+  const userCode = useAtomValue(userCodeAtom);
+  const setSessionStatus = useSetAtom(statusSessionAtom);
 
   useEffect(() => {
     setDisableSwap(userType === 'Not-Verified');
@@ -61,6 +62,7 @@ export default function UserProfile() {
       <View style={styles.section}>
         <View style={styles.item}>
           <InfoSection />
+
           {actionItems.map((item, index) => (
             <ActionItem key={index} title={item.title} />
           ))}

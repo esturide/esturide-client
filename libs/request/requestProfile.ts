@@ -1,6 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { clientUserManagement, config } from '@const/apiRequest';
 import RequestProfile, { getRoleFromRequest } from '@const/RequestProfile';
+import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
 export const requestProfile = async (
   setProfile: (date: RequestProfile) => void,
@@ -16,8 +17,8 @@ export const requestProfile = async (
     setProfile({
       userCode: data.code,
       firstName: data.firstname,
-      maternalSurname: data.maternal_surname,
-      paternalSurname: data.paternal_surname,
+      maternalSurname: data.maternalSurname,
+      paternalSurname: data.paternalSurname,
       email: data.email,
       role: getRoleFromRequest(data.role),
     });
@@ -26,9 +27,7 @@ export const requestProfile = async (
   } catch (e) {
     console.error(e);
 
-    if (axios.isAxiosError(e)) {
-      return false;
-    }
+    showAxiosExceptionMessage(e);
   }
 
   return false;

@@ -21,7 +21,7 @@ export default function Index() {
     if (userType === 'Driver') {
       router.push('/user/maps/driver/select-map');
     } else if (userType === 'Passenger') {
-      router.push('/user/maps/passenger/select-map');
+      router.push('/user/maps/passenger/search-travel');
     }
   };
 

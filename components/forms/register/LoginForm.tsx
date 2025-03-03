@@ -4,7 +4,7 @@ import InputLabel from '@components/inputs/InputLabel';
 import InputPassword from '@components/inputs/InputPassword';
 import styles from '@styles/forms/LoginForm';
 import { router } from 'expo-router';
-import { showMessage } from '@libs/alerts/toast';
+import { showMessage } from '@libs/toast/alerts/toast';
 
 type Props = {
   onLogin: (username: string, password: string) => Promise<boolean>;

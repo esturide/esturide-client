@@ -1,13 +1,16 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { clientTravelMatchNetwork, config } from '@const/apiRequest';
 import { Position } from '@const/Position';
-import { showMessage } from '@libs/alerts/toast';
+import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
 export const requestScheduleTravel = async (
   start: Position,
   end: Position,
   price: number,
-  seats: number,
+  maxPassengers: number,
+  starting: Date,
+  finished: Date,
+  seats = [],
 ) => {
   try {
     const data = {
@@ -21,10 +24,12 @@ export const requestScheduleTravel = async (
         latitude: end.latitude,
         longitude: start.longitude,
       },
-      maxPassengers: seats,
+      maxPassengers: maxPassengers,
+      price: price,
+      starting: starting.toISOString(),
+      finished: finished.toISOString(),
+      seats: seats,
     };
-
-    console.log(data);
 
     const response: AxiosResponse = await clientTravelMatchNetwork.post(
       `/schedule/`,
@@ -34,13 +39,8 @@ export const requestScheduleTravel = async (
 
     return response.status === 200 || response.status === 201;
   } catch (e) {
-    // console.error(e);
-
-    if (axios.isAxiosError(e)) {
-      showMessage(e.response.data.message);
-
-      return false;
-    }
+    console.error(e);
+    showAxiosExceptionMessage(e);
   }
 
   return false;

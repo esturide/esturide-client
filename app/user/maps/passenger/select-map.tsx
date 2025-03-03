@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTravelScheduleRoute } from '@components/context/RouteNavigatorContext';
+import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
@@ -8,10 +8,8 @@ import CancelButton from '@components/buttons/CancelButton';
 import BlueButton from '@components/buttons/BlueButton';
 
 export default function SelectMapRide() {
-  const { setCurrentRoute } = useTravelScheduleRoute();
-  const { location, isLoading } = useUserPosition();
-
-  useEffect(() => {}, [isLoading]);
+  const { setCurrentRoute } = useRouteNavigator();
+  const { location } = useUserPosition();
 
   const onSchedule = async () => {
     setCurrentRoute('/user/maps/passenger/search-travel');
@@ -24,6 +22,7 @@ export default function SelectMapRide() {
   return (
     <View style={styles.container}>
       <UserMapViewer location={location} />
+
       <BottomSheet>
         <View style={styles.containerControls}>
           <BlueButton title={'Iniciar'} onPress={onSchedule} />

@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { clientUserManagement, config } from '@const/apiRequest';
 import { formatDate } from '@libs/format/dates';
-import { showMessage } from '@libs/alerts/toast';
+import { showAxiosExceptionMessage } from '@libs/toast/showAxiosExceptionMessage';
 
 export const createUser = async (
   code: number,
@@ -33,12 +33,8 @@ export const createUser = async (
 
     return response.status === 200 || response.status === 201;
   } catch (e) {
-    if (axios.isAxiosError(e)) {
-      showMessage(e.response.data.message);
-
-      return false;
-    }
-
-    return false;
+    showAxiosExceptionMessage(e);
   }
+
+  return false;
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { showMessage } from '@libs/alerts/toast';
+import { showMessage } from '@libs/toast/alerts/toast';
 
-export const responseMessage = (e) => {
+export const showAxiosExceptionMessage = (e) => {
   if (axios.isAxiosError(e)) {
     showMessage(e.response.data.message);
   }

@@ -12,6 +12,8 @@ module.exports = function (api) {
             '@components': './components',
             '@libs': './libs',
             '@styles': './styles',
+            '@const': './const',
+            '@stores': './stores',
           },
           extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
         },

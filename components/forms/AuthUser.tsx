@@ -30,6 +30,8 @@ export default function AuthUser({ label, onValidate }: Props) {
         fallbackLabel: 'Usar contraseña',
       });
 
+      setAuthenticated(false);
+
       if (result.success) {
         setAuthenticated(result.success);
       } else {
@@ -37,6 +39,7 @@ export default function AuthUser({ label, onValidate }: Props) {
       }
 
       if (onValidate !== undefined) {
+        console.log(`Authenticated: ${authenticated}`);
         await onValidate(authenticated);
       }
     } catch (error) {

@@ -7,22 +7,18 @@ import ScrollLayout from '@components/layouts/ScrollLayout';
 import HeaderRegister from '@components/layouts/register/HeaderRegister';
 import { AbsoluteBackButton } from '@components/buttons/navigation/AbsoluteBackButton';
 import loaderEffect from '@libs/loaderEffect';
-import { UserRegisterFormContext } from '@components/context/RegisterFormContext';
 import { createUser } from '@libs/request/createUser';
 import Loading from '@components/visuals/resources/Loading';
+import {
+  CreateUserRequest,
+  useCreateUserContext,
+} from '@components/context/RegisterFormContext';
 
 export default function SecondRegister() {
   const [loading, setLoading] = useState(false);
-  const { userFormRequest, setUserFormRequest } = useContext(
-    UserRegisterFormContext,
-  );
+  const { userFormRequest } = useCreateUserContext();
 
-  const eventRedirect = async (
-    address: string,
-    phoneNumber: string,
-    email: string,
-    password: string,
-  ) => {
+  const eventRedirect = async (form: CreateUserRequest) => {
     let status = false;
 
     await loaderEffect(async () => {
@@ -34,7 +30,7 @@ export default function SecondRegister() {
         userFormRequest.curp,
         userFormRequest.birthDate,
         userFormRequest.email,
-        password,
+        userFormRequest.password,
       );
     }, setLoading);
 

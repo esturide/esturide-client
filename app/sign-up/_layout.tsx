@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Slot } from 'expo-router';
+import RegisterFormContext from '@components/context/RegisterFormContext';
 
 import styles from '@styles/layouts/SignUpLayout';
-import RegisterFormContext from '@components/context/RegisterFormContext';
 
 export default function SignUpLayout() {
   return (

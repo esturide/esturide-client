@@ -7,10 +7,25 @@ import React, {
 } from 'react';
 import * as Location from 'expo-location';
 import { Position } from '@const/Position';
-import { showFailureMessage } from '@libs/toast/messages';
+import { showFailureMessage } from '@libs/toast/message/messages';
 import loaderEffect from '@libs/loaderEffect';
 
-const CurrentUserPosition = createContext(null);
+interface ContextProps {
+  setRefresh: (status: boolean) => void;
+  isLoading: boolean;
+  location: Position;
+}
+
+const CurrentUserPosition = createContext<ContextProps>({
+  setRefresh: (status: boolean) => {
+    return;
+  },
+  isLoading: false,
+  location: {
+    latitude: 0,
+    longitude: 0,
+  },
+});
 
 export default function UserCurrentLocation({ children }: PropsWithChildren) {
   const [update, setUpdate] = useState(false);
@@ -35,8 +50,6 @@ export default function UserCurrentLocation({ children }: PropsWithChildren) {
           latitude: locationObject.coords.latitude,
           longitude: locationObject.coords.longitude,
         });
-
-        console.log('Current location: ', location);
 
         setUpdate(false);
       }, setLoading);

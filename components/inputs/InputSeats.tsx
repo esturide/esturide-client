@@ -1,15 +1,43 @@
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import CardSeat from '@components/cards/CardSeat';
-import React from 'react';
 import CardItemPresentation from '@components/cards/item/CardItemPresentation';
 
-export default function InputSeats() {
+type Props = {
+  onPress?: (seat: string, status: boolean) => Promise<void>;
+};
+
+export default function InputSeats({ onPress }: Props) {
+  const [seatA, setSeatA] = useState(false);
+  const [seatB, setSeatB] = useState(false);
+  const [seatC, setSeatC] = useState(false);
+
+  const pressSeat = (seat: string, status: boolean) => {
+    return async () => {
+      if (onPress !== undefined) {
+        await onPress(seat, status);
+      }
+    };
+  };
+
+  useEffect(() => {
+    pressSeat('A', seatA)();
+  }, [seatA]);
+
+  useEffect(() => {
+    pressSeat('B', seatB)();
+  }, [seatB]);
+
+  useEffect(() => {
+    pressSeat('C', seatC)();
+  }, [seatC]);
+
   return (
     <CardItemPresentation title={'Asientos'}>
       <View style={styles.seats}>
-        <CardSeat seat={'A'} />
-        <CardSeat seat={'B'} />
-        <CardSeat seat={'C'} />
+        <CardSeat seat={'A'} onPress={setSeatA} />
+        <CardSeat seat={'B'} onPress={setSeatB} />
+        <CardSeat seat={'C'} onPress={setSeatC} />
       </View>
     </CardItemPresentation>
   );
