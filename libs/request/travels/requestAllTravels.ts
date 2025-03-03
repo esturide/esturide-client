@@ -63,7 +63,7 @@ export const requestAllTravel = async (
         },
         destination: {
           latitude: destination.latitude,
-          longitude: destination.latitude,
+          longitude: destination.longitude,
         },
         finished: new Date(travel.finished),
         starting: new Date(travel.starting),

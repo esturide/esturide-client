@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   showFailureMessage,
   showLongSuccessMessage,
@@ -9,7 +9,7 @@ import AdBanner from '@components/banners/AdBanner';
 import Loading from '@components/visuals/resources/Loading';
 import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
-import CardTravel, { ArrayPassengers } from '@components/cards/CardTravel';
+import { ArrayPassengers } from '@components/cards/CardTravel';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
 import GreenButton from '@components/buttons/GreenButton';
@@ -23,8 +23,13 @@ import {
 } from '@libs/request/travels/changeStatusTravel';
 import loaderEffect from '@libs/loaderEffect';
 import { TravelCardStatus } from '@components/cards/travel/TravelCardStatus';
+import { TravelListPassengers } from '@components/cards/travel/TravelListPassengers';
+import CancelButton from '@components/buttons/CancelButton';
 
 export default function WaitingPassengers() {
+  const [changePage, setChangePage] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [seats, setSeats] = useState<ArrayPassengers[]>([]);
   const { location } = useUserPosition();
   const { setOnTraveling } = useUserManagerContext();
   const { isLoading } = useUserPosition();
@@ -40,21 +45,20 @@ export default function WaitingPassengers() {
     setDestination,
     addSeats,
   } = useDriverContext();
-  const [changePage, setChangePage] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [seats, setSeats] = useState<ArrayPassengers[]>([]);
+
+  const [viewPassengers, setViewPassengers] = useState(false);
+  const [travelActive, setTravelActive] = useState(false);
 
   useEffect(() => {
-    if (travelData !== undefined) {
-      setStartTime(travelData.starting);
-      setFinishedTime(travelData.finished);
-      setTravelPrice(travelData.price);
-      setDestinationEstablished(true);
-      setDestination(travelData.destination);
+    setStartTime(travelData.starting);
+    setFinishedTime(travelData.finished);
+    setTravelPrice(travelData.price);
+    setDestinationEstablished(true);
+    setDestination(travelData.destination);
+    setTravelActive(travelData.active);
 
-      for (const seat of travelData.seats) {
-        addSeats(seat);
-      }
+    for (const seat of travelData.seats) {
+      addSeats(seat);
     }
   }, [travelDataIsLoad]);
 
@@ -83,6 +87,23 @@ export default function WaitingPassengers() {
   const travelIsOver = async () => {
     setCurrentRoute('/user/maps');
     setOnTraveling(false);
+  };
+
+  const activeTravel = async () => {
+    const uuid = await requestCurrentUUIDScheduleTravel();
+
+    if (uuid === '') {
+      await travelIsOver();
+    }
+
+    const status = await loadingChangeStatus('start', uuid);
+
+    if (status) {
+      showLongSuccessMessage(
+        'Viaje empezado.',
+        'Los pasajeros estaran esperando en sus puntos.',
+      );
+    }
   };
 
   const finishTravel = async () => {
@@ -122,19 +143,14 @@ export default function WaitingPassengers() {
     setChangePage(!changePage);
   };
 
-  const StatusTravel = () => {
-    const [viewPassengers, setViewPassengers] = useState(false);
-
+  const ControlStatusTravel = () => {
     const onChangeView = async () => {
       setViewPassengers(!viewPassengers);
     };
 
-    const Passengers = () => {
-      return (
-        <View>
-          <Text>Pasajero</Text>
-        </View>
-      );
+    const onChangeStatusTravel = async () => {
+      setTravelActive(true);
+      await activeTravel();
     };
 
     const ButtonControls = () => {
@@ -145,7 +161,12 @@ export default function WaitingPassengers() {
           ) : (
             <GreenButton title={'Pasajeros'} onPress={onChangeView} />
           )}
-          <GreenButton title={'Terminar'} onPress={onChangePage} />
+
+          {travelActive ? (
+            <CancelButton title={'Terminar'} onPress={onChangePage} />
+          ) : (
+            <GreenButton title={'Empezar'} onPress={onChangeStatusTravel} />
+          )}
         </View>
       );
     };
@@ -153,7 +174,7 @@ export default function WaitingPassengers() {
     return (
       <>
         {viewPassengers ? (
-          <Passengers />
+          <TravelListPassengers profiles={travelData.passengers} />
         ) : (
           <TravelCardStatus
             price={travelData.price}
@@ -193,7 +214,7 @@ export default function WaitingPassengers() {
           <AdBanner />
 
           <View style={styles.container}>
-            {changePage ? <StatusTravel /> : <ModifyTravel />}
+            {changePage ? <ControlStatusTravel /> : <ModifyTravel />}
           </View>
         </BottomSheet>
       </View>
@@ -222,6 +243,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignSelf: 'center',
+    alignItems: 'center',
+    textAlignVertical: 'center',
+    alignContent: 'center',
     gap: 15,
   },
   maps: {

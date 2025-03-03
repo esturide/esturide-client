@@ -1,22 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useRouteNavigator } from '@components/context/RouteNavigatorContext';
-import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import { useUserPosition } from '@components/context/UserCurrentLocation';
+import { updateTracking } from '@libs/request/rides/updateTracking';
+import { usePassengerContext } from '@components/context/PassengerContext';
+import UserMapViewer from '@components/cards/maps/UserMapViewer';
 import BottomSheet from '@components/modals/sheets/BottomSheet';
 import CancelButton from '@components/buttons/CancelButton';
-import { usePassengerContext } from '@components/context/PassengerContext';
+import {requestCurrentRide} from "@libs/request/rides/requestCurrentRide";
 
 export default function WaitingDriver() {
   const { setCurrentRoute } = useRouteNavigator();
-  const { location } = useUserPosition();
-  const { data } = usePassengerContext();
+  const { location, setRefresh } = useUserPosition();
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (data?.current !== undefined) {
-      console.log(JSON.stringify(data.current));
-    }
+    intervalRef.current = setInterval(() => {
+      setRefresh(true);
+    }, 20000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    const recordTracking = async () => {
+      await requestCurrentRide(async (uuid: string) => {
+        const status = await updateTracking({
+          uuid: uuid,
+          record: {
+            latitude: location.latitude,
+            longitude: location.longitude,
+          },
+        });
+      })
+    };
+
+    recordTracking();
+  }, [location]);
 
   const onCancel = async () => {
     setCurrentRoute('/user/maps');

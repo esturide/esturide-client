@@ -9,7 +9,7 @@ type Props = {
   destination: LatLng;
 };
 
-export default function MapCard({ region, origin, destination }: Props) {
+export default function RideMapCard({ region, origin, destination }: Props) {
   const [loading, setLoading] = useState(false);
 
   if (loading) {

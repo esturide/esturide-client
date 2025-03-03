@@ -5,7 +5,7 @@ import AdBanner from '@components/banners/AdBanner';
 import BlueButton from '@components/buttons/BlueButton';
 import CompactBlueButton from '@components/buttons/compact/CompactBlueButton';
 import Loading from '@components/visuals/resources/Loading';
-import MapCard from '@components/cards/maps/MapCard';
+import RideMapCard from '@components/cards/maps/RideMapCard';
 import { requestAllTravel } from '@libs/request/travels/requestAllTravels';
 import loaderEffect from '@libs/loaderEffect';
 import { showFailureMessage } from '@libs/toast/message/messages';
@@ -18,7 +18,7 @@ import * as Crypto from 'expo-crypto';
 import * as Location from 'expo-location';
 import { usePassengerContext } from '@components/context/PassengerContext';
 import { useUserManagerContext } from '@components/context/UserManagerContext';
-import {requestRide} from "@libs/request/rides/requestTravels";
+import { requestRide } from "@libs/request/rides/requestTravels";
 
 export default function SearchTravel() {
   const { setOnTraveling } = useUserManagerContext();
@@ -63,6 +63,7 @@ export default function SearchTravel() {
 
         setTravels(data);
         setReloading(false);
+        console.log(JSON.stringify(data));
       }, setLoadingData);
     };
 
@@ -98,7 +99,7 @@ export default function SearchTravel() {
     const requestTravel = async () => {
       let status = false;
 
-      loaderEffect(async () => {
+      await loaderEffect(async () => {
         status = await requestRide({
           uuid: travel.uuid,
           origin: location,
@@ -119,7 +120,7 @@ export default function SearchTravel() {
       <View style={styles.travelCard}>
         <TravelCard travel={travel} />
 
-        <MapCard
+        <RideMapCard
           region={{
             latitude: location.latitude,
             longitude: location.longitude,

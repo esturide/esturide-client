@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { Position } from '@const/Position';
 import { requestCurrentScheduleTravel } from '@libs/request/travels/requestCurrentTravel';
-import { Travel } from '@const/Travels';
+import {PublicProfile, Travel} from '@const/Travels';
 
 const RouteContext = createContext<null | any>(null);
 
@@ -38,8 +38,41 @@ const EmptyTravel = {
   seats: [],
 };
 
+const EmptyUserData: PublicProfile = {
+  userCode: 0,
+  firstName: '',
+  maternalSurname: '',
+  paternalSurname: '',
+  position: {
+    latitude: 0,
+    longitude: 0,
+  },
+};
+
+const EmptyTravelData: Travel = {
+  uuid: '',
+  driver: EmptyUserData,
+  price: 0,
+  active: false,
+  terminate: false,
+  cancel: false,
+  maxPassenger: 0,
+  seats: [],
+  passengers: [],
+  origin: {
+    latitude: 0,
+    longitude: 0,
+  },
+  destination: {
+    latitude: 0,
+    longitude: 0,
+  },
+  starting: new Date(),
+  finished: new Date(),
+};
+
 export default function DriverContextProvider({ children }: PropsWithChildren) {
-  const [travelData, setTravelData] = useState<null | Travel>();
+  const [travelData, setTravelData] = useState<Travel>(EmptyTravelData);
   const [travelDataIsLoad, setTravelDataIsLoad] = useState(false);
   const [validTravel, setValidTravel] = useState(false);
   const [travelRequestForm, setTravelRequestForm] =
@@ -53,7 +86,7 @@ export default function DriverContextProvider({ children }: PropsWithChildren) {
         setTravelData(travel);
       });
 
-      setTravelDataIsLoad(true);
+      setTravelDataIsLoad(status);
     };
 
     loadTravel();
